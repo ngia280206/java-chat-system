@@ -1,0 +1,27 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+// Cấu hình Java
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+// Khai báo thư viện
+dependencies {
+    implementation project(':shared-client')
+}
+
+// Cấu hình JavaFX
+javafx {
+    version = '17.0.2'
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+// Điểm khởi động ứng dụng
+application {
+    mainClass = 'com.chatsystem.user.UserMain'
+}

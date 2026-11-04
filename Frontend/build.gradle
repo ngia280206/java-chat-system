@@ -1,0 +1,7 @@
+allprojects {
+    group = 'com.chatsystem'
+    version = '1.0.0'
+    repositories {
+        mavenCentral()
+    }
+}
