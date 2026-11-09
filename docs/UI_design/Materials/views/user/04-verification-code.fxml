@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="auth-root" prefWidth="1240" prefHeight="780" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="auth-brand" prefWidth="570" minWidth="460">
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <Label text="RELAY" styleClass="brand-name"/>
+      </HBox>
+      <Region VBox.vgrow="ALWAYS"/>
+      <Label text="Stay close,&#10;even from afar." styleClass="auth-accent" wrapText="true"/>
+      <Label text="A calmer space for meaningful conversations." styleClass="auth-caption" wrapText="true"/>
+      <Region prefHeight="12"/>
+      <Label text="PRIVATE CHATS     /     GROUPS     /     SMART ASSISTANT" styleClass="pill"/>
+      <Region prefHeight="58"/>
+      <Label text="Beautifully simple. Thoughtfully connected." styleClass="muted"/>
+    </VBox>
+  </left>
+  <center>
+    <VBox spacing="12" styleClass="auth-panel" prefWidth="630">
+      <Label text="RELAY ACCOUNT" styleClass="sidebar-heading"/>
+      <Region prefHeight="4"/>
+      <Label text="Check your inbox" styleClass="auth-title"/>
+      <Label text="Enter the six-digit verification code sent to m***@example.com." styleClass="auth-subtitle" wrapText="true"/>
+      <Region prefHeight="12"/>
+      <Label text="Verification code" styleClass="form-label"/>
+      <HBox spacing="10" alignment="CENTER_LEFT">
+        <StackPane styleClass="otp-box">
+          <Label text="4" styleClass="otp-digit"/>
+        </StackPane>
+        <StackPane styleClass="otp-box">
+          <Label text="8" styleClass="otp-digit"/>
+        </StackPane>
+        <StackPane styleClass="otp-box">
+          <Label text="" styleClass="otp-digit"/>
+        </StackPane>
+        <StackPane styleClass="otp-box">
+          <Label text="" styleClass="otp-digit"/>
+        </StackPane>
+        <StackPane styleClass="otp-box">
+          <Label text="" styleClass="otp-digit"/>
+        </StackPane>
+        <StackPane styleClass="otp-box">
+          <Label text="" styleClass="otp-digit"/>
+        </StackPane>
+      </HBox>
+      <Label text="The code expires in 10 minutes." styleClass="form-hint"/>
+      <Button text="Verify code  →" styleClass="primary-button" prefWidth="386"/>
+      <Region prefHeight="5"/>
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="Did not receive a code?" styleClass="muted"/>
+        <Button text="Resend code" styleClass="inline-link"/>
+      </HBox>
+    </VBox>
+  </center>
+</BorderPane>

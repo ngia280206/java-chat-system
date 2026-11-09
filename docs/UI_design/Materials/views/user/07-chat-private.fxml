@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-root" prefWidth="1540" prefHeight="930" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="sidebar" prefWidth="240" minWidth="240" maxWidth="240">
+      <HBox spacing="11" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <VBox spacing="1">
+          <Label text="RELAY" styleClass="brand-name"/>
+          <Label text="MESSENGER" styleClass="brand-subtitle"/>
+        </VBox>
+      </HBox>
+      <Region prefHeight="23"/>
+      <Label text="YOUR SPACE" styleClass="sidebar-heading"/>
+      <Button text="  Chats" styleClass="nav-active" maxWidth="230" prefWidth="206"/>
+      <Button text="  Friends" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Groups" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Spam reports" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  My profile" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Region prefHeight="15"/>
+      <Label text="ACCOUNT" styleClass="sidebar-heading"/>
+      <Button text="  Settings" styleClass="nav-button" prefWidth="206"/>
+      <Button text="  Help &amp; support" styleClass="nav-button" prefWidth="206"/>
+      <Region minHeight="15" VBox.vgrow="ALWAYS"/>
+      <VBox spacing="12" styleClass="sidebar-footer">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <StackPane styleClass="avatar">
+            <Label text="ME" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4">
+            <Label text="Alex Morgan" styleClass="small-heading"/>
+            <Label text="Online now" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+      </VBox>
+    </VBox>
+  </left>
+  <center>
+    <HBox spacing="0" alignment="CENTER_LEFT">
+      <VBox spacing="12" styleClass="conversation-pane" prefWidth="330" minWidth="300" maxWidth="330">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <Label text="Messages" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+          <Button text="+ New" styleClass="small-button"/>
+        </HBox>
+        <TextField promptText="Search conversations" styleClass="search-field"/>
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <Label text="All" styleClass="pill-active"/>
+          <Label text="Unread" styleClass="pill"/>
+          <Label text="Groups" styleClass="pill"/>
+        </HBox>
+        <Region prefHeight="4"/>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="list-item-selected">
+          <StackPane styleClass="avatar-violet">
+            <Label text="MT" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="Mia Tran" styleClass="list-title"/>
+            <Label text="Can you review the latest mockup?" styleClass="list-preview"/>
+          </VBox>
+          <VBox spacing="4" alignment="CENTER_RIGHT">
+            <Label text="10:42" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="list-item">
+          <StackPane styleClass="avatar-teal">
+            <Label text="DC" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="Design Circle" styleClass="list-title"/>
+            <Label text="Jordan: I shared the new files" styleClass="list-preview"/>
+          </VBox>
+          <VBox spacing="4" alignment="CENTER_RIGHT">
+            <Label text="09:28" styleClass="tiny-muted"/>
+            <Label text="5" styleClass="pill-active"/>
+          </VBox>
+        </HBox>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="list-item">
+          <StackPane styleClass="avatar">
+            <Label text="JL" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="Jordan Lee" styleClass="list-title"/>
+            <Label text="Thanks for your help yesterday!" styleClass="list-preview"/>
+          </VBox>
+          <VBox spacing="4" alignment="CENTER_RIGHT">
+            <Label text="Yesterday" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="list-item">
+          <StackPane styleClass="avatar-rose">
+            <Label text="SH" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="Study Hub" styleClass="list-title"/>
+            <Label text="Tomorrow at 8 PM works for me" styleClass="list-preview"/>
+          </VBox>
+          <VBox spacing="4" alignment="CENTER_RIGHT">
+            <Label text="Yesterday" styleClass="tiny-muted"/>
+            <Label text="1" styleClass="pill-active"/>
+          </VBox>
+        </HBox>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="list-item">
+          <StackPane styleClass="avatar-teal">
+            <Label text="SR" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="Sam Rivera" styleClass="list-title"/>
+            <Label text="Sounds good, see you there" styleClass="list-preview"/>
+          </VBox>
+          <VBox spacing="4" alignment="CENTER_RIGHT">
+            <Label text="Mon" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+        <Region VBox.vgrow="ALWAYS"/>
+        <Label text="12 conversations  ·  8 unread" styleClass="tiny-muted"/>
+      </VBox>
+      <VBox spacing="12" styleClass="chat-main" minWidth="560" HBox.hgrow="ALWAYS">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <StackPane styleClass="avatar-violet">
+            <Label text="MT" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="Mia Tran" styleClass="section-title"/>
+            <Label text="Online · last seen now" styleClass="muted"/>
+          </VBox>
+          <Button text="Search" styleClass="secondary-button"/>
+          <Button text="Details" styleClass="secondary-button"/>
+        </HBox>
+        <Separator/>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll" VBox.vgrow="ALWAYS">
+          <content>
+            <VBox spacing="19">
+              <Label text="TODAY   ·   NOVEMBER 9" styleClass="sidebar-heading"/>
+              <Region prefHeight="20"/>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <VBox spacing="12" styleClass="message-theirs" maxWidth="475">
+                  <Label text="Hey Alex, I have a new version of the UI." styleClass="message-text" wrapText="true" maxWidth="425"/>
+                  <Label text="10:32" styleClass="message-time"/>
+                </VBox>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_RIGHT">
+                <Region VBox.vgrow="ALWAYS"/>
+                <VBox spacing="12" styleClass="message-mine" maxWidth="475">
+                  <Label text="Nice. Send it over and I will take a look." styleClass="message-text" wrapText="true" maxWidth="425"/>
+                  <Label text="10:34" styleClass="message-time"/>
+                </VBox>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <HBox spacing="9" alignment="BOTTOM_LEFT">
+                  <VBox spacing="12" styleClass="message-theirs" maxWidth="475">
+                    <Label text="I updated the layout and fixed the spacing. Can you review the latest mockup?" styleClass="message-text" wrapText="true" maxWidth="425"/>
+                    <Label text="10:42" styleClass="message-time"/>
+                  </VBox>
+                  <Button text="✦ Ask AI" styleClass="small-button"/>
+                </HBox>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_RIGHT">
+                <Region VBox.vgrow="ALWAYS"/>
+                <VBox spacing="12" styleClass="message-mine" maxWidth="475">
+                  <Label text="Absolutely. The overall structure looks cleaner now." styleClass="message-text" wrapText="true" maxWidth="425"/>
+                  <Label text="10:45" styleClass="message-time"/>
+                </VBox>
+              </HBox>
+            </VBox>
+          </content>
+        </ScrollPane>
+        <HBox spacing="12" alignment="CENTER_LEFT" styleClass="chat-composer">
+          <Button text="+" styleClass="small-button"/>
+          <TextField promptText="Write a message..." styleClass="text-field" HBox.hgrow="ALWAYS"/>
+          <Button text="Send  →" styleClass="primary-button"/>
+        </HBox>
+      </VBox>
+    </HBox>
+  </center>
+</BorderPane>

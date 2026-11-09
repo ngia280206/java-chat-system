@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-root" prefWidth="1480" prefHeight="920" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="sidebar" prefWidth="240" minWidth="240" maxWidth="240">
+      <HBox spacing="11" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <VBox spacing="1">
+          <Label text="RELAY" styleClass="brand-name"/>
+          <Label text="ADMIN CONSOLE" styleClass="brand-subtitle"/>
+        </VBox>
+      </HBox>
+      <Region prefHeight="23"/>
+      <Label text="WORKSPACE" styleClass="sidebar-heading"/>
+      <Button text="  Overview" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  People" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Groups" styleClass="nav-active" maxWidth="230" prefWidth="206"/>
+      <Button text="  Warnings" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Region prefHeight="15"/>
+      <Label text="ACCOUNT" styleClass="sidebar-heading"/>
+      <Button text="  Settings" styleClass="nav-button" prefWidth="206"/>
+      <Button text="  Help &amp; support" styleClass="nav-button" prefWidth="206"/>
+      <Region minHeight="15" VBox.vgrow="ALWAYS"/>
+      <VBox spacing="12" styleClass="sidebar-footer">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <StackPane styleClass="avatar">
+            <Label text="AD" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4">
+            <Label text="System Admin" styleClass="small-heading"/>
+            <Label text="Administrator" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+      </VBox>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll">
+      <content>
+        <VBox spacing="12" styleClass="content-wrap">
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="ADMIN  /  GROUPS" styleClass="breadcrumb" HBox.hgrow="ALWAYS"/>
+            <Label text="PREVIEW ONLY" styleClass="pill"/>
+            <Label text="Nov 2026" styleClass="muted"/>
+          </HBox>
+          <HBox spacing="15" alignment="CENTER_LEFT">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+              <Label text="Groups &amp; members" styleClass="page-title"/>
+              <Label text="Inspect group ownership, membership, and safety signals." styleClass="page-subtitle"/>
+            </VBox>
+          </HBox>
+          <HBox spacing="14" alignment="CENTER_LEFT">
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Active groups" styleClass="metric-label"/>
+              <Label text="1,078" styleClass="value-large"/>
+              <Label text="+24 this week" styleClass="metric-trend"/>
+            </VBox>
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Group memberships" styleClass="metric-label"/>
+              <Label text="24.6K" styleClass="value-large"/>
+              <Label text="+9.1% this month" styleClass="metric-trend"/>
+            </VBox>
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Flagged groups" styleClass="metric-label"/>
+              <Label text="11" styleClass="value-large"/>
+              <Label text="3 require review" styleClass="metric-trend-warn"/>
+            </VBox>
+          </HBox>
+          <VBox spacing="12" styleClass="card">
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="Group directory" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <TextField promptText="Search group name or owner" styleClass="search-field" HBox.hgrow="ALWAYS"/>
+              <Button text="Sort: member count  v" styleClass="secondary-button"/>
+            </HBox>
+            <VBox spacing="1">
+              <HBox spacing="6" alignment="CENTER_LEFT">
+                <Label text="GROUP NAME" styleClass="table-heading" prefWidth="190"/>
+                <Label text="MEMBERS" styleClass="table-heading" prefWidth="95"/>
+                <Label text="OWNER" styleClass="table-heading" prefWidth="176"/>
+                <Label text="CREATED" styleClass="table-heading" prefWidth="172"/>
+                <Label text="STATUS" styleClass="table-heading" prefWidth="118"/>
+                <Label text="ACTION" styleClass="table-heading" prefWidth="95"/>
+              </HBox>
+              <Separator/>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                <Label text="Design Circle" styleClass="small-heading" prefWidth="190"/>
+                <Label text="36" styleClass="body-text" prefWidth="95"/>
+                <Label text="Mia Tran" styleClass="body-text" prefWidth="176"/>
+                <Label text="Nov 08, 2026" styleClass="body-text" prefWidth="172"/>
+                <Label text="Healthy" styleClass="pill-success" prefWidth="118"/>
+                <Label text="Inspect" styleClass="body-text" prefWidth="95"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row-alt">
+                <Label text="Study Hub" styleClass="small-heading" prefWidth="190"/>
+                <Label text="128" styleClass="body-text" prefWidth="95"/>
+                <Label text="Jordan Lee" styleClass="body-text" prefWidth="176"/>
+                <Label text="Nov 07, 2026" styleClass="body-text" prefWidth="172"/>
+                <Label text="Flagged" styleClass="pill-warning" prefWidth="118"/>
+                <Label text="Inspect" styleClass="body-text" prefWidth="95"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                <Label text="Weekend Crew" styleClass="small-heading" prefWidth="190"/>
+                <Label text="18" styleClass="body-text" prefWidth="95"/>
+                <Label text="Sam Rivera" styleClass="body-text" prefWidth="176"/>
+                <Label text="Nov 03, 2026" styleClass="body-text" prefWidth="172"/>
+                <Label text="Healthy" styleClass="pill-success" prefWidth="118"/>
+                <Label text="Inspect" styleClass="body-text" prefWidth="95"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row-alt">
+                <Label text="Dev Community" styleClass="small-heading" prefWidth="190"/>
+                <Label text="243" styleClass="body-text" prefWidth="95"/>
+                <Label text="Alex Morgan" styleClass="body-text" prefWidth="176"/>
+                <Label text="Oct 26, 2026" styleClass="body-text" prefWidth="172"/>
+                <Label text="Healthy" styleClass="pill-success" prefWidth="118"/>
+                <Label text="Inspect" styleClass="body-text" prefWidth="95"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                <Label text="Marketplace" styleClass="small-heading" prefWidth="190"/>
+                <Label text="415" styleClass="body-text" prefWidth="95"/>
+                <Label text="Taylor Chen" styleClass="body-text" prefWidth="176"/>
+                <Label text="Oct 20, 2026" styleClass="body-text" prefWidth="172"/>
+                <Label text="Review" styleClass="pill-danger" prefWidth="118"/>
+                <Label text="Inspect" styleClass="body-text" prefWidth="95"/>
+              </HBox>
+            </VBox>
+          </VBox>
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>

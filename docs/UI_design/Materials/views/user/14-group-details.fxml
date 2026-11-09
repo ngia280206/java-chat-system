@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-root" prefWidth="1480" prefHeight="920" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="sidebar" prefWidth="240" minWidth="240" maxWidth="240">
+      <HBox spacing="11" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <VBox spacing="1">
+          <Label text="RELAY" styleClass="brand-name"/>
+          <Label text="MESSENGER" styleClass="brand-subtitle"/>
+        </VBox>
+      </HBox>
+      <Region prefHeight="23"/>
+      <Label text="YOUR SPACE" styleClass="sidebar-heading"/>
+      <Button text="  Chats" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Friends" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Groups" styleClass="nav-active" maxWidth="230" prefWidth="206"/>
+      <Button text="  Spam reports" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  My profile" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Region prefHeight="15"/>
+      <Label text="ACCOUNT" styleClass="sidebar-heading"/>
+      <Button text="  Settings" styleClass="nav-button" prefWidth="206"/>
+      <Button text="  Help &amp; support" styleClass="nav-button" prefWidth="206"/>
+      <Region minHeight="15" VBox.vgrow="ALWAYS"/>
+      <VBox spacing="12" styleClass="sidebar-footer">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <StackPane styleClass="avatar">
+            <Label text="ME" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4">
+            <Label text="Alex Morgan" styleClass="small-heading"/>
+            <Label text="Online now" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+      </VBox>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll">
+      <content>
+        <VBox spacing="12" styleClass="content-wrap">
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="RELAY  /  GROUPS" styleClass="breadcrumb" HBox.hgrow="ALWAYS"/>
+            <Label text="PREVIEW ONLY" styleClass="pill"/>
+            <Label text="Nov 2026" styleClass="muted"/>
+          </HBox>
+          <HBox spacing="15" alignment="CENTER_LEFT">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+              <Label text="Design Circle" styleClass="page-title"/>
+              <Label text="Edit group details and manage members." styleClass="page-subtitle"/>
+            </VBox>
+            <Button text="Back to groups" styleClass="secondary-button"/>
+          </HBox>
+          <HBox spacing="16" alignment="CENTER_LEFT">
+            <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
+              <Label text="Design Circle" styleClass="page-title"/>
+              <Label text="A collaborative group for interface design and creative feedback." styleClass="body-text"/>
+              <Label text="Owner: Alex Morgan" styleClass="pill-active"/>
+              <Separator/>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Created" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="April 02, 2026" styleClass="body-text"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Members" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="36" styleClass="body-text"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Group visibility" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="Private" styleClass="body-text"/>
+              </HBox>
+              <Label text="Group description" styleClass="form-label"/>
+              <TextArea promptText="Share your ideas, ask for feedback, and build better products together." prefRowCount="3"/>
+              <Button text="Save changes" styleClass="primary-button"/>
+            </VBox>
+            <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Members" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+                <HBox spacing="12" alignment="CENTER_LEFT">
+                  <Button text="Invite members" styleClass="small-button"/>
+                  <Button text="Edit group" styleClass="small-button"/>
+                </HBox>
+              </HBox>
+              <VBox spacing="1">
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                  <Label text="MEMBER" styleClass="table-heading" prefWidth="245"/>
+                  <Label text="ROLE" styleClass="table-heading" prefWidth="160"/>
+                  <Label text="JOINED" styleClass="table-heading" prefWidth="172"/>
+                  <Label text="ACTION" styleClass="table-heading" prefWidth="122"/>
+                </HBox>
+                <Separator/>
+                <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                  <Label text="Alex Morgan" styleClass="small-heading" prefWidth="245"/>
+                  <Label text="Owner" styleClass="pill-active" prefWidth="160"/>
+                  <Label text="Apr 02, 2026" styleClass="body-text" prefWidth="172"/>
+                  <Button text="—" styleClass="small-button" prefWidth="122"/>
+                </HBox>
+                <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row-alt">
+                  <Label text="Mia Tran" styleClass="small-heading" prefWidth="245"/>
+                  <Label text="Moderator" styleClass="pill-success" prefWidth="160"/>
+                  <Label text="Apr 03, 2026" styleClass="body-text" prefWidth="172"/>
+                  <Button text="Remove" styleClass="small-button" prefWidth="122"/>
+                </HBox>
+                <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                  <Label text="Jordan Lee" styleClass="small-heading" prefWidth="245"/>
+                  <Label text="Member" styleClass="pill" prefWidth="160"/>
+                  <Label text="Apr 09, 2026" styleClass="body-text" prefWidth="172"/>
+                  <Button text="Remove" styleClass="small-button" prefWidth="122"/>
+                </HBox>
+                <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row-alt">
+                  <Label text="Casey Brown" styleClass="small-heading" prefWidth="245"/>
+                  <Label text="Member" styleClass="pill" prefWidth="160"/>
+                  <Label text="May 16, 2026" styleClass="body-text" prefWidth="172"/>
+                  <Button text="Remove" styleClass="small-button" prefWidth="122"/>
+                </HBox>
+              </VBox>
+            </VBox>
+          </HBox>
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-root" prefWidth="1480" prefHeight="920" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="sidebar" prefWidth="240" minWidth="240" maxWidth="240">
+      <HBox spacing="11" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <VBox spacing="1">
+          <Label text="RELAY" styleClass="brand-name"/>
+          <Label text="MESSENGER" styleClass="brand-subtitle"/>
+        </VBox>
+      </HBox>
+      <Region prefHeight="23"/>
+      <Label text="YOUR SPACE" styleClass="sidebar-heading"/>
+      <Button text="  Chats" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Friends" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Groups" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Spam reports" styleClass="nav-active" maxWidth="230" prefWidth="206"/>
+      <Button text="  My profile" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Region prefHeight="15"/>
+      <Label text="ACCOUNT" styleClass="sidebar-heading"/>
+      <Button text="  Settings" styleClass="nav-button" prefWidth="206"/>
+      <Button text="  Help &amp; support" styleClass="nav-button" prefWidth="206"/>
+      <Region minHeight="15" VBox.vgrow="ALWAYS"/>
+      <VBox spacing="12" styleClass="sidebar-footer">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <StackPane styleClass="avatar">
+            <Label text="ME" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4">
+            <Label text="Alex Morgan" styleClass="small-heading"/>
+            <Label text="Online now" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+      </VBox>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll">
+      <content>
+        <VBox spacing="12" styleClass="content-wrap">
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="RELAY  /  REPORTS" styleClass="breadcrumb" HBox.hgrow="ALWAYS"/>
+            <Label text="PREVIEW ONLY" styleClass="pill"/>
+            <Label text="Nov 2026" styleClass="muted"/>
+          </HBox>
+          <HBox spacing="15" alignment="CENTER_LEFT">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+              <Label text="Spam reports" styleClass="page-title"/>
+              <Label text="Track reports you submitted and their moderation status." styleClass="page-subtitle"/>
+            </VBox>
+          </HBox>
+          <HBox spacing="14" alignment="CENTER_LEFT">
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Submitted" styleClass="metric-label"/>
+              <Label text="3" styleClass="value-large"/>
+              <Label text="Total reported cases" styleClass="metric-trend"/>
+            </VBox>
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Pending" styleClass="metric-label"/>
+              <Label text="1" styleClass="value-large"/>
+              <Label text="Waiting for review" styleClass="metric-trend-warn"/>
+            </VBox>
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Resolved" styleClass="metric-label"/>
+              <Label text="1" styleClass="value-large"/>
+              <Label text="Moderation complete" styleClass="metric-trend"/>
+            </VBox>
+          </HBox>
+          <VBox spacing="12" styleClass="card">
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="Your submitted reports" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+              <Button text="New report" styleClass="primary-button"/>
+            </HBox>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <TextField promptText="Search your reports" styleClass="search-field" HBox.hgrow="ALWAYS"/>
+              <Button text="Status: all  v" styleClass="secondary-button"/>
+            </HBox>
+            <VBox spacing="1">
+              <HBox spacing="6" alignment="CENTER_LEFT">
+                <Label text="REPORT ID" styleClass="table-heading" prefWidth="146"/>
+                <Label text="TYPE" styleClass="table-heading" prefWidth="170"/>
+                <Label text="SUBJECT" styleClass="table-heading" prefWidth="196"/>
+                <Label text="SUBMITTED" styleClass="table-heading" prefWidth="180"/>
+                <Label text="STATUS" styleClass="table-heading" prefWidth="130"/>
+              </HBox>
+              <Separator/>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                <Label text="RP-1042" styleClass="small-heading" prefWidth="146"/>
+                <Label text="Spam messages" styleClass="body-text" prefWidth="170"/>
+                <Label text="Taylor Chen" styleClass="body-text" prefWidth="196"/>
+                <Label text="Nov 08, 2026" styleClass="body-text" prefWidth="180"/>
+                <Label text="Under review" styleClass="pill-active" prefWidth="130"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row-alt">
+                <Label text="RP-1023" styleClass="small-heading" prefWidth="146"/>
+                <Label text="Harassment" styleClass="body-text" prefWidth="170"/>
+                <Label text="Unknown User" styleClass="body-text" prefWidth="196"/>
+                <Label text="Nov 02, 2026" styleClass="body-text" prefWidth="180"/>
+                <Label text="Resolved" styleClass="pill-success" prefWidth="130"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                <Label text="RP-1007" styleClass="small-heading" prefWidth="146"/>
+                <Label text="Suspicious link" styleClass="body-text" prefWidth="170"/>
+                <Label text="Marketplace" styleClass="body-text" prefWidth="196"/>
+                <Label text="Oct 26, 2026" styleClass="body-text" prefWidth="180"/>
+                <Label text="Pending" styleClass="pill-warning" prefWidth="130"/>
+              </HBox>
+            </VBox>
+          </VBox>
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-root" prefWidth="1480" prefHeight="920" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="sidebar" prefWidth="240" minWidth="240" maxWidth="240">
+      <HBox spacing="11" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <VBox spacing="1">
+          <Label text="RELAY" styleClass="brand-name"/>
+          <Label text="ADMIN CONSOLE" styleClass="brand-subtitle"/>
+        </VBox>
+      </HBox>
+      <Region prefHeight="23"/>
+      <Label text="WORKSPACE" styleClass="sidebar-heading"/>
+      <Button text="  Overview" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  People" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Groups" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Warnings" styleClass="nav-active" maxWidth="230" prefWidth="206"/>
+      <Region prefHeight="15"/>
+      <Label text="ACCOUNT" styleClass="sidebar-heading"/>
+      <Button text="  Settings" styleClass="nav-button" prefWidth="206"/>
+      <Button text="  Help &amp; support" styleClass="nav-button" prefWidth="206"/>
+      <Region minHeight="15" VBox.vgrow="ALWAYS"/>
+      <VBox spacing="12" styleClass="sidebar-footer">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <StackPane styleClass="avatar">
+            <Label text="AD" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4">
+            <Label text="System Admin" styleClass="small-heading"/>
+            <Label text="Administrator" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+      </VBox>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll">
+      <content>
+        <VBox spacing="12" styleClass="content-wrap">
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="ADMIN  /  MODERATION" styleClass="breadcrumb" HBox.hgrow="ALWAYS"/>
+            <Label text="PREVIEW ONLY" styleClass="pill"/>
+            <Label text="Nov 2026" styleClass="muted"/>
+          </HBox>
+          <HBox spacing="15" alignment="CENTER_LEFT">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+              <Label text="Warnings &amp; moderation" styleClass="page-title"/>
+              <Label text="Review incoming spam and safety reports." styleClass="page-subtitle"/>
+            </VBox>
+            <Button text="Export report log" styleClass="secondary-button"/>
+          </HBox>
+          <HBox spacing="14" alignment="CENTER_LEFT">
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Pending" styleClass="metric-label"/>
+              <Label text="12" styleClass="value-large"/>
+              <Label text="Needs triage" styleClass="metric-trend-warn"/>
+            </VBox>
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Under review" styleClass="metric-label"/>
+              <Label text="25" styleClass="value-large"/>
+              <Label text="8 assigned today" styleClass="metric-trend-warn"/>
+            </VBox>
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Resolved" styleClass="metric-label"/>
+              <Label text="604" styleClass="value-large"/>
+              <Label text="+42 this week" styleClass="metric-trend"/>
+            </VBox>
+          </HBox>
+          <VBox spacing="12" styleClass="card">
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="Warning queue" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <TextField promptText="Search case ID, user, or reason" styleClass="search-field" HBox.hgrow="ALWAYS"/>
+              <Button text="All statuses  v" styleClass="secondary-button"/>
+              <Button text="Newest first  v" styleClass="secondary-button"/>
+            </HBox>
+            <VBox spacing="1">
+              <HBox spacing="6" alignment="CENTER_LEFT">
+                <Label text="CASE ID" styleClass="table-heading" prefWidth="100"/>
+                <Label text="REASON" styleClass="table-heading" prefWidth="148"/>
+                <Label text="REPORTED USER" styleClass="table-heading" prefWidth="162"/>
+                <Label text="CONTEXT" styleClass="table-heading" prefWidth="163"/>
+                <Label text="CREATED" styleClass="table-heading" prefWidth="170"/>
+                <Label text="STATUS" styleClass="table-heading" prefWidth="116"/>
+              </HBox>
+              <Separator/>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                <Label text="WR-219" styleClass="small-heading" prefWidth="100"/>
+                <Label text="Spam messages" styleClass="body-text" prefWidth="148"/>
+                <Label text="Taylor Chen" styleClass="body-text" prefWidth="162"/>
+                <Label text="Private message" styleClass="body-text" prefWidth="163"/>
+                <Label text="Nov 09 · 09:23" styleClass="body-text" prefWidth="170"/>
+                <Label text="Pending" styleClass="pill-warning" prefWidth="116"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row-alt">
+                <Label text="WR-218" styleClass="small-heading" prefWidth="100"/>
+                <Label text="Harassment" styleClass="body-text" prefWidth="148"/>
+                <Label text="Unknown member" styleClass="body-text" prefWidth="162"/>
+                <Label text="Study Hub" styleClass="body-text" prefWidth="163"/>
+                <Label text="Nov 09 · 08:18" styleClass="body-text" prefWidth="170"/>
+                <Label text="Under review" styleClass="pill-active" prefWidth="116"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                <Label text="WR-217" styleClass="small-heading" prefWidth="100"/>
+                <Label text="Repeated links" styleClass="body-text" prefWidth="148"/>
+                <Label text="Marketplace" styleClass="body-text" prefWidth="162"/>
+                <Label text="Group chat" styleClass="body-text" prefWidth="163"/>
+                <Label text="Nov 08 · 18:30" styleClass="body-text" prefWidth="170"/>
+                <Label text="Pending" styleClass="pill-warning" prefWidth="116"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row-alt">
+                <Label text="WR-216" styleClass="small-heading" prefWidth="100"/>
+                <Label text="Impersonation" styleClass="body-text" prefWidth="148"/>
+                <Label text="Casey Brown" styleClass="body-text" prefWidth="162"/>
+                <Label text="Private message" styleClass="body-text" prefWidth="163"/>
+                <Label text="Nov 07 · 16:12" styleClass="body-text" prefWidth="170"/>
+                <Label text="Resolved" styleClass="pill-success" prefWidth="116"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                <Label text="WR-215" styleClass="small-heading" prefWidth="100"/>
+                <Label text="Spam messages" styleClass="body-text" prefWidth="148"/>
+                <Label text="Jordan Lee" styleClass="body-text" prefWidth="162"/>
+                <Label text="Group chat" styleClass="body-text" prefWidth="163"/>
+                <Label text="Nov 06 · 14:55" styleClass="body-text" prefWidth="170"/>
+                <Label text="Resolved" styleClass="pill-success" prefWidth="116"/>
+              </HBox>
+            </VBox>
+          </VBox>
+          <VBox spacing="12" styleClass="card">
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="Moderation workflow" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="1. Review evidence" styleClass="pill"/>
+              <Label text="2. Select action" styleClass="pill"/>
+              <Label text="3. Record decision" styleClass="pill"/>
+              <Label text="4. Close case" styleClass="pill"/>
+            </HBox>
+          </VBox>
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>
