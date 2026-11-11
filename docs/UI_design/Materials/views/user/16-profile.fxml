@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-root" prefWidth="1480" prefHeight="920" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="sidebar" prefWidth="240" minWidth="240" maxWidth="240">
+      <HBox spacing="11" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <VBox spacing="1">
+          <Label text="RELAY" styleClass="brand-name"/>
+          <Label text="MESSENGER" styleClass="brand-subtitle"/>
+        </VBox>
+      </HBox>
+      <Region prefHeight="23"/>
+      <Label text="YOUR SPACE" styleClass="sidebar-heading"/>
+      <Button text="  Chats" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Friends" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Groups" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Spam reports" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  My profile" styleClass="nav-active" maxWidth="230" prefWidth="206"/>
+      <Region prefHeight="15"/>
+      <Label text="ACCOUNT" styleClass="sidebar-heading"/>
+      <Button text="  Settings" styleClass="nav-button" prefWidth="206"/>
+      <Button text="  Help &amp; support" styleClass="nav-button" prefWidth="206"/>
+      <Region minHeight="15" VBox.vgrow="ALWAYS"/>
+      <VBox spacing="12" styleClass="sidebar-footer">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <StackPane styleClass="avatar">
+            <Label text="ME" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4">
+            <Label text="Alex Morgan" styleClass="small-heading"/>
+            <Label text="Online now" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+      </VBox>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll">
+      <content>
+        <VBox spacing="12" styleClass="content-wrap">
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="RELAY  /  PROFILE" styleClass="breadcrumb" HBox.hgrow="ALWAYS"/>
+            <Label text="PREVIEW ONLY" styleClass="pill"/>
+            <Label text="Nov 2026" styleClass="muted"/>
+          </HBox>
+          <HBox spacing="15" alignment="CENTER_LEFT">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+              <Label text="My profile" styleClass="page-title"/>
+              <Label text="Personal information and public identity." styleClass="page-subtitle"/>
+            </VBox>
+            <Button text="Preview public profile" styleClass="secondary-button"/>
+          </HBox>
+          <HBox spacing="16" alignment="CENTER_LEFT">
+            <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Public profile" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <StackPane styleClass="avatar-large">
+                  <Label text="AM" styleClass="avatar-label-large"/>
+                </StackPane>
+                <VBox spacing="6">
+                  <Label text="Alex Morgan" styleClass="section-title"/>
+                  <Label text="@alexmorgan" styleClass="muted"/>
+                  <Button text="Change avatar" styleClass="small-button"/>
+                </VBox>
+              </HBox>
+              <Separator/>
+              <VBox spacing="7">
+                <Label text="Display name" styleClass="form-label"/>
+                <TextField promptText="Alex Morgan" styleClass="text-field" prefWidth="386"/>
+              </VBox>
+              <VBox spacing="7">
+                <Label text="Username" styleClass="form-label"/>
+                <TextField promptText="alexmorgan" styleClass="text-field" prefWidth="386"/>
+              </VBox>
+              <VBox spacing="7">
+                <Label text="Bio" styleClass="form-label"/>
+                <TextField promptText="Design enthusiast and Java developer" styleClass="text-field" prefWidth="386"/>
+              </VBox>
+              <Button text="Save profile" styleClass="primary-button"/>
+            </VBox>
+            <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Account information" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Email" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="alex.morgan@example.com" styleClass="body-text"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Member since" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="March 2026" styleClass="body-text"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Account status" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="Verified" styleClass="body-text"/>
+              </HBox>
+              <Separator/>
+              <Label text="Profile visibility" styleClass="form-label"/>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Friends only" styleClass="pill-active"/>
+                <Label text="Everyone" styleClass="pill"/>
+              </HBox>
+              <Label text="Changes in this preview are not saved." styleClass="tiny-muted"/>
+            </VBox>
+          </HBox>
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>

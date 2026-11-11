@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-root" prefWidth="1480" prefHeight="920" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="sidebar" prefWidth="240" minWidth="240" maxWidth="240">
+      <HBox spacing="11" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <VBox spacing="1">
+          <Label text="RELAY" styleClass="brand-name"/>
+          <Label text="ADMIN CONSOLE" styleClass="brand-subtitle"/>
+        </VBox>
+      </HBox>
+      <Region prefHeight="23"/>
+      <Label text="WORKSPACE" styleClass="sidebar-heading"/>
+      <Button text="  Overview" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  People" styleClass="nav-active" maxWidth="230" prefWidth="206"/>
+      <Button text="  Groups" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Warnings" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Region prefHeight="15"/>
+      <Label text="ACCOUNT" styleClass="sidebar-heading"/>
+      <Button text="  Settings" styleClass="nav-button" prefWidth="206"/>
+      <Button text="  Help &amp; support" styleClass="nav-button" prefWidth="206"/>
+      <Region minHeight="15" VBox.vgrow="ALWAYS"/>
+      <VBox spacing="12" styleClass="sidebar-footer">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <StackPane styleClass="avatar">
+            <Label text="AD" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4">
+            <Label text="System Admin" styleClass="small-heading"/>
+            <Label text="Administrator" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+      </VBox>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll">
+      <content>
+        <VBox spacing="12" styleClass="content-wrap">
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="ADMIN  /  USERS" styleClass="breadcrumb" HBox.hgrow="ALWAYS"/>
+            <Label text="PREVIEW ONLY" styleClass="pill"/>
+            <Label text="Nov 2026" styleClass="muted"/>
+          </HBox>
+          <HBox spacing="15" alignment="CENTER_LEFT">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+              <Label text="User details" styleClass="page-title"/>
+              <Label text="Account overview, security history, and recent actions." styleClass="page-subtitle"/>
+            </VBox>
+            <Button text="Back to users" styleClass="secondary-button"/>
+          </HBox>
+          <HBox spacing="16" alignment="CENTER_LEFT">
+            <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <StackPane styleClass="avatar-large">
+                  <Label text="MT" styleClass="avatar-label-large"/>
+                </StackPane>
+                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                  <Label text="Mia Tran" styleClass="page-title"/>
+                  <Label text="@miatran  ·  UID 004219" styleClass="muted"/>
+                  <Label text="Active account" styleClass="pill-success"/>
+                </VBox>
+                <Button text="Restrict user" styleClass="danger-button"/>
+              </HBox>
+              <Separator/>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Email address" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="mia.tran@example.com" styleClass="body-text"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Joined on" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="March 12, 2026" styleClass="body-text"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Last login" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="Nov 09, 2026 · 08:17" styleClass="body-text"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Friends / groups" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="86 friends · 7 groups" styleClass="body-text"/>
+              </HBox>
+            </VBox>
+            <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Activity timeline" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <StackPane styleClass="avatar-teal">
+                  <Label text="GR" styleClass="avatar-label"/>
+                </StackPane>
+                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                  <Label text="Joined a group" styleClass="small-heading"/>
+                  <Label text="Accepted invitation to Product Design" styleClass="muted"/>
+                </VBox>
+                <Label text="Today · 10:12" styleClass="tiny-muted"/>
+              </HBox>
+              <Separator/>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <StackPane styleClass="avatar-teal">
+                  <Label text="PR" styleClass="avatar-label"/>
+                </StackPane>
+                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                  <Label text="Updated profile" styleClass="small-heading"/>
+                  <Label text="Changed display name and avatar" styleClass="muted"/>
+                </VBox>
+                <Label text="Yesterday" styleClass="tiny-muted"/>
+              </HBox>
+              <Separator/>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <StackPane styleClass="avatar-teal">
+                  <Label text="RP" styleClass="avatar-label"/>
+                </StackPane>
+                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                  <Label text="Created a report" styleClass="small-heading"/>
+                  <Label text="Reported suspicious private message" styleClass="muted"/>
+                </VBox>
+                <Label text="Nov 06" styleClass="tiny-muted"/>
+              </HBox>
+            </VBox>
+          </HBox>
+          <VBox spacing="12" styleClass="card">
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="Recent login history" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+              <Button text="Full history" styleClass="small-button"/>
+            </HBox>
+            <VBox spacing="1">
+              <HBox spacing="6" alignment="CENTER_LEFT">
+                <Label text="DATE / TIME" styleClass="table-heading" prefWidth="154"/>
+                <Label text="DEVICE" styleClass="table-heading" prefWidth="154"/>
+                <Label text="LOCATION" styleClass="table-heading" prefWidth="170"/>
+                <Label text="RESULT" styleClass="table-heading" prefWidth="110"/>
+              </HBox>
+              <Separator/>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                <Label text="Nov 09 · 08:17" styleClass="small-heading" prefWidth="154"/>
+                <Label text="Windows desktop" styleClass="body-text" prefWidth="154"/>
+                <Label text="Ho Chi Minh City" styleClass="body-text" prefWidth="170"/>
+                <Label text="Successful" styleClass="body-text" prefWidth="110"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row-alt">
+                <Label text="Nov 08 · 20:44" styleClass="small-heading" prefWidth="154"/>
+                <Label text="Android phone" styleClass="body-text" prefWidth="154"/>
+                <Label text="Ho Chi Minh City" styleClass="body-text" prefWidth="170"/>
+                <Label text="Successful" styleClass="body-text" prefWidth="110"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                <Label text="Nov 07 · 11:12" styleClass="small-heading" prefWidth="154"/>
+                <Label text="Web browser" styleClass="body-text" prefWidth="154"/>
+                <Label text="Da Nang" styleClass="body-text" prefWidth="170"/>
+                <Label text="Successful" styleClass="body-text" prefWidth="110"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row-alt">
+                <Label text="Nov 06 · 09:31" styleClass="small-heading" prefWidth="154"/>
+                <Label text="Windows desktop" styleClass="body-text" prefWidth="154"/>
+                <Label text="Ho Chi Minh City" styleClass="body-text" prefWidth="170"/>
+                <Label text="Successful" styleClass="body-text" prefWidth="110"/>
+              </HBox>
+            </VBox>
+          </VBox>
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>

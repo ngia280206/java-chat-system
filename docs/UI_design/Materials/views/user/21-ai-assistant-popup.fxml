@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-root" prefWidth="890" prefHeight="890" stylesheets="@../../styles/dark.css">
+  <center>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll">
+      <content>
+        <VBox spacing="14" styleClass="content-wrap">
+          <Label text="IN-CONTEXT ASSISTANT · CHAT PREVIEW" styleClass="sidebar-heading"/>
+          <Label text="Summon the assistant beside a selected message" styleClass="page-title"/>
+          <Label text="Example: AI opens next to a message in the conversation window." styleClass="page-subtitle"/>
+          <Region prefHeight="24"/>
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <HBox spacing="9" alignment="BOTTOM_LEFT">
+              <VBox spacing="12" styleClass="message-theirs" maxWidth="475">
+                <Label text="I updated the layout and fixed the spacing. Can you review the latest mockup?" styleClass="message-text" wrapText="true" maxWidth="425"/>
+                <Label text="10:42" styleClass="message-time"/>
+              </VBox>
+              <Button text="✦ Ask AI" styleClass="small-button"/>
+            </HBox>
+          </HBox>
+          <Region prefHeight="18"/>
+          <VBox spacing="12" styleClass="card" prefWidth="510">
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <StackPane styleClass="brand-badge">
+                <Label text="✦" styleClass="avatar-label"/>
+              </StackPane>
+              <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Relay AI Assistant" styleClass="section-title"/>
+                <Label text="Context-aware help for this message" styleClass="muted"/>
+              </VBox>
+              <Button text="×" styleClass="ghost-button"/>
+            </HBox>
+            <Separator/>
+            <Label text="MESSAGE CONTEXT" styleClass="sidebar-heading"/>
+            <VBox spacing="12" styleClass="card-flat">
+              <Label text="Mia Tran wrote:" styleClass="small-heading"/>
+              <Label text="“I updated the layout and fixed the spacing. Can you review the latest mockup?”" styleClass="body-text" wrapText="true"/>
+            </VBox>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="Summarize" styleClass="pill"/>
+              <Label text="Draft a reply" styleClass="pill"/>
+              <Label text="Explain" styleClass="pill"/>
+            </HBox>
+            <VBox spacing="12" styleClass="callout-card">
+              <Label text="AI SUGGESTION" styleClass="sidebar-heading"/>
+              <Label text="A concise reply could be: “Sure! Send me the updated screens and I will review spacing, hierarchy, and consistency.”" styleClass="body-text" wrapText="true"/>
+            </VBox>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <TextField promptText="Ask about this message..." styleClass="text-field" HBox.hgrow="ALWAYS"/>
+              <Button text="Send" styleClass="primary-button"/>
+            </HBox>
+            <Label text="AI responses shown here are sample content." styleClass="tiny-muted"/>
+          </VBox>
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>

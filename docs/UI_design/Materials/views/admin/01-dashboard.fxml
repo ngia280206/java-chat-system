@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-root" prefWidth="1480" prefHeight="920" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="sidebar" prefWidth="240" minWidth="240" maxWidth="240">
+      <HBox spacing="11" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <VBox spacing="1">
+          <Label text="RELAY" styleClass="brand-name"/>
+          <Label text="ADMIN CONSOLE" styleClass="brand-subtitle"/>
+        </VBox>
+      </HBox>
+      <Region prefHeight="23"/>
+      <Label text="WORKSPACE" styleClass="sidebar-heading"/>
+      <Button text="  Overview" styleClass="nav-active" maxWidth="230" prefWidth="206"/>
+      <Button text="  People" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Groups" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Warnings" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Region prefHeight="15"/>
+      <Label text="ACCOUNT" styleClass="sidebar-heading"/>
+      <Button text="  Settings" styleClass="nav-button" prefWidth="206"/>
+      <Button text="  Help &amp; support" styleClass="nav-button" prefWidth="206"/>
+      <Region minHeight="15" VBox.vgrow="ALWAYS"/>
+      <VBox spacing="12" styleClass="sidebar-footer">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <StackPane styleClass="avatar">
+            <Label text="AD" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4">
+            <Label text="System Admin" styleClass="small-heading"/>
+            <Label text="Administrator" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+      </VBox>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll">
+      <content>
+        <VBox spacing="12" styleClass="content-wrap">
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="ADMIN  /  DASHBOARD" styleClass="breadcrumb" HBox.hgrow="ALWAYS"/>
+            <Label text="PREVIEW ONLY" styleClass="pill"/>
+            <Label text="Nov 2026" styleClass="muted"/>
+          </HBox>
+          <HBox spacing="15" alignment="CENTER_LEFT">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+              <Label text="Overview &amp; statistics" styleClass="page-title"/>
+              <Label text="Monitor engagement, safety, and system activity." styleClass="page-subtitle"/>
+            </VBox>
+            <Button text="Export overview" styleClass="secondary-button"/>
+          </HBox>
+          <HBox spacing="14" alignment="CENTER_LEFT">
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Total users" styleClass="metric-label"/>
+              <Label text="8,426" styleClass="value-large"/>
+              <Label text="+12.6% vs last month" styleClass="metric-trend"/>
+            </VBox>
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Active today" styleClass="metric-label"/>
+              <Label text="1,284" styleClass="value-large"/>
+              <Label text="+8.2% vs yesterday" styleClass="metric-trend"/>
+            </VBox>
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Messages sent" styleClass="metric-label"/>
+              <Label text="48.9K" styleClass="value-large"/>
+              <Label text="+21.4% this week" styleClass="metric-trend"/>
+            </VBox>
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Open warnings" styleClass="metric-label"/>
+              <Label text="37" styleClass="value-large"/>
+              <Label text="12 need attention" styleClass="metric-trend-warn"/>
+            </VBox>
+          </HBox>
+          <HBox spacing="16" alignment="CENTER_LEFT">
+            <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Weekly activity" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+                <Button text="Last 12 days  v" styleClass="small-button"/>
+              </HBox>
+              <Label text="Active users and conversation volume" styleClass="muted"/>
+              <HBox spacing="12" alignment="BOTTOM_CENTER" minHeight="165">
+                <VBox spacing="12" alignment="BOTTOM_CENTER">
+                  <Region prefHeight="51.25" prefWidth="26" styleClass="chart-bar-dim"/>
+                </VBox>
+                <VBox spacing="12" alignment="BOTTOM_CENTER">
+                  <Region prefHeight="73.75" prefWidth="26" styleClass="chart-bar-dim"/>
+                </VBox>
+                <VBox spacing="12" alignment="BOTTOM_CENTER">
+                  <Region prefHeight="63.125" prefWidth="26" styleClass="chart-bar-dim"/>
+                </VBox>
+                <VBox spacing="12" alignment="BOTTOM_CENTER">
+                  <Region prefHeight="90.625" prefWidth="26" styleClass="chart-bar-dim"/>
+                </VBox>
+                <VBox spacing="12" alignment="BOTTOM_CENTER">
+                  <Region prefHeight="78.125" prefWidth="26" styleClass="chart-bar-dim"/>
+                </VBox>
+                <VBox spacing="12" alignment="BOTTOM_CENTER">
+                  <Region prefHeight="107.5" prefWidth="26" styleClass="chart-bar-dim"/>
+                </VBox>
+                <VBox spacing="12" alignment="BOTTOM_CENTER">
+                  <Region prefHeight="85.625" prefWidth="26" styleClass="chart-bar-dim"/>
+                </VBox>
+                <VBox spacing="12" alignment="BOTTOM_CENTER">
+                  <Region prefHeight="98.75" prefWidth="26" styleClass="chart-bar-blue"/>
+                </VBox>
+                <VBox spacing="12" alignment="BOTTOM_CENTER">
+                  <Region prefHeight="120.0" prefWidth="26" styleClass="chart-bar-dim"/>
+                </VBox>
+                <VBox spacing="12" alignment="BOTTOM_CENTER">
+                  <Region prefHeight="105.0" prefWidth="26" styleClass="chart-bar-dim"/>
+                </VBox>
+                <VBox spacing="12" alignment="BOTTOM_CENTER">
+                  <Region prefHeight="127.5" prefWidth="26" styleClass="chart-bar-blue"/>
+                </VBox>
+                <VBox spacing="12" alignment="BOTTOM_CENTER">
+                  <Region prefHeight="117.5" prefWidth="26" styleClass="chart-bar-teal"/>
+                </VBox>
+              </HBox>
+              <Separator/>
+              <HBox spacing="40" alignment="CENTER_LEFT">
+                <Label text="Mon" styleClass="tiny-muted" minWidth="36"/>
+                <Label text="Tue" styleClass="tiny-muted" minWidth="36"/>
+                <Label text="Wed" styleClass="tiny-muted" minWidth="36"/>
+                <Label text="Thu" styleClass="tiny-muted" minWidth="36"/>
+                <Label text="Fri" styleClass="tiny-muted" minWidth="36"/>
+                <Label text="Sat" styleClass="tiny-muted" minWidth="36"/>
+              </HBox>
+            </VBox>
+            <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Platform snapshot" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="User verification rate" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="94%" styleClass="body-text"/>
+              </HBox>
+              <ProgressBar progress="0.94" prefWidth="320"/>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Messages delivered" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="99.8%" styleClass="body-text"/>
+              </HBox>
+              <ProgressBar progress="0.998" prefWidth="320"/>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Reports reviewed this week" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="68%" styleClass="body-text"/>
+              </HBox>
+              <ProgressBar progress="0.68" prefWidth="320"/>
+              <Separator/>
+              <Label text="All metrics shown are illustrative mock data." styleClass="tiny-muted"/>
+            </VBox>
+          </HBox>
+          <VBox spacing="12" styleClass="card">
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="Recent platform activity" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+              <Button text="View all" styleClass="small-button"/>
+            </HBox>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <StackPane styleClass="avatar-teal">
+                <Label text="MT" styleClass="avatar-label"/>
+              </StackPane>
+              <VBox spacing="3" HBox.hgrow="ALWAYS">
+                <Label text="New user registered" styleClass="small-heading"/>
+                <Label text="Mia Tran joined the platform" styleClass="muted"/>
+              </VBox>
+              <Label text="2 min ago" styleClass="tiny-muted"/>
+            </HBox>
+            <Separator/>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <StackPane styleClass="avatar-teal">
+                <Label text="SR" styleClass="avatar-label"/>
+              </StackPane>
+              <VBox spacing="3" HBox.hgrow="ALWAYS">
+                <Label text="Spam report submitted" styleClass="small-heading"/>
+                <Label text="A conversation was reported for review" styleClass="muted"/>
+              </VBox>
+              <Label text="14 min ago" styleClass="tiny-muted"/>
+            </HBox>
+            <Separator/>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <StackPane styleClass="avatar-teal">
+                <Label text="DC" styleClass="avatar-label"/>
+              </StackPane>
+              <VBox spacing="3" HBox.hgrow="ALWAYS">
+                <Label text="Group created" styleClass="small-heading"/>
+                <Label text="Design Circle created by Sam Rivera" styleClass="muted"/>
+              </VBox>
+              <Label text="31 min ago" styleClass="tiny-muted"/>
+            </HBox>
+            <Separator/>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <StackPane styleClass="avatar-teal">
+                <Label text="OK" styleClass="avatar-label"/>
+              </StackPane>
+              <VBox spacing="3" HBox.hgrow="ALWAYS">
+                <Label text="Moderation resolved" styleClass="small-heading"/>
+                <Label text="Warning #WR-207 marked resolved" styleClass="muted"/>
+              </VBox>
+              <Label text="1 hr ago" styleClass="tiny-muted"/>
+            </HBox>
+          </VBox>
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>

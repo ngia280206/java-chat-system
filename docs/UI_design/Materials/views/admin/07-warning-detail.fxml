@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-root" prefWidth="1480" prefHeight="920" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="sidebar" prefWidth="240" minWidth="240" maxWidth="240">
+      <HBox spacing="11" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <VBox spacing="1">
+          <Label text="RELAY" styleClass="brand-name"/>
+          <Label text="ADMIN CONSOLE" styleClass="brand-subtitle"/>
+        </VBox>
+      </HBox>
+      <Region prefHeight="23"/>
+      <Label text="WORKSPACE" styleClass="sidebar-heading"/>
+      <Button text="  Overview" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  People" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Groups" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Warnings" styleClass="nav-active" maxWidth="230" prefWidth="206"/>
+      <Region prefHeight="15"/>
+      <Label text="ACCOUNT" styleClass="sidebar-heading"/>
+      <Button text="  Settings" styleClass="nav-button" prefWidth="206"/>
+      <Button text="  Help &amp; support" styleClass="nav-button" prefWidth="206"/>
+      <Region minHeight="15" VBox.vgrow="ALWAYS"/>
+      <VBox spacing="12" styleClass="sidebar-footer">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <StackPane styleClass="avatar">
+            <Label text="AD" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4">
+            <Label text="System Admin" styleClass="small-heading"/>
+            <Label text="Administrator" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+      </VBox>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll">
+      <content>
+        <VBox spacing="12" styleClass="content-wrap">
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="ADMIN  /  MODERATION" styleClass="breadcrumb" HBox.hgrow="ALWAYS"/>
+            <Label text="PREVIEW ONLY" styleClass="pill"/>
+            <Label text="Nov 2026" styleClass="muted"/>
+          </HBox>
+          <HBox spacing="15" alignment="CENTER_LEFT">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+              <Label text="Warning details" styleClass="page-title"/>
+              <Label text="Inspect evidence and preview the decision workflow." styleClass="page-subtitle"/>
+            </VBox>
+            <Button text="Back to warning queue" styleClass="secondary-button"/>
+          </HBox>
+          <HBox spacing="16" alignment="CENTER_LEFT">
+            <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Reported message" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+              </HBox>
+              <Label text="CASE WR-219    ·    PRIVATE MESSAGE" styleClass="sidebar-heading"/>
+              <VBox spacing="12" styleClass="card-flat">
+                <Label text="Taylor Chen" styleClass="small-heading"/>
+                <Label text="Hey! You have been selected. Click this link to claim your gift now." styleClass="body-text"/>
+                <Label text="Nov 09, 2026 · 09:23" styleClass="tiny-muted"/>
+              </VBox>
+              <Separator/>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Reported by" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="Mia Tran" styleClass="body-text"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Category" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="Spam / unsolicited promotion" styleClass="body-text"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Previous warnings" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="2" styleClass="body-text"/>
+              </HBox>
+            </VBox>
+            <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Review &amp; decision" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+              </HBox>
+              <Label text="Current status" styleClass="form-label"/>
+              <Label text="Pending" styleClass="pill-warning"/>
+              <Label text="Moderation note" styleClass="form-label"/>
+              <TextArea promptText="Document what you reviewed and why you made this decision." prefRowCount="4"/>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Button text="Dismiss report" styleClass="secondary-button"/>
+                <Button text="Warn user" styleClass="primary-button"/>
+                <Button text="Suspend user" styleClass="danger-button"/>
+              </HBox>
+              <Label text="Buttons are visual placeholders in this preview." styleClass="tiny-muted"/>
+            </VBox>
+          </HBox>
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>

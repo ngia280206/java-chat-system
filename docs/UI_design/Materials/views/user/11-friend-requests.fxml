@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-root" prefWidth="1480" prefHeight="920" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="sidebar" prefWidth="240" minWidth="240" maxWidth="240">
+      <HBox spacing="11" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <VBox spacing="1">
+          <Label text="RELAY" styleClass="brand-name"/>
+          <Label text="MESSENGER" styleClass="brand-subtitle"/>
+        </VBox>
+      </HBox>
+      <Region prefHeight="23"/>
+      <Label text="YOUR SPACE" styleClass="sidebar-heading"/>
+      <Button text="  Chats" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Friends" styleClass="nav-active" maxWidth="230" prefWidth="206"/>
+      <Button text="  Groups" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Spam reports" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  My profile" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Region prefHeight="15"/>
+      <Label text="ACCOUNT" styleClass="sidebar-heading"/>
+      <Button text="  Settings" styleClass="nav-button" prefWidth="206"/>
+      <Button text="  Help &amp; support" styleClass="nav-button" prefWidth="206"/>
+      <Region minHeight="15" VBox.vgrow="ALWAYS"/>
+      <VBox spacing="12" styleClass="sidebar-footer">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <StackPane styleClass="avatar">
+            <Label text="ME" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4">
+            <Label text="Alex Morgan" styleClass="small-heading"/>
+            <Label text="Online now" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+      </VBox>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll">
+      <content>
+        <VBox spacing="12" styleClass="content-wrap">
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="RELAY  /  FRIENDS" styleClass="breadcrumb" HBox.hgrow="ALWAYS"/>
+            <Label text="PREVIEW ONLY" styleClass="pill"/>
+            <Label text="Nov 2026" styleClass="muted"/>
+          </HBox>
+          <HBox spacing="15" alignment="CENTER_LEFT">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+              <Label text="Friend requests" styleClass="page-title"/>
+              <Label text="Review incoming requests and invitations you sent." styleClass="page-subtitle"/>
+            </VBox>
+            <Button text="Back to friends" styleClass="secondary-button"/>
+          </HBox>
+          <VBox spacing="12" styleClass="card">
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="Incoming requests" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+              <Label text="3 new" styleClass="pill-active"/>
+            </HBox>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <StackPane styleClass="avatar-violet">
+                <Label text="PN" styleClass="avatar-label"/>
+              </StackPane>
+              <VBox spacing="12" HBox.hgrow="ALWAYS">
+                <Label text="Priya Nguyen" styleClass="small-heading"/>
+                <Label text="3 mutual friends · Sent today" styleClass="muted"/>
+              </VBox>
+              <Button text="Accept" styleClass="primary-button"/>
+              <Button text="Decline" styleClass="secondary-button"/>
+            </HBox>
+            <Separator/>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <StackPane styleClass="avatar-teal">
+                <Label text="BK" styleClass="avatar-label"/>
+              </StackPane>
+              <VBox spacing="12" HBox.hgrow="ALWAYS">
+                <Label text="Bao Kim" styleClass="small-heading"/>
+                <Label text="1 mutual friend · Sent yesterday" styleClass="muted"/>
+              </VBox>
+              <Button text="Accept" styleClass="primary-button"/>
+              <Button text="Decline" styleClass="secondary-button"/>
+            </HBox>
+            <Separator/>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <StackPane styleClass="avatar-rose">
+                <Label text="ER" styleClass="avatar-label"/>
+              </StackPane>
+              <VBox spacing="12" HBox.hgrow="ALWAYS">
+                <Label text="Emery Ross" styleClass="small-heading"/>
+                <Label text="Sent 2 days ago" styleClass="muted"/>
+              </VBox>
+              <Button text="Accept" styleClass="primary-button"/>
+              <Button text="Decline" styleClass="secondary-button"/>
+            </HBox>
+          </VBox>
+          <VBox spacing="12" styleClass="card">
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="Sent requests" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+              <Label text="2 pending" styleClass="pill"/>
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_LEFT" styleClass="list-item">
+              <StackPane styleClass="avatar-rose">
+                <Label text="TC" styleClass="avatar-label"/>
+              </StackPane>
+              <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Taylor Chen" styleClass="list-title"/>
+                <Label text="Request sent Nov 05" styleClass="list-preview"/>
+              </VBox>
+              <VBox spacing="4" alignment="CENTER_RIGHT">
+                <Label text="Pending" styleClass="tiny-muted"/>
+              </VBox>
+            </HBox>
+            <Separator/>
+            <HBox spacing="10" alignment="CENTER_LEFT" styleClass="list-item">
+              <StackPane styleClass="avatar-violet">
+                <Label text="NP" styleClass="avatar-label"/>
+              </StackPane>
+              <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Nora Park" styleClass="list-title"/>
+                <Label text="Request sent Nov 03" styleClass="list-preview"/>
+              </VBox>
+              <VBox spacing="4" alignment="CENTER_RIGHT">
+                <Label text="Pending" styleClass="tiny-muted"/>
+              </VBox>
+            </HBox>
+          </VBox>
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>

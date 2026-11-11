@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="auth-root" prefWidth="1240" prefHeight="780" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="auth-brand" prefWidth="570" minWidth="460">
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <Label text="RELAY" styleClass="brand-name"/>
+      </HBox>
+      <Region VBox.vgrow="ALWAYS"/>
+      <Label text="Stay close,&#10;even from afar." styleClass="auth-accent" wrapText="true"/>
+      <Label text="A calmer space for meaningful conversations." styleClass="auth-caption" wrapText="true"/>
+      <Region prefHeight="12"/>
+      <Label text="PRIVATE CHATS     /     GROUPS     /     SMART ASSISTANT" styleClass="pill"/>
+      <Region prefHeight="58"/>
+      <Label text="Beautifully simple. Thoughtfully connected." styleClass="muted"/>
+    </VBox>
+  </left>
+  <center>
+    <VBox spacing="12" styleClass="auth-panel" prefWidth="630">
+      <Label text="RELAY ACCOUNT" styleClass="sidebar-heading"/>
+      <Region prefHeight="4"/>
+      <Label text="Welcome back" styleClass="auth-title"/>
+      <Label text="Sign in to continue your conversations." styleClass="auth-subtitle" wrapText="true"/>
+      <Region prefHeight="12"/>
+      <VBox spacing="7">
+        <Label text="Email address" styleClass="form-label"/>
+        <TextField promptText="name@example.com" styleClass="text-field" prefWidth="386"/>
+      </VBox>
+      <VBox spacing="7">
+        <Label text="Password" styleClass="form-label"/>
+        <PasswordField promptText="Enter your password" prefWidth="386"/>
+      </VBox>
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <CheckBox text="Remember me"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Forgot password?" styleClass="inline-link"/>
+      </HBox>
+      <Button text="Sign in  →" styleClass="primary-button" maxWidth="386" prefWidth="386"/>
+      <Region prefHeight="5"/>
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="New to Relay?" styleClass="muted"/>
+        <Button text="Create an account" styleClass="inline-link"/>
+      </HBox>
+    </VBox>
+  </center>
+</BorderPane>

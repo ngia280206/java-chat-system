@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-root" prefWidth="1480" prefHeight="920" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="sidebar" prefWidth="240" minWidth="240" maxWidth="240">
+      <HBox spacing="11" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <VBox spacing="1">
+          <Label text="RELAY" styleClass="brand-name"/>
+          <Label text="ADMIN CONSOLE" styleClass="brand-subtitle"/>
+        </VBox>
+      </HBox>
+      <Region prefHeight="23"/>
+      <Label text="WORKSPACE" styleClass="sidebar-heading"/>
+      <Button text="  Overview" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  People" styleClass="nav-active" maxWidth="230" prefWidth="206"/>
+      <Button text="  Groups" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Warnings" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Region prefHeight="15"/>
+      <Label text="ACCOUNT" styleClass="sidebar-heading"/>
+      <Button text="  Settings" styleClass="nav-button" prefWidth="206"/>
+      <Button text="  Help &amp; support" styleClass="nav-button" prefWidth="206"/>
+      <Region minHeight="15" VBox.vgrow="ALWAYS"/>
+      <VBox spacing="12" styleClass="sidebar-footer">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <StackPane styleClass="avatar">
+            <Label text="AD" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4">
+            <Label text="System Admin" styleClass="small-heading"/>
+            <Label text="Administrator" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+      </VBox>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll">
+      <content>
+        <VBox spacing="12" styleClass="content-wrap">
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="ADMIN  /  USERS" styleClass="breadcrumb" HBox.hgrow="ALWAYS"/>
+            <Label text="PREVIEW ONLY" styleClass="pill"/>
+            <Label text="Nov 2026" styleClass="muted"/>
+          </HBox>
+          <HBox spacing="15" alignment="CENTER_LEFT">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+              <Label text="User directory" styleClass="page-title"/>
+              <Label text="Search accounts and inspect sign-in history." styleClass="page-subtitle"/>
+            </VBox>
+            <Button text="Download CSV" styleClass="secondary-button"/>
+          </HBox>
+          <HBox spacing="14" alignment="CENTER_LEFT">
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Registered users" styleClass="metric-label"/>
+              <Label text="8,426" styleClass="value-large"/>
+              <Label text="+63 this week" styleClass="metric-trend"/>
+            </VBox>
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Logged in today" styleClass="metric-label"/>
+              <Label text="1,284" styleClass="value-large"/>
+              <Label text="15.2% of all users" styleClass="metric-trend"/>
+            </VBox>
+            <VBox spacing="12" styleClass="metric-card" minWidth="170" HBox.hgrow="ALWAYS">
+              <Label text="Restricted" styleClass="metric-label"/>
+              <Label text="42" styleClass="value-large"/>
+              <Label text="Under review" styleClass="metric-trend-warn"/>
+            </VBox>
+          </HBox>
+          <VBox spacing="12" styleClass="card">
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="User directory" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+              <Label text="8,426 total" styleClass="pill"/>
+            </HBox>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <TextField promptText="Search users by name, email, or ID" styleClass="search-field" HBox.hgrow="ALWAYS"/>
+              <Button text="Sort: recent login  v" styleClass="secondary-button"/>
+              <Button text="Filters" styleClass="secondary-button"/>
+            </HBox>
+            <VBox spacing="1">
+              <HBox spacing="6" alignment="CENTER_LEFT">
+                <Label text="NAME" styleClass="table-heading" prefWidth="138"/>
+                <Label text="EMAIL" styleClass="table-heading" prefWidth="221"/>
+                <Label text="LAST LOGIN" styleClass="table-heading" prefWidth="165"/>
+                <Label text="LOGIN HISTORY" styleClass="table-heading" prefWidth="120"/>
+                <Label text="STATUS" styleClass="table-heading" prefWidth="112"/>
+                <Label text="ACTION" styleClass="table-heading" prefWidth="92"/>
+              </HBox>
+              <Separator/>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                <Label text="Alex Morgan" styleClass="small-heading" prefWidth="138"/>
+                <Label text="alex.morgan@example.com" styleClass="body-text" prefWidth="221"/>
+                <Label text="Today, 09:42" styleClass="body-text" prefWidth="165"/>
+                <Label text="142 sign-ins" styleClass="body-text" prefWidth="120"/>
+                <Label text="Active" styleClass="pill-success" prefWidth="112"/>
+                <Label text="View details" styleClass="body-text" prefWidth="92"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row-alt">
+                <Label text="Mia Tran" styleClass="small-heading" prefWidth="138"/>
+                <Label text="mia.tran@example.com" styleClass="body-text" prefWidth="221"/>
+                <Label text="Today, 08:17" styleClass="body-text" prefWidth="165"/>
+                <Label text="98 sign-ins" styleClass="body-text" prefWidth="120"/>
+                <Label text="Active" styleClass="pill-success" prefWidth="112"/>
+                <Label text="View details" styleClass="body-text" prefWidth="92"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                <Label text="Jordan Lee" styleClass="small-heading" prefWidth="138"/>
+                <Label text="jordan.lee@example.com" styleClass="body-text" prefWidth="221"/>
+                <Label text="Yesterday, 22:05" styleClass="body-text" prefWidth="165"/>
+                <Label text="74 sign-ins" styleClass="body-text" prefWidth="120"/>
+                <Label text="Active" styleClass="pill-success" prefWidth="112"/>
+                <Label text="View details" styleClass="body-text" prefWidth="92"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row-alt">
+                <Label text="Taylor Chen" styleClass="small-heading" prefWidth="138"/>
+                <Label text="t.chen@example.com" styleClass="body-text" prefWidth="221"/>
+                <Label text="Nov 06, 15:20" styleClass="body-text" prefWidth="165"/>
+                <Label text="31 sign-ins" styleClass="body-text" prefWidth="120"/>
+                <Label text="Restricted" styleClass="pill-warning" prefWidth="112"/>
+                <Label text="View details" styleClass="body-text" prefWidth="92"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row">
+                <Label text="Sam Rivera" styleClass="small-heading" prefWidth="138"/>
+                <Label text="sam.rivera@example.com" styleClass="body-text" prefWidth="221"/>
+                <Label text="Nov 05, 11:18" styleClass="body-text" prefWidth="165"/>
+                <Label text="65 sign-ins" styleClass="body-text" prefWidth="120"/>
+                <Label text="Active" styleClass="pill-success" prefWidth="112"/>
+                <Label text="View details" styleClass="body-text" prefWidth="92"/>
+              </HBox>
+              <HBox spacing="6" alignment="CENTER_LEFT" styleClass="table-row-alt">
+                <Label text="Casey Brown" styleClass="small-heading" prefWidth="138"/>
+                <Label text="casey.b@example.com" styleClass="body-text" prefWidth="221"/>
+                <Label text="Oct 28, 13:05" styleClass="body-text" prefWidth="165"/>
+                <Label text="18 sign-ins" styleClass="body-text" prefWidth="120"/>
+                <Label text="Inactive" styleClass="pill" prefWidth="112"/>
+                <Label text="View details" styleClass="body-text" prefWidth="92"/>
+              </HBox>
+            </VBox>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="Showing 6 of 8,426 users" styleClass="tiny-muted" HBox.hgrow="ALWAYS"/>
+              <Button text="Previous" styleClass="small-button"/>
+              <Label text="Page 1 of 85" styleClass="pill"/>
+              <Button text="Next" styleClass="small-button"/>
+            </HBox>
+          </VBox>
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>

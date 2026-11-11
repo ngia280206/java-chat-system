@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-root" prefWidth="1480" prefHeight="920" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="sidebar" prefWidth="240" minWidth="240" maxWidth="240">
+      <HBox spacing="11" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <VBox spacing="1">
+          <Label text="RELAY" styleClass="brand-name"/>
+          <Label text="MESSENGER" styleClass="brand-subtitle"/>
+        </VBox>
+      </HBox>
+      <Region prefHeight="23"/>
+      <Label text="YOUR SPACE" styleClass="sidebar-heading"/>
+      <Button text="  Chats" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Friends" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Groups" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Spam reports" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  My profile" styleClass="nav-active" maxWidth="230" prefWidth="206"/>
+      <Region prefHeight="15"/>
+      <Label text="ACCOUNT" styleClass="sidebar-heading"/>
+      <Button text="  Settings" styleClass="nav-button" prefWidth="206"/>
+      <Button text="  Help &amp; support" styleClass="nav-button" prefWidth="206"/>
+      <Region minHeight="15" VBox.vgrow="ALWAYS"/>
+      <VBox spacing="12" styleClass="sidebar-footer">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <StackPane styleClass="avatar">
+            <Label text="ME" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4">
+            <Label text="Alex Morgan" styleClass="small-heading"/>
+            <Label text="Online now" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+      </VBox>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll">
+      <content>
+        <VBox spacing="12" styleClass="content-wrap">
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="RELAY  /  PROFILE" styleClass="breadcrumb" HBox.hgrow="ALWAYS"/>
+            <Label text="PREVIEW ONLY" styleClass="pill"/>
+            <Label text="Nov 2026" styleClass="muted"/>
+          </HBox>
+          <HBox spacing="15" alignment="CENTER_LEFT">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+              <Label text="Settings" styleClass="page-title"/>
+              <Label text="Personalize your Relay experience and account security." styleClass="page-subtitle"/>
+            </VBox>
+            <Button text="Save preferences" styleClass="primary-button"/>
+          </HBox>
+          <HBox spacing="16" alignment="CENTER_LEFT">
+            <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Appearance &amp; notifications" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Theme" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="Dark mode" styleClass="body-text"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Dark" styleClass="pill-active"/>
+                <Label text="Light" styleClass="pill"/>
+                <Label text="System" styleClass="pill"/>
+              </HBox>
+              <Separator/>
+              <CheckBox text="Enable desktop notifications" selected="true"/>
+              <CheckBox text="Play a sound for new messages" selected="false"/>
+              <CheckBox text="Show message previews" selected="true"/>
+            </VBox>
+            <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Privacy &amp; security" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Who can message me" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="Friends and groups" styleClass="body-text"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Read receipts" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="Enabled" styleClass="body-text"/>
+              </HBox>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Online status" styleClass="muted" HBox.hgrow="ALWAYS"/>
+                <Label text="Visible to friends" styleClass="body-text"/>
+              </HBox>
+              <Separator/>
+              <Button text="Change password" styleClass="secondary-button"/>
+              <Button text="Blocked accounts" styleClass="secondary-button"/>
+              <Button text="Sign out" styleClass="danger-button"/>
+            </VBox>
+          </HBox>
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>

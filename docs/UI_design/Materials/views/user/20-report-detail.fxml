@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="app-root" prefWidth="1480" prefHeight="920" stylesheets="@../../styles/dark.css">
+  <left>
+    <VBox spacing="12" styleClass="sidebar" prefWidth="240" minWidth="240" maxWidth="240">
+      <HBox spacing="11" alignment="CENTER_LEFT">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark"/>
+        </StackPane>
+        <VBox spacing="1">
+          <Label text="RELAY" styleClass="brand-name"/>
+          <Label text="MESSENGER" styleClass="brand-subtitle"/>
+        </VBox>
+      </HBox>
+      <Region prefHeight="23"/>
+      <Label text="YOUR SPACE" styleClass="sidebar-heading"/>
+      <Button text="  Chats" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Friends" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Groups" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Button text="  Spam reports" styleClass="nav-active" maxWidth="230" prefWidth="206"/>
+      <Button text="  My profile" styleClass="nav-button" maxWidth="230" prefWidth="206"/>
+      <Region prefHeight="15"/>
+      <Label text="ACCOUNT" styleClass="sidebar-heading"/>
+      <Button text="  Settings" styleClass="nav-button" prefWidth="206"/>
+      <Button text="  Help &amp; support" styleClass="nav-button" prefWidth="206"/>
+      <Region minHeight="15" VBox.vgrow="ALWAYS"/>
+      <VBox spacing="12" styleClass="sidebar-footer">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <StackPane styleClass="avatar">
+            <Label text="ME" styleClass="avatar-label"/>
+          </StackPane>
+          <VBox spacing="4">
+            <Label text="Alex Morgan" styleClass="small-heading"/>
+            <Label text="Online now" styleClass="tiny-muted"/>
+          </VBox>
+        </HBox>
+      </VBox>
+    </VBox>
+  </left>
+  <center>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll">
+      <content>
+        <VBox spacing="12" styleClass="content-wrap">
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="RELAY  /  REPORTS" styleClass="breadcrumb" HBox.hgrow="ALWAYS"/>
+            <Label text="PREVIEW ONLY" styleClass="pill"/>
+            <Label text="Nov 2026" styleClass="muted"/>
+          </HBox>
+          <HBox spacing="15" alignment="CENTER_LEFT">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+              <Label text="Report details" styleClass="page-title"/>
+              <Label text="A detailed view of your submitted moderation report." styleClass="page-subtitle"/>
+            </VBox>
+            <Button text="Back to reports" styleClass="secondary-button"/>
+          </HBox>
+          <VBox spacing="12" styleClass="card">
+            <Label text="RP-1042" styleClass="section-title"/>
+            <Label text="Under review" styleClass="pill-active"/>
+            <Separator/>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="Report category" styleClass="muted" HBox.hgrow="ALWAYS"/>
+              <Label text="Spam messages" styleClass="body-text"/>
+            </HBox>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="Reported account" styleClass="muted" HBox.hgrow="ALWAYS"/>
+              <Label text="Taylor Chen" styleClass="body-text"/>
+            </HBox>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="Submitted" styleClass="muted" HBox.hgrow="ALWAYS"/>
+              <Label text="November 08, 2026" styleClass="body-text"/>
+            </HBox>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+              <Label text="Conversation type" styleClass="muted" HBox.hgrow="ALWAYS"/>
+              <Label text="Private chat" styleClass="body-text"/>
+            </HBox>
+            <Separator/>
+            <Label text="Your description" styleClass="form-label"/>
+            <Label text="Repeated unsolicited promotional messages after I asked them to stop." styleClass="body-text" wrapText="true"/>
+            <Separator/>
+            <Label text="Report progress" styleClass="form-label"/>
+            <VBox spacing="12">
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <StackPane styleClass="avatar-teal">
+                  <Label text="01" styleClass="avatar-label"/>
+                </StackPane>
+                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                  <Label text="Report received" styleClass="small-heading"/>
+                  <Label text="Your report was successfully submitted." styleClass="muted"/>
+                </VBox>
+                <Label text="Nov 08" styleClass="tiny-muted"/>
+              </HBox>
+              <Separator/>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <StackPane styleClass="avatar-teal">
+                  <Label text="02" styleClass="avatar-label"/>
+                </StackPane>
+                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                  <Label text="In review" styleClass="small-heading"/>
+                  <Label text="The moderation team is reviewing the evidence." styleClass="muted"/>
+                </VBox>
+                <Label text="Nov 09" styleClass="tiny-muted"/>
+              </HBox>
+              <Separator/>
+              <HBox spacing="12" alignment="CENTER_LEFT">
+                <StackPane styleClass="avatar-teal">
+                  <Label text="03" styleClass="avatar-label"/>
+                </StackPane>
+                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                  <Label text="Decision pending" styleClass="small-heading"/>
+                  <Label text="You will be notified when a decision is recorded." styleClass="muted"/>
+                </VBox>
+                <Label text="Next" styleClass="tiny-muted"/>
+              </HBox>
+            </VBox>
+          </VBox>
+        </VBox>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>
