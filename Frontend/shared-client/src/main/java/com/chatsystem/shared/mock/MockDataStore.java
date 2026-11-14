@@ -1,12 +1,14 @@
 package com.chatsystem.shared.mock;
 
 import com.chatsystem.shared.model.*;
+import com.chatsystem.shared.model.status.UserStatus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Process-local demo data. Backing state is package-private so fixtures and later
@@ -62,6 +64,47 @@ public final class MockDataStore {
     private final ObservableList<HiddenMessage> hiddenMessagesView = FXCollections.unmodifiableObservableList(hiddenMessages);
 
     MockDataStore() { }
+
+    /** Mock-only credential comparison. Plaintext credentials never leave this store. */
+    public boolean matchesMockPassword(long userId, String candidate) {
+        return candidate != null && candidate.equals(passwords.get(userId));
+    }
+
+    /** Mock-only replacement after service validation; nothing is persisted. */
+    public void replaceMockPassword(long userId, String password) {
+        Objects.requireNonNull(password);
+        if (!passwords.containsKey(userId)) throw new IllegalArgumentException("Unknown mock account");
+        passwords.put(userId, password);
+    }
+
+    /** Adds a validated mock registration with its default settings and private credential. */
+    public UserAccount createMockAccount(String displayName, String email, String password) {
+        Objects.requireNonNull(displayName);
+        Objects.requireNonNull(email);
+        Objects.requireNonNull(password);
+        if (users.stream().anyMatch(u -> u.getEmail().equalsIgnoreCase(email))) {
+            throw new IllegalArgumentException("Email is already registered");
+        }
+        long id = users.stream().mapToLong(UserAccount::getId).max().orElse(0) + 1;
+        String username = "user" + id;
+        while (usernameExists(username)) username += "_";
+        UserAccount user = new UserAccount(id, email, displayName, username, "", UserStatus.ACTIVE, Instant.now());
+        passwords.put(id, password);
+        settings.add(new UserSettings(id));
+        users.add(user);
+        return user;
+    }
+
+    private boolean usernameExists(String username) {
+        return users.stream().anyMatch(u -> u.getUsername().equalsIgnoreCase(username));
+    }
+
+    /** Records successful desktop demo authentication, never a failed attempt. */
+    public void recordMockLogin(long userId) {
+        if (users.stream().noneMatch(u -> u.getId() == userId)) throw new IllegalArgumentException("Unknown mock account");
+        long id = loginEvents.stream().mapToLong(LoginEvent::id).max().orElse(0) + 1;
+        loginEvents.add(new LoginEvent(id, userId, Instant.now(), "Desktop demo", "Local demo"));
+    }
 
     public ObservableList<UserAccount> getUsers() { return usersView; }
     public ObservableList<UserSettings> getSettings() { return settingsView; }

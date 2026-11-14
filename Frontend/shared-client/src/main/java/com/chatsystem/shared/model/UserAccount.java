@@ -14,6 +14,8 @@ public final class UserAccount {
     private final ReadOnlyStringWrapper username = new ReadOnlyStringWrapper(this, "username");
     private final ReadOnlyStringWrapper bio = new ReadOnlyStringWrapper(this, "bio");
     private final ReadOnlyObjectWrapper<UserStatus> status = new ReadOnlyObjectWrapper<>(this, "status");
+    private final ReadOnlyObjectWrapper<ProfileVisibility> profileVisibility =
+            new ReadOnlyObjectWrapper<>(this, "profileVisibility", ProfileVisibility.FRIENDS_ONLY);
 
     public UserAccount(long id, String email, String displayName, String username,
                        String bio, UserStatus status, Instant createdAt) {
@@ -42,6 +44,9 @@ public final class UserAccount {
     public UserStatus getStatus() { return status.get(); }
     public ReadOnlyObjectProperty<UserStatus> statusProperty() { return status.getReadOnlyProperty(); }
 
+    public ProfileVisibility getProfileVisibility() { return profileVisibility.get(); }
+    public ReadOnlyObjectProperty<ProfileVisibility> profileVisibilityProperty() { return profileVisibility.getReadOnlyProperty(); }
+
     public void updateProfile(String displayName, String username, String bio) {
         Objects.requireNonNull(displayName);
         Objects.requireNonNull(username);
@@ -52,4 +57,10 @@ public final class UserAccount {
     }
 
     public void setStatus(UserStatus status) { this.status.set(Objects.requireNonNull(status)); }
+
+    public void updateProfile(String displayName, String username, String bio, ProfileVisibility visibility) {
+        Objects.requireNonNull(visibility);
+        updateProfile(displayName, username, bio);
+        profileVisibility.set(visibility);
+    }
 }
