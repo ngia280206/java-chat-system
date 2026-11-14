@@ -46,28 +46,28 @@
 - Consumes: 28 source FXML files and the approved design.
 - Produces: JUnit 5 configuration for all modules; an inventory row format of `App | Screen | Control | Behavior | Status | Reason | Verification`; a complete initial classification of every actionable control.
 
-- [ ] **Step 1: Write the failing baseline test**
+- [x] **Step 1: Write the failing baseline test**
 
 `ArchitectureSmokeTest` asserts Java 17, the presence of 7 admin plus 21 user source FXML files, and the existence of the approved design and control inventory.
 
-- [ ] **Step 2: Run the baseline test and verify it fails because the inventory/test configuration is incomplete**
+- [x] **Step 2: Run the baseline test and verify it fails because the inventory/test configuration is incomplete**
 
 Run: `Frontend\gradlew.bat :shared-client:test --tests "com.chatsystem.shared.ArchitectureSmokeTest"`
 
-- [ ] **Step 3: Configure JUnit 5 consistently in all modules**
+- [x] **Step 3: Configure JUnit 5 consistently in all modules**
 
 Add `testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'` and `useJUnitPlatform()` without adding TestFX.
 
-- [ ] **Step 4: Build the initial control inventory from every Button, form control, selectable row, and approved added control**
+- [x] **Step 4: Build the initial control inventory from every Button, form control, selectable row, and approved added control**
 
 Classify each as implemented workflow, disabled with exact reason/tooltip, decorative, or pending a named later task. Include New Conversation, Add Friend, Create Group, Invite Members, New Report, Block User, Hide Message, Clear History, Leave Group, and Change Group Role.
 
-- [ ] **Step 5: Run the baseline test**
+- [x] **Step 5: Run the baseline test**
 
 Run: `Frontend\gradlew.bat :shared-client:test --tests "com.chatsystem.shared.ArchitectureSmokeTest"`
 Expected: PASS.
 
-- [ ] **Step 6: Commit the verified baseline**
+- [x] **Step 6: Commit the verified baseline**
 
 ```powershell
 git add Frontend/*/build.gradle Frontend/shared-client/src/test docs/UI_CONTROL_INVENTORY.md
@@ -88,28 +88,28 @@ git commit -m "test: establish interactive frontend baseline"
 - Consumes: ERD/data-dictionary vocabulary and stable demo requirements.
 - Produces: UI-focused observable models with immutable IDs; `ValidationResult<T>` with success value or field/global errors; `MockFixtures.createStore()` returning a new independent `MockDataStore` each call.
 
-- [ ] **Step 1: Write failing fixture and observable-model tests**
+- [x] **Step 1: Write failing fixture and observable-model tests**
 
 Assert fixtures contain linked active/locked users, direct/group conversations, messages, pending/processed requests, friendships/blocks, memberships/invitations, reports, login/activity events, and stable demo IDs; assert mutable displayed fields notify JavaFX property listeners.
 
-- [ ] **Step 2: Run the model tests and verify they fail because models do not exist**
+- [x] **Step 2: Run the model tests and verify they fail because models do not exist**
 
 Run: `Frontend\gradlew.bat :shared-client:test --tests "com.chatsystem.shared.model.*" --tests "com.chatsystem.shared.mock.MockFixturesTest"`
 
-- [ ] **Step 3: Implement only the fields required by the approved screens and workflows**
+- [x] **Step 3: Implement only the fields required by the approved screens and workflows**
 
 Use immutable scalar IDs and JavaFX properties for displayed mutable fields. Keep `MockDataStore` package-focused and expose mutation through later services, not publicly mutable controller access.
 
-- [ ] **Step 4: Implement realistic independent fixtures**
+- [x] **Step 4: Implement realistic independent fixtures**
 
 Include documented mock credentials and reset code in fixture constants, enough records for pagination/filter empty states, and relationally coherent IDs.
 
-- [ ] **Step 5: Run model/fixture tests**
+- [x] **Step 5: Run model/fixture tests**
 
 Run: `Frontend\gradlew.bat :shared-client:test --tests "com.chatsystem.shared.model.*" --tests "com.chatsystem.shared.mock.MockFixturesTest"`
 Expected: PASS.
 
-- [ ] **Step 6: Commit domain foundations**
+- [x] **Step 6: Commit domain foundations**
 
 ```powershell
 git add Frontend/shared-client/src

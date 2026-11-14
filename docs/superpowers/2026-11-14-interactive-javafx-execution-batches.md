@@ -20,8 +20,8 @@ This checklist organizes the approved 15 tasks for subagent-driven execution. It
 
 | Batch | Objective | Tasks | Status |
 |---|---|---:|---|
-| 1 | Establish verified domain and test foundation | 1–2 | `[ ]` |
-| 2 | Complete headless mock-service behavior | 3–5 | `[ ]` |
+| 1 | Establish verified domain and test foundation | 1–2 | `[x]` |
+| 2 | Complete headless mock-service behavior | 3–5 | `[~]` |
 | 3 | Build user runtime and authentication workflows | 6–7 | `[ ]` |
 | 4 | Build user chat and social workflows | 8–9 | `[ ]` |
 | 5 | Complete remaining user workflows | 10–11 | `[ ]` |
@@ -41,12 +41,12 @@ This checklist organizes the approved 15 tasks for subagent-driven execution. It
 
 **Checklist:**
 
-- [ ] Task 1: Baseline test infrastructure and actionable-control inventory
-- [ ] Task 1 specification review
-- [ ] Task 1 code-quality review
-- [ ] Task 2: Observable domain models, validation results, and stable fixtures
-- [ ] Task 2 specification review
-- [ ] Task 2 code-quality review
+- [x] Task 1: Baseline test infrastructure and actionable-control inventory
+- [x] Task 1 specification review
+- [x] Task 1 code-quality review
+- [x] Task 2: Observable domain models, validation results, and stable fixtures
+- [x] Task 2 specification review
+- [x] Task 2 code-quality review
 
 **Batch verification:**
 
@@ -293,6 +293,8 @@ Update this section at every task and batch boundary.
 | Date/time | Batch | Task | Status | Commit(s) | Tests/results | Known issues/review findings | Next task |
 |---|---:|---:|---|---|---|---|---|
 | 2026-11-14 | — | — | Checklist awaiting approval | — | Not run | No implementation started | Batch 1 / Task 1 after approval |
+| 2026-11-14 | 1 | 1 | Complete | `5075b04` | 5/5 baseline; full suite; external working-directory run passed | Review clean | Task 2 |
+| 2026-11-14 | 1 | 2 | Complete; Batch 1 complete | `93defe9` | 12/12 focused; 17/17 clean suite; Batch verification passed | Platform-neutral `javafx.base` config added as required; review clean | Task 3 |
 
 ## Resume checklist
 
