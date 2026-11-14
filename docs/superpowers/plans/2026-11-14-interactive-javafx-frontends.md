@@ -128,15 +128,15 @@ git commit -m "feat: add observable mock domain state"
 - Consumes: models, validation, and `MockDataStore` from Task 2.
 - Produces: meaningful operations `login`, `register`, `beginPasswordReset`, `verifyResetCode`, `resetPassword`, `changePassword`, `logout`, `updateProfile`, and `updateSettings`; read-only current-user/authentication properties through `UserSession`.
 
-- [ ] **Step 1: Write failing service tests for success, failure, and no-mutation cases**
+- [x] **Step 1: Write failing service tests for success, failure, and no-mutation cases**
 
 Cover invalid credentials, locked account, registration validation/duplicate email, fixed-code reset sequence, current-password validation, profile propagation, settings session persistence, remember-email session behavior, cancellation/no call, and logout session clearing.
 
-- [ ] **Step 2: Run the focused service tests and verify failure**
+- [x] **Step 2: Run the focused service tests and verify failure**
 
 Run: `Frontend\gradlew.bat :shared-client:test --tests "com.chatsystem.shared.mock.service.InMemoryAuthServiceTest" --tests "com.chatsystem.shared.mock.service.InMemoryProfileServiceTest" --tests "com.chatsystem.shared.mock.service.InMemorySettingsServiceTest"`
 
-- [ ] **Step 3: Define focused contracts and implement in-memory behavior**
+- [~] **Step 3: Define focused contracts and implement in-memory behavior — paused with compiling placeholder implementations; GREEN behavior remains**
 
 Expose typed validation results and read-only observable session properties. Keep password handling explicitly mock-only and in memory.
 

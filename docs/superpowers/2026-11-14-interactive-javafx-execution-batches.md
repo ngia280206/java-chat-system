@@ -72,7 +72,7 @@ Confirm the inventory accounts for all source FXML controls, fixtures are relati
 
 **Checklist:**
 
-- [ ] Task 3: Authentication, profile, and settings services
+- [~] Task 3: Authentication, profile, and settings services — RED tests/contracts complete; implementation paused
 - [ ] Task 3 specification review
 - [ ] Task 3 code-quality review
 - [ ] Task 4: Social and group services with permission rules
@@ -295,6 +295,7 @@ Update this section at every task and batch boundary.
 | 2026-11-14 | — | — | Checklist awaiting approval | — | Not run | No implementation started | Batch 1 / Task 1 after approval |
 | 2026-11-14 | 1 | 1 | Complete | `5075b04` | 5/5 baseline; full suite; external working-directory run passed | Review clean | Task 2 |
 | 2026-11-14 | 1 | 2 | Complete; Batch 1 complete | `93defe9` | 12/12 focused; 17/17 clean suite; Batch verification passed | Platform-neutral `javafx.base` config added as required; review clean | Task 3 |
+| 2026-11-14 | 2 | 3 | Paused in RED; uncommitted | — | Focused suite compiles; 25 tests run, 20 expected failures against placeholders | Services not implemented; preserved safely | Resume Task 3 Step 3 |
 
 ## Resume checklist
 
