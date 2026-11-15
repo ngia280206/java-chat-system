@@ -55,16 +55,16 @@ Disabled controls remain visible. Their tooltip must be attached to a hoverable 
 | admin | 05-group-details | Export members | Visible, disabled | Disabled — Task 13 | Tooltip: “Group member export is unavailable in the frontend-only demo.” | GroupManagementControllerTest; wrapper hover |
 | admin | 05-group-details | Member rows: Mia, Alex, Jordan, Casey; three group activity entries | Display members, roles, joined dates and activity | Decorative | No member mutation action supplied in admin screen | Task 15 group-detail acceptance |
 | admin | 06-moderation | Export report log | Visible, disabled | Disabled — Task 14 | Tooltip: “Report log export is unavailable in the frontend-only demo.” | ModerationWorkflowControllerTest; wrapper hover |
-| admin | 06-moderation | Search case ID, user, or reason | Filter moderation queue | Pending — Task 14 | Report search | ModerationWorkflowControllerTest |
-| admin | 06-moderation | All statuses v | Filter report status | Pending — Task 14 | Report filter | ModerationWorkflowControllerTest |
-| admin | 06-moderation | Newest first v | Choose report ordering | Pending — Task 14 | Report sort | ModerationWorkflowControllerTest |
-| admin | 06-moderation | Five case rows: WR-219, WR-218, WR-217, WR-216, WR-215 | Open warning details with stable report ID | Pending — Task 14 | Selectable queue rows | ModerationWorkflowControllerTest |
+| admin | 06-moderation | Search case ID, user, or reason | Filter moderation queue | Implemented — Task 14 | Report search | ModerationWorkflowControllerTest |
+| admin | 06-moderation | All statuses v | Filter report status | Implemented — Task 14 | Report filter | ModerationWorkflowControllerTest |
+| admin | 06-moderation | Newest first v | Choose report ordering | Implemented — Task 14 | Report sort | ModerationWorkflowControllerTest |
+| admin | 06-moderation | Five case rows: WR-219, WR-218, WR-217, WR-216, WR-215 | Open warning details with stable report ID | Implemented — Task 14 | Selectable queue rows | ModerationWorkflowControllerTest |
 | admin | 06-moderation | Workflow step pills 1–4; metric cards | Read-only workflow explanation and derived counts | Decorative | Not wizard navigation | Task 15 acceptance |
-| admin | 07-warning-detail | Back to warning queue | Return to moderation | Pending — Task 14 | Navigation | ModerationWorkflowControllerTest |
-| admin | 07-warning-detail | Moderation note TextArea | Collect required review notes; show validation | Pending — Task 14 | Screen-defined review input | ModerationWorkflowControllerTest |
-| admin | 07-warning-detail | Dismiss report | Confirm dismissal; update report only | Pending — Task 14 | Review and sanction are separate operations | ModerationWorkflowControllerTest; InMemoryReportServiceTest |
-| admin | 07-warning-detail | Warn user | Confirm warning decision; update report without account lock | Pending — Task 14 | Explicit warning action | ModerationWorkflowControllerTest; InMemoryReportServiceTest |
-| admin | 07-warning-detail | Suspend user | Confirm decision plus account lock; update queue/detail/dashboard | Pending — Task 14 | Explicit combined sanction action | ModerationWorkflowControllerTest; InMemoryReportServiceTest |
+| admin | 07-warning-detail | Back to warning queue | Return to moderation | Implemented — Task 14 | Navigation | ModerationWorkflowControllerTest |
+| admin | 07-warning-detail | Moderation note TextArea | Collect required review notes; show validation | Implemented — Task 14 | Screen-defined review input | ModerationWorkflowControllerTest |
+| admin | 07-warning-detail | Dismiss report | Confirm dismissal; update report only | Implemented — Task 14 | Review and sanction are separate operations | ModerationWorkflowControllerTest; InMemoryReportServiceTest |
+| admin | 07-warning-detail | Warn user | Confirm warning decision; update report without account lock | Implemented — Task 14 | Explicit warning action | ModerationWorkflowControllerTest; InMemoryReportServiceTest |
+| admin | 07-warning-detail | Suspend user | Confirm decision plus account lock; update queue/detail/dashboard | Implemented — Task 14 | Explicit combined sanction action | ModerationWorkflowControllerTest; InMemoryReportServiceTest |
 
 ## User authentication
 
@@ -223,3 +223,4 @@ These are inventory commitments for the approved workflows, not new standalone s
 | both | Consequential workflow confirmations | Confirm / Cancel / dialog close | Confirm valid mutation; cancel/close without state change | Implemented — Tasks 8–11; pending Tasks 13–14 | Hide/clear, block/unblock, request cancel, member removal/leave/role changes, lock/unlock and moderation | Respective controller/service tests; Task 15 cancellation demo |
 
 No cryptographic/device-key control is present in the 28 source FXML files. If a migrated source control exposes such an operation, disable it with “Device-key and encryption operations are unavailable in the frontend-only demo.” Real export, file selection, external help, AI/network calls, notification delivery, and cryptography are not added by this inventory. Native window close and keyboard/focus/scroll mechanics remain JavaFX behavior; workflow dialog cancellation and fixed window configuration are verified in their owning tasks.
+

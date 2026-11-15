@@ -16,5 +16,7 @@ public final class FxmlViewLoader {
         if(type==UserDetailsController.class)return new UserDetailsController(context.admin(),navigator);
         if(type==GroupsController.class)return new GroupsController(context.admin(),navigator);
         if(type==GroupDetailsController.class)return new GroupDetailsController(context.admin(),navigator);
+        if(type==ModerationController.class)return new ModerationController(context.admin(),navigator);
+        if(type==WarningDetailController.class)return new WarningDetailController(context.admin(),navigator);
         throw new IllegalArgumentException("No explicit controller constructor for "+type.getName());}
 }

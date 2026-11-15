@@ -48,6 +48,9 @@ public final class InMemoryAdminService implements AdminService {
     @Override public Optional<SpamReport> getReport(long reportId) {
         return store.getReports().stream().filter(r -> r.getId() == reportId).findFirst();
     }
+    @Override public Optional<Message> getMessage(long messageId) {
+        return store.getMessages().stream().filter(m -> m.getId() == messageId).findFirst();
+    }
 
     @Override public List<UserAccount> searchUsers(String query, UserStatus status, UserSort sort, int page, int pageSize) {
         String text = MockServiceQueries.normalize(query);
@@ -80,6 +83,15 @@ public final class InMemoryAdminService implements AdminService {
 
     @Override public List<SpamReport> searchReports(String query, ReportStatus status, ReportService.ReportSort sort, int page, int pageSize) {
         return MockServiceQueries.reports(store.getReports(), store.getUsers(), query, status, sort, page, pageSize);
+    }
+
+    @Override public List<SpamReport> searchReportsForConversation(long conversationId, String query, ReportStatus status,
+                                                                   ReportService.ReportSort sort, int page, int pageSize) {
+        if (getGroup(conversationId).isEmpty()) return List.of();
+        List<Long> messageIds = store.getMessages().stream().filter(m -> m.getConversationId() == conversationId)
+                .map(Message::getId).toList();
+        List<SpamReport> scoped = store.getReports().stream().filter(r -> messageIds.contains(r.getMessageId())).toList();
+        return MockServiceQueries.reports(scoped, store.getUsers(), query, status, sort, page, pageSize);
     }
 
     @Override public List<ConversationMember> getGroupMembers(long groupId) {

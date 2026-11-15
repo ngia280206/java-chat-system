@@ -25,9 +25,13 @@ public interface AdminService {
     Optional<UserAccount> getUser(long userId);
     Optional<Conversation> getGroup(long groupId);
     Optional<SpamReport> getReport(long reportId);
+    Optional<Message> getMessage(long messageId);
     List<UserAccount> searchUsers(String query, UserStatus status, UserSort sort, int page, int pageSize);
     List<Conversation> searchGroups(String query, GroupSort sort, int page, int pageSize);
     List<SpamReport> searchReports(String query, ReportStatus status, ReportService.ReportSort sort, int page, int pageSize);
+    /** Moderation queue projection scoped to reports whose message belongs to one conversation. */
+    List<SpamReport> searchReportsForConversation(long conversationId, String query, ReportStatus status,
+                                                  ReportService.ReportSort sort, int page, int pageSize);
     List<ConversationMember> getGroupMembers(long groupId);
     List<LoginEvent> getLoginHistory(long userId);
     List<ActivityEvent> getUserActivity(long userId);

@@ -35,4 +35,10 @@ class FxmlSmokeTest extends JavaFxTestSupport {
             assertTrue(((javafx.scene.control.MenuButton) users.lookup("#filterButton")).getItems().size() >= 3);
         } finally { stage.close(); } return null; });
     }
+
+    @Test void moderationViewsLoadWithExplicitControllers() throws Exception {
+        onFx(() -> { Stage stage=new Stage(); try { var context=new AdminApplicationContext(); var loader=new FxmlViewLoader(context,new AdminNavigator(stage,context));
+            for(String name:new String[]{"moderation","warning-detail"}) { var loaded=loader.load("/fxml/views/"+name+".fxml"); assertNotNull(loaded.root()); assertNotNull(loaded.controller()); }
+        } finally { stage.close(); } return null; });
+    }
 }
