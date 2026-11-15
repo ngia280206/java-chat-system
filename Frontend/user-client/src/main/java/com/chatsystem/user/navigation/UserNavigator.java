@@ -4,6 +4,7 @@ import com.chatsystem.user.UserApplicationContext;
 import com.chatsystem.user.controller.UserShellController;
 import com.chatsystem.user.controller.auth.LoginController;
 import com.chatsystem.user.controller.auth.VerificationCodeController;
+import com.chatsystem.user.controller.chat.*;
 import com.chatsystem.user.ui.FxmlViewLoader;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -122,6 +123,28 @@ public final class UserNavigator {
             if (loaded.controller() instanceof VerificationCodeController verification && !passwordResetEmail.isBlank())
                 verification.present(passwordResetEmail);
             if (request.route() == UserRoute.LOGIN) passwordResetEmail = "";
+            loaded.root().setUserData(request);
+            return loaded.root();
+        }
+        String viewPath = switch (request.route()) {
+            case CHAT_HOME -> "chat-home";
+            case CHAT_PRIVATE -> "chat-private";
+            case CHAT_GROUP -> "chat-group";
+            case MESSAGE_SEARCH -> "message-search";
+            default -> null;
+        };
+        if (request.route() == UserRoute.AI_ASSISTANT) {
+            var loaded = views.load("/fxml/dialogs/ai-assistant-popup.fxml");
+            ((AiAssistantPopupController) loaded.controller()).present(request.entityId().orElseThrow().value());
+            loaded.root().setUserData(request);
+            return loaded.root();
+        }
+        if (viewPath != null) {
+            var loaded = views.load("/fxml/views/" + viewPath + ".fxml");
+            long id = request.entityId().map(ViewRequest.EntityId::value).orElse(0L);
+            if (loaded.controller() instanceof ChatPrivateController controller) controller.present(id);
+            if (loaded.controller() instanceof ChatGroupController controller) controller.present(id);
+            if (loaded.controller() instanceof MessageSearchController controller) controller.present(id);
             loaded.root().setUserData(request);
             return loaded.root();
         }

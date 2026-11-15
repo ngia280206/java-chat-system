@@ -12,6 +12,21 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FxmlSmokeTest extends JavaFxTestSupport {
+    @Test void allChatDesignsLoadWithExplicitControllers() throws Exception {
+        onFx(() -> {
+            var context = new UserApplicationContext();
+            assertTrue(context.auth().login(com.chatsystem.shared.mock.MockFixtures.DEMO_EMAIL,
+                    com.chatsystem.shared.mock.MockFixtures.DEMO_PASSWORD, false).isSuccess());
+            var stage = new Stage();
+            try {
+                var loader = new FxmlViewLoader(context, new UserNavigator(stage, context));
+                String[] views = {"chat-home", "chat-private", "chat-group", "message-search"};
+                for (String view : views) assertNotNull(loader.load("/fxml/views/" + view + ".fxml").controller());
+                assertNotNull(loader.load("/fxml/dialogs/new-conversation.fxml").controller());
+                assertNotNull(loader.load("/fxml/dialogs/ai-assistant-popup.fxml").controller());
+            } finally { stage.close(); }
+        });
+    }
     @Test void allAuthDesignsLoadWithExplicitControllersAndClasspathTheme() throws Exception {
         onFx(() -> {
             var context = new UserApplicationContext();

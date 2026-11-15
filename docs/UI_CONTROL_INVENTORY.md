@@ -98,7 +98,7 @@ Disabled controls remain visible. Their tooltip must be attached to a hoverable 
 
 | App | Screen | Control | Behavior | Status | Reason | Verification |
 |---|---|---|---|---|---|---|
-| user | 06-chat-home, 07-chat-private, 08-chat-group | + New (one per screen) | Open New Conversation recipient-selection modal | Pending — Task 8 | Existing initiating controls | ChatWorkflowControllerTest |
+| user | 06-chat-home, 07-chat-private, 08-chat-group | + New (one per screen) | Open New Conversation recipient-selection modal | Implemented — Task 8 | Existing initiating controls | ChatWorkflowControllerTest |
 | user | 06-chat-home, 07-chat-private, 08-chat-group | Search conversations TextField (one per screen) | Filter conversation previews | Pending — Task 8 | Conversation search | ChatWorkflowControllerTest |
 | user | 06-chat-home, 07-chat-private, 08-chat-group | All / Unread / Groups pills (three per screen) | Select conversation filter | Pending — Task 8 | Label-based filter choices | ChatWorkflowControllerTest |
 | user | 06-chat-home, 07-chat-private, 08-chat-group | Five conversation rows per screen: Mia, Design Circle, Jordan, Study Hub, Sam | Open private/group chat by conversation ID and update unread state | Pending — Task 8 | Includes list-item-selected variant | ChatWorkflowControllerTest |

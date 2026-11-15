@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.chat.ChatPrivateController" styleClass="app-root" prefWidth="1250" prefHeight="850">
+ <top><HBox spacing="10" styleClass="page-header"><Button text="← Chats" onAction="#back"/><Label fx:id="conversationTitle" styleClass="page-title" HBox.hgrow="ALWAYS"/><Button fx:id="searchButton" text="Search" onAction="#search"/><Button fx:id="assistantButton" text="✦ Ask AI" onAction="#assistant"/><Button fx:id="clearHistoryButton" text="Clear History" onAction="#clearHistory"/></HBox></top>
+ <center><ListView fx:id="messageList" styleClass="card"/></center>
+ <bottom><VBox spacing="8"><Label fx:id="feedbackLabel" styleClass="feedback-label"/><HBox spacing="8"><StackPane fx:id="attachmentWrapper"><Button fx:id="attachmentButton" text="+"/></StackPane><TextField fx:id="messageField" promptText="Write a message..." HBox.hgrow="ALWAYS"/><Button fx:id="sendButton" text="Send →" onAction="#send" styleClass="button-primary"/><Button fx:id="hideMessageButton" text="Hide Message" onAction="#hideSelected"/></HBox></VBox></bottom>
+</BorderPane>

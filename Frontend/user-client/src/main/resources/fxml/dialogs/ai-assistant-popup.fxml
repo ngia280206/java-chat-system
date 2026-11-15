@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.chat.AiAssistantPopupController" spacing="14" styleClass="app-root" prefWidth="890" prefHeight="890"><Label text="✦ AI Assistant" styleClass="page-title"/><Label text="Local simulated response — no network or real AI is used." wrapText="true"/><TextArea fx:id="promptField" promptText="Ask for a summary or next step" prefRowCount="8"/><Button fx:id="sendPromptButton" text="Send" onAction="#send" styleClass="button-primary"/><Label fx:id="responseLabel" wrapText="true" styleClass="card" VBox.vgrow="ALWAYS"/><Button text="Close" onAction="#close"/></VBox>

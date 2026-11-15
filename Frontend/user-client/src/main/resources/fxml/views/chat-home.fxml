@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.chat.ChatHomeController" styleClass="app-root" prefWidth="1250" prefHeight="850">
+ <top><VBox spacing="14" styleClass="page-header"><Label text="Chats" styleClass="page-title"/><HBox spacing="10"><TextField fx:id="conversationSearchField" promptText="Search conversations" HBox.hgrow="ALWAYS"/><Button text="Groups" onAction="#showGroups"/></HBox></VBox></top>
+ <center><ListView fx:id="conversationList" styleClass="card"/></center>
+ <bottom><VBox spacing="8" styleClass="card"><Label text="New conversation" styleClass="section-title"/><HBox spacing="10"><TextField fx:id="recipientField" promptText="Recipient ID" HBox.hgrow="ALWAYS"/><Button fx:id="startConversationButton" text="Start a conversation" onAction="#startConversation" styleClass="button-primary"/></HBox><Label fx:id="conversationFeedbackLabel" wrapText="true" styleClass="feedback-label"/></VBox></bottom>
+</BorderPane>
