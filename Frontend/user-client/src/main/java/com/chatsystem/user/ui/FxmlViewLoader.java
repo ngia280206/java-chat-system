@@ -6,6 +6,8 @@ import com.chatsystem.user.controller.auth.*;
 import com.chatsystem.user.controller.chat.*;
 import com.chatsystem.user.controller.social.*;
 import com.chatsystem.user.controller.group.*;
+import com.chatsystem.user.controller.account.*;
+import com.chatsystem.user.controller.report.*;
 import com.chatsystem.user.navigation.UserNavigator;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -65,6 +67,12 @@ public final class FxmlViewLoader {
         if (type == GroupInvitationsController.class) return new GroupInvitationsController(context.groups(), navigator);
         if (type == CreateGroupDialogController.class) return new CreateGroupDialogController(context.groups(), navigator);
         if (type == InviteMembersDialogController.class) return new InviteMembersDialogController(context.groups());
+        if (type == ProfileController.class) return new ProfileController(context.profiles(), context.session());
+        if (type == SettingsController.class) return new SettingsController(context.settings(), context.auth(), navigator);
+        if (type == ChangePasswordController.class) return new ChangePasswordController(context.auth(), navigator);
+        if (type == SpamReportsController.class) return new SpamReportsController(context.reports(), navigator);
+        if (type == ReportDetailController.class) return new ReportDetailController(context.reports(), navigator);
+        if (type == NewReportDialogController.class) return new NewReportDialogController(context.reports());
         throw new IllegalArgumentException("No explicit controller constructor for " + type.getName());
     }
 }

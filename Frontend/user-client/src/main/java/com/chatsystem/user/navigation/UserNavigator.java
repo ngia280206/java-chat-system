@@ -152,6 +152,11 @@ public final class UserNavigator {
             case GROUP_MANAGEMENT -> "group-management";
             case GROUP_DETAILS -> "group-details";
             case GROUP_INVITATIONS -> "group-invitations";
+            case PROFILE -> "profile";
+            case SETTINGS -> "settings";
+            case CHANGE_PASSWORD -> "change-password";
+            case SPAM_REPORTS -> "spam-reports";
+            case REPORT_DETAIL -> "report-detail";
             default -> null;
         };
         if (request.route() == UserRoute.AI_ASSISTANT) {
@@ -169,6 +174,7 @@ public final class UserNavigator {
             if (loaded.controller() instanceof ChatGroupController controller) controller.present(id);
             if (loaded.controller() instanceof MessageSearchController controller) controller.present(id);
             if (loaded.controller() instanceof com.chatsystem.user.controller.group.GroupDetailsController controller) controller.present(id);
+            if (loaded.controller() instanceof com.chatsystem.user.controller.report.ReportDetailController controller) controller.present(id);
             loaded.root().setUserData(request);
             return loaded.root();
         }

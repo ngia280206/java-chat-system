@@ -174,34 +174,34 @@ Disabled controls remain visible. Their tooltip must be attached to a hoverable 
 |---|---|---|---|---|---|---|
 | user | 16-profile | Preview public profile | Visible, disabled | Disabled — Task 11 | Tooltip: “Public profile preview is unavailable because no public profile screen is supplied.” | AccountWorkflowControllerTest; wrapper hover |
 | user | 16-profile | Change avatar | Visible, disabled | Disabled — Task 11 | Tooltip: “Avatar selection is unavailable in the frontend-only demo.” | AccountWorkflowControllerTest; wrapper hover |
-| user | 16-profile | Display name TextField | Validate/edit profile display name | Pending — Task 11 | Profile input | AccountWorkflowControllerTest |
-| user | 16-profile | Username TextField | Validate/edit username | Pending — Task 11 | Profile input | AccountWorkflowControllerTest |
-| user | 16-profile | Bio TextField | Validate/edit bio | Pending — Task 11 | Profile input | AccountWorkflowControllerTest |
-| user | 16-profile | Save profile | Persist profile to session; propagate displayed identity | Pending — Task 11 | Observable profile workflow | AccountWorkflowControllerTest; InMemoryProfileServiceTest |
-| user | 16-profile | Friends only / Everyone pills | Select/save mock profile-visibility preference for session | Pending — Task 11 | Label-based profile preference; no real access control | AccountWorkflowControllerTest |
+| user | 16-profile | Display name TextField | Validate/edit profile display name | Implemented — Task 11 | Profile input | AccountWorkflowControllerTest |
+| user | 16-profile | Username TextField | Validate/edit username | Implemented — Task 11 | Profile input | AccountWorkflowControllerTest |
+| user | 16-profile | Bio TextField | Validate/edit bio | Implemented — Task 11 | Profile input | AccountWorkflowControllerTest |
+| user | 16-profile | Save profile | Persist profile to session; propagate displayed identity | Implemented — Task 11 | Observable profile workflow | AccountWorkflowControllerTest; InMemoryProfileServiceTest |
+| user | 16-profile | Friends only / Everyone pills | Select/save mock profile-visibility preference for session | Implemented — Task 11 | Label-based profile preference; no real access control | AccountWorkflowControllerTest |
 | user | 16-profile | Email, member since, account status | Read-only account information | Decorative | No email/status mutation supplied | Task 15 acceptance |
-| user | 17-settings | Save preferences | Save staged mock preferences for session | Pending — Task 11 | Navigation/cancel must not accidentally save staged edits | AccountWorkflowControllerTest; InMemorySettingsServiceTest |
+| user | 17-settings | Save preferences | Save staged mock preferences for session | Implemented — Task 11 | Navigation/cancel must not accidentally save staged edits | AccountWorkflowControllerTest; InMemorySettingsServiceTest |
 | user | 17-settings | Dark pill | Current fixed theme indicator | Decorative | Approved visual language uses dark.css | Task 15 visual acceptance |
 | user | 17-settings | Light pill | Visible, disabled | Disabled — Task 11 | Tooltip: “Light theme is unavailable because this demo supplies only the dark theme.” | AccountWorkflowControllerTest; wrapper hover |
 | user | 17-settings | System pill | Visible, disabled | Disabled — Task 11 | Tooltip: “System theme switching is unavailable because this demo supplies only the dark theme.” | AccountWorkflowControllerTest; wrapper hover |
-| user | 17-settings | Enable desktop notifications CheckBox | Save mock notification preference only | Pending — Task 11 | Session preference; no real notification delivery | AccountWorkflowControllerTest; InMemorySettingsServiceTest |
-| user | 17-settings | Play a sound for new messages CheckBox | Save mock sound preference only | Pending — Task 11 | Session preference; no device/audio delivery | AccountWorkflowControllerTest; InMemorySettingsServiceTest |
-| user | 17-settings | Show message previews CheckBox | Save preview preference for session | Pending — Task 11 | Mock setting | AccountWorkflowControllerTest; InMemorySettingsServiceTest |
+| user | 17-settings | Enable desktop notifications CheckBox | Save mock notification preference only | Implemented — Task 11 | Session preference; no real notification delivery | AccountWorkflowControllerTest; InMemorySettingsServiceTest |
+| user | 17-settings | Play a sound for new messages CheckBox | Save mock sound preference only | Implemented — Task 11 | Session preference; no device/audio delivery | AccountWorkflowControllerTest; InMemorySettingsServiceTest |
+| user | 17-settings | Show message previews CheckBox | Save preview preference for session | Implemented — Task 11 | Mock setting | AccountWorkflowControllerTest; InMemorySettingsServiceTest |
 | user | 17-settings | Friends and groups / Read receipts Enabled / Online status Visible to friends | Read-only privacy/security summaries | Decorative | Supplied as text with no editing action | Task 15 acceptance |
-| user | 17-settings | Change password | Navigate to change-password form | Pending — Task 11 | Supplied route | AccountWorkflowControllerTest |
-| user | 17-settings | Blocked accounts | Navigate to blocked users | Pending — Task 11 | Supplied route | AccountWorkflowControllerTest |
-| user | 17-settings | Sign out | Clear authenticated session; return to Login | Pending — Task 11 | Authentication lifecycle | AccountWorkflowControllerTest |
-| user | 18-change-password | Back to settings | Discard unsaved input; return to settings | Pending — Task 11 | Navigation/cancel | AccountWorkflowControllerTest |
-| user | 18-change-password | Current password PasswordField | Validate existing credential | Pending — Task 11 | Password validation | AccountWorkflowControllerTest |
-| user | 18-change-password | New password PasswordField | Validate new password strength/reuse rule | Pending — Task 11 | Password validation | AccountWorkflowControllerTest |
-| user | 18-change-password | Confirm password PasswordField | Validate match | Pending — Task 11 | Password validation | AccountWorkflowControllerTest |
-| user | 18-change-password | Cancel | Return without password mutation | Pending — Task 11 | Cancellation | AccountWorkflowControllerTest |
-| user | 18-change-password | Update password | Apply validated mock password change with feedback | Pending — Task 11 | Password workflow | AccountWorkflowControllerTest; InMemoryAuthServiceTest |
-| user | 19-spam-reports | New report | Open minimal target/reason report modal | Pending — Task 11 | Existing initiator | UserReportWorkflowControllerTest |
-| user | 19-spam-reports | Search your reports TextField | Filter current user's submitted reports | Pending — Task 11 | Report search | UserReportWorkflowControllerTest |
-| user | 19-spam-reports | Status: all v | Filter report history by status | Pending — Task 11 | Report filter | UserReportWorkflowControllerTest |
-| user | 19-spam-reports | Three report rows: RP-1042, RP-1023, RP-1007 | Open selected report details by ID | Pending — Task 11 | Selectable report rows | UserReportWorkflowControllerTest |
-| user | 20-report-detail | Back to reports | Return to report history | Pending — Task 11 | Navigation | UserReportWorkflowControllerTest |
+| user | 17-settings | Change password | Navigate to change-password form | Implemented — Task 11 | Supplied route | AccountWorkflowControllerTest |
+| user | 17-settings | Blocked accounts | Navigate to blocked users | Implemented — Task 11 | Supplied route | AccountWorkflowControllerTest |
+| user | 17-settings | Sign out | Clear authenticated session; return to Login | Implemented — Task 11 | Authentication lifecycle | AccountWorkflowControllerTest |
+| user | 18-change-password | Back to settings | Discard unsaved input; return to settings | Implemented — Task 11 | Navigation/cancel | AccountWorkflowControllerTest |
+| user | 18-change-password | Current password PasswordField | Validate existing credential | Implemented — Task 11 | Password validation | AccountWorkflowControllerTest |
+| user | 18-change-password | New password PasswordField | Validate new password strength/reuse rule | Implemented — Task 11 | Password validation | AccountWorkflowControllerTest |
+| user | 18-change-password | Confirm password PasswordField | Validate match | Implemented — Task 11 | Password validation | AccountWorkflowControllerTest |
+| user | 18-change-password | Cancel | Return without password mutation | Implemented — Task 11 | Cancellation | AccountWorkflowControllerTest |
+| user | 18-change-password | Update password | Apply validated mock password change with feedback | Implemented — Task 11 | Password workflow | AccountWorkflowControllerTest; InMemoryAuthServiceTest |
+| user | 19-spam-reports | New report | Open minimal target/reason report modal | Implemented — Task 11 | Existing initiator | UserReportWorkflowControllerTest |
+| user | 19-spam-reports | Search your reports TextField | Filter current user's submitted reports | Implemented — Task 11 | Report search | UserReportWorkflowControllerTest |
+| user | 19-spam-reports | Status: all v | Filter report history by status | Implemented — Task 11 | Report filter | UserReportWorkflowControllerTest |
+| user | 19-spam-reports | Three report rows: RP-1042, RP-1023, RP-1007 | Open selected report details by ID | Implemented — Task 11 | Selectable report rows | UserReportWorkflowControllerTest |
+| user | 20-report-detail | Back to reports | Return to report history | Implemented — Task 11 | Navigation | UserReportWorkflowControllerTest |
 | user | 20-report-detail | Report details/progress entries and Next label | Read-only report status progression | Decorative | Next is a timeline marker, not a button | UserReportWorkflowControllerTest; Task 15 acceptance |
 
 ## Approved added controls and minimal dialogs
@@ -214,12 +214,12 @@ These are inventory commitments for the approved workflows, not new standalone s
 | user | Add Friend modal from 10 | Target selector/search; Send request; Cancel/close | Submit valid request; reject self/blocked/duplicate targets | Implemented — Task 9 | Required Add Friend workflow | SocialWorkflowControllerTest; InMemorySocialServiceTest |
 | user | Create Group modal from 13 | Essential group-name/member inputs; Create; Cancel/close | Validate/create group and update lists/conversations | Implemented — Task 10 | Required Create Group workflow | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
 | user | Invite Members modal from 14 | Eligible member selector; Invite; Cancel/close | Validate and invite selected eligible users | Implemented — Task 10 | Required Invite Members workflow | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
-| user | New Report modal from 19 | Existing message/user target selector; reason/category/description inputs; Submit; Cancel/close | Validate and submit current user's report | Pending — Task 11 | Required New Report workflow | UserReportWorkflowControllerTest; InMemoryReportServiceTest |
+| user | New Report modal from 19 | Existing message/user target selector; reason/category/description inputs; Submit; Cancel/close | Validate and submit current user's report | Implemented — Task 11 | Required New Report workflow | UserReportWorkflowControllerTest; InMemoryReportServiceTest |
 | user | 10 friend/user action area (approved addition) | Block User | Show/enable for valid non-self unblocked target; confirm block; reconcile friendships/requests | Implemented — Task 9 | Approved initiating-control addition 1 | SocialWorkflowControllerTest; InMemorySocialServiceTest; Task 15 demo |
 | user | 07/08 message context menu (approved addition) | Hide Message | Confirm hide of selected message for current user only | Implemented — Task 8 | Approved addition 2; no global message deletion | ChatWorkflowControllerTest; InMemoryChatServiceTest; Task 15 demo |
 | user | 07/08 conversation action area (approved addition) | Clear History | Confirm per-user current-sequence visibility boundary | Implemented — Task 8 | Approved addition 2; later messages remain visible | ChatWorkflowControllerTest; InMemoryChatServiceTest; Task 15 demo |
 | user | 14 group-details action area (approved addition) | Leave Group | Show only for current membership; confirm leave; preserve valid admin | Implemented — Task 10 | Approved initiating-control addition 3 | GroupWorkflowControllerTest; InMemoryGroupServiceTest; Task 15 demo |
 | user | 14 member rows (approved addition) | Change Group Role selector | Current group admin can select ADMIN/MEMBER for eligible target; preserve one admin | Implemented — Task 10 | Approved initiating-control addition 4 | GroupWorkflowControllerTest; InMemoryGroupServiceTest; Task 15 demo |
-| both | Consequential workflow confirmations | Confirm / Cancel / dialog close | Confirm valid mutation; cancel/close without state change | Implemented — Tasks 8–9; pending Tasks 10–11, 13–14 | Hide/clear, block/unblock, request cancel, member removal/leave/role changes, lock/unlock and moderation | Respective controller/service tests; Task 15 cancellation demo |
+| both | Consequential workflow confirmations | Confirm / Cancel / dialog close | Confirm valid mutation; cancel/close without state change | Implemented — Tasks 8–11; pending Tasks 13–14 | Hide/clear, block/unblock, request cancel, member removal/leave/role changes, lock/unlock and moderation | Respective controller/service tests; Task 15 cancellation demo |
 
 No cryptographic/device-key control is present in the 28 source FXML files. If a migrated source control exposes such an operation, disable it with “Device-key and encryption operations are unavailable in the frontend-only demo.” Real export, file selection, external help, AI/network calls, notification delivery, and cryptography are not added by this inventory. Native window close and keyboard/focus/scroll mechanics remain JavaFX behavior; workflow dialog cancellation and fixed window configuration are verified in their owning tasks.
