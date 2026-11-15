@@ -296,7 +296,7 @@ Update this section at every task and batch boundary.
 | 2026-11-15 | 6 | 12–13 | Complete after review fix; Batch 6 complete | `4faa792`, `13c2eca`, `4f459d9` | 98/98 shared tests and 12/12 admin tests; zero failures/errors; JavaFX launch stable until stopped manually | 0 Critical; six Important findings fixed in one RED→GREEN pass; stale-entity feedback deferred as Minor | Task 14, pending authorization |
 | 2026-11-15 | 7 | 14 | Complete after review fix; Batch 7 complete | `39511da`, `fe61636` | 98/98 shared tests and 19/19 admin tests; zero failures/errors | 0 Critical; three Important findings fixed in one RED→GREEN pass; `WR-` search prefix deferred as Minor | Task 15, pending authorization |
 | 2026-11-15 | 8 | 15 | Complete; final review pending | pending commit | 150/150 clean tests; resource/controller audit passed; both graphical launches stable | Known OpenJFX cache warning; documented non-blocking limitations | Whole-project final review |
-| 2026-11-15 | 8 | 15 | Complete after final review fix; Batch 8 complete | `1edc648`, pending fix commit | 152/152 clean tests; user module 35/35; final user graphical launch stable | 0 Critical; four Important findings fixed; documented Minor limitations remain | Final handoff; no further task |
+| 2026-11-15 | 8 | 15 | Complete after final review fix; Batch 8 complete | `1edc648`, `cb23340` | 152/152 clean tests; user module 35/35; final user graphical launch stable | 0 Critical; four Important findings fixed; documented Minor limitations remain | Final handoff; no further task |
 
 ## Resume checklist
 
