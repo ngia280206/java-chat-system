@@ -4,6 +4,9 @@ import com.chatsystem.admin.*;
 import com.chatsystem.admin.navigation.*;
 import com.chatsystem.shared.model.status.*;
 import com.chatsystem.shared.service.ReportService;
+import com.chatsystem.admin.ui.FxmlViewLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -57,5 +60,23 @@ class ModerationWorkflowControllerTest extends JavaFxTestSupport {
             var detail=new WarningDetailController(context.admin(),navigator); detail.present(501); assertTrue(context.admin().dismissReport(501,"resolved elsewhere").isSuccess());
             assertFalse(detail.decide(WarningDetailController.Decision.WARN,"reviewed",true).isSuccess());
             assertTrue(detail.isUnavailable()); return null; });
+    }
+
+    @Test void loadedDetailReactsToExternalResolutionAndDisplaysRecordedDecision() throws Exception {
+        onFx(() -> { var context=new AdminApplicationContext(); var stage=new Stage(); try { var navigator=new AdminNavigator(stage,context); var loaded=new FxmlViewLoader(context,navigator).load("/fxml/views/warning-detail.fxml"); var controller=(WarningDetailController)loaded.controller(); controller.present(501);
+            var status=(Label)loaded.root().lookup("#statusLabel"); var notes=(TextArea)loaded.root().lookup("#notesArea"); var warn=(Button)loaded.root().lookup("#warnButton");
+            assertEquals("PENDING",status.getText()); assertTrue(context.admin().warnUser(501,"external decision").isSuccess());
+            assertEquals("REVIEWED",status.getText()); assertEquals("Warning: external decision",notes.getText()); assertFalse(notes.isEditable()); assertTrue(warn.isDisabled());
+            controller.present(999); assertTrue(controller.isUnavailable()); assertEquals("Unavailable",status.getText());
+        } finally { stage.close(); } return null; });
+    }
+
+    @Test void loadedQueueRendersDarkStructuredColumns() throws Exception {
+        onFx(() -> { var context=new AdminApplicationContext(); var stage=new Stage(); try { var navigator=new AdminNavigator(stage,context); var loaded=new FxmlViewLoader(context,navigator).load("/fxml/views/moderation.fxml"); var scene=new Scene(loaded.root(),1240,800); scene.getStylesheets().add(new FxmlViewLoader(context,navigator).resource("/css/dark.css").toExternalForm()); stage.setScene(scene); stage.show(); loaded.root().applyCss(); loaded.root().layout();
+            var list=(ListView<?>)loaded.root().lookup("#caseList"); assertNotNull(loaded.root().lookup("#contextHeading")); assertFalse(list.lookupAll(".list-cell").isEmpty());
+            var populated=list.lookupAll(".list-cell").stream().filter(n->n instanceof ListCell<?> cell&&cell.getGraphic()!=null).findFirst().orElseThrow();
+            assertTrue(((javafx.scene.layout.HBox)((ListCell<?>)populated).getGraphic()).getChildren().size()>=7);
+            String css=java.nio.file.Files.readString(java.nio.file.Path.of(new FxmlViewLoader(context,navigator).resource("/css/dark.css").toURI())); assertTrue(css.contains(".list-cell"));
+        } finally { stage.close(); } return null; });
     }
 }

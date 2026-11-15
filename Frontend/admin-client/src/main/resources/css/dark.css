@@ -107,3 +107,5 @@
 .scroll-pane > .viewport { -fx-background-color: transparent; }
 .scroll-bar:vertical, .scroll-bar:horizontal { -fx-background-color: #111B28; }
 .scroll-bar .thumb { -fx-background-color: #34475D; -fx-background-radius: 8; }
+.list-view, .list-cell { -fx-background-color: #101923; -fx-control-inner-background: #101923; }
+.list-cell:filled:selected, .list-cell:filled:selected:focused { -fx-background-color: #1A2A38; }
