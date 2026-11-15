@@ -3,6 +3,7 @@ package com.chatsystem.shared.mock.service;
 import com.chatsystem.shared.mock.MockDataStore;
 import com.chatsystem.shared.mock.MockFixtures;
 import com.chatsystem.shared.model.UserAccount;
+import com.chatsystem.shared.model.status.ActivityType;
 import com.chatsystem.shared.model.status.UserStatus;
 import com.chatsystem.shared.service.AuthService;
 import com.chatsystem.shared.session.UserSession;
@@ -49,12 +50,14 @@ class InMemoryAuthServiceTest {
     @Test
     void invalidCredentialsLeaveSessionRememberedEmailAndHistoryUntouched() {
         int logins = store.getLoginEvents().size();
+        int activities = store.getActivityEvents().size();
         assertGlobalFailure(auth.login(MockFixtures.DEMO_EMAIL, "wrong", true));
         assertGlobalFailure(auth.login("unknown@example.com", MockFixtures.DEMO_PASSWORD, true));
         assertFalse(session.isAuthenticated());
         assertNull(session.getCurrentUser());
         assertEquals("", session.getRememberedEmail());
         assertEquals(logins, store.getLoginEvents().size());
+        assertEquals(activities, store.getActivityEvents().size());
     }
 
     @Test
@@ -65,10 +68,34 @@ class InMemoryAuthServiceTest {
 
     @Test
     void lockedAndDeletedAccountsCannotLogin() {
+        int activities = store.getActivityEvents().size();
         assertGlobalFailure(auth.login(MockFixtures.LOCKED_EMAIL, MockFixtures.DEMO_PASSWORD, true));
         store.getUsers().get(0).setStatus(UserStatus.DELETED);
         assertGlobalFailure(auth.login(MockFixtures.DEMO_EMAIL, MockFixtures.DEMO_PASSWORD, true));
         assertFalse(session.isAuthenticated());
+        assertEquals(activities, store.getActivityEvents().size());
+    }
+
+    @Test
+    void successfulLoginsRecordExactlyOneAppOpenEachWithMatchingHistoryTimestamp() {
+        int logins = store.getLoginEvents().size();
+        int activities = store.getActivityEvents().size();
+        long lastActivityId = store.getActivityEvents().stream().mapToLong(e -> e.id()).max().orElseThrow();
+        for (int attempt = 0; attempt < 2; attempt++) {
+            assertTrue(auth.login(MockFixtures.DEMO_EMAIL, MockFixtures.DEMO_PASSWORD, false).isSuccess());
+            assertEquals(logins + attempt + 1, store.getLoginEvents().size());
+            assertEquals(activities + attempt + 1, store.getActivityEvents().size());
+            var login = store.getLoginEvents().get(logins + attempt);
+            var activity = store.getActivityEvents().get(activities + attempt);
+            assertEquals(1, activity.userId());
+            assertEquals(ActivityType.APP_OPEN, activity.type());
+            assertNull(activity.conversationId());
+            assertEquals(login.loggedInAt(), activity.occurredAt());
+            assertTrue(activity.id() > lastActivityId);
+            lastActivityId = activity.id();
+            auth.logout();
+            assertEquals(activities + attempt + 1, store.getActivityEvents().size());
+        }
     }
 
     @Test

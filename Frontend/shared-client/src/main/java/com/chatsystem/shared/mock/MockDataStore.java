@@ -114,7 +114,10 @@ public final class MockDataStore {
     public void recordMockLogin(long userId) {
         if (users.stream().noneMatch(u -> u.getId() == userId)) throw new IllegalArgumentException("Unknown mock account");
         long id = loginEvents.stream().mapToLong(LoginEvent::id).max().orElse(0) + 1;
-        loginEvents.add(new LoginEvent(id, userId, Instant.now(), "Desktop demo", "Local demo"));
+        Instant now = Instant.now();
+        loginEvents.add(new LoginEvent(id, userId, now, "Desktop demo", "Local demo"));
+        long activityId = activityEvents.stream().mapToLong(ActivityEvent::id).max().orElse(0) + 1;
+        activityEvents.add(new ActivityEvent(activityId, userId, com.chatsystem.shared.model.status.ActivityType.APP_OPEN, null, now));
     }
 
     // Narrow storage operations for validated service commands. No mutable lists escape.

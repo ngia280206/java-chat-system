@@ -191,6 +191,27 @@ class InMemoryAdminServiceTest {
         assertEquals("", report.getReviewNotes());
     }
 
+    @Test void loginWithoutSendingUpdatesEngagementAndUserActivityInFreshRange() {
+        Instant start = Instant.now();
+        assertTrue(admin.setDateRange(start, Instant.MAX).isSuccess());
+        var trend = admin.getActivityTrend();
+        assertEquals(0, admin.getMetrics().loginCount());
+        assertEquals(0, admin.getMetrics().activeUsersInRange());
+        assertTrue(trend.isEmpty());
+        var auth = new InMemoryAuthService(store);
+        assertTrue(auth.login(MockFixtures.DEMO_EMAIL, MockFixtures.DEMO_PASSWORD, false).isSuccess());
+        assertEquals(1, admin.getMetrics().loginCount());
+        assertEquals(1, admin.getMetrics().activeUsersInRange());
+        assertEquals(0, admin.getMetrics().messageCount());
+        assertEquals(1, trend.stream().mapToLong(AdminService.DailyActivity::appOpens).sum());
+        assertEquals(0, trend.stream().mapToLong(AdminService.DailyActivity::messages).sum());
+        var freshActivity = admin.getUserActivity(1).stream().filter(e -> !e.occurredAt().isBefore(start)).toList();
+        assertEquals(1, freshActivity.size());
+        assertEquals(ActivityType.APP_OPEN, freshActivity.get(0).type());
+        assertEquals(admin.getLoginHistory(1).get(0).loggedInAt(), freshActivity.get(0).occurredAt());
+        assertEquals(12, store.getMessages().size());
+    }
+
     private SpamReport newReport() {
         var auth = new InMemoryAuthService(store);
         auth.login(MockFixtures.DEMO_EMAIL, MockFixtures.DEMO_PASSWORD, false);
