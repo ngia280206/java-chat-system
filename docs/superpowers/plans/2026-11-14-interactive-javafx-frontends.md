@@ -497,21 +497,21 @@ git commit -m "feat: complete interactive user application"
 - Consumes: shared services/store/fixtures from Tasks 2-5.
 - Produces: independent pre-authenticated admin context, typed entity-ID routes, 1480x920 fixed shell, explicit controller factory, and disabled-tooltip behavior.
 
-- [ ] **Step 1: Write failing admin composition/navigation/window/resource tests**
+- [x] **Step 1: Write failing admin composition/navigation/window/resource tests**
 
 Assert context independence, Dashboard startup, typed detail IDs, exact fixed stage configuration, one shell sidebar, named missing-resource failures, CSS resolution, and disabled undefined navigation (Settings/Help).
 
-- [ ] **Step 2: Run admin infrastructure tests and verify failure**
+- [x] **Step 2: Run admin infrastructure tests and verify failure**
 
 Run: `Frontend\gradlew.bat :admin-client:test --tests "com.chatsystem.admin.*"`
 
-- [ ] **Step 3: Implement explicit composition, navigation, loader, disabled support, and shell**
+- [x] **Step 3: Implement explicit composition, navigation, loader, disabled support, and shell**
 
-- [ ] **Step 4: Run admin infrastructure tests**
+- [x] **Step 4: Run admin infrastructure tests**
 
 Expected command from Step 2: PASS.
 
-- [ ] **Step 5: Commit admin infrastructure**
+- [x] **Step 5: Commit admin infrastructure**
 
 ```powershell
 git add Frontend/admin-client
@@ -531,28 +531,28 @@ git commit -m "feat: add admin application infrastructure"
 - Consumes: `AdminService`, `GroupService`, typed `AdminNavigator` routes.
 - Produces: live dashboard range filters/links, user search/filter/sort/page/detail/lock workflows, and group search/sort/detail/management workflows.
 
-- [ ] **Step 1: Write failing dashboard controller tests**
+- [x] **Step 1: Write failing dashboard controller tests**
 
 Assert time-range controls change derived metrics/chart projection and View All links navigate correctly; exports are disabled with exact tooltip.
 
-- [ ] **Step 2: Write failing user/group controller tests**
+- [x] **Step 2: Write failing user/group controller tests**
 
 Assert deterministic search/filter/sort/page behavior, row/detail selection by ID, lock/unlock confirmation and propagation, group management propagation, and disabled exports/settings/help.
 
-- [ ] **Step 3: Run focused admin tests and verify failure**
+- [x] **Step 3: Run focused admin tests and verify failure**
 
 Run: `Frontend\gradlew.bat :admin-client:test --tests "com.chatsystem.admin.controller.DashboardControllerTest" --tests "com.chatsystem.admin.controller.UserManagementControllerTest" --tests "com.chatsystem.admin.controller.GroupManagementControllerTest"`
 
-- [ ] **Step 4: Migrate five views, replace static rows/charts with visually equivalent observable rendering, and implement controllers**
+- [x] **Step 4: Migrate five views, replace static rows/charts with visually equivalent observable rendering, and implement controllers**
 
 Use small menus behind existing filter/sort buttons so their visual appearance remains intact.
 
-- [ ] **Step 5: Run focused and FXML tests**
+- [x] **Step 5: Run focused and FXML tests**
 
 Run: `Frontend\gradlew.bat :admin-client:test --tests "com.chatsystem.admin.controller.*" --tests "com.chatsystem.admin.FxmlSmokeTest"`
 Expected: PASS.
 
-- [ ] **Step 6: Update inventory and commit admin management UI**
+- [x] **Step 6: Update inventory and commit admin management UI**
 
 ```powershell
 git add Frontend/admin-client docs/UI_CONTROL_INVENTORY.md

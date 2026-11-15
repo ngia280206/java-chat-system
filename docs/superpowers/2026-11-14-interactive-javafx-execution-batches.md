@@ -199,9 +199,9 @@ Verify create/invite/join/reject/role/remove/leave group, profile propagation, p
 
 **Checklist:**
 
-- [ ] Task 12: Admin composition, navigation, shell, and resources
-- [ ] Task 13: Dashboard, users, and groups workflows
-- [ ] Batch 6 independent combined risk review (Tasks 12–13)
+- [x] Task 12: Admin composition, navigation, shell, and resources — `4faa792`
+- [x] Task 13: Dashboard, users, and groups workflows — `13c2eca`
+- [x] Batch 6 independent combined risk review (Tasks 12–13) — Important findings fixed in `4f459d9`
 
 **Batch verification:**
 
@@ -293,6 +293,7 @@ Update this section at every task and batch boundary.
 | 2026-11-15 | 3 | 7 | Complete; Batch 3 complete | `36662a2` | 7/7 focused auth/FXML; 18/18 user module; batch test passed; graphical launch reached stable UserMain | Independent review clean; standard JavaFX/cache warnings only | Task 8, pending authorization |
 | 2026-11-15 | 4 | 8–9 | Complete after review fix; Batch 4 complete | `1669241`, `b47312b`, `df1ad3e` | 98/98 shared tests and 28/28 user tests; zero failures/errors; Batch verification passed | Important review findings fixed: confirmations/cancellation, reachable modals, filters/scope/result navigation, contextual AI/message actions, row actions, inventory and regression coverage | Task 10, pending authorization |
 | 2026-11-15 | 5 | 10–11 | Complete after review fix; Batch 5 complete | `a939fba`, `960ad1c`, `1cf404f` | 98/98 shared tests and 33/33 user tests; zero failures/errors; JavaFX launch stable until stopped manually | Important review findings fixed: row-scoped reactive group permissions, supplied controls/content, observable report filtering/detail and inventory alignment | Task 12, pending authorization |
+| 2026-11-15 | 6 | 12–13 | Complete after review fix; Batch 6 complete | `4faa792`, `13c2eca`, `4f459d9` | 98/98 shared tests and 12/12 admin tests; zero failures/errors; JavaFX launch stable until stopped manually | 0 Critical; six Important findings fixed in one RED→GREEN pass; stale-entity feedback deferred as Minor | Task 14, pending authorization |
 
 ## Resume checklist
 
