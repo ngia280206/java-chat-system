@@ -34,11 +34,12 @@
 ## Approved Execution Workflow
 
 - Preserve the 15 tasks and execute them in the 8 approved batches; do not repeat completed Tasks 1-5.
-- Use subagents selectively. Tasks 6 and 12 may be implemented directly by the primary agent or by one implementation agent. Tasks 7-11 and 13-14 use one implementation agent because they carry authentication, permission, cross-screen state, account, or moderation risk. Task 15 is executed by the primary agent with an independent final review.
-- Every implementation/review agent receives only its extracted task section plus the relevant Global Constraints, task-specific consumed/produced interfaces, acceptance criteria, and concrete carried findings. Do not load the full plan, prior reports, or unrelated source files unless a named ambiguity requires expansion.
-- One independent reviewer combines specification-compliance and code-quality review for each task. Authentication, permissions, shared/cross-screen state, moderation, and final acceptance must retain independent review. Do not create separate specification and quality agents automatically.
+- Execute remaining Tasks 8-15 directly in the primary agent session using `superpowers:executing-plans`; do not automatically dispatch implementation subagents or per-task reviewers.
+- For each task, read only its extracted brief plus the relevant Global Constraints, consumed/produced interfaces, acceptance criteria, concrete carried findings, and directly affected source/FXML files. Do not reload the full plan, prior reports, or unrelated files unless a named ambiguity requires expansion.
+- Preserve TDD, the task completion contract, separate task commits, and ledger checkpoints. Use self-review and required focused/module tests as each task's immediate gate.
+- Retain one independent combined review at the end of each batch that contains authentication, permission, shared/cross-screen state, admin-management, or moderation risk (Batches 4-7), plus the independent whole-project final review in Batch 8. Do not create duplicate specification and quality reviews.
 - During implementation, run focused tests for changed behavior. Before each task commit, run the affected module tests once. At batch boundaries, run the module/launch verification already required by the batch checklist. Reserve `clean test` for shared build changes, suspected stale output, or Task 15.
-- After reviewer-requested fixes, rerun the tests covering the amended behavior and preserve all required module and batch verification. Scoped re-review is required for Critical/Important fixes.
+- After reviewer-requested fixes, rerun the tests covering the amended behavior and preserve all required module and batch verification. Critical/Important batch-review findings receive one focused fix pass with RED→GREEN evidence before the batch is complete.
 - Keep reports concise: changed files, test commands/results, review findings, commit, known issue, and next task. Update progress documentation at task completion and commit consolidated progress documentation once per batch.
 
 ---

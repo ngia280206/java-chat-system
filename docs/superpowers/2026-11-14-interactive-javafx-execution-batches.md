@@ -8,13 +8,13 @@ This checklist organizes the approved 15 tasks for subagent-driven execution. It
 
 ## Execution rules
 
-- Use subagents selectively within every authorized batch. Tasks 6 and 12 may use direct primary-agent implementation or one implementation agent; Tasks 7-11 and 13-14 use one implementation agent; Task 15 is executed by the primary agent.
-- Give each agent only the extracted task section plus relevant global constraints, task-specific interfaces, acceptance criteria, and carried findings. Expand to the full plan or unrelated files only when a named ambiguity requires it.
-- Use one combined specification/code-quality reviewer per task. Reviews for authentication, permissions, shared/cross-screen state, moderation, and final acceptance must remain independent.
-- For each task: implementation → focused tests → combined review → required fixes and affected-test rerun → record commit/result.
+- Execute remaining Tasks 8-15 directly through `superpowers:executing-plans`; do not automatically dispatch implementation subagents or per-task reviewers.
+- For each task, load only its extracted brief, relevant global constraints, task-specific interfaces, acceptance criteria, carried findings, and directly affected files. Expand context only for a named ambiguity.
+- For each task: direct TDD implementation → focused tests → affected module test → self-review → separate task commit → ledger/checklist update.
+- Use one independent combined batch review for high-risk behavior at the end of Batches 4-7, and one independent whole-project final review in Batch 8. Do not duplicate specification and code-quality reviewers.
 - Do not start the next task while the current task has unresolved review findings or failing required tests.
 - Run the affected module tests once before each task commit. At batch end, run the batch verification commands below and record exact results. Use `clean test` only for shared build changes, suspected stale output, or Task 15.
-- Reviewer-requested fixes must rerun their affected tests and receive scoped re-review for Critical/Important findings; module and batch verification requirements remain unchanged.
+- Reviewer-requested Critical/Important fixes require a focused RED→GREEN test and rerun of affected tests; module and batch verification requirements remain unchanged.
 - Keep task reports to changed files, test results, review findings, commit, known issue, and next task. Consolidate progress-document commits at batch boundaries.
 - A completed batch is a safe stopping point. Commit or otherwise preserve all changes before stopping.
 - On resume, read this checklist and the approved plan, inspect recorded commits/status, and verify the current worktree. Do not recreate or reimplement `[x]` tasks.
@@ -141,9 +141,8 @@ Confirm Login starts at 1240x780, successful mock login opens the fixed 1540x930
 **Checklist:**
 
 - [ ] Task 8: Chat, message search, and AI workflows
-- [ ] Task 8 independent combined review
 - [ ] Task 9: Friends and relationship workflows
-- [ ] Task 9 independent combined review
+- [ ] Batch 4 independent combined risk review (Tasks 8–9)
 
 **Batch verification:**
 
@@ -171,9 +170,8 @@ Manually verify new conversation, send/search/hide/clear, preview updates, AI po
 **Checklist:**
 
 - [ ] Task 10: Group workflows and approved membership controls
-- [ ] Task 10 independent combined review
 - [ ] Task 11: Profile, settings, password, and reporting workflows
-- [ ] Task 11 independent combined review
+- [ ] Batch 5 independent combined risk review (Tasks 10–11)
 
 **Batch verification:**
 
@@ -202,9 +200,8 @@ Verify create/invite/join/reject/role/remove/leave group, profile propagation, p
 **Checklist:**
 
 - [ ] Task 12: Admin composition, navigation, shell, and resources
-- [ ] Task 12 combined specification/code-quality review
 - [ ] Task 13: Dashboard, users, and groups workflows
-- [ ] Task 13 independent combined review
+- [ ] Batch 6 independent combined risk review (Tasks 12–13)
 
 **Batch verification:**
 
@@ -233,7 +230,7 @@ Confirm 1480x920 fixed Dashboard startup, live metric ranges, search/filter/sort
 **Checklist:**
 
 - [ ] Task 14: Admin moderation workflows
-- [ ] Task 14 independent combined review
+- [ ] Batch 7 independent combined moderation review
 
 **Batch verification:**
 
