@@ -16,6 +16,7 @@ public interface ChatService {
     ReadOnlyObjectProperty<Conversation> selectedConversationProperty();
     int getUnreadCount();
     ReadOnlyIntegerProperty unreadCountProperty();
+    boolean isUnread(long conversationId);
     ValidationResult<Void> selectConversation(long conversationId);
     ValidationResult<Conversation> startConversation(long recipientId);
     ValidationResult<Message> sendMessage(long conversationId, String content);

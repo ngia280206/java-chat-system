@@ -28,6 +28,7 @@ public final class UserNavigator {
     private String passwordResetEmail = "";
     private String loginEmail;
     private String loginMessage;
+    private String assistantContext = "";
 
     public UserNavigator(Stage stage, UserApplicationContext context) {
         this.stage = Objects.requireNonNull(stage);
@@ -51,6 +52,16 @@ public final class UserNavigator {
     public ViewRequest currentRequest() { return currentRequest.get(); }
     public ReadOnlyObjectProperty<ViewRequest> currentRequestProperty() { return currentRequest.getReadOnlyProperty(); }
     public Optional<Stage> assistantStage() { return Optional.ofNullable(assistantStage); }
+    public Stage showDialog(String path, String title) {
+        var loaded = views.load(path);
+        Stage dialog = new Stage(); dialog.initOwner(stage); dialog.setTitle(title); dialog.setResizable(false);
+        Scene scene = new Scene(loaded.root()); scene.getStylesheets().add(views.resource("/css/dark.css").toExternalForm());
+        dialog.setScene(scene); dialog.show(); return dialog;
+    }
+    public void showAssistant(long conversationId, String messageContext) {
+        assistantContext = messageContext == null ? "" : messageContext;
+        navigate(ViewRequest.conversation(UserRoute.AI_ASSISTANT, conversationId));
+    }
 
     public String passwordResetEmail() { return passwordResetEmail; }
 
@@ -139,6 +150,8 @@ public final class UserNavigator {
         if (request.route() == UserRoute.AI_ASSISTANT) {
             var loaded = views.load("/fxml/dialogs/ai-assistant-popup.fxml");
             ((AiAssistantPopupController) loaded.controller()).present(request.entityId().orElseThrow().value());
+            ((AiAssistantPopupController) loaded.controller()).prefill(assistantContext);
+            assistantContext = "";
             loaded.root().setUserData(request);
             return loaded.root();
         }

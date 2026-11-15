@@ -19,22 +19,20 @@ public final class ChatHomeController {
     private final UserNavigator navigator;
     @FXML private TextField conversationSearchField;
     @FXML private ListView<Conversation> conversationList;
-    @FXML private TextField recipientField;
-    @FXML private Label conversationFeedbackLabel;
+    private FilteredList<Conversation> filtered;
+    private FilterMode filterMode = FilterMode.ALL;
+    private enum FilterMode { ALL, UNREAD, GROUPS }
 
     public ChatHomeController(ChatService chat, UserNavigator navigator) {
         this.chat = Objects.requireNonNull(chat); this.navigator = Objects.requireNonNull(navigator);
     }
 
     @FXML private void initialize() {
-        var filtered = new FilteredList<>(chat.getConversations());
+        filtered = new FilteredList<>(chat.getConversations());
         conversationList.setItems(filtered);
         conversationList.setCellFactory(ignored -> new ConversationCell());
-        conversationSearchField.textProperty().addListener((o, a, text) -> filtered.setPredicate(c -> {
-            String query = text == null ? "" : text.strip().toLowerCase(Locale.ROOT);
-            return query.isEmpty() || c.getName().toLowerCase(Locale.ROOT).contains(query)
-                    || c.getLastMessagePreview().toLowerCase(Locale.ROOT).contains(query);
-        }));
+        conversationSearchField.textProperty().addListener((o, a, text) -> refreshFilter());
+        refreshFilter();
         conversationList.setOnMouseClicked(event -> openSelectedConversation());
         conversationList.setOnKeyPressed(event -> { if (event.getCode() == javafx.scene.input.KeyCode.ENTER) openSelectedConversation(); });
     }
@@ -47,17 +45,16 @@ public final class ChatHomeController {
                 ? UserRoute.CHAT_GROUP : UserRoute.CHAT_PRIVATE, selected.getId()));
     }
 
-    @FXML private void startConversation() {
-        long recipient;
-        try { recipient = Long.parseLong(recipientField.getText().strip()); }
-        catch (RuntimeException exception) { show("Enter a valid recipient ID"); return; }
-        var result = chat.startConversation(recipient);
-        if (!result.isSuccess()) { show(result.errors().get(0).message()); return; }
-        Conversation conversation = result.value().orElseThrow();
-        chat.selectConversation(conversation.getId());
-        navigator.navigate(ViewRequest.conversation(UserRoute.CHAT_PRIVATE, conversation.getId()));
-    }
-
     @FXML private void showGroups() { navigator.navigate(ViewRequest.of(UserRoute.GROUP_MANAGEMENT)); }
-    private void show(String text) { conversationFeedbackLabel.setText(text); }
+    @FXML private void newConversation() { navigator.showDialog("/fxml/dialogs/new-conversation.fxml", "New conversation"); }
+    @FXML private void filterAll() { filterMode = FilterMode.ALL; refreshFilter(); }
+    @FXML private void filterUnread() { filterMode = FilterMode.UNREAD; refreshFilter(); }
+    @FXML private void filterGroups() { filterMode = FilterMode.GROUPS; refreshFilter(); }
+    private void refreshFilter() {
+        String query = conversationSearchField.getText() == null ? "" : conversationSearchField.getText().strip().toLowerCase(Locale.ROOT);
+        filtered.setPredicate(c -> (query.isEmpty() || c.getName().toLowerCase(Locale.ROOT).contains(query)
+                || c.getLastMessagePreview().toLowerCase(Locale.ROOT).contains(query))
+                && (filterMode == FilterMode.ALL || filterMode == FilterMode.UNREAD && chat.isUnread(c.getId())
+                || filterMode == FilterMode.GROUPS && c.getType() == ConversationType.GROUP));
+    }
 }

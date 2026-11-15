@@ -40,6 +40,11 @@ public final class InMemoryChatService implements ChatService {
     @Override public ReadOnlyObjectProperty<Conversation> selectedConversationProperty() { return selected.getReadOnlyProperty(); }
     @Override public int getUnreadCount() { return unread.get(); }
     @Override public ReadOnlyIntegerProperty unreadCountProperty() { return unread.getReadOnlyProperty(); }
+    @Override public boolean isUnread(long conversationId) {
+        UserAccount actor = actor();
+        ConversationMember member = actor == null ? null : membership(conversationId, actor.getId());
+        return member != null && member.getUnreadCount() > 0;
+    }
 
     @Override public ObservableList<Message> getMessages(long conversationId) {
         return messageViews.computeIfAbsent(conversationId, id -> {

@@ -9,6 +9,7 @@ import com.chatsystem.user.navigation.ViewRequest;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,8 +54,10 @@ class ChatWorkflowControllerTest extends JavaFxTestSupport {
             @SuppressWarnings("unchecked") ListView<com.chatsystem.shared.model.Message> messages = w.control("messageList", ListView.class);
             messages.getSelectionModel().selectFirst();
             w.click("hideMessageButton");
+            w.click("confirmActionButton");
             assertEquals(before, w.context.chat().getMessages(MockFixtures.DIRECT_CONVERSATION_ID).size());
             w.click("clearHistoryButton");
+            w.click("confirmActionButton");
             assertTrue(w.context.chat().getMessages(MockFixtures.DIRECT_CONVERSATION_ID).isEmpty());
             assertTrue(w.context.chat().sendMessage(MockFixtures.DIRECT_CONVERSATION_ID, "After clear").isSuccess());
             assertEquals(1, w.context.chat().getMessages(MockFixtures.DIRECT_CONVERSATION_ID).size());
@@ -71,29 +74,69 @@ class ChatWorkflowControllerTest extends JavaFxTestSupport {
             assertTrue(w.control("attachmentButton", Button.class).isDisabled());
             assertEquals("Attachments are unavailable in the frontend-only demo.",
                     w.control("attachmentWrapper", javafx.scene.layout.StackPane.class).getAccessibleText());
+            assertTrue(w.control("detailsButton", Button.class).isDisabled());
+            assertFalse(w.control("detailsWrapper", javafx.scene.layout.StackPane.class).getAccessibleText().isBlank());
 
             int conversations = w.context.chat().getConversations().size();
             w.navigator.navigate(ViewRequest.of(UserRoute.CHAT_HOME));
-            w.control("recipientField", TextField.class).setText("99999");
-            w.click("startConversationButton");
+            w.click("newConversationButton");
+            Window dialog = Window.getWindows().stream().filter(window -> window != w.stage && window.isShowing()).findFirst().orElseThrow();
+            ((TextField) dialog.getScene().getRoot().lookup("#recipientField")).setText("99999");
+            ((Button) dialog.getScene().getRoot().lookup("#submitNewConversationButton")).fire();
             assertEquals(conversations, w.context.chat().getConversations().size());
-            assertFalse(w.control("conversationFeedbackLabel", Label.class).getText().isBlank());
+            assertFalse(((Label) dialog.getScene().getRoot().lookup("#feedbackLabel")).getText().isBlank());
+            ((Button) dialog.getScene().getRoot().lookup("#cancelNewConversationButton")).fire();
         }});
     }
 
     @Test void assistantUsesSelectedConversationAndRejectsBlankPrompt() throws Exception {
         onFx(() -> { try (var w = Workflow.open()) {
             w.navigator.navigate(ViewRequest.conversation(UserRoute.CHAT_GROUP, MockFixtures.GROUP_CONVERSATION_ID));
+            @SuppressWarnings("unchecked") ListView<com.chatsystem.shared.model.Message> messages = w.control("messageList", ListView.class);
+            messages.getSelectionModel().selectFirst(); String selectedText = messages.getSelectionModel().getSelectedItem().getContent();
             w.click("assistantButton");
             Stage assistant = w.navigator.assistantStage().orElseThrow();
             TextArea prompt = (TextArea) assistant.getScene().getRoot().lookup("#promptField");
             Button send = (Button) assistant.getScene().getRoot().lookup("#sendPromptButton");
             Label response = (Label) assistant.getScene().getRoot().lookup("#responseLabel");
-            send.fire();
-            assertTrue(response.getText().contains("Enter a prompt"));
+            assertTrue(prompt.getText().contains(selectedText));
+            ((Button) assistant.getScene().getRoot().lookup("#summarizePromptButton")).fire();
+            assertTrue(prompt.getText().toLowerCase().contains("summarize"));
+            prompt.clear(); send.fire(); assertTrue(response.getText().contains("Enter a prompt"));
             prompt.setText("Please summarize"); send.fire();
             assertTrue(response.getText().startsWith("Recent conversation:"));
             assertEquals(3, w.context.chat().getMessages(MockFixtures.GROUP_CONVERSATION_ID).size());
+        }});
+    }
+
+    @Test void destructiveActionsCanBeCancelledWithoutMutation() throws Exception {
+        onFx(() -> { try (var w = Workflow.open()) {
+            w.navigator.navigate(ViewRequest.conversation(UserRoute.CHAT_PRIVATE, MockFixtures.DIRECT_CONVERSATION_ID));
+            int before = w.context.chat().getMessages(MockFixtures.DIRECT_CONVERSATION_ID).size();
+            @SuppressWarnings("unchecked") ListView<com.chatsystem.shared.model.Message> messages = w.control("messageList", ListView.class);
+            messages.getSelectionModel().selectFirst();
+            w.click("hideMessageButton"); w.click("cancelActionButton");
+            w.click("clearHistoryButton"); w.click("cancelActionButton");
+            assertEquals(before, w.context.chat().getMessages(MockFixtures.DIRECT_CONVERSATION_ID).size());
+        }});
+    }
+
+    @Test void filtersSearchScopeResultNavigationAndNewConversationModalAreReachable() throws Exception {
+        onFx(() -> { try (var w = Workflow.open()) {
+            w.click("groupsFilterButton");
+            @SuppressWarnings("unchecked") ListView<com.chatsystem.shared.model.Conversation> conversations = w.control("conversationList", ListView.class);
+            assertTrue(conversations.getItems().stream().allMatch(c -> c.getType() == com.chatsystem.shared.model.status.ConversationType.GROUP));
+            w.click("allFilterButton"); assertTrue(conversations.getItems().size() > 1);
+            w.click("newConversationButton");
+            Window dialog = Window.getWindows().stream().filter(window -> window != w.stage && window.isShowing()).findFirst().orElseThrow();
+            assertNotNull(dialog.getScene().getRoot().lookup("#recipientField")); dialog.hide();
+            w.navigator.navigate(ViewRequest.conversation(UserRoute.MESSAGE_SEARCH, MockFixtures.DIRECT_CONVERSATION_ID));
+            @SuppressWarnings("unchecked") ComboBox<com.chatsystem.shared.model.Conversation> scope = w.control("conversationScope", ComboBox.class);
+            scope.getSelectionModel().clearSelection();
+            w.control("queryField", TextField.class).setText("palette"); w.click("submitSearchButton");
+            @SuppressWarnings("unchecked") ListView<com.chatsystem.shared.model.Message> results = w.control("resultList", ListView.class);
+            assertFalse(results.getItems().isEmpty()); results.getSelectionModel().selectFirst(); w.click("openResultButton");
+            assertEquals(UserRoute.CHAT_GROUP, w.navigator.currentRequest().route());
         }});
     }
 }

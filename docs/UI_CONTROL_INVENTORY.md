@@ -99,52 +99,52 @@ Disabled controls remain visible. Their tooltip must be attached to a hoverable 
 | App | Screen | Control | Behavior | Status | Reason | Verification |
 |---|---|---|---|---|---|---|
 | user | 06-chat-home, 07-chat-private, 08-chat-group | + New (one per screen) | Open New Conversation recipient-selection modal | Implemented — Task 8 | Existing initiating controls | ChatWorkflowControllerTest |
-| user | 06-chat-home, 07-chat-private, 08-chat-group | Search conversations TextField (one per screen) | Filter conversation previews | Pending — Task 8 | Conversation search | ChatWorkflowControllerTest |
-| user | 06-chat-home, 07-chat-private, 08-chat-group | All / Unread / Groups pills (three per screen) | Select conversation filter | Pending — Task 8 | Label-based filter choices | ChatWorkflowControllerTest |
-| user | 06-chat-home, 07-chat-private, 08-chat-group | Five conversation rows per screen: Mia, Design Circle, Jordan, Study Hub, Sam | Open private/group chat by conversation ID and update unread state | Pending — Task 8 | Includes list-item-selected variant | ChatWorkflowControllerTest |
-| user | 06-chat-home | Start a conversation | Open same recipient-selection modal as + New | Pending — Task 8 | Existing New Conversation initiator | ChatWorkflowControllerTest |
-| user | 06-chat-home | Explore groups | Navigate to group management | Pending — Task 8 | Supplied destination | ChatWorkflowControllerTest |
-| user | 07-chat-private, 08-chat-group | Search (one per screen) | Open message search with current conversation filter | Pending — Task 8 | Chat search route | ChatWorkflowControllerTest |
+| user | 06-chat-home, 07-chat-private, 08-chat-group | Search conversations TextField (one per screen) | Filter conversation previews | Implemented — Task 8 | Conversation search | ChatWorkflowControllerTest |
+| user | 06-chat-home, 07-chat-private, 08-chat-group | All / Unread / Groups pills (three per screen) | Select conversation filter | Implemented — Task 8 | Label-based filter choices | ChatWorkflowControllerTest |
+| user | 06-chat-home, 07-chat-private, 08-chat-group | Five conversation rows per screen: Mia, Design Circle, Jordan, Study Hub, Sam | Open private/group chat by conversation ID and update unread state | Implemented — Task 8 | Includes list-item-selected variant | ChatWorkflowControllerTest |
+| user | 06-chat-home | Start a conversation | Open same recipient-selection modal as + New | Implemented — Task 8 | Existing New Conversation initiator | ChatWorkflowControllerTest |
+| user | 06-chat-home | Explore groups | Navigate to group management | Implemented — Task 8 | Supplied destination | ChatWorkflowControllerTest |
+| user | 07-chat-private, 08-chat-group | Search (one per screen) | Open message search with current conversation filter | Implemented — Task 8 | Chat search route | ChatWorkflowControllerTest |
 | user | 07-chat-private | Details | Visible, disabled | Disabled — Task 8 | Tooltip: “Private contact details are unavailable because no contact details screen is supplied.” | ChatWorkflowControllerTest; wrapper hover |
-| user | 08-chat-group | Details | Open selected group details | Pending — Task 8 | Existing supplied group screen | ChatWorkflowControllerTest |
-| user | 07-chat-private, 08-chat-group | ✦ Ask AI (one per screen) | Open owned fixed-size assistant popup with selected message context | Pending — Task 8 | Local simulated assistant | ChatWorkflowControllerTest |
+| user | 08-chat-group | Details | Open selected group details | Implemented — Task 8 | Existing supplied group screen | ChatWorkflowControllerTest |
+| user | 07-chat-private, 08-chat-group | ✦ Ask AI (one per screen) | Open owned fixed-size assistant popup with selected message context | Implemented — Task 8 | Local simulated assistant | ChatWorkflowControllerTest |
 | user | 07-chat-private, 08-chat-group | + attachment (one per composer) | Visible, disabled | Disabled — Task 8 | Tooltip: “Attachments are unavailable in the frontend-only demo.” | ChatWorkflowControllerTest; wrapper hover |
-| user | 07-chat-private, 08-chat-group | Write a message... TextField (one per screen) | Collect message; prevent empty submission; support submit | Pending — Task 8 | Composer input | ChatWorkflowControllerTest |
-| user | 07-chat-private, 08-chat-group | Send → (one per screen) | Send through service and update messages/preview/time/indicators | Pending — Task 8 | Observable message workflow | ChatWorkflowControllerTest; InMemoryChatServiceTest |
-| user | 07-chat-private, 08-chat-group | Four message bubbles per source screen; each dynamic message | Provide selected message context for AI and Hide Message | Pending — Task 8 | Message identity required for contextual actions | ChatWorkflowControllerTest |
-| user | 08-chat-group | Manage group | Open selected group's management/details | Pending — Task 8 | Existing destination | ChatWorkflowControllerTest |
+| user | 07-chat-private, 08-chat-group | Write a message... TextField (one per screen) | Collect message; prevent empty submission; support submit | Implemented — Task 8 | Composer input | ChatWorkflowControllerTest |
+| user | 07-chat-private, 08-chat-group | Send → (one per screen) | Send through service and update messages/preview/time/indicators | Implemented — Task 8 | Observable message workflow | ChatWorkflowControllerTest; InMemoryChatServiceTest |
+| user | 07-chat-private, 08-chat-group | Four message bubbles per source screen; each dynamic message | Provide selected message context for AI and Hide Message | Implemented — Task 8 | Message identity required for contextual actions | ChatWorkflowControllerTest |
+| user | 08-chat-group | Manage group | Open selected group's management/details | Implemented — Task 8 | Existing destination | ChatWorkflowControllerTest |
 | user | 08-chat-group | Right-pane online member rows: Mia, Jordan, Sam | Read-only member/role projection | Decorative | No member action in supplied chat sidebar | Task 15 acceptance |
-| user | 09-message-search | Back to chats | Return to chat | Pending — Task 8 | Navigation | ChatWorkflowControllerTest |
-| user | 09-message-search | Search query TextField (mockup placeholder) | Collect search text and show empty state | Pending — Task 8 | Message search input | ChatWorkflowControllerTest |
-| user | 09-message-search | All conversations v | Choose conversation scope | Pending — Task 8 | Approved search filter | ChatWorkflowControllerTest |
-| user | 09-message-search | Search | Query visible messages respecting hidden/cleared state | Pending — Task 8 | Per-user search semantics | ChatWorkflowControllerTest; InMemoryChatServiceTest |
+| user | 09-message-search | Back to chats | Return to chat | Implemented — Task 8 | Navigation | ChatWorkflowControllerTest |
+| user | 09-message-search | Search query TextField (mockup placeholder) | Collect search text and show empty state | Implemented — Task 8 | Message search input | ChatWorkflowControllerTest |
+| user | 09-message-search | All conversations v | Choose conversation scope | Implemented — Task 8 | Approved search filter | ChatWorkflowControllerTest |
+| user | 09-message-search | Search | Query visible messages respecting hidden/cleared state | Implemented — Task 8 | Per-user search semantics | ChatWorkflowControllerTest; InMemoryChatServiceTest |
 | user | 09-message-search | All dates pill | Read-only all-dates scope indicator | Decorative | No date-selection workflow supplied | Task 15 acceptance |
 | user | 09-message-search | Images pill | Visible, disabled | Disabled — Task 8 | Tooltip: “Image search is unavailable because attachments are not supported in this demo.” | ChatWorkflowControllerTest; wrapper hover |
 | user | 09-message-search | Links pill | Visible, disabled | Disabled — Task 8 | Tooltip: “Link-specific filtering is unavailable; use message text search.” | ChatWorkflowControllerTest; wrapper hover |
 | user | 09-message-search | Files pill | Visible, disabled | Disabled — Task 8 | Tooltip: “File search is unavailable because attachments are not supported in this demo.” | ChatWorkflowControllerTest; wrapper hover |
-| user | 09-message-search | Four result rows: Mia Nov 09, You Nov 07, Mia Nov 05, You Oct 29 | Open corresponding conversation/message using stable IDs | Pending — Task 8 | Selectable search results | ChatWorkflowControllerTest |
-| user | 21-ai-assistant-popup | ✦ Ask AI (message preview) | Select/reuse displayed message context in existing assistant | Pending — Task 8 | No recursive popup | ChatWorkflowControllerTest |
-| user | 21-ai-assistant-popup | × | Close popup | Pending — Task 8 | Owned popup close | ChatWorkflowControllerTest |
-| user | 21-ai-assistant-popup | Summarize / Draft a reply / Explain pills | Choose predefined prompt and show simulated contextual response | Pending — Task 8 | Label-based assistant shortcuts | ChatWorkflowControllerTest |
-| user | 21-ai-assistant-popup | Ask about this message... TextField | Collect and validate prompt | Pending — Task 8 | Assistant input | ChatWorkflowControllerTest |
-| user | 21-ai-assistant-popup | Send | Show predefined local response; visibly identify simulation | Pending — Task 8 | Real AI is out of scope | ChatWorkflowControllerTest; PredefinedAssistantServiceTest |
+| user | 09-message-search | Four result rows: Mia Nov 09, You Nov 07, Mia Nov 05, You Oct 29 | Open corresponding conversation/message using stable IDs | Implemented — Task 8 | Selectable search results | ChatWorkflowControllerTest |
+| user | 21-ai-assistant-popup | ✦ Ask AI (message preview) | Select/reuse displayed message context in existing assistant | Implemented — Task 8 | No recursive popup | ChatWorkflowControllerTest |
+| user | 21-ai-assistant-popup | × | Close popup | Implemented — Task 8 | Owned popup close | ChatWorkflowControllerTest |
+| user | 21-ai-assistant-popup | Summarize / Draft a reply / Explain pills | Choose predefined prompt and show simulated contextual response | Implemented — Task 8 | Label-based assistant shortcuts | ChatWorkflowControllerTest |
+| user | 21-ai-assistant-popup | Ask about this message... TextField | Collect and validate prompt | Implemented — Task 8 | Assistant input | ChatWorkflowControllerTest |
+| user | 21-ai-assistant-popup | Send | Show predefined local response; visibly identify simulation | Implemented — Task 8 | Real AI is out of scope | ChatWorkflowControllerTest; PredefinedAssistantServiceTest |
 
 ## User friends and relationships
 
 | App | Screen | Control | Behavior | Status | Reason | Verification |
 |---|---|---|---|---|---|---|
 | user | 10-friends | + Add friend | Open minimal target-selection modal | Implemented — Task 9 | Existing initiator | SocialWorkflowControllerTest |
-| user | 10-friends | All friends / Requests / Blocked pills | Navigate to corresponding supplied friend view | Pending — Task 9 | Label-based tabs | SocialWorkflowControllerTest |
-| user | 10-friends | Search by name or username TextField | Filter friends | Pending — Task 9 | Friend search | SocialWorkflowControllerTest |
-| user | 10-friends | Online first v | Choose deterministic friend order | Pending — Task 9 | Friend sort | SocialWorkflowControllerTest |
-| user | 10-friends | Four friend rows: Mia, Jordan, Sam, Casey | Select valid target for row actions; identity/status remains read-only | Pending — Task 9 | Target selection for Message/Block | SocialWorkflowControllerTest |
-| user | 10-friends | Message (four buttons, one per friend) | Start/open private conversation with selected friend | Pending — Task 9 | Existing friend action | SocialWorkflowControllerTest |
-| user | 11-friend-requests | Back to friends | Return to friends | Pending — Task 9 | Navigation | SocialWorkflowControllerTest |
-| user | 11-friend-requests | Accept (Priya, Bao, Emery; three buttons) | Accept incoming request; refresh friendships/requests | Pending — Task 9 | Relationship mutation | SocialWorkflowControllerTest; InMemorySocialServiceTest |
-| user | 11-friend-requests | Decline (Priya, Bao, Emery; three buttons) | Reject incoming request | Pending — Task 9 | Relationship mutation | SocialWorkflowControllerTest; InMemorySocialServiceTest |
-| user | 11-friend-requests | Sent request rows: Taylor, Nora | Select supported outgoing request and cancel with confirmation | Pending — Task 9 | Required cancel workflow uses existing sent-request rows | SocialWorkflowControllerTest; InMemorySocialServiceTest |
-| user | 12-blocked-users | Back to friends | Return to friends | Pending — Task 9 | Navigation | SocialWorkflowControllerTest |
-| user | 12-blocked-users | Unblock (Taylor, Unknown User; two buttons) | Confirm unblock; update blocked state | Pending — Task 9 | Relationship mutation | SocialWorkflowControllerTest; InMemorySocialServiceTest |
+| user | 10-friends | All friends / Requests / Blocked pills | Navigate to corresponding supplied friend view | Implemented — Task 9 | Label-based tabs | SocialWorkflowControllerTest |
+| user | 10-friends | Search by name or username TextField | Filter friends | Implemented — Task 9 | Friend search | SocialWorkflowControllerTest |
+| user | 10-friends | Online first v | Choose deterministic friend order | Implemented — Task 9 | Friend sort | SocialWorkflowControllerTest |
+| user | 10-friends | Four friend rows: Mia, Jordan, Sam, Casey | Select valid target for row actions; identity/status remains read-only | Implemented — Task 9 | Target selection for Message/Block | SocialWorkflowControllerTest |
+| user | 10-friends | Message (four buttons, one per friend) | Start/open private conversation with selected friend | Implemented — Task 9 | Existing friend action | SocialWorkflowControllerTest |
+| user | 11-friend-requests | Back to friends | Return to friends | Implemented — Task 9 | Navigation | SocialWorkflowControllerTest |
+| user | 11-friend-requests | Accept (Priya, Bao, Emery; three buttons) | Accept incoming request; refresh friendships/requests | Implemented — Task 9 | Relationship mutation | SocialWorkflowControllerTest; InMemorySocialServiceTest |
+| user | 11-friend-requests | Decline (Priya, Bao, Emery; three buttons) | Reject incoming request | Implemented — Task 9 | Relationship mutation | SocialWorkflowControllerTest; InMemorySocialServiceTest |
+| user | 11-friend-requests | Sent request rows: Taylor, Nora | Select supported outgoing request and cancel with confirmation | Implemented — Task 9 | Required cancel workflow uses existing sent-request rows | SocialWorkflowControllerTest; InMemorySocialServiceTest |
+| user | 12-blocked-users | Back to friends | Return to friends | Implemented — Task 9 | Navigation | SocialWorkflowControllerTest |
+| user | 12-blocked-users | Unblock (Taylor, Unknown User; two buttons) | Confirm unblock; update blocked state | Implemented — Task 9 | Relationship mutation | SocialWorkflowControllerTest; InMemorySocialServiceTest |
 | user | 12-blocked-users | Blocked account cards | Read-only blocked identity/date | Decorative | Actions accounted for by Unblock buttons | Task 15 acceptance |
 
 ## User groups
@@ -210,16 +210,16 @@ These are inventory commitments for the approved workflows, not new standalone s
 
 | App | Screen | Control | Behavior | Status | Reason | Verification |
 |---|---|---|---|---|---|---|
-| user | New Conversation modal from 06/07/08 | Recipient selector; Start/Create; Cancel/close | Choose valid recipient and open/create conversation; cancel unchanged | Pending — Task 8 | Required New Conversation workflow | ChatWorkflowControllerTest; InMemoryChatServiceTest |
-| user | Add Friend modal from 10 | Target selector/search; Send request; Cancel/close | Submit valid request; reject self/blocked/duplicate targets | Pending — Task 9 | Required Add Friend workflow | SocialWorkflowControllerTest; InMemorySocialServiceTest |
+| user | New Conversation modal from 06/07/08 | Recipient selector; Start/Create; Cancel/close | Choose valid recipient and open/create conversation; cancel unchanged | Implemented — Task 8 | Required New Conversation workflow | ChatWorkflowControllerTest; InMemoryChatServiceTest |
+| user | Add Friend modal from 10 | Target selector/search; Send request; Cancel/close | Submit valid request; reject self/blocked/duplicate targets | Implemented — Task 9 | Required Add Friend workflow | SocialWorkflowControllerTest; InMemorySocialServiceTest |
 | user | Create Group modal from 13 | Essential group-name/member inputs; Create; Cancel/close | Validate/create group and update lists/conversations | Pending — Task 10 | Required Create Group workflow | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
 | user | Invite Members modal from 14 | Eligible member selector; Invite; Cancel/close | Validate and invite selected eligible users | Pending — Task 10 | Required Invite Members workflow | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
 | user | New Report modal from 19 | Existing message/user target selector; reason/category/description inputs; Submit; Cancel/close | Validate and submit current user's report | Pending — Task 11 | Required New Report workflow | UserReportWorkflowControllerTest; InMemoryReportServiceTest |
 | user | 10 friend/user action area (approved addition) | Block User | Show/enable for valid non-self unblocked target; confirm block; reconcile friendships/requests | Implemented — Task 9 | Approved initiating-control addition 1 | SocialWorkflowControllerTest; InMemorySocialServiceTest; Task 15 demo |
-| user | 07/08 message context menu (approved addition) | Hide Message | Confirm hide of selected message for current user only | Pending — Task 8 | Approved addition 2; no global message deletion | ChatWorkflowControllerTest; InMemoryChatServiceTest; Task 15 demo |
-| user | 07/08 conversation action area (approved addition) | Clear History | Confirm per-user current-sequence visibility boundary | Pending — Task 8 | Approved addition 2; later messages remain visible | ChatWorkflowControllerTest; InMemoryChatServiceTest; Task 15 demo |
+| user | 07/08 message context menu (approved addition) | Hide Message | Confirm hide of selected message for current user only | Implemented — Task 8 | Approved addition 2; no global message deletion | ChatWorkflowControllerTest; InMemoryChatServiceTest; Task 15 demo |
+| user | 07/08 conversation action area (approved addition) | Clear History | Confirm per-user current-sequence visibility boundary | Implemented — Task 8 | Approved addition 2; later messages remain visible | ChatWorkflowControllerTest; InMemoryChatServiceTest; Task 15 demo |
 | user | 14 group-details action area (approved addition) | Leave Group | Show only for current membership; confirm leave; preserve valid admin | Pending — Task 10 | Approved initiating-control addition 3 | GroupWorkflowControllerTest; InMemoryGroupServiceTest; Task 15 demo |
 | user | 14 member rows (approved addition) | Change Group Role selector | Current group admin can select ADMIN/MEMBER for eligible target; preserve one admin | Pending — Task 10 | Approved initiating-control addition 4 | GroupWorkflowControllerTest; InMemoryGroupServiceTest; Task 15 demo |
-| both | Consequential workflow confirmations | Confirm / Cancel / dialog close | Confirm valid mutation; cancel/close without state change | Pending — Tasks 8–11, 13–14 | Hide/clear, block/unblock, request cancel, member removal/leave/role changes, lock/unlock and moderation | Respective controller/service tests; Task 15 cancellation demo |
+| both | Consequential workflow confirmations | Confirm / Cancel / dialog close | Confirm valid mutation; cancel/close without state change | Implemented — Tasks 8–9; pending Tasks 10–11, 13–14 | Hide/clear, block/unblock, request cancel, member removal/leave/role changes, lock/unlock and moderation | Respective controller/service tests; Task 15 cancellation demo |
 
 No cryptographic/device-key control is present in the 28 source FXML files. If a migrated source control exposes such an operation, disable it with “Device-key and encryption operations are unavailable in the frontend-only demo.” Real export, file selection, external help, AI/network calls, notification delivery, and cryptography are not added by this inventory. Native window close and keyboard/focus/scroll mechanics remain JavaFX behavior; workflow dialog cancellation and fixed window configuration are verified in their owning tasks.

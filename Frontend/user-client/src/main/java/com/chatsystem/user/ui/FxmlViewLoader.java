@@ -53,7 +53,7 @@ public final class FxmlViewLoader {
         if (type == ChatPrivateController.class) return new ChatPrivateController(context.chat(), navigator);
         if (type == ChatGroupController.class) return new ChatGroupController(context.chat(), navigator);
         if (type == MessageSearchController.class) return new MessageSearchController(context.chat(), navigator);
-        if (type == NewConversationDialogController.class) return new NewConversationDialogController(context.chat());
+        if (type == NewConversationDialogController.class) return new NewConversationDialogController(context.chat(), navigator);
         if (type == AiAssistantPopupController.class) return new AiAssistantPopupController(context.assistant());
         if (type == FriendsController.class) return new FriendsController(context.social(), context.chat(), navigator);
         if (type == FriendRequestsController.class) return new FriendRequestsController(context.social(), navigator);
