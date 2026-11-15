@@ -1,13 +1,3 @@
 package com.chatsystem.user.controller.chat;
-import com.chatsystem.shared.service.ChatService;
-import com.chatsystem.user.navigation.*;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import java.util.Objects;
-public final class NewConversationDialogController {
-    private final ChatService chat; private final UserNavigator navigator;
-    @FXML private TextField recipientField; @FXML private Label feedbackLabel;
-    public NewConversationDialogController(ChatService chat, UserNavigator navigator){this.chat=Objects.requireNonNull(chat);this.navigator=Objects.requireNonNull(navigator);}
-    @FXML private void submit(){try{var r=chat.startConversation(Long.parseLong(recipientField.getText().strip()));if(r.isSuccess()){var c=r.value().orElseThrow();recipientField.getScene().getWindow().hide();navigator.navigate(ViewRequest.conversation(UserRoute.CHAT_PRIVATE,c.getId()));}else feedbackLabel.setText(r.errors().get(0).message());}catch(RuntimeException e){feedbackLabel.setText("Enter a valid recipient ID");}}
-    @FXML private void cancel(){recipientField.getScene().getWindow().hide();}
-}
+import com.chatsystem.shared.model.UserAccount;import com.chatsystem.shared.service.*;import com.chatsystem.user.navigation.*;import javafx.fxml.FXML;import javafx.scene.control.*;import javafx.util.StringConverter;
+public final class NewConversationDialogController{private final ChatService chat;private final AdminService directory;private final UserNavigator nav;@FXML private ComboBox<UserAccount> recipientChoice;@FXML private Label feedbackLabel;public NewConversationDialogController(ChatService c,AdminService d,UserNavigator n){chat=c;directory=d;nav=n;}@FXML private void initialize(){recipientChoice.setItems(directory.getUsers());recipientChoice.setConverter(names());}@FXML private void submit(){var user=recipientChoice.getValue();if(user==null){feedbackLabel.setText("Choose a recipient");return;}var r=chat.startConversation(user.getId());if(r.isSuccess()){var c=r.value().orElseThrow();recipientChoice.getScene().getWindow().hide();nav.navigate(ViewRequest.conversation(UserRoute.CHAT_PRIVATE,c.getId()));}else feedbackLabel.setText(r.errors().get(0).message());}@FXML private void cancel(){recipientChoice.getScene().getWindow().hide();}public static StringConverter<UserAccount> names(){return new StringConverter<>(){public String toString(UserAccount u){return u==null?"":u.getDisplayName()+" (@"+u.getUsername()+")";}public UserAccount fromString(String s){return null;}};}}

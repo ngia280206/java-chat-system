@@ -81,7 +81,6 @@ class ChatWorkflowControllerTest extends JavaFxTestSupport {
             w.navigator.navigate(ViewRequest.of(UserRoute.CHAT_HOME));
             w.click("newConversationButton");
             Window dialog = Window.getWindows().stream().filter(window -> window != w.stage && window.isShowing()).findFirst().orElseThrow();
-            ((TextField) dialog.getScene().getRoot().lookup("#recipientField")).setText("99999");
             ((Button) dialog.getScene().getRoot().lookup("#submitNewConversationButton")).fire();
             assertEquals(conversations, w.context.chat().getConversations().size());
             assertFalse(((Label) dialog.getScene().getRoot().lookup("#feedbackLabel")).getText().isBlank());
@@ -129,7 +128,7 @@ class ChatWorkflowControllerTest extends JavaFxTestSupport {
             w.click("allFilterButton"); assertTrue(conversations.getItems().size() > 1);
             w.click("newConversationButton");
             Window dialog = Window.getWindows().stream().filter(window -> window != w.stage && window.isShowing()).findFirst().orElseThrow();
-            assertNotNull(dialog.getScene().getRoot().lookup("#recipientField")); dialog.hide();
+            assertNotNull(dialog.getScene().getRoot().lookup("#recipientChoice")); dialog.hide();
             w.navigator.navigate(ViewRequest.conversation(UserRoute.MESSAGE_SEARCH, MockFixtures.DIRECT_CONVERSATION_ID));
             @SuppressWarnings("unchecked") ComboBox<com.chatsystem.shared.model.Conversation> scope = w.control("conversationScope", ComboBox.class);
             scope.getSelectionModel().clearSelection();
@@ -137,6 +136,20 @@ class ChatWorkflowControllerTest extends JavaFxTestSupport {
             @SuppressWarnings("unchecked") ListView<com.chatsystem.shared.model.Message> results = w.control("resultList", ListView.class);
             assertFalse(results.getItems().isEmpty()); results.getSelectionModel().selectFirst(); w.click("openResultButton");
             assertEquals(UserRoute.CHAT_GROUP, w.navigator.currentRequest().route());
+        }});
+    }
+
+    @Test void messageSearchHonorsIncomingScopeAndCanReturnToAllConversations() throws Exception {
+        onFx(() -> { try (var w = Workflow.open()) {
+            w.navigator.navigate(ViewRequest.conversation(UserRoute.MESSAGE_SEARCH, MockFixtures.DIRECT_CONVERSATION_ID));
+            @SuppressWarnings("unchecked") ComboBox<com.chatsystem.shared.model.Conversation> scope = w.control("conversationScope", ComboBox.class);
+            assertNotNull(scope.getValue());
+            assertEquals(MockFixtures.DIRECT_CONVERSATION_ID, scope.getValue().getId());
+            w.control("queryField", TextField.class).setText("palette"); w.click("submitSearchButton");
+            assertTrue(w.control("resultList", ListView.class).getItems().isEmpty());
+            w.click("allConversationsButton");
+            w.click("submitSearchButton");
+            assertFalse(w.control("resultList", ListView.class).getItems().isEmpty());
         }});
     }
 }

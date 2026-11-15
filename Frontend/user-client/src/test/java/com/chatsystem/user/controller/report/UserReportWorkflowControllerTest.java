@@ -16,7 +16,8 @@ class UserReportWorkflowControllerTest extends JavaFxTestSupport {
         try { var navigator=new UserNavigator(stage,context);navigator.start();navigator.navigate(ViewRequest.of(UserRoute.SPAM_REPORTS));
             ListView<?> list=control(stage,"reportList",ListView.class);assertEquals(2,list.getItems().size());click(stage,"newReportButton");
             Window dialog=Window.getWindows().stream().filter(w->w!=stage&&w.isShowing()).findFirst().orElseThrow();click(dialog,"submitReportButton");assertFalse(label(dialog,"feedbackLabel").getText().isBlank());
-            text(dialog,"messageIdField").setText("1001");text(dialog,"userIdField").setText("2");text(dialog,"reasonField").setText("Repeated unwanted message");click(dialog,"submitReportButton");assertEquals(3,context.reports().getReports().size());
+            @SuppressWarnings("unchecked") ComboBox<com.chatsystem.shared.model.Message> messageChoice=(ComboBox<com.chatsystem.shared.model.Message>)dialog.getScene().getRoot().lookup("#messageChoice");
+            assertFalse(messageChoice.getItems().isEmpty());messageChoice.getSelectionModel().selectFirst();text(dialog,"reasonField").setText("Repeated unwanted message");click(dialog,"submitReportButton");assertEquals(3,context.reports().getReports().size());
             text(stage,"reportSearchField").setText("unwanted");click(stage,"searchReportsButton");assertFalse(list.getItems().isEmpty());list.getSelectionModel().selectFirst();click(stage,"openReportButton");
             long reportId=((ViewRequest.ReportId)navigator.currentRequest().entityId().orElseThrow()).value();var report=context.reports().getReports().stream().filter(r->r.getId()==reportId).findFirst().orElseThrow();
             report.review(ReportStatus.REVIEWED,"Reviewed in test");assertEquals("REVIEWED",label(stage,"reportStatusLabel").getText());click(stage,"backToReportsButton");

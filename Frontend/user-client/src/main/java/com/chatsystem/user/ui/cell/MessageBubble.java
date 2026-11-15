@@ -1,23 +1,3 @@
 package com.chatsystem.user.ui.cell;
-
-import com.chatsystem.shared.model.Message;
-import javafx.scene.control.*;
-import java.util.function.Consumer;
-
-public final class MessageBubble extends ListCell<Message> {
-    private final Consumer<Message> hide;
-    private final Consumer<Message> askAssistant;
-    public MessageBubble() { this(null, null); }
-    public MessageBubble(Consumer<Message> hide, Consumer<Message> askAssistant) { this.hide = hide; this.askAssistant = askAssistant; }
-    @Override protected void updateItem(Message message, boolean empty) {
-        super.updateItem(message, empty); setText(empty || message == null ? null : message.getContent());
-        getStyleClass().removeAll("message-bubble");
-        if (empty || message == null) { setContextMenu(null); return; }
-        getStyleClass().add("message-bubble");
-        if (hide != null) {
-            MenuItem hideItem = new MenuItem("Hide Message"); hideItem.setOnAction(event -> hide.accept(message));
-            MenuItem assistantItem = new MenuItem("Ask AI about this message"); assistantItem.setOnAction(event -> askAssistant.accept(message));
-            setContextMenu(new ContextMenu(hideItem, assistantItem));
-        }
-    }
-}
+import com.chatsystem.shared.model.Message;import javafx.geometry.Pos;import javafx.scene.control.*;import javafx.scene.layout.*;import java.time.ZoneId;import java.time.format.DateTimeFormatter;import java.util.function.Consumer;
+public final class MessageBubble extends ListCell<Message>{private static final DateTimeFormatter TIME=DateTimeFormatter.ofPattern("HH:mm").withZone(ZoneId.systemDefault());private final Consumer<Message>hide,ask;public MessageBubble(){this(null,null);}public MessageBubble(Consumer<Message>h,Consumer<Message>a){hide=h;ask=a;}@Override protected void updateItem(Message m,boolean empty){super.updateItem(m,empty);setText(null);getStyleClass().removeAll("message-bubble");if(empty||m==null){setGraphic(null);setContextMenu(null);return;}Label sender=new Label("Member #"+m.getSenderId());sender.getStyleClass().add("small-heading");Label text=new Label(m.getContent());text.getStyleClass().add("message-text");text.setWrapText(true);Label time=new Label(TIME.format(m.getSentAt()));time.getStyleClass().add("message-time");VBox bubble=new VBox(4,sender,text,time);bubble.getStyleClass().add("message-theirs");HBox row=new HBox(bubble);row.setAlignment(Pos.CENTER_LEFT);setGraphic(row);getStyleClass().add("message-bubble");if(hide!=null){MenuItem h=new MenuItem("Hide Message");h.setOnAction(e->hide.accept(m));MenuItem a=new MenuItem("Ask AI about this message");a.setOnAction(e->ask.accept(m));setContextMenu(new ContextMenu(h,a));}}}

@@ -31,7 +31,13 @@ public final class MessageSearchController {
         });
         resultList.setOnMouseClicked(event -> { if (event.getClickCount() == 2) openResult(); });
     }
-    public void present(long id) { conversationId=id; search(); }
+    public void present(long id) {
+        conversationId=id;
+        conversationScope.getItems().stream().filter(c -> c.getId() == id).findFirst()
+                .ifPresent(c -> conversationScope.getSelectionModel().select(c));
+        search();
+    }
+    @FXML private void allConversations() { conversationScope.getSelectionModel().clearSelection(); search(); }
     @FXML private void search() {
         var scope = conversationScope.getSelectionModel().getSelectedItem();
         var results = scope == null ? chat.getConversations().stream().flatMap(c -> chat.searchMessages(c.getId(), queryField.getText()).stream()).sorted(Comparator.comparing(Message::getSentAt).reversed()).toList()

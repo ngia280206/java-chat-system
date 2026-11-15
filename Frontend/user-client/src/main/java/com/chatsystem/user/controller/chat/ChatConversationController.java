@@ -18,6 +18,7 @@ abstract class ChatConversationController {
     private long conversationId;
     @FXML private Label conversationTitle;
     @FXML private ListView<Message> messageList;
+    @FXML private ListView<Conversation> conversationList;
     @FXML private TextField messageField;
     @FXML private Label feedbackLabel;
     @FXML private Button attachmentButton;
@@ -40,6 +41,11 @@ abstract class ChatConversationController {
         if (detailsButton != null) DisabledControlSupport.install(detailsButton, detailsWrapper,
                 "Private contact details are unavailable because no contact details screen is supplied.");
         messageField.setOnAction(event -> send());
+        if (conversationList != null) {
+            conversationList.setItems(chat.getConversations());
+            conversationList.setCellFactory(ignored -> new com.chatsystem.user.ui.cell.ConversationCell());
+            conversationList.setOnMouseClicked(event -> { if (event.getClickCount() == 2) openConversation(); });
+        }
     }
 
     public void present(long id) {
@@ -49,6 +55,12 @@ abstract class ChatConversationController {
         Conversation conversation = chat.getSelectedConversation();
         conversationTitle.setText(conversation.getName().isBlank() ? "Direct conversation" : conversation.getName());
         messageList.setItems(chat.getMessages(id));
+        if (conversationList != null) conversationList.getSelectionModel().select(conversation);
+    }
+
+    private void openConversation() {
+        Conversation selected=conversationList.getSelectionModel().getSelectedItem(); if(selected==null)return;
+        navigator.navigate(ViewRequest.conversation(selected.getType()==com.chatsystem.shared.model.status.ConversationType.GROUP?UserRoute.CHAT_GROUP:UserRoute.CHAT_PRIVATE,selected.getId()));
     }
 
     @FXML private void send() {

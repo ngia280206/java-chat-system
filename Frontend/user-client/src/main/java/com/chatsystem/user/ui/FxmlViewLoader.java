@@ -56,23 +56,23 @@ public final class FxmlViewLoader {
         if (type == ChatPrivateController.class) return new ChatPrivateController(context.chat(), navigator);
         if (type == ChatGroupController.class) return new ChatGroupController(context.chat(), navigator);
         if (type == MessageSearchController.class) return new MessageSearchController(context.chat(), navigator);
-        if (type == NewConversationDialogController.class) return new NewConversationDialogController(context.chat(), navigator);
+        if (type == NewConversationDialogController.class) return new NewConversationDialogController(context.chat(), context.admin(), navigator);
         if (type == AiAssistantPopupController.class) return new AiAssistantPopupController(context.assistant());
         if (type == FriendsController.class) return new FriendsController(context.social(), context.chat(), navigator);
         if (type == FriendRequestsController.class) return new FriendRequestsController(context.social(), navigator);
         if (type == BlockedUsersController.class) return new BlockedUsersController(context.social(), navigator);
-        if (type == AddFriendDialogController.class) return new AddFriendDialogController(context.social());
+        if (type == AddFriendDialogController.class) return new AddFriendDialogController(context.social(), context.admin());
         if (type == GroupManagementController.class) return new GroupManagementController(context.groups(), navigator);
         if (type == GroupDetailsController.class) return new GroupDetailsController(context.groups(), context.session(), navigator);
         if (type == GroupInvitationsController.class) return new GroupInvitationsController(context.groups(), navigator);
         if (type == CreateGroupDialogController.class) return new CreateGroupDialogController(context.groups(), navigator);
-        if (type == InviteMembersDialogController.class) return new InviteMembersDialogController(context.groups());
+        if (type == InviteMembersDialogController.class) return new InviteMembersDialogController(context.groups(), context.admin());
         if (type == ProfileController.class) return new ProfileController(context.profiles(), context.session());
         if (type == SettingsController.class) return new SettingsController(context.settings(), context.auth(), navigator);
         if (type == ChangePasswordController.class) return new ChangePasswordController(context.auth(), navigator);
         if (type == SpamReportsController.class) return new SpamReportsController(context.reports(), navigator);
         if (type == ReportDetailController.class) return new ReportDetailController(context.reports(), navigator);
-        if (type == NewReportDialogController.class) return new NewReportDialogController(context.reports());
+        if (type == NewReportDialogController.class) return new NewReportDialogController(context.reports(), context.chat());
         throw new IllegalArgumentException("No explicit controller constructor for " + type.getName());
     }
 }

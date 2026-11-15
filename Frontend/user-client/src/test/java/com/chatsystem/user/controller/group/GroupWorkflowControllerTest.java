@@ -31,13 +31,24 @@ class GroupWorkflowControllerTest extends JavaFxTestSupport {
         navigator.navigate(ViewRequest.of(UserRoute.GROUP_INVITATIONS));ListView<?> invitations=control(stage,"invitationList",ListView.class);assertEquals(1,invitations.getItems().size());
         invitations.getSelectionModel().selectFirst();click(stage,"joinInvitationButton");assertTrue(context.groups().getInvitations().isEmpty());assertTrue(context.groups().getGroups().stream().anyMatch(g->g.getId()==21));
         navigator.navigate(ViewRequest.conversation(UserRoute.GROUP_DETAILS,MockFixtures.GROUP_CONVERSATION_ID));click(stage,"inviteMemberButton");Window dialog=dialog(stage);
-        text(dialog,"memberIdField").setText("1");click(dialog,"submitInviteButton");assertFalse(label(dialog,"feedbackLabel").getText().isBlank());click(dialog,"cancelInviteButton");
+        assertNotNull(dialog.getScene().getRoot().lookup("#memberChoice"));click(dialog,"submitInviteButton");assertFalse(label(dialog,"feedbackLabel").getText().isBlank());click(dialog,"cancelInviteButton");
     }); }
 
     @Test void memberRoleControlsArePermissionAware() throws Exception { workflow((context, stage, navigator) -> {
         navigator.navigate(ViewRequest.of(UserRoute.GROUP_MANAGEMENT));assertNotNull(stage.getScene().getRoot().lookup("#viewAllGroupsButton"));assertNotNull(stage.getScene().getRoot().lookup("#manageMembersButton"));
         navigator.navigate(ViewRequest.conversation(UserRoute.GROUP_DETAILS,MockFixtures.GROUP_CONVERSATION_ID));stage.show();stage.getScene().getRoot().applyCss();stage.getScene().getRoot().layout();assertFalse(stage.getScene().getRoot().lookupAll(".group-role-selector").isEmpty());assertFalse(stage.getScene().getRoot().lookupAll(".group-remove-action").isEmpty());
         navigator.navigate(ViewRequest.conversation(UserRoute.GROUP_DETAILS,22));stage.getScene().getRoot().applyCss();stage.getScene().getRoot().layout();assertTrue(stage.getScene().getRoot().lookupAll(".group-role-selector").isEmpty());
+    }); }
+
+    @Test void roleSelectionRequiresConfirmationAndCanBeCancelled() throws Exception { workflow((context, stage, navigator) -> {
+        navigator.navigate(ViewRequest.conversation(UserRoute.GROUP_DETAILS,MockFixtures.GROUP_CONVERSATION_ID));
+        stage.show();stage.getScene().getRoot().applyCss();stage.getScene().getRoot().layout();
+        var member=context.groups().getMembers(20).stream().filter(m->m.getUserId()==2).findFirst().orElseThrow();
+        @SuppressWarnings("unchecked") ChoiceBox<GroupRole> selector=(ChoiceBox<GroupRole>)stage.getScene().getRoot().lookupAll(".group-role-selector").stream().map(ChoiceBox.class::cast).filter(c->Long.valueOf(2).equals(c.getUserData())).findFirst().orElseThrow();
+        selector.setValue(GroupRole.ADMIN);
+        assertEquals(GroupRole.MEMBER,member.getRole());assertTrue(control(stage,"groupConfirmationBar",javafx.scene.layout.HBox.class).isVisible());
+        click(stage,"cancelGroupActionButton");assertEquals(GroupRole.MEMBER,member.getRole());
+        selector.setValue(GroupRole.MEMBER);selector.setValue(GroupRole.ADMIN);click(stage,"confirmGroupActionButton");assertEquals(GroupRole.ADMIN,member.getRole());
     }); }
 
     private void workflow(Action action)throws Exception{onFx(()->{var c=new UserApplicationContext();c.auth().login(MockFixtures.DEMO_EMAIL,MockFixtures.DEMO_PASSWORD,false);var s=new Stage();try{var n=new UserNavigator(s,c);n.start();action.run(c,s,n);}finally{Window.getWindows().stream().filter(w->w!=s).toList().forEach(Window::hide);s.close();}});}
