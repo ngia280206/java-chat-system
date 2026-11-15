@@ -31,7 +31,7 @@ Start a fresh process with `Frontend\gradlew.bat :admin-client:run`.
 - Source audit: 7 admin + 21 user source FXML files retained.
 - Runtime audit: 7 admin + 20 user regular screens, the supplied AI popup, 5 approved minimal dialogs, and 2 application shells are classpath resources.
 - All 35 runtime FXML controller declarations resolve; no runtime FXML references `docs` or `../../styles`.
-- Final `clean test`: 152 tests, 0 failures, 0 errors across all modules.
+- Final suite: 153 tests, 0 failures, 0 errors across all modules.
 - Stage/FXML tests verify fixed dimensions, CSS resolution, all screens/dialogs, navigation, disabled wrapper tooltips, validation, confirmations/cancellation, permissions, and cross-screen observable-state updates.
 
 Known non-blocking limitations are listed in [`Frontend/README.md`](../Frontend/README.md).
