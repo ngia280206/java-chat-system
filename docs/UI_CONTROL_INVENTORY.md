@@ -70,29 +70,29 @@ Disabled controls remain visible. Their tooltip must be attached to a hoverable 
 
 | App | Screen | Control | Behavior | Status | Reason | Verification |
 |---|---|---|---|---|---|---|
-| user | 01-login | Email TextField | Collect/validate mock account email | Pending — Task 7 | Authentication input | AuthWorkflowControllerTest |
-| user | 01-login | Password PasswordField | Collect required password | Pending — Task 7 | Authentication input | AuthWorkflowControllerTest |
-| user | 01-login | Remember me | Keep mock preference for current process only | Pending — Task 7 | No durable authentication/persistence | AuthWorkflowControllerTest; Task 15 restart acceptance |
-| user | 01-login | Forgot password? | Navigate to forgot password | Pending — Task 7 | Authentication route | AuthWorkflowControllerTest |
-| user | 01-login | Sign in → | Validate and authenticate; show failure or open application shell | Pending — Task 7 | Authentication workflow | AuthWorkflowControllerTest |
-| user | 01-login | Create an account | Navigate to registration | Pending — Task 7 | Authentication route | AuthWorkflowControllerTest |
-| user | 02-register | Full name TextField | Collect required display name | Pending — Task 7 | Registration validation | AuthWorkflowControllerTest |
-| user | 02-register | Email TextField | Validate email and duplicate account | Pending — Task 7 | Registration validation | AuthWorkflowControllerTest |
-| user | 02-register | Password PasswordField | Validate password strength | Pending — Task 7 | Registration validation | AuthWorkflowControllerTest |
-| user | 02-register | Confirm password PasswordField | Validate password match | Pending — Task 7 | Registration validation | AuthWorkflowControllerTest |
-| user | 02-register | I agree to the Terms and Privacy Policy CheckBox | Require checked consent for mock registration | Pending — Task 7 | No separate terms/privacy link or destination supplied | AuthWorkflowControllerTest |
-| user | 02-register | Create account → | Create in-memory account with field/terms validation | Pending — Task 7 | Registration workflow | AuthWorkflowControllerTest |
-| user | 02-register | Sign in | Return to login | Pending — Task 7 | Authentication route | AuthWorkflowControllerTest |
-| user | 03-forgot-password | Email TextField | Collect/validate reset account email | Pending — Task 7 | Reset input | AuthWorkflowControllerTest |
-| user | 03-forgot-password | Send verification code → | Start mock reset session and navigate to verification | Pending — Task 7 | Local fixed code, no real email | AuthWorkflowControllerTest |
-| user | 03-forgot-password | ← Back to sign in | Return to login | Pending — Task 7 | Authentication route | AuthWorkflowControllerTest |
-| user | 04-verification-code | Six otp-box/otp-digit placeholders (positions 1–6) | Replace static digits with visually equivalent editable six-digit code entry | Pending — Task 7 | Required verification form currently drawn as labels | AuthWorkflowControllerTest |
-| user | 04-verification-code | Verify code → | Validate code and reset session; navigate to new password | Pending — Task 7 | Reset verification | AuthWorkflowControllerTest |
-| user | 04-verification-code | Resend code | Refresh mock code/reset session with visible feedback | Pending — Task 7 | Simulated send | AuthWorkflowControllerTest |
-| user | 05-reset-password | New password PasswordField | Validate password strength | Pending — Task 7 | Reset validation | AuthWorkflowControllerTest |
-| user | 05-reset-password | Confirm password PasswordField | Validate match | Pending — Task 7 | Reset validation | AuthWorkflowControllerTest |
-| user | 05-reset-password | Reset password → | Apply reset to verified account, return to login | Pending — Task 7 | Reset workflow | AuthWorkflowControllerTest |
-| user | 05-reset-password | ← Return to sign in | Return to login without changing password | Pending — Task 7 | Cancellation/navigation | AuthWorkflowControllerTest |
+| user | 01-login | Email TextField | Collect/validate mock account email | Implemented — Task 7 | Authentication input | AuthWorkflowControllerTest |
+| user | 01-login | Password PasswordField | Collect required password | Implemented — Task 7 | Authentication input | AuthWorkflowControllerTest |
+| user | 01-login | Remember me | Keep mock preference for current process only | Implemented — Task 7 | No durable authentication/persistence | AuthWorkflowControllerTest; Task 15 restart acceptance |
+| user | 01-login | Forgot password? | Navigate to forgot password | Implemented — Task 7 | Authentication route | AuthWorkflowControllerTest |
+| user | 01-login | Sign in → | Validate and authenticate; show failure or open application shell | Implemented — Task 7 | Authentication workflow | AuthWorkflowControllerTest |
+| user | 01-login | Create an account | Navigate to registration | Implemented — Task 7 | Authentication route | AuthWorkflowControllerTest |
+| user | 02-register | Full name TextField | Collect required display name | Implemented — Task 7 | Registration validation | AuthWorkflowControllerTest |
+| user | 02-register | Email TextField | Validate email and duplicate account | Implemented — Task 7 | Registration validation | AuthWorkflowControllerTest |
+| user | 02-register | Password PasswordField | Validate password strength | Implemented — Task 7 | Registration validation | AuthWorkflowControllerTest |
+| user | 02-register | Confirm password PasswordField | Validate password match | Implemented — Task 7 | Registration validation | AuthWorkflowControllerTest |
+| user | 02-register | I agree to the Terms and Privacy Policy CheckBox | Require checked consent for mock registration | Implemented — Task 7 | No separate terms/privacy link or destination supplied | AuthWorkflowControllerTest |
+| user | 02-register | Create account → | Create in-memory account with field/terms validation | Implemented — Task 7 | Registration workflow | AuthWorkflowControllerTest |
+| user | 02-register | Sign in | Return to login | Implemented — Task 7 | Authentication route | AuthWorkflowControllerTest |
+| user | 03-forgot-password | Email TextField | Collect/validate reset account email | Implemented — Task 7 | Reset input | AuthWorkflowControllerTest |
+| user | 03-forgot-password | Send verification code → | Start mock reset session and navigate to verification | Implemented — Task 7 | Local fixed code, no real email | AuthWorkflowControllerTest |
+| user | 03-forgot-password | ← Back to sign in | Return to login | Implemented — Task 7 | Authentication route | AuthWorkflowControllerTest |
+| user | 04-verification-code | Six otp-box/otp-digit placeholders (positions 1–6) | Replace static digits with visually equivalent editable six-digit code entry | Implemented — Task 7 | Runtime digit inputs preserve source boxes; prototypes remain labels | AuthWorkflowControllerTest |
+| user | 04-verification-code | Verify code → | Validate code and reset session; navigate to new password | Implemented — Task 7 | Reset verification | AuthWorkflowControllerTest |
+| user | 04-verification-code | Resend code | Refresh mock code/reset session with visible feedback | Implemented — Task 7 | Simulated send | AuthWorkflowControllerTest |
+| user | 05-reset-password | New password PasswordField | Validate password strength | Implemented — Task 7 | Reset validation | AuthWorkflowControllerTest |
+| user | 05-reset-password | Confirm password PasswordField | Validate match | Implemented — Task 7 | Reset validation | AuthWorkflowControllerTest |
+| user | 05-reset-password | Reset password → | Apply reset to verified account, return to login | Implemented — Task 7 | Reset workflow | AuthWorkflowControllerTest |
+| user | 05-reset-password | ← Return to sign in | Return to login without changing password | Implemented — Task 7 | Cancellation/navigation | AuthWorkflowControllerTest |
 
 ## User conversations, messages, and assistant
 

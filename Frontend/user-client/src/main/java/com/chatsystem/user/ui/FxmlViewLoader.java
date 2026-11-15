@@ -2,6 +2,7 @@ package com.chatsystem.user.ui;
 
 import com.chatsystem.user.UserApplicationContext;
 import com.chatsystem.user.controller.UserShellController;
+import com.chatsystem.user.controller.auth.*;
 import com.chatsystem.user.navigation.UserNavigator;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -41,6 +42,11 @@ public final class FxmlViewLoader {
 
     public Object createController(Class<?> type) {
         if (type == UserShellController.class) return new UserShellController(context.session(), navigator);
+        if (type == LoginController.class) return new LoginController(context.auth(), navigator);
+        if (type == RegisterController.class) return new RegisterController(context.auth(), navigator);
+        if (type == ForgotPasswordController.class) return new ForgotPasswordController(context.auth(), navigator);
+        if (type == VerificationCodeController.class) return new VerificationCodeController(context.auth(), navigator);
+        if (type == ResetPasswordController.class) return new ResetPasswordController(context.auth(), navigator);
         throw new IllegalArgumentException("No explicit controller constructor for " + type.getName());
     }
 }

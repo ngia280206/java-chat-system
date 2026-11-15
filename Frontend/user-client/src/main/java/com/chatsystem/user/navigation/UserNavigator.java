@@ -2,6 +2,8 @@ package com.chatsystem.user.navigation;
 
 import com.chatsystem.user.UserApplicationContext;
 import com.chatsystem.user.controller.UserShellController;
+import com.chatsystem.user.controller.auth.LoginController;
+import com.chatsystem.user.controller.auth.VerificationCodeController;
 import com.chatsystem.user.ui.FxmlViewLoader;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -22,6 +24,9 @@ public final class UserNavigator {
     private Parent shell;
     private UserShellController shellController;
     private Stage assistantStage;
+    private String passwordResetEmail = "";
+    private String loginEmail;
+    private String loginMessage;
 
     public UserNavigator(Stage stage, UserApplicationContext context) {
         this.stage = Objects.requireNonNull(stage);
@@ -45,6 +50,19 @@ public final class UserNavigator {
     public ViewRequest currentRequest() { return currentRequest.get(); }
     public ReadOnlyObjectProperty<ViewRequest> currentRequestProperty() { return currentRequest.getReadOnlyProperty(); }
     public Optional<Stage> assistantStage() { return Optional.ofNullable(assistantStage); }
+
+    public String passwordResetEmail() { return passwordResetEmail; }
+
+    public void showVerification(String email) {
+        passwordResetEmail = Objects.requireNonNull(email);
+        navigate(ViewRequest.of(UserRoute.VERIFICATION_CODE));
+    }
+
+    public void showLogin(String email, String message) {
+        loginEmail = Objects.requireNonNull(email);
+        loginMessage = Objects.requireNonNull(message);
+        navigate(ViewRequest.of(UserRoute.LOGIN));
+    }
 
     public void navigate(ViewRequest request) {
         Objects.requireNonNull(request);
@@ -86,6 +104,27 @@ public final class UserNavigator {
 
     /** Single replacement point for the FXML/controllers implemented in Tasks 7–11. */
     private Parent routeContent(ViewRequest request) {
+        String authPath = switch (request.route()) {
+            case LOGIN -> "login";
+            case REGISTER -> "register";
+            case FORGOT_PASSWORD -> "forgot-password";
+            case VERIFICATION_CODE -> "verification-code";
+            case RESET_PASSWORD -> "reset-password";
+            default -> null;
+        };
+        if (authPath != null) {
+            var loaded = views.load("/fxml/auth/" + authPath + ".fxml");
+            if (loaded.controller() instanceof LoginController login && loginMessage != null) {
+                login.present(loginEmail, loginMessage);
+                loginEmail = null;
+                loginMessage = null;
+            }
+            if (loaded.controller() instanceof VerificationCodeController verification && !passwordResetEmail.isBlank())
+                verification.present(passwordResetEmail);
+            if (request.route() == UserRoute.LOGIN) passwordResetEmail = "";
+            loaded.root().setUserData(request);
+            return loaded.root();
+        }
         Label title = new Label(request.route().title());
         title.getStyleClass().add("page-title");
         StackPane content = new StackPane(title);
