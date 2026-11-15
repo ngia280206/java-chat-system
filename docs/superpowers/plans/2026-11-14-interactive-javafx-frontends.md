@@ -608,37 +608,37 @@ git commit -m "feat: implement admin moderation workflows"
 - Consumes: all completed tasks.
 - Produces: launch instructions, mock credentials/reset code, architecture/extension notes, clean-fixture user/admin demo scripts, and complete control accounting.
 
-- [ ] **Step 1: Run a clean complete build**
+- [x] **Step 1: Run a clean complete build**
 
 Run: `Frontend\gradlew.bat clean test`
 Expected: `BUILD SUCCESSFUL` for all three modules.
 
-- [ ] **Step 2: Verify resource/reference integrity**
+- [x] **Step 2: Verify resource/reference integrity**
 
 Run checks confirming all 28 source FXML files remain, all 28 runtime screens plus approved modals exist, no runtime FXML references `docs` or `../../styles`, and every controller class named by FXML resolves.
 
-- [ ] **Step 3: Audit the control inventory against runtime FXML**
+- [x] **Step 3: Audit the control inventory against runtime FXML**
 
 Assert every actionable control/row action is accounted for; sample every disabled control category to verify its specific tooltip is hoverable; verify the four approved additions and all minimal modals are present.
 
-- [ ] **Step 4: Write and execute the user demo script from fresh fixtures**
+- [x] **Step 4: Write and execute the user demo script from fresh fixtures**
 
 Cover invalid/valid login, registration/reset, chat send/search/hide/clear/AI, friend request/block flows, group create/invite/role/leave flows, profile/settings/password/logout, and report submission/detail.
 
-- [ ] **Step 5: Write and execute the admin demo script from fresh fixtures**
+- [x] **Step 5: Write and execute the admin demo script from fresh fixtures**
 
 Cover dashboard filters, user/group search/detail/actions, lock/unlock, moderation filtering/detail/notes/dismiss/warn/suspend, and derived-state updates.
 
-- [ ] **Step 6: Launch both applications and verify fixed windows and visual preservation**
+- [x] **Step 6: Launch both applications and verify fixed windows and visual preservation**
 
 Run separately in a graphical environment: `Frontend\gradlew.bat :user-client:run` and `Frontend\gradlew.bat :admin-client:run`; confirm startup screen, styling, fixed dimensions, dialogs, navigation, and no runtime exceptions.
 
-- [ ] **Step 7: Re-run the complete automated suite after acceptance fixes**
+- [x] **Step 7: Re-run the complete automated suite after acceptance fixes**
 
 Run: `Frontend\gradlew.bat test`
 Expected: `BUILD SUCCESSFUL`.
 
-- [ ] **Step 8: Commit acceptance documentation**
+- [x] **Step 8: Commit acceptance documentation**
 
 ```powershell
 git add Frontend/README.md docs/INTERACTIVE_UI_DEMO.md docs/UI_CONTROL_INVENTORY.md docs/superpowers

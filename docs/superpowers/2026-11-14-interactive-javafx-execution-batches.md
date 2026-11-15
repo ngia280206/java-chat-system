@@ -257,7 +257,7 @@ Verify search/filter/sort/detail, required notes, cancel/no mutation, dismiss, w
 
 **Checklist:**
 
-- [ ] Task 15: End-to-end acceptance, documentation, and final verification
+- [x] Task 15: End-to-end acceptance, documentation, and final verification
 - [ ] Whole-project final review
 
 **Batch verification:**
@@ -295,6 +295,7 @@ Update this section at every task and batch boundary.
 | 2026-11-15 | 5 | 10–11 | Complete after review fix; Batch 5 complete | `a939fba`, `960ad1c`, `1cf404f` | 98/98 shared tests and 33/33 user tests; zero failures/errors; JavaFX launch stable until stopped manually | Important review findings fixed: row-scoped reactive group permissions, supplied controls/content, observable report filtering/detail and inventory alignment | Task 12, pending authorization |
 | 2026-11-15 | 6 | 12–13 | Complete after review fix; Batch 6 complete | `4faa792`, `13c2eca`, `4f459d9` | 98/98 shared tests and 12/12 admin tests; zero failures/errors; JavaFX launch stable until stopped manually | 0 Critical; six Important findings fixed in one RED→GREEN pass; stale-entity feedback deferred as Minor | Task 14, pending authorization |
 | 2026-11-15 | 7 | 14 | Complete after review fix; Batch 7 complete | `39511da`, `fe61636` | 98/98 shared tests and 19/19 admin tests; zero failures/errors | 0 Critical; three Important findings fixed in one RED→GREEN pass; `WR-` search prefix deferred as Minor | Task 15, pending authorization |
+| 2026-11-15 | 8 | 15 | Complete; final review pending | pending commit | 150/150 clean tests; resource/controller audit passed; both graphical launches stable | Known OpenJFX cache warning; documented non-blocking limitations | Whole-project final review |
 
 ## Resume checklist
 
