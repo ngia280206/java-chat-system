@@ -2,6 +2,8 @@
 
 > **RESUMED CHECKPOINT UPDATE — 2026-11-15:** The paused Task 3 work described below was resumed and completed. Tasks 3–5 and Batch 2 are now complete and reviewed. Current service-layer commits are `b8e6e9a` (Task 3), `c5c691e` (Task 4), `56e81dc` plus `8d81f8a` (Task 5 and review fix). The full suite passes 98/98 tests, and Batch 2 verification passes. The exact next task is **Task 6**, which is not authorized and has not started. The older pause details below remain as historical recovery evidence.
 
+> **BATCH 3 UPDATE — 2026-11-15:** Tasks 6–7 are complete and reviewed at commits `56d2d7b` and `36662a2`. User infrastructure/authentication tests pass (18/18 module tests); graphical `UserMain` launch reached a stable JavaFX process with no runtime exception. Exact auth/shell sizes and authentication workflows are verified by Stage-based tests. The exact next task is **Task 8**, pending explicit authorization.
+
 ## Repository checkpoint
 
 - **Branch:** `feature/interactive-javafx-frontends`

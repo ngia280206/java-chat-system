@@ -31,6 +31,16 @@
 - Disabled-control completeness: every undefined control must remain visually present, be non-actionable, and expose its specific tooltip through a hoverable wrapper when needed.
 - Navigation/session boundaries: logout must clear authenticated UI state, detail routes must use entity IDs, and independent admin/user process contexts must not share mutable state.
 
+## Approved Execution Workflow
+
+- Preserve the 15 tasks and execute them in the 8 approved batches; do not repeat completed Tasks 1-5.
+- Use subagents selectively. Tasks 6 and 12 may be implemented directly by the primary agent or by one implementation agent. Tasks 7-11 and 13-14 use one implementation agent because they carry authentication, permission, cross-screen state, account, or moderation risk. Task 15 is executed by the primary agent with an independent final review.
+- Every implementation/review agent receives only its extracted task section plus the relevant Global Constraints, task-specific consumed/produced interfaces, acceptance criteria, and concrete carried findings. Do not load the full plan, prior reports, or unrelated source files unless a named ambiguity requires expansion.
+- One independent reviewer combines specification-compliance and code-quality review for each task. Authentication, permissions, shared/cross-screen state, moderation, and final acceptance must retain independent review. Do not create separate specification and quality agents automatically.
+- During implementation, run focused tests for changed behavior. Before each task commit, run the affected module tests once. At batch boundaries, run the module/launch verification already required by the batch checklist. Reserve `clean test` for shared build changes, suspected stale output, or Task 15.
+- After reviewer-requested fixes, rerun the tests covering the amended behavior and preserve all required module and batch verification. Scoped re-review is required for Critical/Important fixes.
+- Keep reports concise: changed files, test commands/results, review findings, commit, known issue, and next task. Update progress documentation at task completion and commit consolidated progress documentation once per batch.
+
 ---
 
 ### Task 1: Baseline test infrastructure and actionable-control inventory
@@ -246,27 +256,27 @@ git commit -m "feat: add mock chat and moderation workflows"
 - Consumes: shared service interfaces and in-memory implementations from Tasks 2-5.
 - Produces: one explicit `UserApplicationContext`; typed routes with optional entity IDs; fixed window profiles; controller factory with explicit constructor mapping; wrapper-based disabled tooltip support; persistent user shell.
 
-- [ ] **Step 1: Write failing composition/navigation/window/disabled-tooltip tests**
+- [x] **Step 1: Write failing composition/navigation/window/disabled-tooltip tests**
 
 Assert fresh contexts are independent, routes require valid IDs where applicable, Login is startup, successful transition can create the shell at 1540x930, fixed/resizable flags are exact, missing resources name their path, and disabled controls expose their reason through the wrapper.
 
-- [ ] **Step 2: Run user infrastructure tests and verify failure**
+- [x] **Step 2: Run user infrastructure tests and verify failure**
 
 Run: `Frontend\gradlew.bat :user-client:test --tests "com.chatsystem.user.*"`
 
-- [ ] **Step 3: Implement explicit composition and navigation infrastructure**
+- [x] **Step 3: Implement explicit composition and navigation infrastructure**
 
 Instantiate one store and services per context; map controller types to explicit constructors; do not provide generic type lookup.
 
-- [ ] **Step 4: Extract the visually equivalent user shell and classpath CSS loading**
+- [x] **Step 4: Extract the visually equivalent user shell and classpath CSS loading**
 
 The shell owns the sidebar/current user summary/content host; no sidebar button is left unwired—defined routes work and undefined Help is disabled with inventory tooltip.
 
-- [ ] **Step 5: Run user infrastructure tests**
+- [x] **Step 5: Run user infrastructure tests**
 
 Expected command from Step 2: PASS.
 
-- [ ] **Step 6: Commit user infrastructure**
+- [x] **Step 6: Commit user infrastructure**
 
 ```powershell
 git add Frontend/user-client
@@ -285,24 +295,24 @@ git commit -m "feat: add user application infrastructure"
 - Consumes: `AuthService`, `UserSession`, `UserNavigator`.
 - Produces: validated five-screen authentication/reset workflow and transition to the user shell.
 
-- [ ] **Step 1: Write failing controller tests for navigation, validation, success, and failure feedback**
+- [x] **Step 1: Write failing controller tests for navigation, validation, success, and failure feedback**
 
 Cover empty/invalid email, password requirements, terms, incorrect credentials, locked user, registration success, reset-code sequence, cancellation/back links, remember-email, and logout-compatible session state.
 
-- [ ] **Step 2: Run controller tests and verify failure**
+- [x] **Step 2: Run controller tests and verify failure**
 
 Run: `Frontend\gradlew.bat :user-client:test --tests "com.chatsystem.user.controller.auth.AuthWorkflowControllerTest"`
 
-- [ ] **Step 3: Migrate five FXML designs, add only required `fx:id`/handlers, and implement thin controllers**
+- [x] **Step 3: Migrate five FXML designs, add only required `fx:id`/handlers, and implement thin controllers**
 
 Remove docs-relative CSS paths; preserve layouts and show specific field/global feedback without generic click messages.
 
-- [ ] **Step 4: Add all five views to the FXML smoke test and run tests**
+- [x] **Step 4: Add all five views to the FXML smoke test and run tests**
 
 Run: `Frontend\gradlew.bat :user-client:test --tests "com.chatsystem.user.controller.auth.*" --tests "com.chatsystem.user.FxmlSmokeTest"`
 Expected: PASS.
 
-- [ ] **Step 5: Update inventory entries and commit authentication UI**
+- [x] **Step 5: Update inventory entries and commit authentication UI**
 
 ```powershell
 git add Frontend/user-client docs/UI_CONTROL_INVENTORY.md

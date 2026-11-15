@@ -8,10 +8,14 @@ This checklist organizes the approved 15 tasks for subagent-driven execution. It
 
 ## Execution rules
 
-- Use `superpowers:subagent-driven-development` within every authorized batch.
-- For each task: fresh implementer → specification review → code-quality review → required fixes → task tests → record commit/result.
+- Use subagents selectively within every authorized batch. Tasks 6 and 12 may use direct primary-agent implementation or one implementation agent; Tasks 7-11 and 13-14 use one implementation agent; Task 15 is executed by the primary agent.
+- Give each agent only the extracted task section plus relevant global constraints, task-specific interfaces, acceptance criteria, and carried findings. Expand to the full plan or unrelated files only when a named ambiguity requires it.
+- Use one combined specification/code-quality reviewer per task. Reviews for authentication, permissions, shared/cross-screen state, moderation, and final acceptance must remain independent.
+- For each task: implementation → focused tests → combined review → required fixes and affected-test rerun → record commit/result.
 - Do not start the next task while the current task has unresolved review findings or failing required tests.
-- At batch end, run the batch verification commands below and record exact results.
+- Run the affected module tests once before each task commit. At batch end, run the batch verification commands below and record exact results. Use `clean test` only for shared build changes, suspected stale output, or Task 15.
+- Reviewer-requested fixes must rerun their affected tests and receive scoped re-review for Critical/Important findings; module and batch verification requirements remain unchanged.
+- Keep task reports to changed files, test results, review findings, commit, known issue, and next task. Consolidate progress-document commits at batch boundaries.
 - A completed batch is a safe stopping point. Commit or otherwise preserve all changes before stopping.
 - On resume, read this checklist and the approved plan, inspect recorded commits/status, and verify the current worktree. Do not recreate or reimplement `[x]` tasks.
 - If prior work has no commit, inspect the listed files and test results before deciding what remains; never assume it is absent.
@@ -22,7 +26,7 @@ This checklist organizes the approved 15 tasks for subagent-driven execution. It
 |---|---|---:|---|
 | 1 | Establish verified domain and test foundation | 1–2 | `[x]` |
 | 2 | Complete headless mock-service behavior | 3–5 | `[x]` |
-| 3 | Build user runtime and authentication workflows | 6–7 | `[ ]` |
+| 3 | Build user runtime and authentication workflows | 6–7 | `[x]` |
 | 4 | Build user chat and social workflows | 8–9 | `[ ]` |
 | 5 | Complete remaining user workflows | 10–11 | `[ ]` |
 | 6 | Build admin runtime and core management workflows | 12–13 | `[ ]` |
@@ -106,12 +110,10 @@ Confirm authentication/reset, social/group permissions, per-user message visibil
 
 **Checklist:**
 
-- [ ] Task 6: User composition, navigation, shell, resources, and FXML harness
-- [ ] Task 6 specification review
-- [ ] Task 6 code-quality review
-- [ ] Task 7: Authentication screens and controllers
-- [ ] Task 7 specification review
-- [ ] Task 7 code-quality review
+- [x] Task 6: User composition, navigation, shell, resources, and FXML harness
+- [x] Task 6 combined specification/code-quality review
+- [x] Task 7: Authentication screens and controllers
+- [x] Task 7 independent combined review
 
 **Batch verification:**
 
@@ -139,11 +141,9 @@ Confirm Login starts at 1240x780, successful mock login opens the fixed 1540x930
 **Checklist:**
 
 - [ ] Task 8: Chat, message search, and AI workflows
-- [ ] Task 8 specification review
-- [ ] Task 8 code-quality review
+- [ ] Task 8 independent combined review
 - [ ] Task 9: Friends and relationship workflows
-- [ ] Task 9 specification review
-- [ ] Task 9 code-quality review
+- [ ] Task 9 independent combined review
 
 **Batch verification:**
 
@@ -171,11 +171,9 @@ Manually verify new conversation, send/search/hide/clear, preview updates, AI po
 **Checklist:**
 
 - [ ] Task 10: Group workflows and approved membership controls
-- [ ] Task 10 specification review
-- [ ] Task 10 code-quality review
+- [ ] Task 10 independent combined review
 - [ ] Task 11: Profile, settings, password, and reporting workflows
-- [ ] Task 11 specification review
-- [ ] Task 11 code-quality review
+- [ ] Task 11 independent combined review
 
 **Batch verification:**
 
@@ -204,11 +202,9 @@ Verify create/invite/join/reject/role/remove/leave group, profile propagation, p
 **Checklist:**
 
 - [ ] Task 12: Admin composition, navigation, shell, and resources
-- [ ] Task 12 specification review
-- [ ] Task 12 code-quality review
+- [ ] Task 12 combined specification/code-quality review
 - [ ] Task 13: Dashboard, users, and groups workflows
-- [ ] Task 13 specification review
-- [ ] Task 13 code-quality review
+- [ ] Task 13 independent combined review
 
 **Batch verification:**
 
@@ -237,8 +233,7 @@ Confirm 1480x920 fixed Dashboard startup, live metric ranges, search/filter/sort
 **Checklist:**
 
 - [ ] Task 14: Admin moderation workflows
-- [ ] Task 14 specification review
-- [ ] Task 14 code-quality review
+- [ ] Task 14 independent combined review
 
 **Batch verification:**
 
@@ -266,8 +261,6 @@ Verify search/filter/sort/detail, required notes, cancel/no mutation, dismiss, w
 **Checklist:**
 
 - [ ] Task 15: End-to-end acceptance, documentation, and final verification
-- [ ] Task 15 specification review
-- [ ] Task 15 code-quality/documentation review
 - [ ] Whole-project final review
 
 **Batch verification:**
@@ -299,6 +292,8 @@ Update this section at every task and batch boundary.
 | 2026-11-15 | 2 | 3 | Complete after resume | `b8e6e9a` | 25/25 focused; 42/42 clean full suite | Review clean | Task 4 |
 | 2026-11-15 | 2 | 4 | Complete | `c5c691e` | 27/27 focused; 69/69 clean full suite | Review clean; minor projection-refresh suggestion recorded | Task 5 |
 | 2026-11-15 | 2 | 5 | Complete after fix round 1; Batch 2 complete | `56e81dc`, `8d81f8a` | 28/28 focused; 98/98 clean full suite; Batch verification passed | Login/APP_OPEN metrics gap fixed and re-review passed | Task 6, pending authorization |
+| 2026-11-15 | 3 | 6 | Complete | `56d2d7b` | 11/11 focused; 109/109 fresh module/full suite | Combined review clean | Task 7 |
+| 2026-11-15 | 3 | 7 | Complete; Batch 3 complete | `36662a2` | 7/7 focused auth/FXML; 18/18 user module; batch test passed; graphical launch reached stable UserMain | Independent review clean; standard JavaFX/cache warnings only | Task 8, pending authorization |
 
 ## Resume checklist
 
