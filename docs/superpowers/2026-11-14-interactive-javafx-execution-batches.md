@@ -229,8 +229,8 @@ Confirm 1480x920 fixed Dashboard startup, live metric ranges, search/filter/sort
 
 **Checklist:**
 
-- [ ] Task 14: Admin moderation workflows
-- [ ] Batch 7 independent combined moderation review
+- [x] Task 14: Admin moderation workflows — `39511da`
+- [x] Batch 7 independent combined moderation review — Important findings fixed in `fe61636`
 
 **Batch verification:**
 
@@ -294,6 +294,7 @@ Update this section at every task and batch boundary.
 | 2026-11-15 | 4 | 8–9 | Complete after review fix; Batch 4 complete | `1669241`, `b47312b`, `df1ad3e` | 98/98 shared tests and 28/28 user tests; zero failures/errors; Batch verification passed | Important review findings fixed: confirmations/cancellation, reachable modals, filters/scope/result navigation, contextual AI/message actions, row actions, inventory and regression coverage | Task 10, pending authorization |
 | 2026-11-15 | 5 | 10–11 | Complete after review fix; Batch 5 complete | `a939fba`, `960ad1c`, `1cf404f` | 98/98 shared tests and 33/33 user tests; zero failures/errors; JavaFX launch stable until stopped manually | Important review findings fixed: row-scoped reactive group permissions, supplied controls/content, observable report filtering/detail and inventory alignment | Task 12, pending authorization |
 | 2026-11-15 | 6 | 12–13 | Complete after review fix; Batch 6 complete | `4faa792`, `13c2eca`, `4f459d9` | 98/98 shared tests and 12/12 admin tests; zero failures/errors; JavaFX launch stable until stopped manually | 0 Critical; six Important findings fixed in one RED→GREEN pass; stale-entity feedback deferred as Minor | Task 14, pending authorization |
+| 2026-11-15 | 7 | 14 | Complete after review fix; Batch 7 complete | `39511da`, `fe61636` | 98/98 shared tests and 19/19 admin tests; zero failures/errors | 0 Critical; three Important findings fixed in one RED→GREEN pass; `WR-` search prefix deferred as Minor | Task 15, pending authorization |
 
 ## Resume checklist
 

@@ -572,24 +572,24 @@ git commit -m "feat: implement admin management workflows"
 - Consumes: `ReportService`, `AdminService`, `AdminNavigator`.
 - Produces: search/filter/sort/detail, notes validation, dismiss/warn/suspend actions, confirmation, and consistent status/sanction updates.
 
-- [ ] **Step 1: Write failing controller tests for report queue and moderation decisions**
+- [x] **Step 1: Write failing controller tests for report queue and moderation decisions**
 
 Assert filter/sort/search, ID-based detail navigation, required notes, cancellation/no mutation, dismiss-only status, warn decision without sanction, suspend decision plus lock, stale report handling, and immediate queue/detail/dashboard consistency.
 
-- [ ] **Step 2: Run moderation tests and verify failure**
+- [x] **Step 2: Run moderation tests and verify failure**
 
 Run: `Frontend\gradlew.bat :admin-client:test --tests "com.chatsystem.admin.controller.ModerationWorkflowControllerTest"`
 
-- [ ] **Step 3: Migrate two views, implement dynamic case rows, and wire controllers**
+- [x] **Step 3: Migrate two views, implement dynamic case rows, and wire controllers**
 
 Keep report decisions separate from sanctions except the explicit Suspend action; disable export with its inventory explanation.
 
-- [ ] **Step 4: Complete admin inventory entries and run all admin tests**
+- [x] **Step 4: Complete admin inventory entries and run all admin tests**
 
 Run: `Frontend\gradlew.bat :admin-client:test`
 Expected: all 7 supplied screens load; tests pass.
 
-- [ ] **Step 5: Commit moderation UI**
+- [x] **Step 5: Commit moderation UI**
 
 ```powershell
 git add Frontend/admin-client docs/UI_CONTROL_INVENTORY.md
