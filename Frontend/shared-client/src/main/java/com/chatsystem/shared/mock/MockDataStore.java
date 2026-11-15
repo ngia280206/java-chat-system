@@ -2,6 +2,9 @@ package com.chatsystem.shared.mock;
 
 import com.chatsystem.shared.model.*;
 import com.chatsystem.shared.model.status.UserStatus;
+import com.chatsystem.shared.model.status.ConversationType;
+import com.chatsystem.shared.model.status.GroupRole;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -34,15 +37,19 @@ public final class MockDataStore {
         public HiddenMessage { java.util.Objects.requireNonNull(hiddenAt); }
     }
 
-    final ObservableList<UserAccount> users = FXCollections.observableArrayList();
+    final ObservableList<UserAccount> users = FXCollections.observableArrayList(
+            user -> new Observable[]{user.statusProperty()});
     final ObservableList<UserSettings> settings = FXCollections.observableArrayList();
-    final ObservableList<FriendRequest> friendRequests = FXCollections.observableArrayList();
+    final ObservableList<FriendRequest> friendRequests = FXCollections.observableArrayList(
+            request -> new Observable[]{request.statusProperty()});
     final ObservableList<Friendship> friendships = FXCollections.observableArrayList();
     final ObservableList<Block> blocks = FXCollections.observableArrayList();
     final ObservableList<Conversation> conversations = FXCollections.observableArrayList();
-    final ObservableList<ConversationMember> members = FXCollections.observableArrayList();
+    final ObservableList<ConversationMember> members = FXCollections.observableArrayList(
+            member -> new Observable[]{member.roleProperty(), member.leftAtProperty()});
     final ObservableList<Message> messages = FXCollections.observableArrayList();
-    final ObservableList<GroupInvitation> invitations = FXCollections.observableArrayList();
+    final ObservableList<GroupInvitation> invitations = FXCollections.observableArrayList(
+            invitation -> new Observable[]{invitation.statusProperty()});
     final ObservableList<SpamReport> reports = FXCollections.observableArrayList();
     final ObservableList<LoginEvent> loginEvents = FXCollections.observableArrayList();
     final ObservableList<ActivityEvent> activityEvents = FXCollections.observableArrayList();
@@ -104,6 +111,51 @@ public final class MockDataStore {
         if (users.stream().noneMatch(u -> u.getId() == userId)) throw new IllegalArgumentException("Unknown mock account");
         long id = loginEvents.stream().mapToLong(LoginEvent::id).max().orElse(0) + 1;
         loginEvents.add(new LoginEvent(id, userId, Instant.now(), "Desktop demo", "Local demo"));
+    }
+
+    // Narrow storage operations for validated service commands. No mutable lists escape.
+    public FriendRequest createMockFriendRequest(long senderId, long receiverId) {
+        long id = friendRequests.stream().mapToLong(FriendRequest::getId).max().orElse(0) + 1;
+        FriendRequest request = new FriendRequest(id, senderId, receiverId, Instant.now());
+        friendRequests.add(request);
+        return request;
+    }
+
+    public void addMockFriendship(long firstId, long secondId) {
+        friendships.add(new Friendship(Math.min(firstId, secondId), Math.max(firstId, secondId), Instant.now()));
+    }
+
+    public void removeMockFriendship(long firstId, long secondId) {
+        friendships.removeIf(f -> f.firstUserId() == Math.min(firstId, secondId)
+                && f.secondUserId() == Math.max(firstId, secondId));
+    }
+
+    public void addMockBlock(long blockerId, long blockedId) {
+        blocks.add(new Block(blockerId, blockedId, Instant.now()));
+    }
+
+    public void removeMockBlock(long blockerId, long blockedId) {
+        blocks.removeIf(b -> b.blockerId() == blockerId && b.blockedId() == blockedId);
+    }
+
+    public Conversation createMockGroup(long creatorId, String name, String description) {
+        long id = conversations.stream().mapToLong(Conversation::getId).max().orElse(0) + 1;
+        Instant now = Instant.now();
+        Conversation group = new Conversation(id, ConversationType.GROUP, creatorId, now, name, description);
+        members.add(new ConversationMember(id, creatorId, GroupRole.ADMIN, now));
+        conversations.add(group);
+        return group;
+    }
+
+    public GroupInvitation createMockGroupInvitation(long groupId, long inviterId, long inviteeId) {
+        long id = invitations.stream().mapToLong(GroupInvitation::getId).max().orElse(0) + 1;
+        GroupInvitation invitation = new GroupInvitation(id, groupId, inviterId, inviteeId, Instant.now());
+        invitations.add(invitation);
+        return invitation;
+    }
+
+    public void addMockGroupMember(long groupId, long userId) {
+        members.add(new ConversationMember(groupId, userId, GroupRole.MEMBER, Instant.now()));
     }
 
     public ObservableList<UserAccount> getUsers() { return usersView; }
