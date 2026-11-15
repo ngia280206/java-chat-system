@@ -22,10 +22,7 @@ class GroupWorkflowControllerTest extends JavaFxTestSupport {
         navigator.navigate(ViewRequest.conversation(UserRoute.GROUP_DETAILS, MockFixtures.GROUP_CONVERSATION_ID));
         TextArea description=control(stage,"descriptionField",TextArea.class);description.setText("Updated design notes");click(stage,"saveGroupButton");
         assertEquals("Updated design notes", context.groups().getGroups().stream().filter(g->g.getId()==20).findFirst().orElseThrow().getDescription());
-        @SuppressWarnings("unchecked") ListView<com.chatsystem.shared.model.ConversationMember> members=control(stage,"memberList",ListView.class);
-        var promoted=members.getItems().stream().filter(m->m.getUserId()==2).findFirst().orElseThrow();members.getSelectionModel().select(promoted);
-        control(stage,"roleChoice",ChoiceBox.class).setValue(GroupRole.ADMIN);click(stage,"changeRoleButton");
-        assertEquals(GroupRole.ADMIN, promoted.getRole());
+        var promoted=context.groups().getMembers(20).stream().filter(m->m.getUserId()==2).findFirst().orElseThrow();assertTrue(context.groups().changeRole(20,2,GroupRole.ADMIN).isSuccess());assertEquals(GroupRole.ADMIN,promoted.getRole());
         click(stage,"leaveGroupButton");click(stage,"cancelGroupActionButton");assertTrue(context.groups().getGroups().stream().anyMatch(g->g.getId()==20));
         click(stage,"leaveGroupButton");click(stage,"confirmGroupActionButton");assertFalse(context.groups().getGroups().stream().anyMatch(g->g.getId()==20));
     }); }
@@ -38,8 +35,9 @@ class GroupWorkflowControllerTest extends JavaFxTestSupport {
     }); }
 
     @Test void memberRoleControlsArePermissionAware() throws Exception { workflow((context, stage, navigator) -> {
-        navigator.navigate(ViewRequest.conversation(UserRoute.GROUP_DETAILS,MockFixtures.GROUP_CONVERSATION_ID));assertFalse(control(stage,"roleChoice",ChoiceBox.class).isDisabled());
-        navigator.navigate(ViewRequest.conversation(UserRoute.GROUP_DETAILS,22));assertTrue(control(stage,"roleChoice",ChoiceBox.class).isDisabled());
+        navigator.navigate(ViewRequest.of(UserRoute.GROUP_MANAGEMENT));assertNotNull(stage.getScene().getRoot().lookup("#viewAllGroupsButton"));assertNotNull(stage.getScene().getRoot().lookup("#manageMembersButton"));
+        navigator.navigate(ViewRequest.conversation(UserRoute.GROUP_DETAILS,MockFixtures.GROUP_CONVERSATION_ID));stage.show();stage.getScene().getRoot().applyCss();stage.getScene().getRoot().layout();assertFalse(stage.getScene().getRoot().lookupAll(".group-role-selector").isEmpty());assertFalse(stage.getScene().getRoot().lookupAll(".group-remove-action").isEmpty());
+        navigator.navigate(ViewRequest.conversation(UserRoute.GROUP_DETAILS,22));stage.getScene().getRoot().applyCss();stage.getScene().getRoot().layout();assertTrue(stage.getScene().getRoot().lookupAll(".group-role-selector").isEmpty());
     }); }
 
     private void workflow(Action action)throws Exception{onFx(()->{var c=new UserApplicationContext();c.auth().login(MockFixtures.DEMO_EMAIL,MockFixtures.DEMO_PASSWORD,false);var s=new Stage();try{var n=new UserNavigator(s,c);n.start();action.run(c,s,n);}finally{Window.getWindows().stream().filter(w->w!=s).toList().forEach(Window::hide);s.close();}});}
