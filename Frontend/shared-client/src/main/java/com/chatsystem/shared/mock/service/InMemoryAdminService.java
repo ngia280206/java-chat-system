@@ -59,7 +59,8 @@ public final class InMemoryAdminService implements AdminService {
         return MockServiceQueries.page(store.getUsers().stream().filter(u -> status == null || u.getStatus() == status)
                 .filter(u -> MockServiceQueries.normalize(u.getDisplayName()).contains(text)
                         || MockServiceQueries.normalize(u.getUsername()).contains(text)
-                        || MockServiceQueries.normalize(u.getEmail()).contains(text))
+                        || MockServiceQueries.normalize(u.getEmail()).contains(text)
+                        || Long.toString(u.getId()).equals(text))
                 .sorted(order.thenComparingLong(UserAccount::getId)).toList(), page, pageSize);
     }
 
@@ -71,7 +72,9 @@ public final class InMemoryAdminService implements AdminService {
             case MEMBER_COUNT -> Comparator.comparingLong((Conversation c) -> getGroupMembers(c.getId()).size()).reversed();
         };
         return MockServiceQueries.page(groups.stream().filter(c -> MockServiceQueries.normalize(c.getName()).contains(text)
-                        || MockServiceQueries.normalize(c.getDescription()).contains(text))
+                        || MockServiceQueries.normalize(c.getDescription()).contains(text)
+                        || getUser(c.getCreatedBy()).map(owner -> MockServiceQueries.normalize(owner.getDisplayName()).contains(text)
+                                || MockServiceQueries.normalize(owner.getUsername()).contains(text)).orElse(false))
                 .sorted(order.thenComparingLong(Conversation::getId)).toList(), page, pageSize);
     }
 

@@ -29,6 +29,11 @@
 .metric-trend-warn { -fx-text-fill: #F1C27A; -fx-font-size: 11px; -fx-font-weight: bold; }
 .card { -fx-background-color: #15212E; -fx-background-radius: 14; -fx-border-color: #263646; -fx-border-radius: 14; -fx-border-width: 1; -fx-padding: 20; -fx-spacing: 14; }
 .card-flat { -fx-background-color: #15212E; -fx-background-radius: 14; -fx-padding: 20; -fx-spacing: 14; }
+.content-area { -fx-padding: 34; -fx-background-color: #0B1118; }
+.muted-text { -fx-text-fill: #91A0B2; }
+.metric-value { -fx-text-fill: #F2F5FC; -fx-font-size: 28px; -fx-font-weight: bold; }
+.status-pill { -fx-text-fill: #68D9A4; -fx-font-weight: bold; }
+.list-row { -fx-alignment: center-left; -fx-padding: 10; }
 .metric-card { -fx-background-color: #172433; -fx-background-radius: 14; -fx-border-color: #273A4D; -fx-border-radius: 14; -fx-padding: 19; -fx-spacing: 9; }
 .callout-card { -fx-background-color: #1B2940; -fx-background-radius: 14; -fx-border-color: #385078; -fx-border-radius: 14; -fx-padding: 20; -fx-spacing: 11; }
 .separator *.line { -fx-border-color: #2A3949; -fx-border-width: 1 0 0 0; }

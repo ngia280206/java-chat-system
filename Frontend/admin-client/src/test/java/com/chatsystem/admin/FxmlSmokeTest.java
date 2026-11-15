@@ -23,4 +23,16 @@ class FxmlSmokeTest extends JavaFxTestSupport {
             }
         } finally { stage.close(); } return null; });
     }
+
+    @Test void managementViewsExposeDesignedDynamicRegionsAndRealChoiceMenus() throws Exception {
+        onFx(() -> { Stage stage = new Stage(); try {
+            var context = new AdminApplicationContext(); var loader = new FxmlViewLoader(context, new AdminNavigator(stage, context));
+            var dashboard = loader.load("/fxml/views/dashboard.fxml").root();
+            assertNotNull(dashboard.lookup("#activityTrend")); assertNotNull(dashboard.lookup("#platformSnapshot")); assertNotNull(dashboard.lookup("#recentActivity"));
+            assertTrue(((javafx.scene.control.MenuButton) dashboard.lookup("#rangeButton")).getItems().size() >= 3);
+            var users = loader.load("/fxml/views/users.fxml").root();
+            assertTrue(((javafx.scene.control.MenuButton) users.lookup("#sortButton")).getItems().size() >= 3);
+            assertTrue(((javafx.scene.control.MenuButton) users.lookup("#filterButton")).getItems().size() >= 3);
+        } finally { stage.close(); } return null; });
+    }
 }
