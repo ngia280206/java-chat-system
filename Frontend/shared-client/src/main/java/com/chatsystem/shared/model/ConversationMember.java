@@ -37,13 +37,14 @@ public final class ConversationMember {
     public ReadOnlyIntegerProperty unreadCountProperty() { return unreadCount.getReadOnlyProperty(); }
 
     // Private per-user visibility boundary is not a displayed field.
-    private long historyClearedThroughSeq;
+    private final ReadOnlyLongWrapper historyClearedThroughSeq = new ReadOnlyLongWrapper(this, "historyClearedThroughSeq");
 
-    public long getHistoryClearedThroughSeq() { return historyClearedThroughSeq; }
+    public long getHistoryClearedThroughSeq() { return historyClearedThroughSeq.get(); }
+    public ReadOnlyLongProperty historyClearedThroughSeqProperty() { return historyClearedThroughSeq.getReadOnlyProperty(); }
 
     public void clearHistoryThrough(long sequence) {
         if (sequence < 0) throw new IllegalArgumentException("Sequence cannot be negative");
-        historyClearedThroughSeq = Math.max(historyClearedThroughSeq, sequence);
+        historyClearedThroughSeq.set(Math.max(historyClearedThroughSeq.get(), sequence));
     }
 
     public void setRole(GroupRole role) { this.role.set(Objects.requireNonNull(role)); }

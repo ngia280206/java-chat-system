@@ -38,19 +38,23 @@ public final class MockDataStore {
     }
 
     final ObservableList<UserAccount> users = FXCollections.observableArrayList(
-            user -> new Observable[]{user.statusProperty()});
+            user -> new Observable[]{user.statusProperty(), user.displayNameProperty(), user.usernameProperty()});
     final ObservableList<UserSettings> settings = FXCollections.observableArrayList();
     final ObservableList<FriendRequest> friendRequests = FXCollections.observableArrayList(
             request -> new Observable[]{request.statusProperty()});
     final ObservableList<Friendship> friendships = FXCollections.observableArrayList();
     final ObservableList<Block> blocks = FXCollections.observableArrayList();
-    final ObservableList<Conversation> conversations = FXCollections.observableArrayList();
+    final ObservableList<Conversation> conversations = FXCollections.observableArrayList(
+            conversation -> new Observable[]{conversation.nameProperty(), conversation.descriptionProperty(),
+                    conversation.lastMessageAtProperty(), conversation.lastMessagePreviewProperty()});
     final ObservableList<ConversationMember> members = FXCollections.observableArrayList(
-            member -> new Observable[]{member.roleProperty(), member.leftAtProperty()});
+            member -> new Observable[]{member.roleProperty(), member.leftAtProperty(), member.unreadCountProperty(),
+                    member.historyClearedThroughSeqProperty()});
     final ObservableList<Message> messages = FXCollections.observableArrayList();
     final ObservableList<GroupInvitation> invitations = FXCollections.observableArrayList(
             invitation -> new Observable[]{invitation.statusProperty()});
-    final ObservableList<SpamReport> reports = FXCollections.observableArrayList();
+    final ObservableList<SpamReport> reports = FXCollections.observableArrayList(
+            report -> new Observable[]{report.statusProperty(), report.reviewNotesProperty()});
     final ObservableList<LoginEvent> loginEvents = FXCollections.observableArrayList();
     final ObservableList<ActivityEvent> activityEvents = FXCollections.observableArrayList();
     final ObservableList<HiddenMessage> hiddenMessages = FXCollections.observableArrayList();
@@ -156,6 +160,53 @@ public final class MockDataStore {
 
     public void addMockGroupMember(long groupId, long userId) {
         members.add(new ConversationMember(groupId, userId, GroupRole.MEMBER, Instant.now()));
+    }
+
+    public Conversation createMockDirectConversation(long firstUserId, long secondUserId) {
+        long id = conversations.stream().mapToLong(Conversation::getId).max().orElse(0) + 1;
+        Instant now = Instant.now();
+        Conversation conversation = new Conversation(id, ConversationType.DIRECT, firstUserId, now, "", "");
+        members.addAll(new ConversationMember(id, firstUserId, GroupRole.MEMBER, now),
+                new ConversationMember(id, secondUserId, GroupRole.MEMBER, now));
+        conversations.add(conversation);
+        return conversation;
+    }
+
+    public Message createMockMessage(long conversationId, long senderId, String content) {
+        Conversation conversation = conversations.stream().filter(c -> c.getId() == conversationId).findFirst().orElseThrow();
+        long id = messages.stream().mapToLong(Message::getId).max().orElse(0) + 1;
+        long sequence = messages.stream().filter(m -> m.getConversationId() == conversationId)
+                .mapToLong(Message::getSequence).max().orElse(0) + 1;
+        Message message = new Message(id, conversationId, senderId, sequence, content, Instant.now());
+        messages.add(message);
+        conversation.updatePreview(message.getContent(), message.getSentAt());
+        members.stream().filter(m -> m.getConversationId() == conversationId && m.getLeftAt() == null)
+                .forEach(m -> m.setUnreadCount(m.getUserId() == senderId ? 0 : m.getUnreadCount() + 1));
+        long activityId = activityEvents.stream().mapToLong(ActivityEvent::id).max().orElse(0) + 1;
+        activityEvents.add(new ActivityEvent(activityId, senderId, com.chatsystem.shared.model.status.ActivityType.MESSAGE_SENT,
+                conversationId, message.getSentAt()));
+        return message;
+    }
+
+    /** Shared visibility rule for chat searches and report target validation. */
+    public boolean isMockMessageVisible(long userId, Message message) {
+        return members.stream().anyMatch(m -> m.getConversationId() == message.getConversationId()
+                && m.getUserId() == userId && m.getLeftAt() == null
+                && message.getSequence() > m.getHistoryClearedThroughSeq())
+                && hiddenMessages.stream().noneMatch(h -> h.userId() == userId && h.messageId() == message.getId());
+    }
+
+    public void hideMockMessage(long userId, long messageId) {
+        if (hiddenMessages.stream().noneMatch(h -> h.userId() == userId && h.messageId() == messageId)) {
+            hiddenMessages.add(new HiddenMessage(userId, messageId, Instant.now()));
+        }
+    }
+
+    public SpamReport createMockReport(long reporterId, long reportedUserId, long messageId, String reason) {
+        long id = reports.stream().mapToLong(SpamReport::getId).max().orElse(0) + 1;
+        SpamReport report = new SpamReport(id, reporterId, reportedUserId, messageId, reason, Instant.now());
+        reports.add(report);
+        return report;
     }
 
     public ObservableList<UserAccount> getUsers() { return usersView; }
