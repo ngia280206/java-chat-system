@@ -4,6 +4,7 @@ import com.chatsystem.user.UserApplicationContext;
 import com.chatsystem.user.controller.UserShellController;
 import com.chatsystem.user.controller.auth.*;
 import com.chatsystem.user.controller.chat.*;
+import com.chatsystem.user.controller.social.*;
 import com.chatsystem.user.navigation.UserNavigator;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -54,6 +55,10 @@ public final class FxmlViewLoader {
         if (type == MessageSearchController.class) return new MessageSearchController(context.chat(), navigator);
         if (type == NewConversationDialogController.class) return new NewConversationDialogController(context.chat());
         if (type == AiAssistantPopupController.class) return new AiAssistantPopupController(context.assistant());
+        if (type == FriendsController.class) return new FriendsController(context.social(), context.chat(), navigator);
+        if (type == FriendRequestsController.class) return new FriendRequestsController(context.social(), navigator);
+        if (type == BlockedUsersController.class) return new BlockedUsersController(context.social(), navigator);
+        if (type == AddFriendDialogController.class) return new AddFriendDialogController(context.social());
         throw new IllegalArgumentException("No explicit controller constructor for " + type.getName());
     }
 }

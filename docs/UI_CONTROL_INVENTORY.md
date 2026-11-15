@@ -133,7 +133,7 @@ Disabled controls remain visible. Their tooltip must be attached to a hoverable 
 
 | App | Screen | Control | Behavior | Status | Reason | Verification |
 |---|---|---|---|---|---|---|
-| user | 10-friends | + Add friend | Open minimal target-selection modal | Pending — Task 9 | Existing initiator | SocialWorkflowControllerTest |
+| user | 10-friends | + Add friend | Open minimal target-selection modal | Implemented — Task 9 | Existing initiator | SocialWorkflowControllerTest |
 | user | 10-friends | All friends / Requests / Blocked pills | Navigate to corresponding supplied friend view | Pending — Task 9 | Label-based tabs | SocialWorkflowControllerTest |
 | user | 10-friends | Search by name or username TextField | Filter friends | Pending — Task 9 | Friend search | SocialWorkflowControllerTest |
 | user | 10-friends | Online first v | Choose deterministic friend order | Pending — Task 9 | Friend sort | SocialWorkflowControllerTest |
@@ -215,7 +215,7 @@ These are inventory commitments for the approved workflows, not new standalone s
 | user | Create Group modal from 13 | Essential group-name/member inputs; Create; Cancel/close | Validate/create group and update lists/conversations | Pending — Task 10 | Required Create Group workflow | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
 | user | Invite Members modal from 14 | Eligible member selector; Invite; Cancel/close | Validate and invite selected eligible users | Pending — Task 10 | Required Invite Members workflow | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
 | user | New Report modal from 19 | Existing message/user target selector; reason/category/description inputs; Submit; Cancel/close | Validate and submit current user's report | Pending — Task 11 | Required New Report workflow | UserReportWorkflowControllerTest; InMemoryReportServiceTest |
-| user | 10 friend/user action area (approved addition) | Block User | Show/enable for valid non-self unblocked target; confirm block; reconcile friendships/requests | Pending — Task 9 | Approved initiating-control addition 1 | SocialWorkflowControllerTest; InMemorySocialServiceTest; Task 15 demo |
+| user | 10 friend/user action area (approved addition) | Block User | Show/enable for valid non-self unblocked target; confirm block; reconcile friendships/requests | Implemented — Task 9 | Approved initiating-control addition 1 | SocialWorkflowControllerTest; InMemorySocialServiceTest; Task 15 demo |
 | user | 07/08 message context menu (approved addition) | Hide Message | Confirm hide of selected message for current user only | Pending — Task 8 | Approved addition 2; no global message deletion | ChatWorkflowControllerTest; InMemoryChatServiceTest; Task 15 demo |
 | user | 07/08 conversation action area (approved addition) | Clear History | Confirm per-user current-sequence visibility boundary | Pending — Task 8 | Approved addition 2; later messages remain visible | ChatWorkflowControllerTest; InMemoryChatServiceTest; Task 15 demo |
 | user | 14 group-details action area (approved addition) | Leave Group | Show only for current membership; confirm leave; preserve valid admin | Pending — Task 10 | Approved initiating-control addition 3 | GroupWorkflowControllerTest; InMemoryGroupServiceTest; Task 15 demo |

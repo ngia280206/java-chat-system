@@ -1,0 +1,1 @@
+package com.chatsystem.user.ui.cell;import com.chatsystem.shared.model.UserAccount;import javafx.scene.control.ListCell;public final class FriendCell extends ListCell<UserAccount>{@Override protected void updateItem(UserAccount u,boolean e){super.updateItem(u,e);setText(e||u==null?null:u.getDisplayName()+"  @"+u.getUsername());}}

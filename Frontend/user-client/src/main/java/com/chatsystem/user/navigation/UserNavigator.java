@@ -131,6 +131,9 @@ public final class UserNavigator {
             case CHAT_PRIVATE -> "chat-private";
             case CHAT_GROUP -> "chat-group";
             case MESSAGE_SEARCH -> "message-search";
+            case FRIENDS -> "friends";
+            case FRIEND_REQUESTS -> "friend-requests";
+            case BLOCKED_USERS -> "blocked-users";
             default -> null;
         };
         if (request.route() == UserRoute.AI_ASSISTANT) {
