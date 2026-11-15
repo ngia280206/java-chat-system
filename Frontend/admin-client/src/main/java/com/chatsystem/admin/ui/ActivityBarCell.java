@@ -1,0 +1,3 @@
+package com.chatsystem.admin.ui;
+import com.chatsystem.shared.service.AdminService;import javafx.scene.control.*;import javafx.scene.layout.*;
+public final class ActivityBarCell extends ListCell<AdminService.DailyActivity>{@Override protected void updateItem(AdminService.DailyActivity item,boolean empty){super.updateItem(item,empty);if(empty||item==null){setText(null);setGraphic(null);return;}Label date=new Label(item.date().toString());date.setMinWidth(90);ProgressBar messages=new ProgressBar(Math.min(1,item.messages()/10.0));messages.setPrefWidth(150);Label values=new Label(item.messages()+" messages · "+item.appOpens()+" opens");HBox row=new HBox(12,date,messages,values);row.getStyleClass().add("activity-bar-row");setText(null);setGraphic(row);}}
