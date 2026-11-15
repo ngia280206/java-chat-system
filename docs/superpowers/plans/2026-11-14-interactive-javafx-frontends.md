@@ -334,28 +334,28 @@ git commit -m "feat: implement user authentication demo"
 - Consumes: `ChatService`, `AssistantService`, `ReportService`, `UserNavigator`.
 - Produces: dynamic conversation/message rendering; send/search/select/new conversation; approved Hide Message and Clear History controls; AI popup; disabled attachment behavior.
 
-- [ ] **Step 1: Write failing controller tests for selection, sending, search, hide/clear, dialog validation, AI, and cancel/no-mutation**
+- [x] **Step 1: Write failing controller tests for selection, sending, search, hide/clear, dialog validation, AI, and cancel/no-mutation**
 
 Assert views react to observable service changes and context-menu/action visibility matches current message/conversation state.
 
-- [ ] **Step 2: Run chat controller tests and verify failure**
+- [x] **Step 2: Run chat controller tests and verify failure**
 
 Run: `Frontend\gradlew.bat :user-client:test --tests "com.chatsystem.user.controller.chat.ChatWorkflowControllerTest"`
 
-- [ ] **Step 3: Migrate four screens and replace static rows with visually equivalent dynamic nodes**
+- [x] **Step 3: Migrate four screens and replace static rows with visually equivalent dynamic nodes**
 
 Add the approved Hide Message context item and Clear History action naturally; preserve per-user semantics and confirmation.
 
-- [ ] **Step 4: Implement the two minimal dialogs and thin controllers**
+- [x] **Step 4: Implement the two minimal dialogs and thin controllers**
 
 New Conversation collects only a recipient; AI popup accepts a prompt, renders predefined response, and closes. Attachment `+` remains disabled with its inventory explanation.
 
-- [ ] **Step 5: Run chat and FXML tests**
+- [x] **Step 5: Run chat and FXML tests**
 
 Run: `Frontend\gradlew.bat :user-client:test --tests "com.chatsystem.user.controller.chat.*" --tests "com.chatsystem.user.FxmlSmokeTest"`
 Expected: PASS.
 
-- [ ] **Step 6: Update inventory and commit chat UI**
+- [x] **Step 6: Update inventory and commit chat UI**
 
 ```powershell
 git add Frontend/user-client docs/UI_CONTROL_INVENTORY.md
@@ -376,22 +376,22 @@ git commit -m "feat: implement interactive chat workflows"
 - Consumes: `SocialService`, `ChatService`, `UserNavigator`.
 - Produces: search/sort/add/message/request actions and approved Block/Unblock interactions with confirmation and observable consistency.
 
-- [ ] **Step 1: Write failing controller tests for search/sort, request transitions, add modal, message navigation, block/unblock visibility, confirmation, and cancellation**
+- [x] **Step 1: Write failing controller tests for search/sort, request transitions, add modal, message navigation, block/unblock visibility, confirmation, and cancellation**
 
-- [ ] **Step 2: Run social controller tests and verify failure**
+- [x] **Step 2: Run social controller tests and verify failure**
 
 Run: `Frontend\gradlew.bat :user-client:test --tests "com.chatsystem.user.controller.social.SocialWorkflowControllerTest"`
 
-- [ ] **Step 3: Migrate three screens, implement dynamic cells, and add the minimal Add Friend modal**
+- [x] **Step 3: Migrate three screens, implement dynamic cells, and add the minimal Add Friend modal**
 
 Place Block naturally in friend details/actions, only for a valid unblocked target; keep undefined controls disabled per inventory.
 
-- [ ] **Step 4: Implement controllers and run social/FXML tests**
+- [x] **Step 4: Implement controllers and run social/FXML tests**
 
 Run: `Frontend\gradlew.bat :user-client:test --tests "com.chatsystem.user.controller.social.*" --tests "com.chatsystem.user.FxmlSmokeTest"`
 Expected: PASS.
 
-- [ ] **Step 5: Update inventory and commit relationship UI**
+- [x] **Step 5: Update inventory and commit relationship UI**
 
 ```powershell
 git add Frontend/user-client docs/UI_CONTROL_INVENTORY.md

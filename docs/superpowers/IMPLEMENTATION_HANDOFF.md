@@ -4,6 +4,8 @@
 
 > **BATCH 3 UPDATE — 2026-11-15:** Tasks 6–7 are complete and reviewed at commits `56d2d7b` and `36662a2`. User infrastructure/authentication tests pass (18/18 module tests); graphical `UserMain` launch reached a stable JavaFX process with no runtime exception. Exact auth/shell sizes and authentication workflows are verified by Stage-based tests. The exact next task is **Task 8**, pending explicit authorization.
 
+> **BATCH 4 UPDATE — 2026-11-15:** Tasks 8–9 and their independent review-fix pass are complete at `1669241`, `b47312b`, and `df1ad3e`. Fresh Batch 4 verification reports 98/98 shared-client tests and 28/28 user-client tests with zero failures/errors. The review findings covering confirmations/cancellation, modal reachability, filtering/search navigation, contextual message actions, social row actions, inventory classification, and regression coverage were resolved. The exact next task is **Task 10**, which has not started.
+
 ## Repository checkpoint
 
 - **Branch:** `feature/interactive-javafx-frontends`

@@ -140,9 +140,9 @@ Confirm Login starts at 1240x780, successful mock login opens the fixed 1540x930
 
 **Checklist:**
 
-- [ ] Task 8: Chat, message search, and AI workflows
-- [ ] Task 9: Friends and relationship workflows
-- [ ] Batch 4 independent combined risk review (Tasks 8–9)
+- [x] Task 8: Chat, message search, and AI workflows
+- [x] Task 9: Friends and relationship workflows
+- [x] Batch 4 independent combined risk review (Tasks 8–9)
 
 **Batch verification:**
 
@@ -291,6 +291,7 @@ Update this section at every task and batch boundary.
 | 2026-11-15 | 2 | 5 | Complete after fix round 1; Batch 2 complete | `56e81dc`, `8d81f8a` | 28/28 focused; 98/98 clean full suite; Batch verification passed | Login/APP_OPEN metrics gap fixed and re-review passed | Task 6, pending authorization |
 | 2026-11-15 | 3 | 6 | Complete | `56d2d7b` | 11/11 focused; 109/109 fresh module/full suite | Combined review clean | Task 7 |
 | 2026-11-15 | 3 | 7 | Complete; Batch 3 complete | `36662a2` | 7/7 focused auth/FXML; 18/18 user module; batch test passed; graphical launch reached stable UserMain | Independent review clean; standard JavaFX/cache warnings only | Task 8, pending authorization |
+| 2026-11-15 | 4 | 8–9 | Complete after review fix; Batch 4 complete | `1669241`, `b47312b`, `df1ad3e` | 98/98 shared tests and 28/28 user tests; zero failures/errors; Batch verification passed | Important review findings fixed: confirmations/cancellation, reachable modals, filters/scope/result navigation, contextual AI/message actions, row actions, inventory and regression coverage | Task 10, pending authorization |
 
 ## Resume checklist
 
