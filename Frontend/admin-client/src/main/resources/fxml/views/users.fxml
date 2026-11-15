@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatsystem.admin.controller.UsersController" spacing="20" styleClass="content-area">
+ <HBox alignment="CENTER_LEFT"><VBox><Label text="People" styleClass="page-title"/><Label text="Search and manage member access" styleClass="muted-text"/></VBox><Region HBox.hgrow="ALWAYS"/><StackPane fx:id="downloadWrapper"><Button fx:id="downloadButton" text="Download CSV" styleClass="secondary-button"/></StackPane></HBox>
+ <HBox spacing="12"><TextField fx:id="searchField" promptText="Search users by name, email, or ID" styleClass="search-field" HBox.hgrow="ALWAYS"/><Button fx:id="sortButton" text="Sort: recent login  v" styleClass="secondary-button"/><Button fx:id="filterButton" text="Filters" styleClass="secondary-button"/></HBox>
+ <ListView fx:id="userList" VBox.vgrow="ALWAYS"/><HBox spacing="12" alignment="CENTER_RIGHT"><Button fx:id="previousButton" text="Previous" styleClass="small-button"/><Button fx:id="nextButton" text="Next" styleClass="small-button"/></HBox>
+</VBox>

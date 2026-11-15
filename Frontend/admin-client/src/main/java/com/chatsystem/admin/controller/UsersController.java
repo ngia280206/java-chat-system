@@ -1,0 +1,13 @@
+package com.chatsystem.admin.controller;
+
+import com.chatsystem.admin.navigation.*; import com.chatsystem.admin.ui.*; import com.chatsystem.admin.ui.cell.AdminUserCell; import com.chatsystem.shared.model.UserAccount; import com.chatsystem.shared.model.status.UserStatus; import com.chatsystem.shared.service.AdminService;
+import javafx.collections.*; import javafx.fxml.FXML; import javafx.scene.control.*; import javafx.scene.layout.StackPane; import java.util.*;
+public final class UsersController {
+ private final AdminService service;private final AdminNavigator navigator;private final ObservableList<UserAccount> results=FXCollections.observableArrayList();private String query="";private UserStatus status;private AdminService.UserSort sort=AdminService.UserSort.RECENT_LOGIN;private int page;private static final int PAGE_SIZE=6;
+ @FXML private TextField searchField;@FXML private ListView<UserAccount> userList;@FXML private Button previousButton,nextButton,downloadButton,sortButton,filterButton;@FXML private StackPane downloadWrapper;
+ public UsersController(AdminService service,AdminNavigator navigator){this.service=service;this.navigator=navigator;refresh();}
+ @FXML private void initialize(){searchField.textProperty().addListener((o,a,b)->setQuery(b));userList.setItems(results);userList.setCellFactory(v->new AdminUserCell(this::open));previousButton.setOnAction(e->previous());nextButton.setOnAction(e->next());sortButton.setOnAction(e->setSort(sort==AdminService.UserSort.RECENT_LOGIN?AdminService.UserSort.NAME:AdminService.UserSort.RECENT_LOGIN));filterButton.setOnAction(e->setStatus(status==null?UserStatus.ACTIVE:null));DisabledControlSupport.install(downloadButton,downloadWrapper,"User CSV download is unavailable in the frontend-only demo.");refreshButtons();}
+ public ObservableList<UserAccount> results(){return FXCollections.unmodifiableObservableList(results);}public void setQuery(String q){query=q==null?"":q;page=0;refresh();}public void setStatus(UserStatus s){status=s;page=0;refresh();}public void setSort(AdminService.UserSort s){sort=Objects.requireNonNull(s);page=0;refresh();}
+ public boolean previous(){if(page==0)return false;page--;refresh();return true;}public boolean next(){if(service.searchUsers(query,status,sort,page+1,PAGE_SIZE).isEmpty())return false;page++;refresh();return true;}public void open(long id){navigator.navigate(ViewRequest.user(id));}
+ private void refresh(){results.setAll(service.searchUsers(query,status,sort,page,PAGE_SIZE));refreshButtons();}private void refreshButtons(){if(previousButton!=null){previousButton.setDisable(page==0);nextButton.setDisable(service.searchUsers(query,status,sort,page+1,PAGE_SIZE).isEmpty());}}
+}

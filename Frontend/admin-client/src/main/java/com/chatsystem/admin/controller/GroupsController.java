@@ -1,0 +1,7 @@
+package com.chatsystem.admin.controller;
+import com.chatsystem.admin.navigation.*;import com.chatsystem.admin.ui.cell.AdminGroupCell;import com.chatsystem.shared.model.Conversation;import com.chatsystem.shared.service.AdminService;import javafx.collections.*;import javafx.fxml.FXML;import javafx.scene.control.*;import java.util.*;
+public final class GroupsController{
+ private final AdminService service;private final AdminNavigator navigator;private final ObservableList<Conversation> results=FXCollections.observableArrayList();private String query="";private AdminService.GroupSort sort=AdminService.GroupSort.MEMBER_COUNT;@FXML private TextField searchField;@FXML private ListView<Conversation> groupList;@FXML private Button sortButton;
+ public GroupsController(AdminService s,AdminNavigator n){service=s;navigator=n;refresh();}@FXML private void initialize(){searchField.textProperty().addListener((o,a,b)->setQuery(b));groupList.setItems(results);groupList.setCellFactory(v->new AdminGroupCell(this::open));sortButton.setOnAction(e->setSort(sort==AdminService.GroupSort.MEMBER_COUNT?AdminService.GroupSort.NAME:AdminService.GroupSort.MEMBER_COUNT));}
+ public ObservableList<Conversation> results(){return FXCollections.unmodifiableObservableList(results);}public void setQuery(String q){query=q==null?"":q;refresh();}public void setSort(AdminService.GroupSort s){sort=Objects.requireNonNull(s);refresh();}public void open(long id){navigator.navigate(ViewRequest.group(id));}private void refresh(){results.setAll(service.searchGroups(query,sort,0,50));}
+}

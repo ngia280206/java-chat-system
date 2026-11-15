@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatsystem.admin.controller.GroupDetailsController" spacing="20" styleClass="content-area">
+ <HBox spacing="12" alignment="CENTER_LEFT"><Button fx:id="backButton" text="Back to groups" styleClass="secondary-button"/><Region HBox.hgrow="ALWAYS"/><Button fx:id="moderationButton" text="Open moderation history" styleClass="secondary-button"/></HBox><VBox styleClass="card"><Label fx:id="nameLabel" styleClass="page-title"/><Label fx:id="descriptionLabel" styleClass="muted-text"/></VBox>
+ <HBox alignment="CENTER_LEFT"><Label text="Members" styleClass="section-title"/><Region HBox.hgrow="ALWAYS"/><StackPane fx:id="exportWrapper"><Button fx:id="exportButton" text="Export members" styleClass="small-button"/></StackPane></HBox><ListView fx:id="memberList" VBox.vgrow="ALWAYS"/>
+</VBox>

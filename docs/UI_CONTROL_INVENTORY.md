@@ -10,10 +10,10 @@ Disabled controls remain visible. Their tooltip must be attached to a hoverable 
 
 | App | Screen | Control | Behavior | Status | Reason | Verification |
 |---|---|---|---|---|---|---|
-| admin | 01–07, each sidebar | Overview | Navigate to Dashboard; preserve admin session | Pending — Task 12 | Supplied route | AdminNavigatorTest; FxmlSmokeTest |
-| admin | 01–07, each sidebar | People | Navigate to Users | Pending — Task 12 | Supplied route | AdminNavigatorTest |
-| admin | 01–07, each sidebar | Groups | Navigate to Groups | Pending — Task 12 | Supplied route | AdminNavigatorTest |
-| admin | 01–07, each sidebar | Warnings | Navigate to Moderation | Pending — Task 12 | Supplied route | AdminNavigatorTest |
+| admin | 01–07, each sidebar | Overview | Navigate to Dashboard; preserve admin session | Implemented — Task 12 | Supplied route | AdminNavigatorTest; FxmlSmokeTest |
+| admin | 01–07, each sidebar | People | Navigate to Users | Implemented — Task 12 | Supplied route | AdminNavigatorTest |
+| admin | 01–07, each sidebar | Groups | Navigate to Groups | Implemented — Task 12 | Supplied route | AdminNavigatorTest |
+| admin | 01–07, each sidebar | Warnings | Navigate to Moderation | Implemented — Task 12 | Supplied route | AdminNavigatorTest |
 | admin | 01–07, each sidebar | Settings | Remain visible and disabled | Disabled — Task 12 | Tooltip: “Admin settings are unavailable because this demo has no admin settings screen.” | AdminApplicationContextTest; wrapper hover in Task 15 |
 | admin | 01–07, each sidebar | Help & support | Remain visible and disabled | Disabled — Task 12 | Tooltip: “Help and support are unavailable because no support destination is defined.” | AdminApplicationContextTest; wrapper hover in Task 15 |
 | user | 06–20, each sidebar | Chats | Navigate to chat home | Pending — Task 6 | Supplied route | UserNavigatorTest; FxmlSmokeTest |
@@ -32,26 +32,26 @@ Disabled controls remain visible. Their tooltip must be attached to a hoverable 
 | App | Screen | Control | Behavior | Status | Reason | Verification |
 |---|---|---|---|---|---|---|
 | admin | 01-dashboard | Export overview | Visible, disabled | Disabled — Task 13 | Tooltip: “Overview export is unavailable in the frontend-only demo.” | DashboardControllerTest; wrapper hover |
-| admin | 01-dashboard | Last 12 days v | Open range choices and recompute metrics/chart | Pending — Task 13 | Dashboard range workflow | DashboardControllerTest |
-| admin | 01-dashboard | View all (recent platform activity) | Navigate to corresponding admin directory | Pending — Task 13 | Dashboard list navigation | DashboardControllerTest; Task 15 navigation |
+| admin | 01-dashboard | Last 12 days v | Open range choices and recompute metrics/chart | Implemented — Task 13 | Dashboard range workflow | DashboardControllerTest |
+| admin | 01-dashboard | View all (recent platform activity) | Navigate to corresponding admin directory | Implemented — Task 13 | Dashboard list navigation | DashboardControllerTest; Task 15 navigation |
 | admin | 01-dashboard | Four metric cards, weekly activity chart, platform snapshot | Display derived metrics for selected range | Decorative | Data projection, no independent card action | DashboardControllerTest |
 | admin | 01-dashboard | Four recent activity rows: registration, report, group creation, resolved moderation | Display fixture/current activity | Decorative | No row action supplied | Task 15 visual acceptance |
-| admin | 02-users | Search users by name, email, or ID | Filter directory with empty-result feedback | Pending — Task 13 | User search | UserManagementControllerTest |
-| admin | 02-users | Sort: recent login v | Choose deterministic ordering | Pending — Task 13 | User sort | UserManagementControllerTest |
-| admin | 02-users | Filters | Choose status/login filters and update directory | Pending — Task 13 | User filters | UserManagementControllerTest |
+| admin | 02-users | Search users by name, email, or ID | Filter directory with empty-result feedback | Implemented — Task 13 | User search | UserManagementControllerTest |
+| admin | 02-users | Sort: recent login v | Choose deterministic ordering | Implemented — Task 13 | User sort | UserManagementControllerTest |
+| admin | 02-users | Filters | Choose status/login filters and update directory | Implemented — Task 13 | User filters | UserManagementControllerTest |
 | admin | 02-users | Download CSV | Visible, disabled | Disabled — Task 13 | Tooltip: “User CSV download is unavailable in the frontend-only demo.” | UserManagementControllerTest; wrapper hover |
-| admin | 02-users | Six user rows / View details labels: Alex, Mia, Jordan, Taylor, Sam, Casey | Select/open details using stable user ID | Pending — Task 13 | Labels represent row actions, not static text | UserManagementControllerTest |
-| admin | 02-users | Previous | Previous result page; disabled at first page | Pending — Task 13 | Pagination | UserManagementControllerTest |
-| admin | 02-users | Next | Next result page; disabled at last page | Pending — Task 13 | Pagination | UserManagementControllerTest |
-| admin | 03-user-details | Back to users | Return to user directory | Pending — Task 13 | Typed navigation | UserManagementControllerTest |
-| admin | 03-user-details | Restrict user / corresponding unlock state | Confirm lock/unlock and refresh account/list/metrics | Pending — Task 13 | Account sanction separate from report status | UserManagementControllerTest; InMemoryAdminServiceTest |
-| admin | 03-user-details | Full history | Reveal full selected user's login history within existing history area | Pending — Task 13 | No separate history screen is supplied | UserManagementControllerTest |
+| admin | 02-users | Six user rows / View details labels: Alex, Mia, Jordan, Taylor, Sam, Casey | Select/open details using stable user ID | Implemented — Task 13 | Labels represent row actions, not static text | UserManagementControllerTest |
+| admin | 02-users | Previous | Previous result page; disabled at first page | Implemented — Task 13 | Pagination | UserManagementControllerTest |
+| admin | 02-users | Next | Next result page; disabled at last page | Implemented — Task 13 | Pagination | UserManagementControllerTest |
+| admin | 03-user-details | Back to users | Return to user directory | Implemented — Task 13 | Typed navigation | UserManagementControllerTest |
+| admin | 03-user-details | Restrict user / corresponding unlock state | Confirm lock/unlock and refresh account/list/metrics | Implemented — Task 13 | Account sanction separate from report status | UserManagementControllerTest; InMemoryAdminServiceTest |
+| admin | 03-user-details | Full history | Reveal full selected user's login history within existing history area | Implemented — Task 13 | No separate history screen is supplied | UserManagementControllerTest |
 | admin | 03-user-details | Four recent login rows and three activity timeline entries | Display selected user's fixture/activity history | Decorative | No per-record action supplied | Task 15 history acceptance |
-| admin | 04-groups | Search group name or owner | Filter groups | Pending — Task 13 | Admin group search | GroupManagementControllerTest |
-| admin | 04-groups | Sort: member count v | Choose deterministic group ordering | Pending — Task 13 | Admin group sort | GroupManagementControllerTest |
-| admin | 04-groups | Five group rows / Inspect labels: Design Circle, Study Hub, Weekend Crew, Dev Community, Marketplace | Open selected group by ID | Pending — Task 13 | Labels represent row actions | GroupManagementControllerTest |
-| admin | 05-group-details | Back to groups | Return to group directory | Pending — Task 13 | Typed navigation | GroupManagementControllerTest |
-| admin | 05-group-details | Open moderation history | Navigate to moderation filtered to selected group's reports | Pending — Task 13 | Existing moderation destination | GroupManagementControllerTest |
+| admin | 04-groups | Search group name or owner | Filter groups | Implemented — Task 13 | Admin group search | GroupManagementControllerTest |
+| admin | 04-groups | Sort: member count v | Choose deterministic group ordering | Implemented — Task 13 | Admin group sort | GroupManagementControllerTest |
+| admin | 04-groups | Five group rows / Inspect labels: Design Circle, Study Hub, Weekend Crew, Dev Community, Marketplace | Open selected group by ID | Implemented — Task 13 | Labels represent row actions | GroupManagementControllerTest |
+| admin | 05-group-details | Back to groups | Return to group directory | Implemented — Task 13 | Typed navigation | GroupManagementControllerTest |
+| admin | 05-group-details | Open moderation history | Navigate to moderation filtered to selected group's reports | Implemented — Task 13 | Existing moderation destination | GroupManagementControllerTest |
 | admin | 05-group-details | Export members | Visible, disabled | Disabled — Task 13 | Tooltip: “Group member export is unavailable in the frontend-only demo.” | GroupManagementControllerTest; wrapper hover |
 | admin | 05-group-details | Member rows: Mia, Alex, Jordan, Casey; three group activity entries | Display members, roles, joined dates and activity | Decorative | No member mutation action supplied in admin screen | Task 15 group-detail acceptance |
 | admin | 06-moderation | Export report log | Visible, disabled | Disabled — Task 14 | Tooltip: “Report log export is unavailable in the frontend-only demo.” | ModerationWorkflowControllerTest; wrapper hover |

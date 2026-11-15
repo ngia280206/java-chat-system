@@ -13,4 +13,14 @@ class FxmlSmokeTest extends JavaFxTestSupport {
             assertNotNull(loaded.root()); assertNotNull(loaded.controller());
         } finally { stage.close(); } return null; });
     }
+
+    @Test void allFiveManagementViewsLoadWithExplicitControllers() throws Exception {
+        onFx(() -> { Stage stage = new Stage(); try {
+            var context = new AdminApplicationContext(); var loader = new FxmlViewLoader(context, new AdminNavigator(stage, context));
+            for (String name : new String[]{"dashboard", "users", "user-details", "groups", "group-details"}) {
+                var loaded = loader.load("/fxml/views/" + name + ".fxml");
+                assertNotNull(loaded.root(), name); assertNotNull(loaded.controller(), name);
+            }
+        } finally { stage.close(); } return null; });
+    }
 }
