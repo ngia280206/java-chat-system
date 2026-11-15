@@ -412,26 +412,26 @@ git commit -m "feat: implement friend workflows"
 - Consumes: `GroupService`, `ChatService`, `UserNavigator`.
 - Produces: browse/create/edit/invite/join/reject/remove flows; approved Leave Group action and role selector with permission-aware visibility.
 
-- [ ] **Step 1: Write failing controller tests for full group workflow and control permissions**
+- [x] **Step 1: Write failing controller tests for full group workflow and control permissions**
 
 Cover minimal modal validation/cancel, group updates across views, join/reject, remove, Leave Group confirmation, role selector visibility, last-admin protection, and invalid/stale member handling.
 
-- [ ] **Step 2: Run group controller tests and verify failure**
+- [x] **Step 2: Run group controller tests and verify failure**
 
 Run: `Frontend\gradlew.bat :user-client:test --tests "com.chatsystem.user.controller.group.GroupWorkflowControllerTest"`
 
-- [ ] **Step 3: Migrate three screens and create visually equivalent dynamic member/group/invitation rows**
+- [x] **Step 3: Migrate three screens and create visually equivalent dynamic member/group/invitation rows**
 
 Add Leave Group to group-detail actions and the compact `ADMIN`/`MEMBER` selector to authorized member rows without redesigning the screen.
 
-- [ ] **Step 4: Implement minimal Create Group/Invite Members dialogs and controllers**
+- [x] **Step 4: Implement minimal Create Group/Invite Members dialogs and controllers**
 
-- [ ] **Step 5: Run group and FXML tests**
+- [x] **Step 5: Run group and FXML tests**
 
 Run: `Frontend\gradlew.bat :user-client:test --tests "com.chatsystem.user.controller.group.*" --tests "com.chatsystem.user.FxmlSmokeTest"`
 Expected: PASS.
 
-- [ ] **Step 6: Update inventory and commit group UI**
+- [x] **Step 6: Update inventory and commit group UI**
 
 ```powershell
 git add Frontend/user-client docs/UI_CONTROL_INVENTORY.md
@@ -454,26 +454,26 @@ git commit -m "feat: implement group workflows"
 - Consumes: `ProfileService`, `SettingsService`, `AuthService`, `ReportService`, `UserNavigator`.
 - Produces: live profile/settings/password/logout workflows and report submission/search/filter/detail workflows.
 
-- [ ] **Step 1: Write failing account controller tests**
+- [x] **Step 1: Write failing account controller tests**
 
 Cover profile field validation/propagation, preference save/cancel semantics, password validation, blocked-account navigation, logout, and disabled avatar/public-preview controls with exact tooltips.
 
-- [ ] **Step 2: Write failing report controller tests**
+- [x] **Step 2: Write failing report controller tests**
 
 Cover minimal target/reason validation, submission/cancel, search/filter, detail navigation, and observable status updates.
 
-- [ ] **Step 3: Run account/report tests and verify failure**
+- [x] **Step 3: Run account/report tests and verify failure**
 
 Run: `Frontend\gradlew.bat :user-client:test --tests "com.chatsystem.user.controller.account.*" --tests "com.chatsystem.user.controller.report.*"`
 
-- [ ] **Step 4: Migrate five views, implement the New Report modal, dynamic report rows, and thin controllers**
+- [x] **Step 4: Migrate five views, implement the New Report modal, dynamic report rows, and thin controllers**
 
-- [ ] **Step 5: Complete all remaining user inventory classifications and run all user tests**
+- [x] **Step 5: Complete all remaining user inventory classifications and run all user tests**
 
 Run: `Frontend\gradlew.bat :user-client:test`
 Expected: all 21 supplied screens and approved dialogs load; tests pass.
 
-- [ ] **Step 6: Commit remaining user workflows**
+- [x] **Step 6: Commit remaining user workflows**
 
 ```powershell
 git add Frontend/user-client docs/UI_CONTROL_INVENTORY.md

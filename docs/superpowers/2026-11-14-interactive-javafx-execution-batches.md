@@ -169,9 +169,9 @@ Manually verify new conversation, send/search/hide/clear, preview updates, AI po
 
 **Checklist:**
 
-- [ ] Task 10: Group workflows and approved membership controls
-- [ ] Task 11: Profile, settings, password, and reporting workflows
-- [ ] Batch 5 independent combined risk review (Tasks 10–11)
+- [x] Task 10: Group workflows and approved membership controls
+- [x] Task 11: Profile, settings, password, and reporting workflows
+- [x] Batch 5 independent combined risk review (Tasks 10–11)
 
 **Batch verification:**
 
@@ -292,6 +292,7 @@ Update this section at every task and batch boundary.
 | 2026-11-15 | 3 | 6 | Complete | `56d2d7b` | 11/11 focused; 109/109 fresh module/full suite | Combined review clean | Task 7 |
 | 2026-11-15 | 3 | 7 | Complete; Batch 3 complete | `36662a2` | 7/7 focused auth/FXML; 18/18 user module; batch test passed; graphical launch reached stable UserMain | Independent review clean; standard JavaFX/cache warnings only | Task 8, pending authorization |
 | 2026-11-15 | 4 | 8–9 | Complete after review fix; Batch 4 complete | `1669241`, `b47312b`, `df1ad3e` | 98/98 shared tests and 28/28 user tests; zero failures/errors; Batch verification passed | Important review findings fixed: confirmations/cancellation, reachable modals, filters/scope/result navigation, contextual AI/message actions, row actions, inventory and regression coverage | Task 10, pending authorization |
+| 2026-11-15 | 5 | 10–11 | Complete after review fix; Batch 5 complete | `a939fba`, `960ad1c`, `1cf404f` | 98/98 shared tests and 33/33 user tests; zero failures/errors; JavaFX launch stable until stopped manually | Important review findings fixed: row-scoped reactive group permissions, supplied controls/content, observable report filtering/detail and inventory alignment | Task 12, pending authorization |
 
 ## Resume checklist
 

@@ -6,6 +6,8 @@
 
 > **BATCH 4 UPDATE — 2026-11-15:** Tasks 8–9 and their independent review-fix pass are complete at `1669241`, `b47312b`, and `df1ad3e`. Fresh Batch 4 verification reports 98/98 shared-client tests and 28/28 user-client tests with zero failures/errors. The review findings covering confirmations/cancellation, modal reachability, filtering/search navigation, contextual message actions, social row actions, inventory classification, and regression coverage were resolved. The exact next task is **Task 10**, which has not started.
 
+> **BATCH 5 UPDATE — 2026-11-15:** Tasks 10–11 and their independent review-fix pass are complete at `a939fba`, `960ad1c`, and `1cf404f`. Fresh verification reports 98/98 shared-client tests and 33/33 user-client tests with zero failures/errors; graphical `UserMain` launch remained stable until stopped manually. All 21 user screens and approved dialogs load through explicit controllers. The exact next task is **Task 12**, pending explicit authorization.
+
 ## Repository checkpoint
 
 - **Branch:** `feature/interactive-javafx-frontends`
