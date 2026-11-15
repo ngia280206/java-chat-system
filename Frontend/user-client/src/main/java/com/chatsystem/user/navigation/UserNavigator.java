@@ -53,7 +53,11 @@ public final class UserNavigator {
     public ReadOnlyObjectProperty<ViewRequest> currentRequestProperty() { return currentRequest.getReadOnlyProperty(); }
     public Optional<Stage> assistantStage() { return Optional.ofNullable(assistantStage); }
     public Stage showDialog(String path, String title) {
+        return showDialog(path, title, ignored -> {});
+    }
+    public Stage showDialog(String path, String title, java.util.function.Consumer<Object> configure) {
         var loaded = views.load(path);
+        configure.accept(loaded.controller());
         Stage dialog = new Stage(); dialog.initOwner(stage); dialog.setTitle(title); dialog.setResizable(false);
         Scene scene = new Scene(loaded.root()); scene.getStylesheets().add(views.resource("/css/dark.css").toExternalForm());
         dialog.setScene(scene); dialog.show(); return dialog;
@@ -145,6 +149,9 @@ public final class UserNavigator {
             case FRIENDS -> "friends";
             case FRIEND_REQUESTS -> "friend-requests";
             case BLOCKED_USERS -> "blocked-users";
+            case GROUP_MANAGEMENT -> "group-management";
+            case GROUP_DETAILS -> "group-details";
+            case GROUP_INVITATIONS -> "group-invitations";
             default -> null;
         };
         if (request.route() == UserRoute.AI_ASSISTANT) {
@@ -161,6 +168,7 @@ public final class UserNavigator {
             if (loaded.controller() instanceof ChatPrivateController controller) controller.present(id);
             if (loaded.controller() instanceof ChatGroupController controller) controller.present(id);
             if (loaded.controller() instanceof MessageSearchController controller) controller.present(id);
+            if (loaded.controller() instanceof com.chatsystem.user.controller.group.GroupDetailsController controller) controller.present(id);
             loaded.root().setUserData(request);
             return loaded.root();
         }

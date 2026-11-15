@@ -1,0 +1,1 @@
+package com.chatsystem.user.ui.cell;import com.chatsystem.shared.model.ConversationMember;import javafx.scene.control.ListCell;public final class GroupMemberCell extends ListCell<ConversationMember>{@Override protected void updateItem(ConversationMember m,boolean e){super.updateItem(m,e);setText(e||m==null?null:"Member #"+m.getUserId()+" · "+m.getRole());}}

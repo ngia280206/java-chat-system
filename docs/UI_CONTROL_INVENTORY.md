@@ -151,22 +151,22 @@ Disabled controls remain visible. Their tooltip must be attached to a hoverable 
 
 | App | Screen | Control | Behavior | Status | Reason | Verification |
 |---|---|---|---|---|---|---|
-| user | 13-group-management | + Create group | Open minimal group-creation modal | Pending — Task 10 | Existing initiator | GroupWorkflowControllerTest |
-| user | 13-group-management | View all | Show complete group collection in existing list | Pending — Task 10 | Browse groups without new screen | GroupWorkflowControllerTest |
-| user | 13-group-management | Four group rows: Design Circle, Study Hub, Weekend Crew, Dev Community | Open selected group details by ID | Pending — Task 10 | Selectable groups | GroupWorkflowControllerTest |
-| user | 13-group-management | Group invitations | Navigate to invitations | Pending — Task 10 | Supplied route | GroupWorkflowControllerTest |
-| user | 13-group-management | Manage members | Select valid group and open member management in group details | Pending — Task 10 | Use existing group selection; explain missing selection | GroupWorkflowControllerTest |
-| user | 14-group-details | Back to groups | Return to group management | Pending — Task 10 | Navigation | GroupWorkflowControllerTest |
-| user | 14-group-details | Group description TextArea | Edit supplied group field with validation/permission checks | Pending — Task 10 | Existing editable field | GroupWorkflowControllerTest |
-| user | 14-group-details | Save changes | Save authorized group-field edits and update projections | Pending — Task 10 | Existing group mutation | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
-| user | 14-group-details | Invite members | Open minimal member-selection modal | Pending — Task 10 | Existing initiator | GroupWorkflowControllerTest |
-| user | 14-group-details | Edit group | Focus/enable existing editable group details | Pending — Task 10 | Reuse existing description form | GroupWorkflowControllerTest |
+| user | 13-group-management | + Create group | Open minimal group-creation modal | Implemented — Task 10 | Existing initiator | GroupWorkflowControllerTest |
+| user | 13-group-management | View all | Show complete group collection in existing list | Implemented — Task 10 | Browse groups without new screen | GroupWorkflowControllerTest |
+| user | 13-group-management | Four group rows: Design Circle, Study Hub, Weekend Crew, Dev Community | Open selected group details by ID | Implemented — Task 10 | Selectable groups | GroupWorkflowControllerTest |
+| user | 13-group-management | Group invitations | Navigate to invitations | Implemented — Task 10 | Supplied route | GroupWorkflowControllerTest |
+| user | 13-group-management | Manage members | Select valid group and open member management in group details | Implemented — Task 10 | Use existing group selection; explain missing selection | GroupWorkflowControllerTest |
+| user | 14-group-details | Back to groups | Return to group management | Implemented — Task 10 | Navigation | GroupWorkflowControllerTest |
+| user | 14-group-details | Group description TextArea | Edit supplied group field with validation/permission checks | Implemented — Task 10 | Existing editable field | GroupWorkflowControllerTest |
+| user | 14-group-details | Save changes | Save authorized group-field edits and update projections | Implemented — Task 10 | Existing group mutation | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
+| user | 14-group-details | Invite members | Open minimal member-selection modal | Implemented — Task 10 | Existing initiator | GroupWorkflowControllerTest |
+| user | 14-group-details | Edit group | Focus/enable existing editable group details | Implemented — Task 10 | Reuse existing description form | GroupWorkflowControllerTest |
 | user | 14-group-details | — (Alex owner row) | Visible, disabled for protected member | Disabled — Task 10 | Tooltip: “This protected group admin cannot be removed; the group must retain a valid admin.” | GroupWorkflowControllerTest; wrapper hover |
-| user | 14-group-details | Remove (Mia, Jordan, Casey; three buttons) | Confirm authorized member removal, preserving valid admin | Pending — Task 10 | Group permission/invariant checks | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
+| user | 14-group-details | Remove (Mia, Jordan, Casey; three buttons) | Confirm authorized member removal, preserving valid admin | Implemented — Task 10 | Group permission/invariant checks | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
 | user | 14-group-details | Member row identity, role label, joined date | Read-only except approved role-selection control below | Decorative | Source Owner/Moderator wording maps to documented ADMIN/MEMBER domain | Task 15 acceptance |
-| user | 15-group-invitations | Back to groups | Return to group management | Pending — Task 10 | Navigation | GroupWorkflowControllerTest |
-| user | 15-group-invitations | Join (Product Roundtable, Java Community, Movie Group; three buttons) | Accept selected invitation; update groups/membership/conversation | Pending — Task 10 | Cross-screen mutation | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
-| user | 15-group-invitations | Decline (same three invitation cards) | Reject invitation | Pending — Task 10 | Group invitation mutation | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
+| user | 15-group-invitations | Back to groups | Return to group management | Implemented — Task 10 | Navigation | GroupWorkflowControllerTest |
+| user | 15-group-invitations | Join (Product Roundtable, Java Community, Movie Group; three buttons) | Accept selected invitation; update groups/membership/conversation | Implemented — Task 10 | Cross-screen mutation | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
+| user | 15-group-invitations | Decline (same three invitation cards) | Reject invitation | Implemented — Task 10 | Group invitation mutation | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
 
 ## User profile, settings, password, and reports
 
@@ -212,14 +212,14 @@ These are inventory commitments for the approved workflows, not new standalone s
 |---|---|---|---|---|---|---|
 | user | New Conversation modal from 06/07/08 | Recipient selector; Start/Create; Cancel/close | Choose valid recipient and open/create conversation; cancel unchanged | Implemented — Task 8 | Required New Conversation workflow | ChatWorkflowControllerTest; InMemoryChatServiceTest |
 | user | Add Friend modal from 10 | Target selector/search; Send request; Cancel/close | Submit valid request; reject self/blocked/duplicate targets | Implemented — Task 9 | Required Add Friend workflow | SocialWorkflowControllerTest; InMemorySocialServiceTest |
-| user | Create Group modal from 13 | Essential group-name/member inputs; Create; Cancel/close | Validate/create group and update lists/conversations | Pending — Task 10 | Required Create Group workflow | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
-| user | Invite Members modal from 14 | Eligible member selector; Invite; Cancel/close | Validate and invite selected eligible users | Pending — Task 10 | Required Invite Members workflow | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
+| user | Create Group modal from 13 | Essential group-name/member inputs; Create; Cancel/close | Validate/create group and update lists/conversations | Implemented — Task 10 | Required Create Group workflow | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
+| user | Invite Members modal from 14 | Eligible member selector; Invite; Cancel/close | Validate and invite selected eligible users | Implemented — Task 10 | Required Invite Members workflow | GroupWorkflowControllerTest; InMemoryGroupServiceTest |
 | user | New Report modal from 19 | Existing message/user target selector; reason/category/description inputs; Submit; Cancel/close | Validate and submit current user's report | Pending — Task 11 | Required New Report workflow | UserReportWorkflowControllerTest; InMemoryReportServiceTest |
 | user | 10 friend/user action area (approved addition) | Block User | Show/enable for valid non-self unblocked target; confirm block; reconcile friendships/requests | Implemented — Task 9 | Approved initiating-control addition 1 | SocialWorkflowControllerTest; InMemorySocialServiceTest; Task 15 demo |
 | user | 07/08 message context menu (approved addition) | Hide Message | Confirm hide of selected message for current user only | Implemented — Task 8 | Approved addition 2; no global message deletion | ChatWorkflowControllerTest; InMemoryChatServiceTest; Task 15 demo |
 | user | 07/08 conversation action area (approved addition) | Clear History | Confirm per-user current-sequence visibility boundary | Implemented — Task 8 | Approved addition 2; later messages remain visible | ChatWorkflowControllerTest; InMemoryChatServiceTest; Task 15 demo |
-| user | 14 group-details action area (approved addition) | Leave Group | Show only for current membership; confirm leave; preserve valid admin | Pending — Task 10 | Approved initiating-control addition 3 | GroupWorkflowControllerTest; InMemoryGroupServiceTest; Task 15 demo |
-| user | 14 member rows (approved addition) | Change Group Role selector | Current group admin can select ADMIN/MEMBER for eligible target; preserve one admin | Pending — Task 10 | Approved initiating-control addition 4 | GroupWorkflowControllerTest; InMemoryGroupServiceTest; Task 15 demo |
+| user | 14 group-details action area (approved addition) | Leave Group | Show only for current membership; confirm leave; preserve valid admin | Implemented — Task 10 | Approved initiating-control addition 3 | GroupWorkflowControllerTest; InMemoryGroupServiceTest; Task 15 demo |
+| user | 14 member rows (approved addition) | Change Group Role selector | Current group admin can select ADMIN/MEMBER for eligible target; preserve one admin | Implemented — Task 10 | Approved initiating-control addition 4 | GroupWorkflowControllerTest; InMemoryGroupServiceTest; Task 15 demo |
 | both | Consequential workflow confirmations | Confirm / Cancel / dialog close | Confirm valid mutation; cancel/close without state change | Implemented — Tasks 8–9; pending Tasks 10–11, 13–14 | Hide/clear, block/unblock, request cancel, member removal/leave/role changes, lock/unlock and moderation | Respective controller/service tests; Task 15 cancellation demo |
 
 No cryptographic/device-key control is present in the 28 source FXML files. If a migrated source control exposes such an operation, disable it with “Device-key and encryption operations are unavailable in the frontend-only demo.” Real export, file selection, external help, AI/network calls, notification delivery, and cryptography are not added by this inventory. Native window close and keyboard/focus/scroll mechanics remain JavaFX behavior; workflow dialog cancellation and fixed window configuration are verified in their owning tasks.

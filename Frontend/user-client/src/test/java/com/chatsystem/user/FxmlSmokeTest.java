@@ -27,6 +27,10 @@ class FxmlSmokeTest extends JavaFxTestSupport {
                 for (String view : new String[]{"friends", "friend-requests", "blocked-users"})
                     assertNotNull(loader.load("/fxml/views/" + view + ".fxml").controller());
                 assertNotNull(loader.load("/fxml/dialogs/add-friend.fxml").controller());
+                for (String view : new String[]{"group-management", "group-details", "group-invitations"})
+                    assertNotNull(loader.load("/fxml/views/" + view + ".fxml").controller());
+                assertNotNull(loader.load("/fxml/dialogs/create-group.fxml").controller());
+                assertNotNull(loader.load("/fxml/dialogs/invite-members.fxml").controller());
             } finally { stage.close(); }
         });
     }
