@@ -1,5 +1,7 @@
 # Interactive JavaFX Implementation Handoff
 
+> **RESUMED CHECKPOINT UPDATE — 2026-11-15:** The paused Task 3 work described below was resumed and completed. Tasks 3–5 and Batch 2 are now complete and reviewed. Current service-layer commits are `b8e6e9a` (Task 3), `c5c691e` (Task 4), `56e81dc` plus `8d81f8a` (Task 5 and review fix). The full suite passes 98/98 tests, and Batch 2 verification passes. The exact next task is **Task 6**, which is not authorized and has not started. The older pause details below remain as historical recovery evidence.
+
 ## Repository checkpoint
 
 - **Branch:** `feature/interactive-javafx-frontends`

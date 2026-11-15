@@ -21,7 +21,7 @@ This checklist organizes the approved 15 tasks for subagent-driven execution. It
 | Batch | Objective | Tasks | Status |
 |---|---|---:|---|
 | 1 | Establish verified domain and test foundation | 1–2 | `[x]` |
-| 2 | Complete headless mock-service behavior | 3–5 | `[~]` |
+| 2 | Complete headless mock-service behavior | 3–5 | `[x]` |
 | 3 | Build user runtime and authentication workflows | 6–7 | `[ ]` |
 | 4 | Build user chat and social workflows | 8–9 | `[ ]` |
 | 5 | Complete remaining user workflows | 10–11 | `[ ]` |
@@ -72,15 +72,15 @@ Confirm the inventory accounts for all source FXML controls, fixtures are relati
 
 **Checklist:**
 
-- [~] Task 3: Authentication, profile, and settings services — RED tests/contracts complete; implementation paused
-- [ ] Task 3 specification review
-- [ ] Task 3 code-quality review
-- [ ] Task 4: Social and group services with permission rules
-- [ ] Task 4 specification review
-- [ ] Task 4 code-quality review
-- [ ] Task 5: Chat, reports, moderation, metrics, and assistant services
-- [ ] Task 5 specification review
-- [ ] Task 5 code-quality review
+- [x] Task 3: Authentication, profile, and settings services
+- [x] Task 3 specification review
+- [x] Task 3 code-quality review
+- [x] Task 4: Social and group services with permission rules
+- [x] Task 4 specification review
+- [x] Task 4 code-quality review
+- [x] Task 5: Chat, reports, moderation, metrics, and assistant services
+- [x] Task 5 specification review
+- [x] Task 5 code-quality review
 
 **Batch verification:**
 
@@ -296,6 +296,9 @@ Update this section at every task and batch boundary.
 | 2026-11-14 | 1 | 1 | Complete | `5075b04` | 5/5 baseline; full suite; external working-directory run passed | Review clean | Task 2 |
 | 2026-11-14 | 1 | 2 | Complete; Batch 1 complete | `93defe9` | 12/12 focused; 17/17 clean suite; Batch verification passed | Platform-neutral `javafx.base` config added as required; review clean | Task 3 |
 | 2026-11-14 | 2 | 3 | Paused in RED; uncommitted | — | Focused suite compiles; 25 tests run, 20 expected failures against placeholders | Services not implemented; preserved safely | Resume Task 3 Step 3 |
+| 2026-11-15 | 2 | 3 | Complete after resume | `b8e6e9a` | 25/25 focused; 42/42 clean full suite | Review clean | Task 4 |
+| 2026-11-15 | 2 | 4 | Complete | `c5c691e` | 27/27 focused; 69/69 clean full suite | Review clean; minor projection-refresh suggestion recorded | Task 5 |
+| 2026-11-15 | 2 | 5 | Complete after fix round 1; Batch 2 complete | `56e81dc`, `8d81f8a` | 28/28 focused; 98/98 clean full suite; Batch verification passed | Login/APP_OPEN metrics gap fixed and re-review passed | Task 6, pending authorization |
 
 ## Resume checklist
 

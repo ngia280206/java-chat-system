@@ -136,15 +136,15 @@ Cover invalid credentials, locked account, registration validation/duplicate ema
 
 Run: `Frontend\gradlew.bat :shared-client:test --tests "com.chatsystem.shared.mock.service.InMemoryAuthServiceTest" --tests "com.chatsystem.shared.mock.service.InMemoryProfileServiceTest" --tests "com.chatsystem.shared.mock.service.InMemorySettingsServiceTest"`
 
-- [~] **Step 3: Define focused contracts and implement in-memory behavior — paused with compiling placeholder implementations; GREEN behavior remains**
+- [x] **Step 3: Define focused contracts and implement in-memory behavior**
 
 Expose typed validation results and read-only observable session properties. Keep password handling explicitly mock-only and in memory.
 
-- [ ] **Step 4: Run the focused service tests**
+- [x] **Step 4: Run the focused service tests**
 
 Expected command from Step 2: PASS.
 
-- [ ] **Step 5: Commit account services**
+- [x] **Step 5: Commit account services**
 
 ```powershell
 git add Frontend/shared-client/src
@@ -162,27 +162,27 @@ git commit -m "feat: add mock account workflows"
 - Consumes: `MockDataStore`, observable models, `UserSession`.
 - Produces: observable friends/requests/blocks/groups/invitations/member projections and operations `sendRequest`, `acceptRequest`, `rejectRequest`, `cancelRequest`, `blockUser`, `unblockUser`, `createGroup`, `updateGroup`, `inviteMember`, `acceptInvitation`, `rejectInvitation`, `removeMember`, `leaveGroup`, and `changeRole`.
 
-- [ ] **Step 1: Write failing social consistency tests**
+- [x] **Step 1: Write failing social consistency tests**
 
 Assert accepting a request removes it and adds a friend; cancel/reject transitions are correct; blocking is directional, rejects self-block, removes conflicting friendship/pending requests, and appears in blocked users; unblock restores only block state.
 
-- [ ] **Step 2: Write failing group workflow and permission tests**
+- [x] **Step 2: Write failing group workflow and permission tests**
 
 Assert create/invite/join/reject/update/remove/leave changes every observable projection; only admins change roles/remove members; roles are `ADMIN`/`MEMBER`; no action may leave a group with no valid admin; invalid/stale IDs fail without mutation.
 
-- [ ] **Step 3: Run the tests and verify they fail because services are missing**
+- [x] **Step 3: Run the tests and verify they fail because services are missing**
 
 Run: `Frontend\gradlew.bat :shared-client:test --tests "com.chatsystem.shared.mock.service.InMemorySocialServiceTest" --tests "com.chatsystem.shared.mock.service.InMemoryGroupServiceTest"`
 
-- [ ] **Step 4: Implement focused contracts and in-memory services**
+- [x] **Step 4: Implement focused contracts and in-memory services**
 
 Return read-only observable projections and enforce all invariants in services, not controllers.
 
-- [ ] **Step 5: Run social/group tests**
+- [x] **Step 5: Run social/group tests**
 
 Expected command from Step 3: PASS.
 
-- [ ] **Step 6: Commit social/group workflows**
+- [x] **Step 6: Commit social/group workflows**
 
 ```powershell
 git add Frontend/shared-client/src
@@ -200,28 +200,28 @@ git commit -m "feat: add mock social and group workflows"
 - Consumes: Task 2 store/models and Task 3 session.
 - Produces: conversation/message selection and queries; `startConversation`, `sendMessage`, `searchMessages`, `hideMessage`, `clearHistory`; report submission/review/dismiss/warn/suspend; user lock/unlock; user/group/report filters/sorts; derived dashboard metrics; contextual predefined assistant replies.
 
-- [ ] **Step 1: Write failing chat state/visibility tests**
+- [x] **Step 1: Write failing chat state/visibility tests**
 
 Assert sending updates messages, preview, timestamp, ordering, and unread projection; search respects per-user hidden/cleared state; hide affects one user only; clear uses the current sequence boundary without global deletion; starting direct chat reuses an existing pair.
 
-- [ ] **Step 2: Write failing report/admin/assistant tests**
+- [x] **Step 2: Write failing report/admin/assistant tests**
 
 Assert report submission references visible message/user, review/dismiss update queue independently of sanctions, warn records decision and reviews, suspend reviews plus locks, lock/unlock updates metrics, filters/sorts/pagination are deterministic, and assistant responses are predefined/contextual.
 
-- [ ] **Step 3: Run focused tests and verify failure**
+- [x] **Step 3: Run focused tests and verify failure**
 
 Run: `Frontend\gradlew.bat :shared-client:test --tests "com.chatsystem.shared.mock.service.InMemoryChatServiceTest" --tests "com.chatsystem.shared.mock.service.InMemoryReportServiceTest" --tests "com.chatsystem.shared.mock.service.InMemoryAdminServiceTest" --tests "com.chatsystem.shared.mock.service.PredefinedAssistantServiceTest"`
 
-- [ ] **Step 4: Implement the four focused service contracts and mock implementations**
+- [x] **Step 4: Implement the four focused service contracts and mock implementations**
 
 Keep filter/sort criteria as small named value types only where multiple controllers/tests use them; do not add repositories or transport DTOs.
 
-- [ ] **Step 5: Run focused and complete shared-client tests**
+- [x] **Step 5: Run focused and complete shared-client tests**
 
 Run: `Frontend\gradlew.bat :shared-client:test`
 Expected: PASS.
 
-- [ ] **Step 6: Commit conversation/admin services**
+- [x] **Step 6: Commit conversation/admin services**
 
 ```powershell
 git add Frontend/shared-client/src
