@@ -2,6 +2,8 @@ package com.chatsystem.user.controller.chat;
 
 import com.chatsystem.shared.model.*;
 import com.chatsystem.shared.service.ChatService;
+import com.chatsystem.shared.service.AdminService;
+import com.chatsystem.shared.session.UserSession;
 import com.chatsystem.user.navigation.*;
 import com.chatsystem.user.ui.DisabledControlSupport;
 import com.chatsystem.user.ui.cell.MessageBubble;
@@ -15,6 +17,8 @@ import java.util.Objects;
 abstract class ChatConversationController {
     protected final ChatService chat;
     protected final UserNavigator navigator;
+    private final UserSession session;
+    private final AdminService directory;
     private long conversationId;
     @FXML private Label conversationTitle;
     @FXML private ListView<Message> messageList;
@@ -29,12 +33,13 @@ abstract class ChatConversationController {
     @FXML private Label confirmationLabel;
     private Runnable pendingAction;
 
-    ChatConversationController(ChatService chat, UserNavigator navigator) {
-        this.chat = Objects.requireNonNull(chat); this.navigator = Objects.requireNonNull(navigator);
+    ChatConversationController(ChatService chat, UserSession session, AdminService directory, UserNavigator navigator) {
+        this.chat = Objects.requireNonNull(chat); this.session=Objects.requireNonNull(session);
+        this.directory=Objects.requireNonNull(directory); this.navigator = Objects.requireNonNull(navigator);
     }
 
     @FXML private void initialize() {
-        messageList.setCellFactory(ignored -> new MessageBubble(this::requestHide,
+        messageList.setCellFactory(ignored -> new MessageBubble(session.getCurrentUser().getId(), this::displayName, this::requestHide,
                 message -> navigator.showAssistant(conversationId, message.getContent())));
         DisabledControlSupport.install(attachmentButton, attachmentWrapper,
                 "Attachments are unavailable in the frontend-only demo.");
@@ -46,6 +51,10 @@ abstract class ChatConversationController {
             conversationList.setCellFactory(ignored -> new com.chatsystem.user.ui.cell.ConversationCell());
             conversationList.setOnMouseClicked(event -> { if (event.getClickCount() == 2) openConversation(); });
         }
+    }
+
+    private String displayName(long userId) {
+        return directory.getUser(userId).map(UserAccount::getDisplayName).orElse("Unknown user");
     }
 
     public void present(long id) {

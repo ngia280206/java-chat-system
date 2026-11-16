@@ -36,6 +36,9 @@ class FxmlSmokeTest extends JavaFxTestSupport {
                 assertNotNull(loader.load("/fxml/dialogs/new-report.fxml").controller());
                 var profile = loader.load("/fxml/views/profile.fxml").root();
                 assertNotNull(profile.lookup("#profileEmailLabel")); assertNotNull(profile.lookup("#memberSinceLabel")); assertNotNull(profile.lookup("#accountStatusLabel"));
+                assertEquals(1, profile.lookupAll(".profile-main-card").size());
+                assertEquals(1, profile.lookupAll(".profile-account-card").size());
+                assertNotNull(profile.lookup("#profileInitialsLabel"));
                 var settings = loader.load("/fxml/views/settings.fxml").root();
                 assertNotNull(settings.lookup("#privacySummaryLabel")); assertNotNull(settings.lookup("#securitySummaryLabel"));
                 var detail = loader.load("/fxml/views/report-detail.fxml").root();

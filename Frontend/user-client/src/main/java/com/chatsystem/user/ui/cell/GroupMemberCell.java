@@ -11,14 +11,17 @@ public final class GroupMemberCell extends ListCell<ConversationMember> {
     private final BiConsumer<ConversationMember, GroupRole> changeRole;
     private final Consumer<ConversationMember> remove;
     private final Predicate<ConversationMember> protectedMember;
+    private final LongFunction<String> displayName;
     public GroupMemberCell(BooleanSupplier c, BiConsumer<ConversationMember, GroupRole> r,
-                           Consumer<ConversationMember> x, Predicate<ConversationMember> p) {
-        canManage=c; changeRole=r; remove=x; protectedMember=p;
+                           Consumer<ConversationMember> x, Predicate<ConversationMember> p,
+                           LongFunction<String> displayName) {
+        canManage=c; changeRole=r; remove=x; protectedMember=p; this.displayName=displayName;
     }
     @Override protected void updateItem(ConversationMember member, boolean empty) {
         super.updateItem(member, empty);
         if(empty||member==null){setText(null);setGraphic(null);return;}
-        Label identity=new Label("Member #"+member.getUserId()+" · joined "+member.getJoinedAt());
+        Label identity=new Label(displayName.apply(member.getUserId())+" · joined "+member.getJoinedAt());
+        identity.getStyleClass().add("group-member-name");
         HBox.setHgrow(identity,Priority.ALWAYS); HBox row=new HBox(8,identity);
         if(canManage.getAsBoolean()){
             ChoiceBox<GroupRole> roles=new ChoiceBox<>(); roles.setUserData(member.getUserId());

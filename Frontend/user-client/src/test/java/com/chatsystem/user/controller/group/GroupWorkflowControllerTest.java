@@ -36,7 +36,7 @@ class GroupWorkflowControllerTest extends JavaFxTestSupport {
 
     @Test void memberRoleControlsArePermissionAware() throws Exception { workflow((context, stage, navigator) -> {
         navigator.navigate(ViewRequest.of(UserRoute.GROUP_MANAGEMENT));assertNotNull(stage.getScene().getRoot().lookup("#viewAllGroupsButton"));assertNotNull(stage.getScene().getRoot().lookup("#manageMembersButton"));
-        navigator.navigate(ViewRequest.conversation(UserRoute.GROUP_DETAILS,MockFixtures.GROUP_CONVERSATION_ID));stage.show();stage.getScene().getRoot().applyCss();stage.getScene().getRoot().layout();assertFalse(stage.getScene().getRoot().lookupAll(".group-role-selector").isEmpty());assertFalse(stage.getScene().getRoot().lookupAll(".group-remove-action").isEmpty());
+        navigator.navigate(ViewRequest.conversation(UserRoute.GROUP_DETAILS,MockFixtures.GROUP_CONVERSATION_ID));stage.show();stage.getScene().getRoot().applyCss();stage.getScene().getRoot().layout();assertFalse(stage.getScene().getRoot().lookupAll(".group-role-selector").isEmpty());assertFalse(stage.getScene().getRoot().lookupAll(".group-remove-action").isEmpty());var memberNames=stage.getScene().getRoot().lookupAll(".group-member-name");assertFalse(memberNames.isEmpty());assertTrue(memberNames.stream().map(n->((Label)n).getText()).noneMatch(t->t.startsWith("Member #")));
         navigator.navigate(ViewRequest.conversation(UserRoute.GROUP_DETAILS,22));stage.getScene().getRoot().applyCss();stage.getScene().getRoot().layout();assertTrue(stage.getScene().getRoot().lookupAll(".group-role-selector").isEmpty());
     }); }
 

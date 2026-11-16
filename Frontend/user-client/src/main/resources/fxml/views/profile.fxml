@@ -1,1 +1,63 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?><VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.account.ProfileController" spacing="10" styleClass="app-root"><Label text="My profile" styleClass="page-title"/><HBox spacing="16" styleClass="card"><Label fx:id="profileEmailLabel"/><Label fx:id="memberSinceLabel"/><Label fx:id="accountStatusLabel"/></HBox><TextField fx:id="displayNameField" promptText="Display name"/><TextField fx:id="usernameField" promptText="Username"/><TextField fx:id="bioField" promptText="Bio"/><ChoiceBox fx:id="visibilityChoice"/><HBox spacing="8"><StackPane fx:id="previewWrapper"><Button fx:id="previewButton" text="Preview public profile"/></StackPane><StackPane fx:id="avatarWrapper"><Button fx:id="avatarButton" text="Change avatar"/></StackPane><Button fx:id="saveProfileButton" text="Save profile" onAction="#save"/></HBox><Label fx:id="accountFeedbackLabel"/></VBox>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.chatsystem.user.controller.account.ProfileController"
+      spacing="22" styleClass="content-wrap">
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="RELAY  /  PROFILE" styleClass="breadcrumb" HBox.hgrow="ALWAYS"/>
+        <Label text="MY ACCOUNT" styleClass="pill"/>
+      </HBox>
+      <HBox spacing="15" alignment="CENTER_LEFT">
+        <VBox spacing="5" HBox.hgrow="ALWAYS">
+          <Label text="My profile" styleClass="page-title"/>
+          <Label text="Personal information and public identity." styleClass="page-subtitle"/>
+        </VBox>
+        <StackPane fx:id="previewWrapper">
+          <Button fx:id="previewButton" text="Preview public profile" styleClass="secondary-button"/>
+        </StackPane>
+      </HBox>
+      <HBox spacing="16" alignment="TOP_LEFT">
+        <VBox spacing="14" styleClass="card,profile-main-card" HBox.hgrow="ALWAYS">
+          <Label text="Public profile" styleClass="section-title"/>
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <StackPane styleClass="avatar-large">
+              <Label fx:id="profileInitialsLabel" styleClass="avatar-label-large"/>
+            </StackPane>
+            <VBox spacing="6">
+              <Label fx:id="profileDisplayNameLabel" styleClass="section-title"/>
+              <Label fx:id="profileUsernameLabel" styleClass="muted"/>
+              <StackPane fx:id="avatarWrapper" alignment="CENTER_LEFT">
+                <Button fx:id="avatarButton" text="Change avatar" styleClass="small-button"/>
+              </StackPane>
+            </VBox>
+          </HBox>
+          <Separator/>
+          <VBox spacing="7">
+            <Label text="Display name" styleClass="form-label"/>
+            <TextField fx:id="displayNameField" promptText="Display name"/>
+          </VBox>
+          <VBox spacing="7">
+            <Label text="Username" styleClass="form-label"/>
+            <TextField fx:id="usernameField" promptText="Username"/>
+          </VBox>
+          <VBox spacing="7">
+            <Label text="Bio" styleClass="form-label"/>
+            <TextField fx:id="bioField" promptText="Tell people about yourself"/>
+          </VBox>
+          <Button fx:id="saveProfileButton" text="Save profile" onAction="#save" styleClass="primary-button"/>
+          <Label fx:id="accountFeedbackLabel" wrapText="true"/>
+        </VBox>
+        <VBox spacing="14" styleClass="card,profile-account-card" HBox.hgrow="ALWAYS">
+          <Label text="Account information" styleClass="section-title"/>
+          <HBox spacing="12"><Label text="Email" styleClass="muted" HBox.hgrow="ALWAYS"/><Label fx:id="profileEmailLabel" styleClass="body-text"/></HBox>
+          <HBox spacing="12"><Label text="Member since" styleClass="muted" HBox.hgrow="ALWAYS"/><Label fx:id="memberSinceLabel" styleClass="body-text"/></HBox>
+          <HBox spacing="12"><Label text="Account status" styleClass="muted" HBox.hgrow="ALWAYS"/><Label fx:id="accountStatusLabel" styleClass="pill-success"/></HBox>
+          <Separator/>
+          <Label text="Profile visibility" styleClass="form-label"/>
+          <ChoiceBox fx:id="visibilityChoice" maxWidth="Infinity"/>
+          <Label text="Choose who can view your profile details." styleClass="tiny-muted" wrapText="true"/>
+        </VBox>
+      </HBox>
+</VBox>

@@ -53,8 +53,8 @@ public final class FxmlViewLoader {
         if (type == VerificationCodeController.class) return new VerificationCodeController(context.auth(), navigator);
         if (type == ResetPasswordController.class) return new ResetPasswordController(context.auth(), navigator);
         if (type == ChatHomeController.class) return new ChatHomeController(context.chat(), navigator);
-        if (type == ChatPrivateController.class) return new ChatPrivateController(context.chat(), navigator);
-        if (type == ChatGroupController.class) return new ChatGroupController(context.chat(), navigator);
+        if (type == ChatPrivateController.class) return new ChatPrivateController(context.chat(), context.session(), context.admin(), navigator);
+        if (type == ChatGroupController.class) return new ChatGroupController(context.chat(), context.session(), context.admin(), navigator);
         if (type == MessageSearchController.class) return new MessageSearchController(context.chat(), navigator);
         if (type == NewConversationDialogController.class) return new NewConversationDialogController(context.chat(), context.admin(), navigator);
         if (type == AiAssistantPopupController.class) return new AiAssistantPopupController(context.assistant());
@@ -63,7 +63,7 @@ public final class FxmlViewLoader {
         if (type == BlockedUsersController.class) return new BlockedUsersController(context.social(), navigator);
         if (type == AddFriendDialogController.class) return new AddFriendDialogController(context.social(), context.admin());
         if (type == GroupManagementController.class) return new GroupManagementController(context.groups(), navigator);
-        if (type == GroupDetailsController.class) return new GroupDetailsController(context.groups(), context.session(), navigator);
+        if (type == GroupDetailsController.class) return new GroupDetailsController(context.groups(), context.session(), context.admin(), navigator);
         if (type == GroupInvitationsController.class) return new GroupInvitationsController(context.groups(), navigator);
         if (type == CreateGroupDialogController.class) return new CreateGroupDialogController(context.groups(), navigator);
         if (type == InviteMembersDialogController.class) return new InviteMembersDialogController(context.groups(), context.admin());

@@ -120,6 +120,18 @@ class ChatWorkflowControllerTest extends JavaFxTestSupport {
         }});
     }
 
+    @Test void messagesRenderAccountNamesAndAlignCurrentUsersMessagesRight() throws Exception {
+        onFx(() -> { try (var w = Workflow.open()) {
+            w.navigator.navigate(ViewRequest.conversation(UserRoute.CHAT_GROUP, MockFixtures.GROUP_CONVERSATION_ID));
+            w.stage.show(); w.stage.getScene().getRoot().applyCss(); w.stage.getScene().getRoot().layout();
+            assertFalse(w.stage.getScene().getRoot().lookupAll(".message-mine").isEmpty());
+            assertFalse(w.stage.getScene().getRoot().lookupAll(".message-theirs").isEmpty());
+            var names=w.stage.getScene().getRoot().lookupAll(".message-sender").stream().map(node -> ((Label)node).getText()).toList();
+            assertTrue(names.stream().anyMatch(name -> name.equals("You")));
+            assertTrue(names.stream().anyMatch(name -> !name.startsWith("Member #") && !name.equals("You")));
+        }});
+    }
+
     @Test void filtersSearchScopeResultNavigationAndNewConversationModalAreReachable() throws Exception {
         onFx(() -> { try (var w = Workflow.open()) {
             w.click("groupsFilterButton");
