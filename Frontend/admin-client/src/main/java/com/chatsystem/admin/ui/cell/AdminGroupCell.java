@@ -1,0 +1,3 @@
+package com.chatsystem.admin.ui.cell;
+import com.chatsystem.shared.model.Conversation;import javafx.scene.control.*;import javafx.scene.layout.*;import java.util.function.LongConsumer;
+public final class AdminGroupCell extends ListCell<Conversation>{private final LongConsumer open;public AdminGroupCell(LongConsumer open){this.open=open;}@Override protected void updateItem(Conversation g,boolean empty){super.updateItem(g,empty);if(empty||g==null){setGraphic(null);return;}Label text=new Label(g.getName()+"   "+g.getDescription());Button button=new Button("Inspect");button.getStyleClass().add("small-button");button.setOnAction(e->open.accept(g.getId()));setGraphic(new HBox(16,text,button));}}

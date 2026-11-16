@@ -1,9 +1,25 @@
 plugins {
     id 'java-library'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
+}
+
+javafx {
+    version = '17.0.2'
+    modules = ['javafx.base']
+    configuration = 'api'
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
 }

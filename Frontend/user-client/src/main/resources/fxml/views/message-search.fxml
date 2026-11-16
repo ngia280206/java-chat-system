@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.chat.MessageSearchController" styleClass="app-root" prefWidth="1250" prefHeight="850">
+ <top><VBox spacing="12" styleClass="page-header"><HBox spacing="10"><Button text="← Back to chats" onAction="#back"/><Label text="Search messages" styleClass="page-title"/></HBox><HBox spacing="8"><Button fx:id="allConversationsButton" text="All conversations" onAction="#allConversations"/><ComboBox fx:id="conversationScope" promptText="Choose conversation"/><TextField fx:id="queryField" promptText="Search visible messages" HBox.hgrow="ALWAYS"/><Button fx:id="submitSearchButton" text="Search" onAction="#search" styleClass="button-primary"/></HBox><HBox spacing="8"><Label text="All dates"/><StackPane fx:id="imagesWrapper"><Button fx:id="imagesButton" text="Images"/></StackPane><StackPane fx:id="linksWrapper"><Button fx:id="linksButton" text="Links"/></StackPane><StackPane fx:id="filesWrapper"><Button fx:id="filesButton" text="Files"/></StackPane></HBox></VBox></top>
+ <center><VBox spacing="8"><ListView fx:id="resultList" styleClass="card" VBox.vgrow="ALWAYS"/><Button fx:id="openResultButton" text="Open conversation" onAction="#openResult"/></VBox></center>
+</BorderPane>

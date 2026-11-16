@@ -13,6 +13,14 @@ java {
 // Khai báo thư viện
 dependencies {
     implementation project(':shared-client')
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+    // Native JavaFX libraries need a writable cache even in restricted test profiles.
+    systemProperty 'javafx.cachedir', layout.buildDirectory.dir('javafx-cache').get().asFile.absolutePath
 }
 
 // Cấu hình JavaFX
