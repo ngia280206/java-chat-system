@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatsystem.admin.controller.AdminShellController" styleClass="app-root" prefWidth="1480" prefHeight="920">
- <left><VBox spacing="12" styleClass="sidebar" prefWidth="240" minWidth="240" maxWidth="240">
-  <Label text="RELAY ADMIN" styleClass="brand-name"/><Region prefHeight="20"/><Label text="MANAGEMENT" styleClass="sidebar-heading"/>
-  <Button fx:id="dashboardButton" text="  Overview" styleClass="nav-active" prefWidth="206"/><Button fx:id="usersButton" text="  People" styleClass="nav-button" prefWidth="206"/><Button fx:id="groupsButton" text="  Groups" styleClass="nav-button" prefWidth="206"/><Button fx:id="moderationButton" text="  Warnings" styleClass="nav-button" prefWidth="206"/>
-  <Region VBox.vgrow="ALWAYS"/><StackPane fx:id="settingsWrapper"><Button fx:id="settingsButton" text="  Settings" styleClass="nav-button" prefWidth="206"/></StackPane><StackPane fx:id="helpWrapper"><Button fx:id="helpButton" text="  Help &amp; support" styleClass="nav-button" prefWidth="206"/></StackPane>
- </VBox></left><center><StackPane fx:id="contentHost"/></center>
-</BorderPane>

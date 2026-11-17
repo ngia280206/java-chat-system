@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatsystem.admin.controller.UserDetailsController" spacing="20" styleClass="content-area">
- <HBox spacing="12" alignment="CENTER_LEFT"><Button fx:id="backButton" text="Back to users" styleClass="secondary-button"/><Region HBox.hgrow="ALWAYS"/><Button fx:id="restrictButton" text="Restrict user" styleClass="danger-button"/></HBox>
- <VBox styleClass="card" spacing="8"><Label fx:id="nameLabel" styleClass="page-title"/><Label fx:id="emailLabel" styleClass="muted-text"/><Label fx:id="usernameLabel" styleClass="muted-text"/><Label fx:id="createdLabel" styleClass="muted-text"/><Label fx:id="statusLabel" styleClass="status-pill"/></VBox>
- <HBox spacing="16" VBox.vgrow="ALWAYS"><VBox styleClass="card" HBox.hgrow="ALWAYS"><HBox alignment="CENTER_LEFT"><Label text="Recent login history" styleClass="section-title"/><Region HBox.hgrow="ALWAYS"/><Button fx:id="historyButton" text="Full history" styleClass="small-button"/></HBox><ListView fx:id="historyList" VBox.vgrow="ALWAYS"/></VBox><VBox styleClass="card" HBox.hgrow="ALWAYS"><Label text="Activity timeline" styleClass="section-title"/><ListView fx:id="activityList" VBox.vgrow="ALWAYS"/></VBox></HBox>
-</VBox>
