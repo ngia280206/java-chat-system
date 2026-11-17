@@ -1,0 +1,15 @@
+-- OPTIONAL TEMPLATE: execute as the database administrator after reviewing it.
+-- This is a TRUSTED SERVER role, not a per-user desktop login or an RLS policy.
+-- Use a dedicated database. Configure the actual password separately.
+CREATE ROLE relay_backend LOGIN;
+DO $$ BEGIN
+    EXECUTE format('GRANT CONNECT ON DATABASE %I TO relay_backend',current_database());
+END $$;
+GRANT USAGE ON SCHEMA chat TO relay_backend;
+GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA chat TO relay_backend;
+GRANT USAGE,SELECT ON ALL SEQUENCES IN SCHEMA chat TO relay_backend;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA chat TO relay_backend;
+-- In psql set a strong password without embedding it in source control:
+-- \password relay_backend
+-- The backend must authenticate users, derive p_actor_id from the session,
+-- enforce authorization on raw SQL paths, and use prepared statements.
