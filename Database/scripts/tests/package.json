@@ -1,8 +1,8 @@
 {
-  "name": "relay-postgresql-concurrency-tests",
+  "name": "relay-unified-postgresql-tests",
   "private": true,
   "type": "module",
-  "scripts": { "test": "node 02_concurrency_test.mjs" },
+  "scripts": { "test": "node 03_concurrency_test.mjs" },
   "dependencies": { "pg": "8.23.1" },
   "engines": { "node": ">=18" }
 }

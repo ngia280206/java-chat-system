@@ -1,193 +1,104 @@
-# RELAY - PostgreSQL database scripts
+# Bộ SQL đồng bộ đủ 18 bảng
 
-Bộ script triển khai **đúng 14 bảng** của ERD và từ điển dữ liệu trong đồ án. Mục tiêu PostgreSQL **16+**; đã chạy thực tế trên **PostgreSQL 18.6**. Không yêu cầu extension.
+## Bạn đã có database: chỉ chạy một file này
 
-## 1. Cài đặt nhanh
+1. Chép nội dung gói vào thư mục gốc đồ án để có `Database/scripts/`; ghi đè các file SQL cùng tên.
+2. Dừng backend/ứng dụng đang dùng database, mở **pgAdmin > database hiện tại > Query Tool**.
+3. Mở **`UPDATE_EXISTING_DATABASE.sql`**, chạy toàn bộ nội dung một lần.
 
-Giải nén vào dự án để được thư mục `Database/scripts`. Chọn **một** cách cài:
+File này dùng được khi database đang có **14 bảng hoặc đã thêm thành 18 bảng** theo `sqlclone.rar`. Nó tạo phần còn thiếu, kiểm tra cấu trúc, cập nhật hàm/trigger và đồng bộ dữ liệu trong một transaction. Không cần xóa database, không cần chạy lại từng file tạo bảng.
 
-### psql / SQL Shell
+Sau khi chạy, kết quả cuối phải là `total_chat_tables = 18`. Có thể chạy `CHECK_AFTER_INSTALL.sql` để xem nhanh. File cập nhật chạy lại được nếu cấu trúc/dữ liệu phù hợp; không phát lại lệnh khóa của các report đã xử lý xong.
 
-Tạo database mới `relay_chat` bằng pgAdmin hoặc:
+Nếu cấu trúc hoặc dữ liệu cũ mâu thuẫn, script báo rõ trường hợp và rollback toàn bộ. Ví dụ: một lời mời nhóm trỏ vào DIRECT; quyết định DISMISS nhưng report đã là REVIEWED; admin không có quyền trong quyết định chưa áp dụng. Script không tự xóa những dòng đó hoặc tự bịa người xử lý.
 
-```bash
-createdb -h localhost -U postgres -E UTF8 relay_chat
-```
+## Khi tạo database mới
 
-Từ thư mục gốc dự án:
+Chọn database trống rồi chạy toàn bộ **`INSTALL_NEW_DATABASE.sql`**. Sau đó có thể chạy **`16_seed_demo.sql`** để thêm dữ liệu mẫu. Không chạy file cài mới lên database đã có schema `chat`.
+
+File `00_install.sql` là lựa chọn tương đương cho psql, không phải pgAdmin:
 
 ```bash
 psql -X -h localhost -U postgres -d relay_chat -v ON_ERROR_STOP=1 -f Database/scripts/00_install.sql
 ```
 
-`00_install.sql` tự gọi 01-08 bằng `\ir`, đường dẫn tính từ chính file cài đặt. Toàn bộ cài đặt nằm trong một transaction, lỗi sẽ không để lại nửa schema.
+Hai file INSTALL/UPDATE đều là SQL thuần, không có lệnh riêng của psql, nên có thể mở rồi copy toàn bộ vào Query Tool. Không chạy tất cả file trong thư mục bằng wildcard.
 
-### pgAdmin Query Tool
+## Các phần đã đồng bộ
 
-1. Tạo database `relay_chat` với encoding UTF8 và chọn database đó.
-2. Mở Query Tool, mở **`bundles/install_pgadmin.sql`**, chạy toàn bộ file.
-3. Refresh `Schemas > chat > Tables`: phải có **14 bảng**.
+| Phần | Hành vi |
+| --- | --- |
+| Lời mời nhóm | Chỉ mời vào GROUP; người mời phải là admin đang hoạt động; kiểm tra trùng lời mời |
+| Chấp nhận lời mời | Đổi trạng thái và thêm/kích hoạt membership trong cùng transaction |
+| Thêm thành viên qua API admin cũ | Hủy lời mời PENDING đã không còn cần thiết; không giả lập người nhận đã bấm chấp nhận |
+| Admin nhóm rời nhóm/hạ quyền | Hủy lời mời PENDING do người đó gửi |
+| Cài đặt | Tạo cho user cũ và user đăng ký mới; giữ cài đặt đã lưu; tự cập nhật updated_at |
+| Đặt lại mật khẩu | Tự thu hồi yêu cầu cũ khi tạo yêu cầu mới; theo dõi hạn, số lần sai, xác minh và dùng một lần |
+| Xử lý báo cáo | Ghi admin/ghi chú/hành động, cập nhật report; SUSPEND khóa tài khoản cùng transaction |
+| Hàm review_spam_report cũ | Vẫn gọi được, nay cũng ghi moderation_actions |
+| User bị khóa/xóa mềm | Thu hồi reset còn mở; khi xóa mềm, hủy lời mời bạn bè/nhóm đang chờ |
+| Quyền backend | Cấp quyền cho các đối tượng mới nếu role server `relay_backend` đã có |
 
-Bundle chứa cùng SQL 01-08, không có meta-command của psql. Không chạy bundle sau `00_install.sql`.
+Các cột/bảng cũ được giữ lại. Chỉ thêm đúng 4 bảng đã thống nhất: group_invitations, user_settings, password_reset_requests, moderation_actions. Không thêm các cột bio, mô tả nhóm hoặc mốc đọc của bản ERD dài.
 
-Đây là migration khởi tạo, **không phải script reset**: chạy lại sẽ báo schema `chat` đã tồn tại và dừng, không tự xóa dữ liệu. Không chạy mọi `*.sql` bằng wildcard vì sẽ chạy trùng hai cách cài và cả seed tùy chọn.
+## Dữ liệu đã có trong bản chỉ CREATE TABLE
 
-## 2. Cách chia file
+- Lời mời ACCEPTED mà chưa từng có membership được bổ sung membership theo thời điểm chấp nhận. Nếu membership đã rời nhóm sau lần chấp nhận đó thì giữ nguyên trạng thái đã rời. Nếu cần sửa membership nhưng tài khoản không còn ACTIVE, script dừng để kiểm tra dữ liệu.
+- Quyết định đã ghi nhưng report còn PENDING được áp dụng. Với SUSPEND, tài khoản đích sẽ bị khóa. Các report đã xử lý từ trước mà chưa có quyết định vẫn được giữ nguyên, không tự tạo admin/ghi chú giả.
+- Yêu cầu reset hết hạn/hết lượt được thu hồi; cài đặt cũ được giữ nguyên.
+
+Khóa trực tiếp ở màn hình Users vẫn dùng `set_account_locked`; thao tác không có report_id nên không tạo quyết định báo cáo.
+
+## Thứ tự file nguồn mới
+
+Các file được đánh số liên tục theo thứ tự phụ thuộc. Không còn bước nhảy từ 09 lên 15.
 
 | File | Nội dung |
 | --- | --- |
-| `00_install.sql` | Điểm chạy psql, gọi 01-08 trong một transaction |
-| `01_schema_types.sql` | Schema `chat`, 8 ENUM, quyền mặc định |
-| `02_accounts_social.sql` | `users`, `friend_requests`, `friendships`, `user_blocks` |
-| `03_conversations_keys.sql` | `conversations`, `conversation_members`, `user_devices`, `group_key_versions`, `group_key_envelopes` |
-| `04_messages_activity_reports.sql` | `messages`, `message_hidden_for_users`, `login_history`, `activity_logs`, `spam_reports` |
-| `05_indexes.sql` | Index cho FK, lịch sử, thống kê, nonce |
-| `06_integrity_triggers.sql` | Quy tắc liên bảng, sequence và ghi log tự động |
-| `07_service_functions.sql` | Các hàm nghiệp vụ backend gọi |
-| `08_views.sql` | Thống kê nhóm, đăng nhập cuối, hoạt động theo ngày |
-| `09_seed_demo.sql` | Seed tùy chọn, chạy riêng sau khi cài |
-| `bundles/install_pgadmin.sql` | Bản ghép 01-08 cho Query Tool |
-| `bundles/seed_demo_pgadmin.sql` | Seed không có meta-command psql |
-| `examples/01_queries.sql` | 10 truy vấn đọc/thống kê mẫu |
-| `examples/02_backend_permissions.sql.example` | Mẫu cấp quyền cho server tin cậy |
-| `tests/01_smoke_test.sql` | 58 kiểm tra, rollback dữ liệu test |
-| `tests/02_concurrency_test.mjs` | 9 kịch bản hai kết nối thật |
-| `TEST_RESULTS.md` | Kết quả kiểm tra và phạm vi |
+| `00_install.sql` | Chạy toàn bộ bằng psql |
+| `01_schema_types.sql` | Schema và kiểu dữ liệu |
+| `02_accounts_social.sql` | Tài khoản, bạn bè và chặn |
+| `03_conversations_keys.sql` | Hội thoại, thành viên và khóa |
+| `04_messages_activity_reports.sql` | Tin nhắn, hoạt động và báo cáo |
+| `05_group_invitations.sql` | Lời mời nhóm |
+| `06_user_settings.sql` | Cài đặt cá nhân |
+| `07_password_reset_requests.sql` | Yêu cầu đặt lại mật khẩu |
+| `08_moderation_actions.sql` | Quyết định xử lý báo cáo |
+| `09_indexes.sql` | Index của phần nền |
+| `10_integrity_triggers.sql` | Trigger kiểm tra phần nền |
+| `11_service_functions.sql` | Hàm nghiệp vụ phần nền |
+| `12_sync_triggers.sql` | Trigger đồng bộ các bảng |
+| `13_sync_functions.sql` | Hàm đồng bộ và API tương thích |
+| `14_views.sql` | Các view tổng hợp |
+| `15_sync_data_permissions.sql` | Đồng bộ dữ liệu và phân quyền |
+| `16_seed_demo.sql` | Dữ liệu mẫu, chạy riêng khi cần |
 
-Giữ tên bảng/cột theo ERD. Dùng tiền tố `chat.`, không phải `public.users`.
+`00_install.sql` gọi 01-15 đúng thứ tự; 16 là seed tùy chọn. Hai file INSTALL/UPDATE vẫn chạy độc lập trong pgAdmin. Tên bảng, cột, hàm và logic SQL không đổi.
 
-## 3. Quy đổi và quyết định triển khai
+Khi cập nhật file trong repo, dùng thư mục scripts mới thay cho bản gói cũ để tránh giữ cả hai bộ tên. Không xóa database để đổi tên file.
 
-| ERD / nghiệp vụ | PostgreSQL |
+## Backend gọi gì?
+
+| Hàm | Công dụng |
 | --- | --- |
-| ID đơn BIGINT | `GENERATED ALWAYS AS IDENTITY` |
-| BLOB / TIMESTAMP | `bytea` / `timestamptz` |
-| Username, email duy nhất | Unique index trên `lower(...)`, kể cả tài khoản xóa mềm |
-| Bạn bè không đảo cặp | PK ghép và `user_id_1 < user_id_2` |
-| Một request PENDING mỗi cặp | Partial unique index với LEAST/GREATEST |
-| DIRECT đúng hai người, không trùng cặp | Deferred constraint trigger và advisory lock theo cặp |
-| Nhóm mới | Creator là ADMIN, ít nhất hai thành viên khi commit |
-| Nhóm đã tồn tại | Có thể còn một người, nhưng phải còn ADMIN; chưa hỗ trợ nhóm rỗng |
-| Xóa tài khoản | `status='DELETED'`, `deleted_at`; cấm DELETE vật lý và khôi phục |
-| Rời nhóm | `left_at`, giữ membership cũ để bảo toàn FK |
-| Tham gia lại | Giữ joined_at gốc và watermark cũ; backend quyết định chính sách lịch sử |
-| Xóa một tin / cả lịch sử riêng | `message_hidden_for_users` / watermark số thứ tự |
-| message_seq | Trigger khóa hội thoại và cấp max+1; không dùng sequence toàn cục |
-| Tin nhắn và thống kê | Mỗi INSERT tự ghi một MESSAGE_SENT trong cùng transaction |
-| Payload | Bản rõ hoặc bản mã, không đồng thời cả hai |
-| E2EE | Chỉ GROUP vì ERD chỉ mô hình hóa phân phối khóa nhóm; DIRECT dùng NONE |
-| Nonce | Không trùng `(conversation_id,key_version,nonce)` |
-| Block | Cấm kết bạn/gửi DIRECT hai chiều; hủy request chờ, xóa friendship; không chặn tin nhóm chung |
-| Lịch sử | Tin nhắn/log append-only; ẩn riêng thay cho sửa/xóa bản tin gốc |
+| `save_user_settings(actor,notifications,sound,previews)` | Lưu cài đặt |
+| `create_group_invitation(actor,group,invitee)` | Tạo lời mời, trả invitation_id |
+| `respond_group_invitation(actor,invitation,status)` | ACCEPTED / REJECTED / CANCELLED |
+| `create_password_reset(user,token_hash,ttl,attempt_limit)` | Tạo yêu cầu; mặc định 15 phút, 5 lần sai |
+| `verify_password_reset(reset,candidate_hash)` | Kiểm tra mã, trả true/false |
+| `complete_password_reset(reset,candidate_hash,new_password_hash)` | Hoàn tất và dùng hết yêu cầu |
+| `moderate_report(admin,report,action,notes)` | REVIEW / DISMISS / WARN / SUSPEND |
 
-Độ dài VARCHAR, giới hạn trang 1-200, không phân biệt hoa/thường của username/email và các lựa chọn ở trên là quyết định triển khai. Email chỉ kiểm tra định dạng cơ bản. Database kiểm tra độ dài password_hash, **không** xác minh thuật toán/hash hợp lệ.
+Các ID actor/admin phải lấy từ session server. Các hàm là SECURITY INVOKER; kiểm tra dữ liệu/vai trò không thay thế xác thực danh tính. Role server có SQL trực tiếp cần được backend kiểm soát, không phát cùng JavaFX. Nếu backend dùng role khác `relay_backend`, quản trị viên cấp quyền tương ứng theo phần GRANT trong file 15.
 
-## 4. Transaction và Java backend
+SQL không tự gửi email, sinh OTP hoặc băm mật khẩu. Backend tạo token/hash/HMAC bằng thư viện phù hợp và truyền bytea, không lưu OTP gốc. Với OTP ngắn cần bảo vệ phù hợp và giới hạn tần suất gửi ở server. Password mới được backend băm bằng Argon2id/bcrypt; SQL chỉ kiểm tra hình dạng chuỗi hash.
 
-Ghi dữ liệu **yêu cầu READ COMMITTED**, mặc định PostgreSQL. Trigger từ chối ghi ở isolation khác với SQLSTATE `25000`: sau khi chờ advisory lock, kiểm tra liên bảng phải nhìn thấy dữ liệu mới commit. Đọc/báo cáo vẫn có thể dùng snapshot riêng.
+Sau verify/complete trả **false**, commit để giữ số lần sai đã tăng; SQLException thì rollback. Ghi dữ liệu dùng READ COMMITTED như bộ nền; giữ transaction ngắn và retry toàn transaction khi gặp deadlock 40P01. Quyền xem dữ liệu và vô hiệu hóa session vẫn do backend thực hiện. Frontend mock không tự đổi thành kết nối database chỉ bằng việc chép SQL.
 
-Tạo hội thoại và thành viên ban đầu phải cùng transaction. Kiểm tra đủ người/admin chạy ở COMMIT, nên backend phải xử lý cả lỗi commit. Có thể cấp admin mới rồi hạ quyền/rời nhóm trong cùng transaction.
+## Kiểm tra đã thực hiện
 
-```java
-connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-connection.setAutoCommit(false);
-try {
-    // PreparedStatement: SELECT chat.create_direct_conversation(?, ?)
-    // Hoặc SELECT chat.send_text_message(?, ?, ?)
-    // actorId lấy từ session đã xác thực ở server.
-    connection.commit();
-} catch (SQLException ex) {
-    connection.rollback();
-    throw ex;
-}
-```
+PostgreSQL 18.6 native: **130 kiểm tra SQL** (58 nền + 65 đồng bộ + 7 vòng đời), **14 kịch bản khóa/đồng thời**, cài mới, cập nhật từ 14 bảng, cập nhật từ 18 bảng có dữ liệu và chạy lại migration. Chi tiết ở `TEST_RESULTS.md`.
 
-Khóa theo hội thoại bảo vệ gửi tin/xóa lịch sử/thay đổi thành viên; khóa theo cặp bảo vệ DIRECT/block/bạn bè; khóa đọc tài khoản/thiết bị đồng bộ với lock/revoke. Giữ transaction ngắn, không chờ mạng/mã hóa trong transaction. Khi ghép nhiều nghiệp vụ, backend cần retry toàn transaction khi gặp deadlock `40P01`, khóa nhiều đối tượng theo thứ tự ID thống nhất.
+Thư mục `tests` để kiểm tra trên database phát triển. Các file SQL test rollback các dòng test, sequence có thể tăng. Test Node tùy chọn cần `npm install`, các biến PGHOST/PGPORT/PGUSER/PGPASSWORD/PGDATABASE và database tên kết thúc `_test`/`_validation`; `npm test` giữ fixture đã commit để kiểm tra cạnh tranh. Không cần Node để sử dụng database.
 
-SQLSTATE: `23505` trùng khóa/cặp/nonce; `23503` FK; `23514` vi phạm nghiệp vụ; `42501` thiếu quyền trong hàm; `25000` sai isolation. Identity ID có thể có khoảng trống sau rollback.
-
-### Hàm backend
-
-| Hàm | Mục đích |
-| --- | --- |
-| `create_direct_conversation(actor,other)` | Trả ID có sẵn hoặc tạo DIRECT mới |
-| `create_group(actor,name,member_ids,mode)` | Tạo nhóm, tự thêm creator làm admin |
-| `add_group_member(actor,group,user)` | Admin thêm/tham gia lại thành viên |
-| `remove_group_member(actor,group,user)` | Admin cho người khác rời nhóm |
-| `change_group_role(actor,group,user,role)` | Đổi quyền, bảo vệ admin cuối |
-| `leave_group(actor,group)` | Tự rời nhóm |
-| `send_text_message(actor,conversation,text)` | Tạo tin, tự cấp thứ tự và ghi log |
-| `send_encrypted_message(actor,conversation,ciphertext,nonce,version)` | Lưu bản mã client tạo |
-| `get_visible_messages(actor,conversation,limit,before_seq)` | Phân trang mới nhất trước, lọc tin ẩn/watermark |
-| `search_visible_messages(actor,conversation,query,limit)` | Tìm chuỗi literal không phân biệt hoa/thường |
-| `hide_message(actor,message)` / `clear_history(actor,conversation)` | Ẩn riêng tin / lịch sử đến mốc hiện tại |
-| `send_friend_request(actor,receiver)` | Tạo request PENDING |
-| `respond_friend_request(actor,request,status)` | Receiver accept/reject, sender cancel |
-| `block_user(actor,target)` / `unblock_user(actor,target)` | Chặn / bỏ chặn đúng hướng |
-| `submit_spam_report(actor,message,reason)` | Báo cáo tin nhìn thấy, tự lấy đúng sender |
-| `review_spam_report(admin,report,status)` | REVIEWED hoặc DISMISSED |
-| `set_account_locked(admin,target,locked)` | Khóa/mở tài khoản khác chưa DELETED |
-
-JDBC dùng `long`/`setLong` cho BIGINT, `createArrayOf("bigint", ...)` cho mảng thành viên, `setBytes` cho bytea, `OffsetDateTime`/`Instant` cho thời điểm. Múi giờ hiển thị do client quyết định. Trang lịch sử trả mới nhất trước, UI có thể đảo trang để hiển thị thời gian tăng dần.
-
-## 5. Dữ liệu demo
-
-Tùy chọn sau khi cài:
-
-```bash
-psql -X -h localhost -U postgres -d relay_chat -v ON_ERROR_STOP=1 -f Database/scripts/09_seed_demo.sql
-```
-
-pgAdmin dùng `bundles/seed_demo_pgadmin.sql`. Seed có transaction riêng, từ chối email demo đã tồn tại, không ghi đè dữ liệu cũ.
-
-- User: `alex.morgan@example.com`; admin: `admin@relay.example`.
-- Mật khẩu chung: `DemoPass123!`, lưu **bcrypt cost 12** thực sự.
-- Tạo 5 tài khoản, 1 DIRECT, 1 nhóm, 4 tin nhắn, 1 báo cáo PENDING.
-
-Backend phải tự xác thực bcrypt rồi mới ghi login_history. Cài database **không tự chuyển JavaFX từ mock sang PostgreSQL**; cần backend/JDBC adapter. Byte giả lập trong test E2EE chỉ kiểm tra cấu trúc, không dùng như bản mã/khóa thực tế.
-
-## 6. Quyền truy cập và khoảng trống ERD
-
-Hàm là **SECURITY INVOKER**. PUBLIC không được dùng schema/thực thi function. Mẫu cấp quyền chỉ dành cho **server tin cậy**; không nhúng tài khoản database vào JavaFX phát cho người dùng.
-
-`p_actor_id` phải lấy từ session server; hàm kiểm tra vai trò nhưng không tự xác thực caller. Role backend có SQL trực tiếp nên vẫn phải kiểm soát mọi đường ghi/đọc khác. View không phải RLS. Không dùng DB owner cho kết nối phục vụ người dùng.
-
-Giữ nguyên ERD nên chưa thêm lời mời nhóm, mô tả nhóm, avatar, settings, read receipt/unread count, token reset mật khẩu, ghi chú/cảnh cáo chi tiết. Frontend có một số khái niệm này: cần migration bổ sung khi chốt thiết kế. REVIEWED không tự đồng nghĩa warn/lock; backend có thể review và lock cùng transaction, nhưng lưu quyết định/ghi chú cần mở rộng ERD.
-
-Khóa chỉ lưu public key, phiên bản và wrapped key. Không tạo/giải mã khóa, không tự rotate khi thành viên/thiết bị thay đổi, không xác minh thuật toán/độ dài nonce. Giao thức E2EE, thu hồi/cấp khóa, quyền lịch sử khi tham gia lại và bằng chứng báo cáo bản mã cần thiết kế ở client/server. Tìm nội dung E2EE thực hiện phía client sau giải mã.
-
-## 7. Chạy lại kiểm thử
-
-Tạo database riêng `relay_chat_test`, cài schema, rồi:
-
-```bash
-psql -X -h localhost -U postgres -d relay_chat_test -v ON_ERROR_STOP=1 -f Database/scripts/tests/01_smoke_test.sql
-```
-
-Smoke test rollback các dòng/temp object, sequence có thể tăng. Trong pgAdmin bỏ dòng `\set` trước khi chạy toàn bộ file.
-
-Test đồng thời tùy chọn cần Node >=18 và package pg, chỉ là dependency kiểm thử:
-
-```bash
-cd Database/scripts/tests
-npm install
-```
-
-Đặt PGHOST, PGPORT, PGUSER, PGPASSWORD, PGDATABASE rồi `npm test`. Ví dụ PowerShell:
-
-```powershell
-$env:PGHOST='localhost'
-$env:PGPORT='5432'
-$env:PGUSER='postgres'
-$env:PGDATABASE='relay_chat_test'
-# Đặt PGPASSWORD theo database cục bộ của bạn.
-npm test
-```
-
-Test yêu cầu hậu tố database `_test` hoặc `_validation`. Fixtures được commit và giữ lại để kiểm tra: không chạy trên database dùng thật. Không cần Node để cài hoặc sử dụng database.
-
-## 8. Nguồn kỹ thuật
-
-- [PostgreSQL 16 - Constraints](https://www.postgresql.org/docs/16/ddl-constraints.html).
-- [PostgreSQL 16 - CREATE TRIGGER](https://www.postgresql.org/docs/16/sql-createtrigger.html).
-- [PostgreSQL 16 - Explicit/advisory locking](https://www.postgresql.org/docs/16/explicit-locking.html).
+Mục tiêu PostgreSQL 16+; đã chạy thực tế trên 18.6, chưa chạy riêng 16/17.

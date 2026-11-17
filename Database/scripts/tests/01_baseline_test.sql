@@ -1,6 +1,5 @@
 -- Run only on a development/test database after installation.
 -- All rows are rolled back. Identity sequences can still advance (normal PostgreSQL behavior).
-\set ON_ERROR_STOP on
 BEGIN;
 CREATE TEMP TABLE relay_test_results (label text NOT NULL);
 
@@ -37,8 +36,8 @@ DECLARE
     v_count bigint; v_hash text := '$TEST_ONLY_HASH_NOT_A_VALID_LOGIN_HASH$';
     prefix text := 'test_' || txid_current() || '_';
 BEGIN
-    PERFORM pg_temp.assert_true((SELECT count(*) = 14 FROM information_schema.tables
-        WHERE table_schema = 'chat' AND table_type = 'BASE TABLE'), 'ERD has exactly 14 tables');
+    PERFORM pg_temp.assert_true((SELECT count(*) = 18 FROM information_schema.tables
+        WHERE table_schema = 'chat' AND table_type = 'BASE TABLE'), 'ERD has exactly 18 tables');
     INSERT INTO chat.users(username,email,password_hash,full_name) VALUES(prefix||'a',prefix||'a@example.com',v_hash,'An') RETURNING user_id INTO a;
     INSERT INTO chat.users(username,email,password_hash,full_name) VALUES(prefix||'b',prefix||'b@example.com',v_hash,'Binh') RETURNING user_id INTO b;
     INSERT INTO chat.users(username,email,password_hash,full_name) VALUES(prefix||'c',prefix||'c@example.com',v_hash,'Chi') RETURNING user_id INTO c;
