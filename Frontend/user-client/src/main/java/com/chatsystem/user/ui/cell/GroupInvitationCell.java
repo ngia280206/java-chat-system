@@ -1,1 +1,13 @@
-package com.chatsystem.user.ui.cell;import com.chatsystem.shared.model.GroupInvitation;import javafx.scene.control.ListCell;public final class GroupInvitationCell extends ListCell<GroupInvitation>{@Override protected void updateItem(GroupInvitation i,boolean e){super.updateItem(i,e);setText(e||i==null?null:"Group #"+i.getConversationId()+" · invited by account "+i.getInviterId());}}
+package com.chatsystem.user.ui.cell;
+
+import com.chatsystem.shared.model.GroupInvitation;
+import javafx.scene.control.ListCell;
+
+public final class GroupInvitationCell extends ListCell<GroupInvitation> {
+
+    @Override
+    protected void updateItem(GroupInvitation i, boolean e) {
+        super.updateItem(i, e);
+        setText(e || i == null ? null : "Group #" + i.getConversationId() + " · invited by account " + i.getInviterId());
+    }
+}

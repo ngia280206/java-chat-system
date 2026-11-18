@@ -22,6 +22,8 @@ public final class InMemorySocialService implements SocialService {
     private final UserSession session;
     private final ObservableList<UserAccount> friends = FXCollections.observableArrayList();
     private final ObservableList<UserAccount> blocked = FXCollections.observableArrayList();
+    private final ObservableList<UserAccount> discoverable = FXCollections.observableArrayList();
+    private final ObservableList<UserAccount> discoverableView = FXCollections.unmodifiableObservableList(discoverable);
     private final ObservableList<FriendRequest> incoming = FXCollections.observableArrayList();
     private final ObservableList<FriendRequest> outgoing = FXCollections.observableArrayList();
     private final ObservableList<UserAccount> friendsView;
@@ -49,6 +51,7 @@ public final class InMemorySocialService implements SocialService {
     @Override public ObservableList<FriendRequest> getIncomingRequests() { return incomingView; }
     @Override public ObservableList<FriendRequest> getOutgoingRequests() { return outgoingView; }
     @Override public ObservableList<UserAccount> getBlockedUsers() { return blockedView; }
+    @Override public ObservableList<UserAccount> getDiscoverableUsers() { return discoverableView; }
 
     @Override
     public ValidationResult<FriendRequest> sendRequest(long userId) {
@@ -86,6 +89,14 @@ public final class InMemorySocialService implements SocialService {
 
     @Override public ValidationResult<Void> cancelRequest(long requestId) {
         return resolveRequest(requestId, true, FriendRequestStatus.CANCELLED);
+    }
+
+    @Override
+    public ValidationResult<Void> removeFriend(long userId) {
+        UserAccount actor = actor();
+        if (actor == null || !areFriends(actor.getId(), userId)) return failure("Choose a current friend");
+        store.removeMockFriendship(actor.getId(), userId);
+        return ValidationResult.success(null);
     }
 
     @Override
@@ -129,6 +140,9 @@ public final class InMemorySocialService implements SocialService {
     private void refresh() {
         UserAccount actor = actor();
         friends.setAll(store.getUsers().stream().filter(u -> actor != null && areFriends(actor.getId(), u.getId())).toList());
+        discoverable.setAll(store.getUsers().stream().filter(u -> actor != null
+                && u.getId() != actor.getId() && u.getStatus() == UserStatus.ACTIVE
+                && !blockedEitherWay(actor.getId(), u.getId())).toList());
         blocked.setAll(store.getUsers().stream().filter(u -> actor != null && hasBlock(actor.getId(), u.getId())).toList());
         incoming.setAll(store.getFriendRequests().stream().filter(r -> actor != null
                 && r.getStatus() == FriendRequestStatus.PENDING && r.getReceiverId() == actor.getId()).toList());

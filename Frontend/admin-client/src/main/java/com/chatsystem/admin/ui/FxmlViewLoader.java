@@ -11,6 +11,7 @@ public final class FxmlViewLoader {
     public LoadedView load(String path){FXMLLoader loader=new FXMLLoader(resource(path));loader.setControllerFactory(this::createController);try{return new LoadedView(loader.load(),loader.getController());}catch(IOException e){throw new IllegalStateException("Could not load "+path,e);}}
     public Object createController(Class<?> type){
         if(type==AdminShellController.class)return new AdminShellController(navigator);
+        if(type==AnalyticsController.class)return new AnalyticsController(context.admin());
         if(type==DashboardController.class)return new DashboardController(context.admin(),navigator);
         if(type==UsersController.class)return new UsersController(context.admin(),navigator);
         if(type==UserDetailsController.class)return new UserDetailsController(context.admin(),navigator);

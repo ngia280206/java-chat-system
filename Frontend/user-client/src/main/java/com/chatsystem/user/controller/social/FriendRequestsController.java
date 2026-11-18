@@ -8,23 +8,47 @@ import com.chatsystem.user.ui.cell.FriendRequestCell;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.collections.transformation.FilteredList;
+import com.chatsystem.shared.service.AdminService;
+import com.chatsystem.shared.model.UserAccount;
+import java.util.Locale;
 
 import java.util.function.LongFunction;
 
 public final class FriendRequestsController {
     private final SocialService social;
     private final UserNavigator navigator;
+    private final AdminService directory;
     private FriendRequest pendingCancellation;
+    @FXML private TextField requestSearchField;
     @FXML private ListView<FriendRequest> incomingList;
     @FXML private ListView<FriendRequest> outgoingList;
     @FXML private Label requestFeedbackLabel;
     @FXML private HBox requestConfirmationBar;
 
-    public FriendRequestsController(SocialService social, UserNavigator navigator) { this.social = social; this.navigator = navigator; }
+    public FriendRequestsController(SocialService social, UserNavigator navigator) { this(social,null,navigator); }
+    public FriendRequestsController(SocialService social, AdminService directory, UserNavigator navigator) {
+        this.social=social;this.directory=directory;this.navigator=navigator;
+    }
     @FXML private void initialize() {
-        incomingList.setItems(social.getIncomingRequests()); outgoingList.setItems(social.getOutgoingRequests());
+        FilteredList<FriendRequest> incoming=new FilteredList<>(social.getIncomingRequests());
+        FilteredList<FriendRequest> outgoing=new FilteredList<>(social.getOutgoingRequests());
+        incomingList.setItems(incoming); outgoingList.setItems(outgoing);
+        requestSearchField.textProperty().addListener((o,a,text)->{
+            String needle=text.strip().toLowerCase(Locale.ROOT);
+            incoming.setPredicate(r->matches(r.getSenderId(),needle));
+            outgoing.setPredicate(r->matches(r.getReceiverId(),needle));
+        });
+        incomingList.setPlaceholder(new Label("No matching incoming requests"));
+        outgoingList.setPlaceholder(new Label("No matching sent requests"));
         incomingList.setCellFactory(ignored -> new FriendRequestCell("Accept", request -> apply(social.acceptRequest(request.getId()), "Request accepted"), "Decline", request -> apply(social.rejectRequest(request.getId()), "Request declined")));
         outgoingList.setCellFactory(ignored -> new FriendRequestCell("Cancel request", this::requestCancel, null, null));
+    }
+    private boolean matches(long id,String query) {
+        if (query.isEmpty()) return true;
+        if(directory==null) return Long.toString(id).contains(query);
+        return directory.getUser(id).map(u->u.getDisplayName().toLowerCase(Locale.ROOT).contains(query)
+                ||u.getUsername().toLowerCase(Locale.ROOT).contains(query)).orElse(false);
     }
     @FXML private void accept() { run(incomingList, social::acceptRequest, "Request accepted"); }
     @FXML private void decline() { run(incomingList, social::rejectRequest, "Request declined"); }

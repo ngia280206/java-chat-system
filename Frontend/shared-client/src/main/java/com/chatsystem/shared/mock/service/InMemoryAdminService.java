@@ -14,6 +14,7 @@ import java.time.*;
 import java.util.*;
 
 public final class InMemoryAdminService implements AdminService {
+
     private final MockDataStore store;
     private final ObservableList<Conversation> groups = FXCollections.observableArrayList();
     private final ObservableList<Conversation> groupsView = FXCollections.unmodifiableObservableList(groups);
@@ -36,28 +37,51 @@ public final class InMemoryAdminService implements AdminService {
         refresh();
     }
 
-    @Override public ObservableList<UserAccount> getUsers() { return store.getUsers(); }
-    @Override public ObservableList<Conversation> getGroups() { return groupsView; }
-    @Override public ObservableList<SpamReport> getReports() { return store.getReports(); }
-    @Override public Optional<UserAccount> getUser(long userId) {
+    @Override
+    public ObservableList<UserAccount> getUsers() {
+        return store.getUsers();
+    }
+
+    @Override
+    public ObservableList<Conversation> getGroups() {
+        return groupsView;
+    }
+
+    @Override
+    public ObservableList<SpamReport> getReports() {
+        return store.getReports();
+    }
+
+    @Override
+    public Optional<UserAccount> getUser(long userId) {
         return store.getUsers().stream().filter(u -> u.getId() == userId).findFirst();
     }
-    @Override public Optional<Conversation> getGroup(long groupId) {
+
+    @Override
+    public Optional<Conversation> getGroup(long groupId) {
         return store.getConversations().stream().filter(c -> c.getId() == groupId && c.getType() == ConversationType.GROUP).findFirst();
     }
-    @Override public Optional<SpamReport> getReport(long reportId) {
+
+    @Override
+    public Optional<SpamReport> getReport(long reportId) {
         return store.getReports().stream().filter(r -> r.getId() == reportId).findFirst();
     }
-    @Override public Optional<Message> getMessage(long messageId) {
+
+    @Override
+    public Optional<Message> getMessage(long messageId) {
         return store.getMessages().stream().filter(m -> m.getId() == messageId).findFirst();
     }
 
-    @Override public List<UserAccount> searchUsers(String query, UserStatus status, UserSort sort, int page, int pageSize) {
+    @Override
+    public List<UserAccount> searchUsers(String query, UserStatus status, UserSort sort, int page, int pageSize) {
         String text = MockServiceQueries.normalize(query);
         Comparator<UserAccount> order = switch (Objects.requireNonNull(sort)) {
-            case NAME -> Comparator.comparing(u -> MockServiceQueries.normalize(u.getDisplayName()));
-            case NEWEST -> Comparator.comparing(UserAccount::getCreatedAt).reversed();
-            case RECENT_LOGIN -> Comparator.comparing((UserAccount u) -> lastLogin(u.getId())).reversed();
+            case NAME ->
+                Comparator.comparing(u -> MockServiceQueries.normalize(u.getDisplayName()));
+            case NEWEST ->
+                Comparator.comparing(UserAccount::getCreatedAt).reversed();
+            case RECENT_LOGIN ->
+                Comparator.comparing((UserAccount u) -> lastLogin(u.getId())).reversed();
         };
         return MockServiceQueries.page(store.getUsers().stream().filter(u -> status == null || u.getStatus() == status)
                 .filter(u -> MockServiceQueries.normalize(u.getDisplayName()).contains(text)
@@ -67,80 +91,209 @@ public final class InMemoryAdminService implements AdminService {
                 .sorted(order.thenComparingLong(UserAccount::getId)).toList(), page, pageSize);
     }
 
-    @Override public List<Conversation> searchGroups(String query, GroupSort sort, int page, int pageSize) {
+    @Override
+    public List<Conversation> searchGroups(String query, GroupSort sort, int page, int pageSize) {
         String text = MockServiceQueries.normalize(query);
         Comparator<Conversation> order = switch (Objects.requireNonNull(sort)) {
-            case NAME -> Comparator.comparing(c -> MockServiceQueries.normalize(c.getName()));
-            case NEWEST -> Comparator.comparing(Conversation::getCreatedAt).reversed();
-            case MEMBER_COUNT -> Comparator.comparingLong((Conversation c) -> getGroupMembers(c.getId()).size()).reversed();
+            case NAME ->
+                Comparator.comparing(c -> MockServiceQueries.normalize(c.getName()));
+            case NEWEST ->
+                Comparator.comparing(Conversation::getCreatedAt).reversed();
+            case MEMBER_COUNT ->
+                Comparator.comparingLong((Conversation c) -> getGroupMembers(c.getId()).size()).reversed();
         };
         return MockServiceQueries.page(groups.stream().filter(c -> MockServiceQueries.normalize(c.getName()).contains(text)
-                        || MockServiceQueries.normalize(c.getDescription()).contains(text)
-                        || getUser(c.getCreatedBy()).map(owner -> MockServiceQueries.normalize(owner.getDisplayName()).contains(text)
-                                || MockServiceQueries.normalize(owner.getUsername()).contains(text)).orElse(false))
+                || MockServiceQueries.normalize(c.getDescription()).contains(text)
+                || getUser(c.getCreatedBy()).map(owner -> MockServiceQueries.normalize(owner.getDisplayName()).contains(text)
+                        || MockServiceQueries.normalize(owner.getUsername()).contains(text)).orElse(false))
                 .sorted(order.thenComparingLong(Conversation::getId)).toList(), page, pageSize);
     }
 
-    @Override public List<SpamReport> searchReports(String query, ReportStatus status, ReportService.ReportSort sort, int page, int pageSize) {
+    @Override
+    public List<SpamReport> searchReports(String query, ReportStatus status, ReportService.ReportSort sort, int page, int pageSize) {
         return MockServiceQueries.reports(store.getReports(), store.getUsers(), query, status, sort, page, pageSize);
     }
 
-    @Override public List<SpamReport> searchReportsForConversation(long conversationId, String query, ReportStatus status,
-                                                                   ReportService.ReportSort sort, int page, int pageSize) {
-        if (getGroup(conversationId).isEmpty()) return List.of();
+    @Override
+    public List<SpamReport> searchReportsForConversation(long conversationId, String query, ReportStatus status,
+            ReportService.ReportSort sort, int page, int pageSize) {
+        if (getGroup(conversationId).isEmpty()) {
+            return List.of();
+        }
         List<Long> messageIds = store.getMessages().stream().filter(m -> m.getConversationId() == conversationId)
                 .map(Message::getId).toList();
         List<SpamReport> scoped = store.getReports().stream().filter(r -> messageIds.contains(r.getMessageId())).toList();
         return MockServiceQueries.reports(scoped, store.getUsers(), query, status, sort, page, pageSize);
     }
 
-    @Override public List<ConversationMember> getGroupMembers(long groupId) {
-        if (getGroup(groupId).isEmpty()) return List.of();
+    @Override
+    public List<ConversationMember> getGroupMembers(long groupId) {
+        if (getGroup(groupId).isEmpty()) {
+            return List.of();
+        }
         return store.getMembers().stream().filter(m -> m.getConversationId() == groupId && m.getLeftAt() == null)
                 .sorted(Comparator.comparingLong(ConversationMember::getUserId)).toList();
     }
 
-    @Override public List<LoginEvent> getLoginHistory(long userId) {
-        if (getUser(userId).isEmpty()) return List.of();
+    @Override
+    public List<LoginEvent> getAllLoginHistory() {
+        return store.getLoginEvents().stream()
+                .sorted(Comparator.comparing(LoginEvent::loggedInAt).reversed().thenComparingLong(LoginEvent::id))
+                .toList();
+    }
+
+    @Override
+    public List<Long> getFriendIds(long userId) {
+        if (getUser(userId).isEmpty()) {
+            return List.of();
+        }
+        return store.getFriendships().stream().filter(f -> f.firstUserId() == userId || f.secondUserId() == userId)
+                .map(f -> f.firstUserId() == userId ? f.secondUserId() : f.firstUserId())
+                .sorted().toList();
+    }
+
+    @Override
+    public List<LoginEvent> getLoginHistory(long userId) {
+        if (getUser(userId).isEmpty()) {
+            return List.of();
+        }
         return store.getLoginEvents().stream().filter(e -> e.userId() == userId)
                 .sorted(Comparator.comparing(LoginEvent::loggedInAt).thenComparingLong(LoginEvent::id).reversed()).toList();
     }
 
-    @Override public List<ActivityEvent> getUserActivity(long userId) {
-        if (getUser(userId).isEmpty()) return List.of();
+    @Override
+    public List<ActivityEvent> getUserActivity(long userId) {
+        if (getUser(userId).isEmpty()) {
+            return List.of();
+        }
         return store.getActivityEvents().stream().filter(e -> e.userId() == userId).sorted(activityOrder()).toList();
     }
 
-    @Override public List<ActivityEvent> getGroupActivity(long groupId) {
-        if (getGroup(groupId).isEmpty()) return List.of();
+    @Override
+    public List<ActivityEvent> getGroupActivity(long groupId) {
+        if (getGroup(groupId).isEmpty()) {
+            return List.of();
+        }
         return store.getActivityEvents().stream().filter(e -> Long.valueOf(groupId).equals(e.conversationId()))
                 .sorted(activityOrder()).toList();
     }
 
-    @Override public ValidationResult<Void> lockUser(long userId) { return changeStatus(userId, UserStatus.ACTIVE, UserStatus.LOCKED); }
-    @Override public ValidationResult<Void> unlockUser(long userId) { return changeStatus(userId, UserStatus.LOCKED, UserStatus.ACTIVE); }
+    private List<ValidationError> userErrors(long id, String name, String username, String email) {
+        List<ValidationError> errors = new ArrayList<>();
+        if (name == null || name.isBlank()) {
+            errors.add(ValidationError.field("name", "Full name is required"));
+        }
+        if (username == null || !username.matches("[A-Za-z0-9_]{3,32}")) {
+            errors.add(ValidationError.field("username", "Username must have 3-32 letters, numbers or underscores")); 
+        }else if (store.getUsers().stream().anyMatch(u -> u.getId() != id && u.getUsername().equalsIgnoreCase(username))) {
+            errors.add(ValidationError.field("username", "Username already exists"));
+        }
+        if (email == null || !email.matches("[^\\s@]+@[^\\s@]+\\.[^\\s@]+")) {
+            errors.add(ValidationError.field("email", "Enter a valid email")); 
+        }else if (store.getUsers().stream().anyMatch(u -> u.getId() != id && u.getEmail().equalsIgnoreCase(email))) {
+            errors.add(ValidationError.field("email", "Email already exists"));
+        }
+        return errors;
+    }
+
+    @Override
+    public ValidationResult<UserAccount> createUser(String name, String username, String email,
+            String address, LocalDate birthDate, String gender) {
+        var errors = userErrors(-1, name, username, email);
+        if (!errors.isEmpty()) {
+            return ValidationResult.failure(errors);
+        }
+        // Mock-only credential, not real account provisioning or email delivery.
+        UserAccount user = store.createMockAccount(name.strip(), email.strip(), "DemoPass123!");
+        user.updateProfile(name.strip(), username.strip(), "");
+        user.updatePersonalDetails(address, birthDate, gender);
+        return ValidationResult.success(user);
+    }
+
+    @Override
+    public ValidationResult<UserAccount> updateUser(long id, String name, String username, String email,
+            String address, LocalDate birthDate, String gender) {
+        UserAccount u = getUser(id).filter(x -> x.getStatus() != UserStatus.DELETED).orElse(null);
+        if (u == null) {
+            return failure("User is not available");
+        }
+        var errors = userErrors(id, name, username, email);
+        if (!errors.isEmpty()) {
+            return ValidationResult.failure(errors);
+        }
+        u.updateProfile(name.strip(), username.strip(), u.getBio());
+        u.updateEmail(email.strip());
+        u.updatePersonalDetails(address, birthDate, gender);
+        return ValidationResult.success(u);
+    }
+
+    @Override
+    public ValidationResult<Void> deleteUser(long id) {
+        UserAccount u = getUser(id).filter(x -> x.getStatus() != UserStatus.DELETED).orElse(null);
+        if (u == null) {
+            return failure("User is not available");
+        }
+        u.setStatus(UserStatus.DELETED);
+        u.setOnline(false);
+        return ValidationResult.success(null);
+    }
+
+    @Override
+    public ValidationResult<Void> setUserPassword(long id, String password) {
+        if (getUser(id).filter(u -> u.getStatus() != UserStatus.DELETED).isEmpty()) {
+            return failure("User is not available");
+        }
+        if (password == null || password.length() < 8) {
+            return failure("Use at least eight characters");
+        }
+        store.replaceMockPassword(id, password);
+        return ValidationResult.success(null);
+    }
+
+    @Override
+    public ValidationResult<Void> lockUser(long userId) {
+        return changeStatus(userId, UserStatus.ACTIVE, UserStatus.LOCKED);
+    }
+
+    @Override
+    public ValidationResult<Void> unlockUser(long userId) {
+        return changeStatus(userId, UserStatus.LOCKED, UserStatus.ACTIVE);
+    }
 
     private ValidationResult<Void> changeStatus(long userId, UserStatus expected, UserStatus next) {
         UserAccount user = getUser(userId).orElse(null);
-        if (user == null || user.getStatus() != expected) return failure("This account is no longer available for that status change");
+        if (user == null || user.getStatus() != expected) {
+            return failure("This account is no longer available for that status change");
+        }
         user.setStatus(next);
         return ValidationResult.success(null);
     }
 
-    @Override public ValidationResult<Void> reviewReport(long reportId, String notes) {
+    @Override
+    public ValidationResult<Void> reviewReport(long reportId, String notes) {
         return resolve(reportId, notes, ReportStatus.REVIEWED, "");
     }
-    @Override public ValidationResult<Void> dismissReport(long reportId, String notes) {
+
+    @Override
+    public ValidationResult<Void> dismissReport(long reportId, String notes) {
         return resolve(reportId, notes, ReportStatus.DISMISSED, "");
     }
-    @Override public ValidationResult<Void> warnUser(long reportId, String notes) {
+
+    @Override
+    public ValidationResult<Void> warnUser(long reportId, String notes) {
         return resolve(reportId, notes, ReportStatus.REVIEWED, "Warning: ");
     }
-    @Override public ValidationResult<Void> suspendUser(long reportId, String notes) {
+
+    @Override
+    public ValidationResult<Void> suspendUser(long reportId, String notes) {
         SpamReport report = pendingReport(reportId);
-        if (report == null || !validNotes(notes)) return failure("Choose a pending report and enter review notes");
+        if (report == null || !validNotes(notes)) {
+            return failure("Choose a pending report and enter review notes");
+        }
         UserAccount target = getUser(report.getReportedUserId()).orElse(null);
-        if (target == null || target.getStatus() == UserStatus.DELETED) return failure("The reported account is unavailable");
+        if (target == null || target.getStatus() == UserStatus.DELETED) {
+            return failure("The reported account is unavailable");
+        }
         target.setStatus(UserStatus.LOCKED);
         report.review(ReportStatus.REVIEWED, "Suspension: " + notes.strip());
         return ValidationResult.success(null);
@@ -148,7 +301,9 @@ public final class InMemoryAdminService implements AdminService {
 
     private ValidationResult<Void> resolve(long reportId, String notes, ReportStatus status, String decision) {
         SpamReport report = pendingReport(reportId);
-        if (report == null || !validNotes(notes)) return failure("Choose a pending report and enter review notes");
+        if (report == null || !validNotes(notes)) {
+            return failure("Choose a pending report and enter review notes");
+        }
         report.review(status, decision + notes.strip());
         return ValidationResult.success(null);
     }
@@ -156,12 +311,28 @@ public final class InMemoryAdminService implements AdminService {
     private SpamReport pendingReport(long reportId) {
         return getReport(reportId).filter(r -> r.getStatus() == ReportStatus.PENDING).orElse(null);
     }
-    private static boolean validNotes(String notes) { return notes != null && !notes.isBlank(); }
 
-    @Override public DashboardMetrics getMetrics() { return metrics.get(); }
-    @Override public ReadOnlyObjectProperty<DashboardMetrics> metricsProperty() { return metrics.getReadOnlyProperty(); }
-    @Override public ObservableList<DailyActivity> getActivityTrend() { return trendView; }
-    @Override public ValidationResult<Void> setDateRange(Instant fromInclusive, Instant toExclusive) {
+    private static boolean validNotes(String notes) {
+        return notes != null && !notes.isBlank();
+    }
+
+    @Override
+    public DashboardMetrics getMetrics() {
+        return metrics.get();
+    }
+
+    @Override
+    public ReadOnlyObjectProperty<DashboardMetrics> metricsProperty() {
+        return metrics.getReadOnlyProperty();
+    }
+
+    @Override
+    public ObservableList<DailyActivity> getActivityTrend() {
+        return trendView;
+    }
+
+    @Override
+    public ValidationResult<Void> setDateRange(Instant fromInclusive, Instant toExclusive) {
         if (fromInclusive == null || toExclusive == null || !fromInclusive.isBefore(toExclusive)) {
             return failure("Choose a start before the end of the date range");
         }
@@ -189,14 +360,19 @@ public final class InMemoryAdminService implements AdminService {
         trend.setAll(days.entrySet().stream().map(e -> new DailyActivity(e.getKey(), e.getValue()[0], e.getValue()[1])).toList());
     }
 
-    private boolean inRange(Instant time) { return !time.isBefore(from) && time.isBefore(until); }
+    private boolean inRange(Instant time) {
+        return !time.isBefore(from) && time.isBefore(until);
+    }
+
     private Instant lastLogin(long userId) {
         return store.getLoginEvents().stream().filter(e -> e.userId() == userId).map(LoginEvent::loggedInAt)
                 .max(Comparator.naturalOrder()).orElse(Instant.MIN);
     }
+
     private static Comparator<ActivityEvent> activityOrder() {
         return Comparator.comparing(ActivityEvent::occurredAt).thenComparingLong(ActivityEvent::id).reversed();
     }
+
     private static <T> ValidationResult<T> failure(String message) {
         return ValidationResult.failure(List.of(ValidationError.global(message)));
     }

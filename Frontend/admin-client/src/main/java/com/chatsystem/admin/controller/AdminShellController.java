@@ -5,11 +5,11 @@ import javafx.fxml.FXML; import javafx.scene.Parent; import javafx.scene.control
 import java.util.*;
 public final class AdminShellController {
     private final AdminNavigator navigator; private Map<AdminRoute,Button> buttons;
-    @FXML private Button dashboardButton,usersButton,groupsButton,moderationButton,settingsButton,helpButton;
+    @FXML private Button dashboardButton,analyticsButton,usersButton,groupsButton,moderationButton,settingsButton,helpButton;
     @FXML private StackPane settingsWrapper,helpWrapper,contentHost;
     public AdminShellController(AdminNavigator navigator){this.navigator=Objects.requireNonNull(navigator);}
     @FXML private void initialize(){
-        buttons=Map.of(AdminRoute.DASHBOARD,dashboardButton,AdminRoute.USERS,usersButton,AdminRoute.GROUPS,groupsButton,AdminRoute.MODERATION,moderationButton);
+        buttons=Map.of(AdminRoute.DASHBOARD,dashboardButton,AdminRoute.ANALYTICS,analyticsButton,AdminRoute.USERS,usersButton,AdminRoute.GROUPS,groupsButton,AdminRoute.MODERATION,moderationButton);
         buttons.forEach((r,b)->b.setOnAction(e->{if(r==AdminRoute.MODERATION)navigator.navigateGeneralModeration();else navigator.navigate(ViewRequest.of(r));}));
         DisabledControlSupport.install(settingsButton,settingsWrapper,"Admin settings are unavailable because this demo has no admin settings screen.");
         DisabledControlSupport.install(helpButton,helpWrapper,"Help and support are unavailable because no support destination is defined.");

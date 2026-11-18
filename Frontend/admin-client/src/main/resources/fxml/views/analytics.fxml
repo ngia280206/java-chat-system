@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.chatsystem.admin.controller.AnalyticsController"
+      styleClass="content-area" spacing="18">
+    <VBox spacing="5"><Label text="Statistics &amp; login records" styleClass="page-title"/>
+      <Label text="Registration, connections, member activity and annual charts — mock dataset" styleClass="muted-text"/></VBox>
+    <TabPane fx:id="analyticsTabs" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS"/>
+</VBox>

@@ -11,10 +11,13 @@ public interface SocialService {
     ObservableList<FriendRequest> getIncomingRequests();
     ObservableList<FriendRequest> getOutgoingRequests();
     ObservableList<UserAccount> getBlockedUsers();
+    /** Discoverable directory excludes self and both directions of blocking. */
+    ObservableList<UserAccount> getDiscoverableUsers();
     ValidationResult<FriendRequest> sendRequest(long userId);
     ValidationResult<Void> acceptRequest(long requestId);
     ValidationResult<Void> rejectRequest(long requestId);
     ValidationResult<Void> cancelRequest(long requestId);
+    ValidationResult<Void> removeFriend(long userId);
     ValidationResult<Void> blockUser(long userId);
     ValidationResult<Void> unblockUser(long userId);
 }

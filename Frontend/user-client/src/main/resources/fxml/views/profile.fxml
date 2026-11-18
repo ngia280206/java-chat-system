@@ -46,6 +46,12 @@
             <Label text="Bio" styleClass="form-label"/>
             <TextField fx:id="bioField" promptText="Tell people about yourself"/>
           </VBox>
+          <VBox spacing="7"><Label text="Address" styleClass="form-label"/>
+            <TextField fx:id="addressField" promptText="Address"/></VBox>
+          <HBox spacing="12"><VBox spacing="7" HBox.hgrow="ALWAYS"><Label text="Date of birth" styleClass="form-label"/>
+            <DatePicker fx:id="birthPicker" maxWidth="Infinity"/></VBox>
+            <VBox spacing="7" HBox.hgrow="ALWAYS"><Label text="Gender" styleClass="form-label"/>
+              <ChoiceBox fx:id="genderChoice" maxWidth="Infinity"/></VBox></HBox>
           <Button fx:id="saveProfileButton" text="Save profile" onAction="#save" styleClass="primary-button"/>
           <Label fx:id="accountFeedbackLabel" wrapText="true"/>
         </VBox>

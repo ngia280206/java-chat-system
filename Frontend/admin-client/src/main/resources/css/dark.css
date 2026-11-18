@@ -109,3 +109,42 @@
 .scroll-bar .thumb { -fx-background-color: #34475D; -fx-background-radius: 8; }
 .list-view, .list-cell { -fx-background-color: #101923; -fx-control-inner-background: #101923; }
 .list-cell:filled:selected, .list-cell:filled:selected:focused { -fx-background-color: #1A2A38; }
+
+/* V1 UI-01: MenuButton popups use their own JavaFX context menu, not .secondary-button.
+   Explicitly style every unselected, hovered and selected menu entry. */
+.menu-button .context-menu, .context-menu {
+    -fx-background-color: #172536;
+    -fx-border-color: #40536A;
+    -fx-border-width: 1;
+    -fx-padding: 5;
+}
+.menu-item { -fx-background-color: transparent; -fx-padding: 9 14; }
+.menu-item > .label { -fx-text-fill: #E9F1FC; }
+.menu-item:focused, .menu-item:hover { -fx-background-color: #314869; }
+.menu-item:focused > .label, .menu-item:hover > .label { -fx-text-fill: #FFFFFF; }
+.menu-item .accelerator-text { -fx-text-fill: #B6C8E0; }
+.date-picker .text-field, .date-picker-popup .day-cell { -fx-text-fill: #E9EFF7; }
+.date-picker-popup { -fx-background-color: #172536; }
+.date-picker-popup .calendar-grid { -fx-background-color: #172536; }
+.date-picker-popup .day-cell { -fx-background-color: #233449; }
+.date-picker-popup .day-cell:hover { -fx-background-color: #405E87; }
+.combo-box, .choice-box { -fx-background-color: #172536; -fx-border-color: #40536A; -fx-border-radius: 7; }
+.choice-box > .label, .combo-box > .list-cell { -fx-text-fill: #E9EFF7; }
+.choice-box .context-menu, .combo-box-popup .list-view { -fx-background-color: #172536; }
+.choice-box .menu-item > .label, .combo-box-popup .list-cell { -fx-text-fill: #E9EFF7; }
+.chart { -fx-background-color: transparent; }
+.chart-plot-background { -fx-background-color: #101A26; }
+.chart-vertical-grid-lines, .chart-horizontal-grid-lines { -fx-stroke: #2B4055; }
+.axis, .axis-label { -fx-tick-label-fill: #D5E2F3; -fx-text-fill: #D5E2F3; }
+.chart-bar { -fx-bar-fill: #758BFF; }
+.tab-pane .tab-header-background { -fx-background-color: #15212E; }
+.tab-pane .tab { -fx-background-color: #23354A; }
+.tab-pane .tab:selected { -fx-background-color: #385477; }
+.tab-pane .tab .tab-label { -fx-text-fill: #E8F1FA; }
+.table-view { -fx-background-color: #111B28; -fx-control-inner-background: #111B28; }
+.table-view .column-header-background, .table-view .column-header { -fx-background-color: #25364A; }
+.table-view .column-header .label { -fx-text-fill: #E8F1FA; }
+.table-row-cell { -fx-background-color: #111B28; -fx-text-background-color: #E8F1FA; }
+.table-row-cell:odd { -fx-background-color: #172637; }
+.table-row-cell:selected { -fx-background-color: #304969; }
+.table-cell { -fx-text-fill: #E8F1FA; }
