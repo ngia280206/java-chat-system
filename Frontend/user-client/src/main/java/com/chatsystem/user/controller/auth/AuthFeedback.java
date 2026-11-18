@@ -6,9 +6,13 @@ import javafx.scene.control.Tooltip;
 
 import java.util.stream.Collectors;
 
-/** Presents service feedback without duplicating account policy in the views. */
+/**
+ * Presents service feedback without duplicating account policy in the views.
+ */
 final class AuthFeedback {
-    private AuthFeedback() { }
+
+    private AuthFeedback() {
+    }
 
     static void errors(Label label, ValidationResult<?> result) {
         label.setText(result.errors().get(0).message());

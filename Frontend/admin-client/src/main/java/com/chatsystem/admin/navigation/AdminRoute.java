@@ -1,7 +1,7 @@
 package com.chatsystem.admin.navigation;
 
 public enum AdminRoute {
-    DASHBOARD("Overview"), USERS("People"), USER_DETAILS("User details", ViewRequest.UserId.class),
+    DASHBOARD("Overview"), ANALYTICS("Statistics"), USERS("People"), USER_DETAILS("User details", ViewRequest.UserId.class),
     GROUPS("Groups"), GROUP_DETAILS("Group details", ViewRequest.GroupId.class),
     MODERATION("Warnings"), WARNING_DETAILS("Warning details", ViewRequest.ReportId.class);
     private final String title; private final Class<? extends ViewRequest.EntityId> entityType;

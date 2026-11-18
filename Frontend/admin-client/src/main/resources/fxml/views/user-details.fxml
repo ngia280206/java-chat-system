@@ -1,6 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatsystem.admin.controller.UserDetailsController" spacing="20" styleClass="content-area">
- <HBox spacing="12" alignment="CENTER_LEFT"><Button fx:id="backButton" text="Back to users" styleClass="secondary-button"/><Region HBox.hgrow="ALWAYS"/><Button fx:id="restrictButton" text="Restrict user" styleClass="danger-button"/></HBox>
- <VBox styleClass="card" spacing="8"><Label fx:id="nameLabel" styleClass="page-title"/><Label fx:id="emailLabel" styleClass="muted-text"/><Label fx:id="usernameLabel" styleClass="muted-text"/><Label fx:id="createdLabel" styleClass="muted-text"/><Label fx:id="statusLabel" styleClass="status-pill"/></VBox>
- <HBox spacing="16" VBox.vgrow="ALWAYS"><VBox styleClass="card" HBox.hgrow="ALWAYS"><HBox alignment="CENTER_LEFT"><Label text="Recent login history" styleClass="section-title"/><Region HBox.hgrow="ALWAYS"/><Button fx:id="historyButton" text="Full history" styleClass="small-button"/></HBox><ListView fx:id="historyList" VBox.vgrow="ALWAYS"/></VBox><VBox styleClass="card" HBox.hgrow="ALWAYS"><Label text="Activity timeline" styleClass="section-title"/><ListView fx:id="activityList" VBox.vgrow="ALWAYS"/></VBox></HBox>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.chatsystem.admin.controller.UserDetailsController" spacing="15" styleClass="content-area">
+ <HBox spacing="9" alignment="CENTER_LEFT"><Button fx:id="backButton" text="Back to people" styleClass="secondary-button"/>
+   <Region HBox.hgrow="ALWAYS"/><Button fx:id="editButton" text="Edit profile" styleClass="secondary-button"/>
+   <Button fx:id="passwordButton" text="Update password" styleClass="secondary-button"/>
+   <Button fx:id="restrictButton" text="Restrict user" styleClass="danger-button"/>
+   <Button fx:id="deleteButton" text="Delete account" styleClass="danger-button"/></HBox>
+ <VBox styleClass="card" spacing="7"><Label fx:id="nameLabel" styleClass="page-title"/><Label fx:id="usernameLabel" styleClass="muted-text"/>
+   <Label fx:id="emailLabel" styleClass="muted-text"/><Label fx:id="addressLabel" styleClass="body-text"/>
+   <HBox spacing="18"><Label fx:id="birthLabel" styleClass="body-text"/><Label fx:id="genderLabel" styleClass="body-text"/></HBox>
+   <HBox spacing="14"><Label fx:id="createdLabel" styleClass="muted-text"/><Label fx:id="statusLabel" styleClass="status-pill"/></HBox></VBox>
+ <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+  <Tab text="Login history"><VBox spacing="8" styleClass="card"><HBox alignment="CENTER_LEFT"><Label text="Logins for this account" styleClass="section-title"/>
+    <Region HBox.hgrow="ALWAYS"/><Button fx:id="historyButton" text="Full history" styleClass="small-button"/></HBox>
+    <ListView fx:id="historyList" VBox.vgrow="ALWAYS"/></VBox></Tab>
+  <Tab text="Activity"><VBox styleClass="card"><Label text="Activity timeline" styleClass="section-title"/>
+    <ListView fx:id="activityList" VBox.vgrow="ALWAYS"/></VBox></Tab>
+  <Tab text="Friends"><VBox spacing="10" styleClass="card"><Label text="Direct friends" styleClass="section-title"/>
+    <ListView fx:id="friendsList" VBox.vgrow="ALWAYS"/></VBox></Tab>
+ </TabPane>
 </VBox>

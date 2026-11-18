@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.social.AddFriendDialogController" spacing="10" styleClass="app-root"><Label text="Add friend" styleClass="page-title"/><ComboBox fx:id="targetChoice" promptText="Choose an account" maxWidth="Infinity"/><Label fx:id="feedbackLabel"/><HBox spacing="8"><Button text="Cancel" onAction="#cancel"/><Button fx:id="submitAddFriendButton" text="Send request" onAction="#submit"/></HBox></VBox>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.social.AddFriendDialogController"
+ spacing="12" styleClass="app-root" prefWidth="560" prefHeight="410">
+ <Label text="Find people" styleClass="page-title"/>
+ <Label text="Search by full name or username; blocked accounts are hidden." styleClass="muted"/>
+ <TextField fx:id="findUserField" promptText="Enter a name or @username"/>
+ <ListView fx:id="resultsList" VBox.vgrow="ALWAYS"/>
+ <Label fx:id="feedbackLabel" wrapText="true"/>
+ <HBox spacing="9"><Button text="Close" onAction="#cancel"/>
+  <Button fx:id="submitAddFriendButton" text="Send friend request" onAction="#submit"/>
+  <Button fx:id="chatButton" text="Chat" onAction="#chat"/>
+  <Button fx:id="groupButton" text="Create group" onAction="#group"/></HBox>
+</VBox>

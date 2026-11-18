@@ -7,23 +7,35 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
-/** Stable, relational demo state. Every call creates a fully independent session. */
+/**
+ * Stable, relational demo state. Every call creates a fully independent
+ * session.
+ */
 public final class MockFixtures {
+
     public static final long DEMO_USER_ID = 1L;
     public static final long LOCKED_USER_ID = 3L;
     public static final long DIRECT_CONVERSATION_ID = 10L;
     public static final long GROUP_CONVERSATION_ID = 20L;
     public static final long INVITED_GROUP_ID = 21L;
-    /** Mock-only login: alex.morgan@example.com / DemoPass123! */
+    /**
+     * Mock-only login: alex.morgan@example.com / DemoPass123!
+     */
     public static final String DEMO_EMAIL = "alex.morgan@example.com";
     public static final String DEMO_PASSWORD = "DemoPass123!";
     public static final String LOCKED_EMAIL = "jordan.lee@example.com";
-    /** All seeded users share the demo password; registration/reset remain in memory. */
+    /**
+     * All seeded users share the demo password; registration/reset remain in
+     * memory.
+     */
     public static final String RESET_CODE = "123456";
-    /** Fixed reference time keeps history, filtering, and metrics reproducible. */
+    /**
+     * Fixed reference time keeps history, filtering, and metrics reproducible.
+     */
     public static final Instant REFERENCE_TIME = Instant.parse("2026-11-14T05:00:00Z");
 
-    private MockFixtures() { }
+    private MockFixtures() {
+    }
 
     public static MockDataStore createStore() {
         MockDataStore store = new MockDataStore();
@@ -36,9 +48,9 @@ public final class MockFixtures {
 
     private static void seedUsers(MockDataStore store) {
         String[] names = {"Alex Morgan", "Mia Tran", "Jordan Lee", "Noah Wilson", "Casey Brown", "Emma Davis",
-                "Liam Nguyen", "Olivia Chen", "Ethan Miller", "Ava Patel", "Lucas Garcia", "Sophia Kim",
-                "Oliver Martin", "Amelia Clark", "James Hall", "Charlotte Allen", "Benjamin Young", "Isabella King",
-                "Henry Wright", "Harper Scott", "Daniel Green", "Evelyn Adams", "Samuel Baker", "Aria Nelson"};
+            "Liam Nguyen", "Olivia Chen", "Ethan Miller", "Ava Patel", "Lucas Garcia", "Sophia Kim",
+            "Oliver Martin", "Amelia Clark", "James Hall", "Charlotte Allen", "Benjamin Young", "Isabella King",
+            "Henry Wright", "Harper Scott", "Daniel Green", "Evelyn Adams", "Samuel Baker", "Aria Nelson"};
         for (int i = 0; i < names.length; i++) {
             long id = i + 1L;
             String email = names[i].toLowerCase(Locale.ROOT).replace(' ', '.') + "@example.com";
@@ -47,6 +59,11 @@ public final class MockFixtures {
                     id == DEMO_USER_ID ? "Design enthusiast and Java developer" : "Building things together",
                     id == LOCKED_USER_ID || id == 18 ? UserStatus.LOCKED : UserStatus.ACTIVE,
                     REFERENCE_TIME.minus(250 - i * 10L, ChronoUnit.DAYS)));
+            UserAccount account = store.users.get(store.users.size() - 1);
+            account.updatePersonalDetails(i % 3 == 0 ? "12 Example Street, Ho Chi Minh City"
+                    : i % 3 == 1 ? "88 Riverside Road" : "", java.time.LocalDate.of(2000 + (i % 6), i % 12 + 1, i % 27 + 1),
+                    i % 3 == 0 ? "Male" : i % 3 == 1 ? "Female" : "Other");
+            account.setOnline(id != LOCKED_USER_ID && id != 18 && i % 3 != 1);
             store.settings.add(new UserSettings(id));
             store.passwords.put(id, DEMO_PASSWORD);
         }
@@ -67,14 +84,16 @@ public final class MockFixtures {
     }
 
     private static void addConversation(MockDataStore store, long id, ConversationType type, long creator,
-                                        String name, String description, long[] users, long[] senders, String[] contents) {
+            String name, String description, long[] users, long[] senders, String[] contents) {
         Instant created = REFERENCE_TIME.minus(40 + id, ChronoUnit.DAYS);
         Conversation conversation = new Conversation(id, type, creator, created, name, description);
         store.conversations.add(conversation);
         for (long user : users) {
             ConversationMember member = new ConversationMember(id, user,
                     type == ConversationType.GROUP && user == creator ? GroupRole.ADMIN : GroupRole.MEMBER, created);
-            if (user == DEMO_USER_ID) member.setUnreadCount(1);
+            if (user == DEMO_USER_ID) {
+                member.setUnreadCount(1);
+            }
             store.members.add(member);
         }
         for (int i = 0; i < contents.length; i++) {
@@ -111,7 +130,9 @@ public final class MockFixtures {
 
     private static void addRequest(MockDataStore store, long id, long sender, long receiver, FriendRequestStatus status, Instant created) {
         FriendRequest request = new FriendRequest(id, sender, receiver, created);
-        if (status != FriendRequestStatus.PENDING) request.respond(status, created.plusSeconds(1800));
+        if (status != FriendRequestStatus.PENDING) {
+            request.respond(status, created.plusSeconds(1800));
+        }
         store.friendRequests.add(request);
     }
 

@@ -1,2 +1,61 @@
-package com.chatsystem.user.controller.account;import com.chatsystem.shared.service.*;import com.chatsystem.user.navigation.*;import com.chatsystem.user.ui.DisabledControlSupport;import javafx.fxml.FXML;import javafx.scene.control.*;import javafx.scene.layout.StackPane;
-public final class SettingsController{private final SettingsService settings;private final AuthService auth;private final UserNavigator nav;@FXML private CheckBox notificationCheckBox,soundCheckBox,previewCheckBox;@FXML private Label accountFeedbackLabel;@FXML private Button lightThemeButton,systemThemeButton;@FXML private StackPane lightThemeWrapper,systemThemeWrapper;public SettingsController(SettingsService s,AuthService a,UserNavigator n){settings=s;auth=a;nav=n;}@FXML private void initialize(){settings.getSettings().value().ifPresent(v->{notificationCheckBox.setSelected(v.isDesktopNotifications());soundCheckBox.setSelected(v.isSoundEnabled());previewCheckBox.setSelected(v.isMessagePreviews());});DisabledControlSupport.install(lightThemeButton,lightThemeWrapper,"Light theme is unavailable because this demo supplies only the dark theme.");DisabledControlSupport.install(systemThemeButton,systemThemeWrapper,"System theme switching is unavailable because this demo supplies only the dark theme.");}@FXML private void save(){var r=settings.updateSettings(notificationCheckBox.isSelected(),soundCheckBox.isSelected(),previewCheckBox.isSelected());accountFeedbackLabel.setText(r.isSuccess()?"Preferences saved":r.errors().get(0).message());}@FXML private void password(){nav.navigate(ViewRequest.of(UserRoute.CHANGE_PASSWORD));}@FXML private void blocked(){nav.navigate(ViewRequest.of(UserRoute.BLOCKED_USERS));}@FXML private void logout(){auth.logout();}}
+package com.chatsystem.user.controller.account;
+
+import com.chatsystem.shared.service.*;
+import com.chatsystem.user.navigation.*;
+import com.chatsystem.user.ui.DisabledControlSupport;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
+
+public final class SettingsController {
+
+    private final SettingsService settings;
+    private final AuthService auth;
+    private final UserNavigator nav;
+    @FXML
+    private CheckBox notificationCheckBox, soundCheckBox, previewCheckBox;
+    @FXML
+    private Label accountFeedbackLabel;
+    @FXML
+    private Button lightThemeButton, systemThemeButton;
+    @FXML
+    private StackPane lightThemeWrapper, systemThemeWrapper;
+
+    public SettingsController(SettingsService s, AuthService a, UserNavigator n) {
+        settings = s;
+        auth = a;
+        nav = n;
+    }
+
+    @FXML
+    private void initialize() {
+        settings.getSettings().value().ifPresent(v -> {
+            notificationCheckBox.setSelected(v.isDesktopNotifications());
+            soundCheckBox.setSelected(v.isSoundEnabled());
+            previewCheckBox.setSelected(v.isMessagePreviews());
+        });
+        DisabledControlSupport.install(lightThemeButton, lightThemeWrapper, "Light theme is unavailable because this demo supplies only the dark theme.");
+        DisabledControlSupport.install(systemThemeButton, systemThemeWrapper, "System theme switching is unavailable because this demo supplies only the dark theme.");
+    }
+
+    @FXML
+    private void save() {
+        var r = settings.updateSettings(notificationCheckBox.isSelected(), soundCheckBox.isSelected(), previewCheckBox.isSelected());
+        accountFeedbackLabel.setText(r.isSuccess() ? "Preferences saved" : r.errors().get(0).message());
+    }
+
+    @FXML
+    private void password() {
+        nav.navigate(ViewRequest.of(UserRoute.CHANGE_PASSWORD));
+    }
+
+    @FXML
+    private void blocked() {
+        nav.navigate(ViewRequest.of(UserRoute.BLOCKED_USERS));
+    }
+
+    @FXML
+    private void logout() {
+        auth.logout();
+    }
+}

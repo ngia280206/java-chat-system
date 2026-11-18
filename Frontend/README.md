@@ -28,6 +28,10 @@ The login window is fixed at 1240×780. Successful login opens the fixed 1540×9
 
 All defined functionality is interactive. Undefined controls remain visible but disabled with a specific tooltip on a hoverable wrapper. Approved missing workflow inputs use only the minimal dialogs documented in [`INTERACTIVE_UI_DEMO.md`](../docs/INTERACTIVE_UI_DEMO.md).
 
+## Version 1 review additions
+
+See [V1_IMPLEMENTATION_REPORT.md](V1_IMPLEMENTATION_REPORT.md) for a checklist of the added administrator screens, social controls, UI fixes and validation limits. A proposed database schema is in [database/schema_v1.sql](database/schema_v1.sql). The database is design-only and not connected to the local clients.
+
 ## Known limitations
 
 - State, remembered email, registrations, password changes, messages, and moderation changes reset when the application restarts.

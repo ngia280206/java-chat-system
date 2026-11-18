@@ -34,8 +34,19 @@ public interface AdminService {
                                                   ReportService.ReportSort sort, int page, int pageSize);
     List<ConversationMember> getGroupMembers(long groupId);
     List<LoginEvent> getLoginHistory(long userId);
+    /** System-wide chronological login audit for the V1 administrator interface. */
+    List<LoginEvent> getAllLoginHistory();
+    /** Direct friend IDs in the mock graph; excludes the subject. */
+    List<Long> getFriendIds(long userId);
     List<ActivityEvent> getUserActivity(long userId);
     List<ActivityEvent> getGroupActivity(long groupId);
+    /** Mock-only CRUD operations. Delete marks the account DELETED (soft delete). */
+    ValidationResult<UserAccount> createUser(String name, String username, String email,
+                                            String address, LocalDate birthDate, String gender);
+    ValidationResult<UserAccount> updateUser(long userId, String name, String username, String email,
+                                            String address, LocalDate birthDate, String gender);
+    ValidationResult<Void> deleteUser(long userId);
+    ValidationResult<Void> setUserPassword(long userId, String newPassword);
     ValidationResult<Void> lockUser(long userId);
     ValidationResult<Void> unlockUser(long userId);
     ValidationResult<Void> reviewReport(long reportId, String notes);

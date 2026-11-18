@@ -5,3 +5,9 @@ allprojects {
         mavenCentral()
     }
 }
+// V1 UI-02: make Java sources deterministic on non-UTF-8 Windows locales.
+subprojects {
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+}

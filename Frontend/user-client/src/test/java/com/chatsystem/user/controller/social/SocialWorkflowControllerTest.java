@@ -35,7 +35,7 @@ class SocialWorkflowControllerTest extends JavaFxTestSupport {
     @Test void addFriendModalIsReachableAndValidatesWithoutMutation() throws Exception { workflow((context, stage, navigator) -> {
         navigator.navigate(ViewRequest.of(UserRoute.FRIENDS)); int before = context.social().getOutgoingRequests().size(); click(stage, "openAddFriendButton");
         Window dialog = Window.getWindows().stream().filter(window -> window != stage && window.isShowing()).findFirst().orElseThrow();
-        assertNotNull(dialog.getScene().getRoot().lookup("#targetChoice"));
+        assertNotNull(dialog.getScene().getRoot().lookup("#findUserField"));
         ((Button) dialog.getScene().getRoot().lookup("#submitAddFriendButton")).fire(); assertEquals(before, context.social().getOutgoingRequests().size());
         assertFalse(((Label) dialog.getScene().getRoot().lookup("#feedbackLabel")).getText().isBlank()); dialog.hide();
     }); }
