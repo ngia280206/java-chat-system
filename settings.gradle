@@ -6,7 +6,13 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 
-rootProject.name = 'java-chat-system-Frontend'
+rootProject.name = 'java-chat-system'
 include 'user-client'
 include 'admin-client'
 include 'shared-client'
+project(':user-client').projectDir = file('Frontend/user-client')
+project(':admin-client').projectDir = file('Frontend/admin-client')
+project(':shared-client').projectDir = file('Frontend/shared-client')
+
+include 'backend'
+project(':backend').projectDir = file('Backend')
