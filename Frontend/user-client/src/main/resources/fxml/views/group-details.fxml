@@ -1,2 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.group.GroupDetailsController" spacing="12" styleClass="content-wrap"><HBox spacing="8"><Button text="← Back to groups" onAction="#back"/><Label text="Group details" styleClass="page-title" HBox.hgrow="ALWAYS"/><Button text="Edit group" onAction="#edit"/><Button fx:id="inviteMemberButton" text="Invite members" onAction="#invite"/><Button fx:id="leaveGroupButton" text="Leave Group" onAction="#leave"/></HBox><HBox spacing="15" VBox.vgrow="ALWAYS"><VBox spacing="10" styleClass="card" HBox.hgrow="ALWAYS"><Label text="Group information" styleClass="section-title"/><Label text="Group name" styleClass="form-label"/><TextField fx:id="nameField" promptText="Group name"/><Label text="Group description" styleClass="form-label"/><TextArea fx:id="descriptionField" promptText="Group description" prefRowCount="4"/><Button fx:id="saveGroupButton" text="Save changes" onAction="#save" styleClass="primary-button"/></VBox><VBox spacing="10" styleClass="card" HBox.hgrow="ALWAYS"><Label text="Members and roles" styleClass="section-title"/><HBox spacing="8"><Label text="MEMBER" styleClass="table-heading" HBox.hgrow="ALWAYS"/><Label text="ROLE / ACTION" styleClass="table-heading"/></HBox><ListView fx:id="memberList" VBox.vgrow="ALWAYS"/></VBox></HBox><HBox fx:id="groupConfirmationBar" managed="false" visible="false" spacing="8"><Label fx:id="groupConfirmationLabel"/><Button fx:id="confirmGroupActionButton" text="Confirm" onAction="#confirmAction"/><Button fx:id="cancelGroupActionButton" text="Cancel" onAction="#cancelAction"/></HBox><Label fx:id="groupFeedbackLabel"/></VBox>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="content-wrap" spacing="22" fx:controller="com.chatsystem.user.controller.group.GroupDetailsController">
+  <Label text="RELAY  /  GROUP DETAILS" styleClass="breadcrumb" />
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="5" HBox.hgrow="ALWAYS"><Label text="Group details" styleClass="page-title"/><Label text="Manage group information, members, and roles." styleClass="page-subtitle"/></VBox>
+    <Button text="Back to groups" onAction="#back" styleClass="secondary-button"/>
+    <Button text="Edit group" onAction="#edit" styleClass="secondary-button"/>
+    <Button fx:id="inviteMemberButton" text="Invite members" onAction="#invite" styleClass="primary-button"/>
+    <Button fx:id="leaveGroupButton" text="Leave group" onAction="#leave" styleClass="danger-button"/>
+  </HBox>
+  <HBox spacing="15" alignment="TOP_LEFT">
+    <VBox spacing="10" styleClass="card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Group information" styleClass="section-title" />
+      <Label text="Group name" styleClass="form-label" />
+      <TextField fx:id="nameField" promptText="Group name" />
+      <Label text="Group description" styleClass="form-label" />
+      <TextArea fx:id="descriptionField" promptText="Group description" prefRowCount="4" />
+      <Button fx:id="saveGroupButton" text="Save changes" onAction="#save" styleClass="primary-button" />
+    </VBox>
+    <VBox spacing="10" styleClass="card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Members and roles" styleClass="section-title" />
+      <HBox spacing="8">
+        <Label text="MEMBER" styleClass="table-heading" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+        <Label text="ROLE / ACTION" styleClass="table-heading" />
+      </HBox>
+      <ListView fx:id="memberList" prefHeight="360" styleClass="directory-list" />
+    </VBox>
+  </HBox>
+  <HBox fx:id="groupConfirmationBar" managed="false" visible="false" spacing="8">
+    <Label fx:id="groupConfirmationLabel" />
+    <Button fx:id="confirmGroupActionButton" text="Confirm" onAction="#confirmAction" />
+    <Button fx:id="cancelGroupActionButton" text="Cancel" onAction="#cancelAction" />
+  </HBox>
+  <Label fx:id="groupFeedbackLabel" />
+</VBox>

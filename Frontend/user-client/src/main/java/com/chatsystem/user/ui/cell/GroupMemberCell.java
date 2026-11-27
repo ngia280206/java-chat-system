@@ -20,8 +20,8 @@ public final class GroupMemberCell extends ListCell<ConversationMember> {
     @Override protected void updateItem(ConversationMember member, boolean empty) {
         super.updateItem(member, empty);
         if(empty||member==null){setText(null);setGraphic(null);return;}
-        Label identity=new Label(displayName.apply(member.getUserId())+" · joined "+member.getJoinedAt());
-        identity.getStyleClass().add("group-member-name");
+        HBox identity=CellLayout.identity(displayName.apply(member.getUserId()),"Joined "+member.getJoinedAt().toString().substring(0,10));
+        ((VBox) identity.getChildren().get(1)).getChildren().get(0).getStyleClass().add("group-member-name"); identity.setMinWidth(0);
         HBox.setHgrow(identity,Priority.ALWAYS); HBox row=new HBox(8,identity);
         if(canManage.getAsBoolean()){
             ChoiceBox<GroupRole> roles=new ChoiceBox<>(); roles.setUserData(member.getUserId());

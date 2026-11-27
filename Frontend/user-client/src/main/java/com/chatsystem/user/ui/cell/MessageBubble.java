@@ -41,6 +41,7 @@ public final class MessageBubble extends ListCell<Message> {
         Label time = new Label(TIME.format(message.getSentAt()));
         time.getStyleClass().add("message-time");
         VBox bubble = new VBox(4, sender, text, time);
+        bubble.maxWidthProperty().bind(widthProperty().multiply(0.75));
         bubble.getStyleClass().add(mine ? "message-mine" : "message-theirs");
         HBox row = new HBox(bubble);
         row.setAlignment(mine ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);

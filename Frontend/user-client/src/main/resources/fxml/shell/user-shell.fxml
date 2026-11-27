@@ -43,5 +43,5 @@
       </VBox>
     </VBox>
   </left>
-  <center><StackPane fx:id="contentHost"/></center>
+  <center><ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" styleClass="content-scroll"><content><StackPane fx:id="contentHost"/></content></ScrollPane></center>
 </BorderPane>

@@ -1,11 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatsystem.admin.controller.ModerationController" spacing="18" styleClass="content-area">
- <HBox alignment="CENTER_LEFT"><VBox><Label text="Warnings &amp; moderation" styleClass="page-title"/><Label text="Review incoming spam and safety reports." styleClass="muted-text"/></VBox><Region HBox.hgrow="ALWAYS"/><StackPane fx:id="exportWrapper"><Button fx:id="exportButton" text="Export report log" styleClass="secondary-button"/></StackPane></HBox>
- <HBox spacing="14"><VBox styleClass="card" HBox.hgrow="ALWAYS"><Label text="Pending"/><Label fx:id="pendingMetric" styleClass="metric-value"/><Label text="Needs triage" styleClass="muted-text"/></VBox><VBox styleClass="card" HBox.hgrow="ALWAYS"><Label text="Reviewed"/><Label fx:id="reviewedMetric" styleClass="metric-value"/><Label text="Decision recorded" styleClass="muted-text"/></VBox><VBox styleClass="card" HBox.hgrow="ALWAYS"><Label text="Resolved"/><Label fx:id="resolvedMetric" styleClass="metric-value"/><Label text="Closed cases" styleClass="muted-text"/></VBox></HBox>
- <VBox spacing="12" styleClass="card" VBox.vgrow="ALWAYS"><Label text="Warning queue" styleClass="section-title"/><HBox spacing="12"><TextField fx:id="searchField" promptText="Search case ID, user, or reason" styleClass="search-field" HBox.hgrow="ALWAYS"/><MenuButton fx:id="statusButton" text="All statuses  v" styleClass="secondary-button"/><MenuButton fx:id="sortButton" text="Newest first  v" styleClass="secondary-button"/></HBox><HBox spacing="10" alignment="CENTER_LEFT"><Label text="From" styleClass="muted-text"/><DatePicker fx:id="fromDate" prefWidth="150"/>
-   <Label text="To" styleClass="muted-text"/><DatePicker fx:id="toDate" prefWidth="150"/>
-   <Button fx:id="applyDatesButton" text="Apply dates" styleClass="small-button"/>
-   <Button fx:id="clearDatesButton" text="Clear dates" styleClass="small-button"/><Label fx:id="dateFeedbackLabel" styleClass="muted-text"/></HBox>
-   <HBox spacing="8"><Label text="CASE ID" prefWidth="90"/><Label text="REASON" prefWidth="170"/><Label text="REPORTED USER" prefWidth="150"/><Label fx:id="contextHeading" text="CONTEXT" prefWidth="150"/><Label text="CREATED" prefWidth="180"/><Label text="STATUS" prefWidth="100"/><Label text="ACTION"/></HBox><Label fx:id="emptyLabel" text="No warning cases match the current filters." visible="false" managed="false" styleClass="muted-text"/><ListView fx:id="caseList" VBox.vgrow="ALWAYS"/></VBox>
- <HBox spacing="12" styleClass="card"><Label text="1. Review evidence" styleClass="pill"/><Label text="2. Select action" styleClass="pill"/><Label text="3. Record decision" styleClass="pill"/><Label text="4. Close case" styleClass="pill"/></HBox>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="content-wrap" spacing="22" fx:controller="com.chatsystem.admin.controller.ModerationController">
+  <Label text="ADMIN  /  MODERATION" styleClass="breadcrumb" />
+  <HBox alignment="CENTER_LEFT">
+    <VBox>
+      <Label text="Warnings &amp; moderation" styleClass="page-title" />
+      <Label text="Review incoming spam and safety reports." styleClass="muted-text" />
+    </VBox>
+    <Region HBox.hgrow="ALWAYS" />
+    <StackPane fx:id="exportWrapper">
+      <Button fx:id="exportButton" text="Export report log" styleClass="secondary-button" />
+    </StackPane>
+  </HBox>
+  <HBox spacing="14">
+    <VBox styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Pending" />
+      <Label fx:id="pendingMetric" styleClass="metric-value" />
+      <Label text="Needs triage" styleClass="muted-text" />
+    </VBox>
+    <VBox styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Reviewed" />
+      <Label fx:id="reviewedMetric" styleClass="metric-value" />
+      <Label text="Decision recorded" styleClass="muted-text" />
+    </VBox>
+    <VBox styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Resolved" />
+      <Label fx:id="resolvedMetric" styleClass="metric-value" />
+      <Label text="Closed cases" styleClass="muted-text" />
+    </VBox>
+  </HBox>
+  <VBox spacing="12" styleClass="card">
+    <Label text="Warning queue" styleClass="section-title" />
+    <HBox spacing="12">
+      <TextField fx:id="searchField" promptText="Search case ID, user, or reason" styleClass="search-field" HBox.hgrow="ALWAYS" />
+      <MenuButton fx:id="statusButton" text="All statuses  v" styleClass="secondary-button" />
+      <MenuButton fx:id="sortButton" text="Newest first  v" styleClass="secondary-button" />
+    </HBox>
+    <HBox spacing="10" alignment="CENTER_LEFT">
+      <Label text="From" styleClass="muted-text" />
+      <DatePicker fx:id="fromDate" prefWidth="150" />
+      <Label text="To" styleClass="muted-text" />
+      <DatePicker fx:id="toDate" prefWidth="150" />
+      <Button fx:id="applyDatesButton" text="Apply dates" styleClass="small-button" />
+      <Button fx:id="clearDatesButton" text="Clear dates" styleClass="small-button" />
+      <Label fx:id="dateFeedbackLabel" styleClass="muted-text" />
+    </HBox>
+    <HBox spacing="8">
+      <Label text="CASE ID" prefWidth="90" />
+      <Label text="REASON" prefWidth="170" />
+      <Label text="REPORTED USER" prefWidth="150" />
+      <Label fx:id="contextHeading" text="CONTEXT" prefWidth="150" />
+      <Label text="CREATED" prefWidth="180" />
+      <Label text="STATUS" prefWidth="100" />
+      <Label text="ACTION" />
+    </HBox>
+    <Label fx:id="emptyLabel" text="No warning cases match the current filters." visible="false" managed="false" styleClass="muted-text" />
+    <ListView fx:id="caseList" prefHeight="300" styleClass="directory-list" />
+  </VBox>
+  <HBox spacing="12" styleClass="card">
+    <Label text="1. Review evidence" styleClass="pill" />
+    <Label text="2. Select action" styleClass="pill" />
+    <Label text="3. Record decision" styleClass="pill" />
+    <Label text="4. Close case" styleClass="pill" />
+  </HBox>
 </VBox>

@@ -20,6 +20,7 @@ public final class FriendRequestsController {
     private final UserNavigator navigator;
     private final AdminService directory;
     private FriendRequest pendingCancellation;
+    @FXML private HBox incomingSelectionActions; @FXML private Button cancelRequestButton;
     @FXML private TextField requestSearchField;
     @FXML private ListView<FriendRequest> incomingList;
     @FXML private ListView<FriendRequest> outgoingList;
@@ -31,6 +32,7 @@ public final class FriendRequestsController {
         this.social=social;this.directory=directory;this.navigator=navigator;
     }
     @FXML private void initialize() {
+        com.chatsystem.user.ui.SelectionActions.showWhenSelected(incomingSelectionActions,incomingList);com.chatsystem.user.ui.SelectionActions.showWhenSelected(cancelRequestButton,outgoingList);
         FilteredList<FriendRequest> incoming=new FilteredList<>(social.getIncomingRequests());
         FilteredList<FriendRequest> outgoing=new FilteredList<>(social.getOutgoingRequests());
         incomingList.setItems(incoming); outgoingList.setItems(outgoing);
@@ -41,8 +43,11 @@ public final class FriendRequestsController {
         });
         incomingList.setPlaceholder(new Label("No matching incoming requests"));
         outgoingList.setPlaceholder(new Label("No matching sent requests"));
-        incomingList.setCellFactory(ignored -> new FriendRequestCell("Accept", request -> apply(social.acceptRequest(request.getId()), "Request accepted"), "Decline", request -> apply(social.rejectRequest(request.getId()), "Request declined")));
-        outgoingList.setCellFactory(ignored -> new FriendRequestCell("Cancel request", this::requestCancel, null, null));
+        incomingList.setCellFactory(ignored -> new FriendRequestCell("Accept", request -> apply(social.acceptRequest(request.getId()), "Request accepted"), "Decline", request -> apply(social.rejectRequest(request.getId()), "Request declined"), request -> displayName(request.getSenderId())));
+        outgoingList.setCellFactory(ignored -> new FriendRequestCell("Cancel request", this::requestCancel, null, null, request -> displayName(request.getReceiverId())));
+    }
+    private String displayName(long id) {
+        return directory==null?"Account #"+id:directory.getUser(id).map(UserAccount::getDisplayName).orElse("Unknown account");
     }
     private boolean matches(long id,String query) {
         if (query.isEmpty()) return true;

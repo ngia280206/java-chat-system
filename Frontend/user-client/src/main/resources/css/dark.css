@@ -117,3 +117,46 @@
 .scroll-pane > .viewport { -fx-background-color: transparent; }
 .scroll-bar:vertical, .scroll-bar:horizontal { -fx-background-color: #111B28; }
 .scroll-bar .thumb { -fx-background-color: #34475D; -fx-background-radius: 8; }
+
+/* Interactive controls keep the reference skin even when JavaFX adds .button. */
+.button.nav-button, .button.nav-active { -fx-border-color: transparent; -fx-border-width: 0; -fx-padding: 12 14; -fx-background-radius: 9; -fx-alignment: CENTER_LEFT; -fx-min-height: 42; }
+.button.nav-button { -fx-background-color: transparent; -fx-text-fill: #A8B7C9; }
+.button.nav-button:hover { -fx-background-color: #1E2C3D; -fx-text-fill: #EFF3FF; }
+.button.nav-active { -fx-background-color: #293758; -fx-text-fill: #B6C5FF; }
+.button.primary-button, .button.button-primary { -fx-background-color: #758BFF; -fx-text-fill: #0D1426; -fx-border-color: transparent; -fx-padding: 11 18; }
+.button.ghost-button, .button.inline-link { -fx-background-color: transparent; -fx-border-color: transparent; }
+.button.pill, .button.pill-active { -fx-background-radius: 20; -fx-border-color: transparent; -fx-padding: 6 11; -fx-font-size: 11px; }
+.button.pill { -fx-background-color: #27354A; -fx-text-fill: #AFC4DD; }
+.button.pill-active { -fx-background-color: #2D4063; -fx-text-fill: #B2C6FF; }
+.content-area { -fx-padding: 30 36 38 36; -fx-background-color: #0B1119; }
+.page-header { -fx-padding: 30 36 22 36; }
+.dialog-content { -fx-padding: 26; -fx-spacing: 14; -fx-background-color: #0B1119; }
+.directory-heading { -fx-padding: 0 10 8 10; -fx-border-color: #2A3949; -fx-border-width: 0 0 1 0; }
+.directory-list, .conversation-list, .message-list { -fx-background-insets: 0; -fx-padding: 0; -fx-border-width: 0; -fx-background-color: transparent; -fx-control-inner-background: transparent; }
+.directory-list .virtual-flow, .conversation-list .virtual-flow, .message-list .virtual-flow { -fx-background-color: transparent; }
+.directory-list .list-cell { -fx-background-color: #15212E; -fx-padding: 10; -fx-cell-size: 58; }
+.directory-list .list-cell:odd { -fx-background-color: #192635; }
+.directory-list .list-cell:filled:hover, .conversation-list .list-cell:filled:hover { -fx-background-color: #1D2A3A; }
+.directory-list .list-cell:filled:selected, .conversation-list .list-cell:filled:selected { -fx-background-color: #263750; }
+.directory-list .list-cell:empty, .conversation-list .list-cell:empty { -fx-background-color: transparent; }
+.list-row { -fx-alignment: CENTER_LEFT; -fx-padding: 0; }
+.conversation-list .list-cell { -fx-background-color: transparent; -fx-padding: 12 4; }
+.chat-workspace, .message-list { -fx-background-color: #0F1722; }
+.chat-header { -fx-padding: 20 25; -fx-border-color: #2A3A4C; -fx-border-width: 0 0 1 0; }
+.composer-wrap { -fx-padding: 10 25 16 25; -fx-spacing: 6; -fx-background-color: #0F1722; }
+.message-list .list-cell, .message-list .list-cell:empty { -fx-background-color: transparent; -fx-padding: 8 25; }
+.message-list .list-cell:filled:selected { -fx-background-color: #172433; }
+.friend-row-action, .request-row-action, .blocked-row-action, .group-remove-action { -fx-font-size: 11px; -fx-padding: 7 11; }
+.chart { -fx-background-color: transparent; -fx-padding: 0; }
+.chart-plot-background { -fx-background-color: transparent; }
+.chart-vertical-grid-lines { -fx-stroke: transparent; }
+.chart-horizontal-grid-lines { -fx-stroke: #263848; }
+.chart-bar { -fx-bar-fill: #748BFF; -fx-background-radius: 5 5 0 0; }
+.axis { -fx-tick-label-fill: #8397AC; -fx-font-size: 10px; }
+.date-picker { -fx-background-color: #101A26; }
+.date-picker > .arrow-button { -fx-background-color: #263950; }
+.date-picker > .arrow-button > .arrow { -fx-background-color: #AFC4DD; }
+
+.metric-card { -fx-min-width: 0; -fx-pref-width: 0; }
+
+.breadcrumb { -fx-min-height: 26; -fx-alignment: CENTER_LEFT; }

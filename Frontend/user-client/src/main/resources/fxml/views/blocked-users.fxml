@@ -1,1 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?><VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.social.BlockedUsersController" spacing="10" styleClass="app-root"><HBox spacing="8"><Button text="← Back to friends" onAction="#back"/><Label text="Blocked users" styleClass="page-title"/></HBox><ListView fx:id="blockedList" VBox.vgrow="ALWAYS"/><Button fx:id="unblockButton" text="Unblock" onAction="#requestUnblock"/><HBox fx:id="unblockConfirmationBar" managed="false" visible="false" spacing="8"><Label text="Unblock this user?"/><Button fx:id="confirmUnblockButton" text="Confirm" onAction="#confirmUnblock"/><Button text="Cancel" onAction="#cancelUnblock"/></HBox><Label fx:id="blockedFeedbackLabel"/></VBox>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="content-wrap" spacing="22" fx:controller="com.chatsystem.user.controller.social.BlockedUsersController">
+  <Label text="RELAY  /  BLOCKED USERS" styleClass="breadcrumb" />
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="5" HBox.hgrow="ALWAYS">
+      <Label text="Blocked users" styleClass="page-title" />
+      <Label text="Manage accounts you have blocked." styleClass="page-subtitle" />
+    </VBox>
+    <Button text="Back to friends" styleClass="secondary-button" onAction="#back" />
+  </HBox>
+  <VBox spacing="14" styleClass="card">
+    <Label text="Blocked accounts" styleClass="section-title" />
+    <Label text="Blocked users cannot send you messages or friend requests." styleClass="muted" />
+    <ListView fx:id="blockedList" styleClass="directory-list" prefHeight="180" />
+    <Button text="Unblock selected" styleClass="small-button" fx:id="unblockButton" onAction="#requestUnblock" />
+  </VBox>
+  <HBox fx:id="unblockConfirmationBar" managed="false" visible="false" spacing="8">
+    <Label text="Unblock this user?" />
+    <Button fx:id="confirmUnblockButton" text="Confirm" onAction="#confirmUnblock" />
+    <Button text="Cancel" onAction="#cancelUnblock" />
+  </HBox>
+  <Label fx:id="blockedFeedbackLabel" />
+</VBox>

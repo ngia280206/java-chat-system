@@ -8,6 +8,7 @@ public final class GroupCell extends ListCell<Conversation> {
     @Override
     protected void updateItem(Conversation g, boolean e) {
         super.updateItem(g, e);
-        setText(e || g == null ? null : g.getName() + "\n" + g.getDescription());
+        setText(null);
+        setGraphic(e || g == null ? null : CellLayout.identity(g.getName(), g.getDescription()));
     }
 }

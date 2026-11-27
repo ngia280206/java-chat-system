@@ -16,6 +16,7 @@ public final class FriendsController {
     private final SocialService social;
     private final ChatService chat;
     private final UserNavigator nav;
+    @FXML private HBox selectedFriendActions;
     @FXML
     private TextField friendSearchField;
     @FXML
@@ -28,6 +29,7 @@ public final class FriendsController {
     private ChoiceBox<String> friendSortChoice;
     @FXML
     private CheckBox onlineOnly;
+    @FXML private Label friendsMetric, onlineMetric, requestsMetric;
     private Runnable pending;
 
     public FriendsController(SocialService s, ChatService c, UserNavigator n) {
@@ -38,6 +40,10 @@ public final class FriendsController {
 
     @FXML
     private void initialize() {
+        com.chatsystem.user.ui.SelectionActions.showWhenSelected(selectedFriendActions,friendList);
+        friendsMetric.textProperty().bind(javafx.beans.binding.Bindings.size(social.getFriends()).asString());
+        onlineMetric.textProperty().bind(javafx.beans.binding.Bindings.createStringBinding(() -> Long.toString(social.getFriends().stream().filter(UserAccount::isOnline).count()), social.getFriends()));
+        requestsMetric.textProperty().bind(javafx.beans.binding.Bindings.size(social.getIncomingRequests()).asString());
         var sorted = new SortedList<>(social.getFriends(), Comparator.comparing(UserAccount::getDisplayName));
         var filtered = new FilteredList<>(sorted);
         friendList.setItems(filtered);

@@ -20,6 +20,18 @@ User demo credentials:
 
 The login window is fixed at 1240×780. Successful login opens the fixed 1540×930 user shell. The admin application opens a fixed 1480×920 shell and intentionally has no authentication workflow in this frontend phase.
 
+## UI design verification
+
+The User and Admin layouts follow the references in `docs/UI_design/Screenshot` while displaying live demo data. `DesignLayoutTest` checks page insets, sidebar styling, chat rail/composer placement, and dashboard card sizes. The workflow suite also checks that changing the dashboard date range updates the chart.
+
+To render review screenshots into each client's `build/ui-snapshots` directory:
+
+```powershell
+$env:RELAY_CAPTURE = 'true'
+.\gradlew.bat :user-client:test :admin-client:test --tests '*DesignLayoutTest' --rerun-tasks
+Remove-Item Env:RELAY_CAPTURE
+```
+
 ## Structure and backend replacement
 
 - `shared-client` owns observable domain state, operation-focused service interfaces, deterministic fixtures, and in-memory service implementations.

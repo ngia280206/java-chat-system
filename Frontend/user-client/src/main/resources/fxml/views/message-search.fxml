@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.chat.MessageSearchController" styleClass="app-root" prefWidth="1250" prefHeight="850">
- <top><VBox spacing="12" styleClass="page-header"><HBox spacing="10"><Button text="← Back to chats" onAction="#back"/><Label text="Search messages" styleClass="page-title"/></HBox><HBox spacing="8"><Button fx:id="allConversationsButton" text="All conversations" onAction="#allConversations"/><ComboBox fx:id="conversationScope" promptText="Choose conversation"/><TextField fx:id="queryField" promptText="Search visible messages" HBox.hgrow="ALWAYS"/><Button fx:id="submitSearchButton" text="Search" onAction="#search" styleClass="button-primary"/></HBox><HBox spacing="8"><Label text="All dates"/><StackPane fx:id="imagesWrapper"><Button fx:id="imagesButton" text="Images"/></StackPane><StackPane fx:id="linksWrapper"><Button fx:id="linksButton" text="Links"/></StackPane><StackPane fx:id="filesWrapper"><Button fx:id="filesButton" text="Files"/></StackPane></HBox></VBox></top>
- <center><VBox spacing="8"><ListView fx:id="resultList" styleClass="card" VBox.vgrow="ALWAYS"/><Button fx:id="openResultButton" text="Open conversation" onAction="#openResult"/></VBox></center>
-</BorderPane>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="content-wrap" spacing="22" fx:controller="com.chatsystem.user.controller.chat.MessageSearchController">
+  <Label text="RELAY  /  MESSAGE SEARCH" styleClass="breadcrumb" />
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="5" HBox.hgrow="ALWAYS">
+      <Label text="Search messages" styleClass="page-title" />
+      <Label text="Find messages across your conversations." styleClass="page-subtitle" />
+    </VBox>
+    <Button text="Back to chats" styleClass="secondary-button" onAction="#back" />
+  </HBox>
+  <VBox spacing="14" styleClass="card">
+    <Label text="Search within messages" styleClass="section-title" />
+    <HBox spacing="12" alignment="CENTER_LEFT">
+      <TextField fx:id="queryField" promptText="Search visible messages" HBox.hgrow="ALWAYS" />
+      <ComboBox fx:id="conversationScope" promptText="Choose conversation" />
+      <Button text="Search" styleClass="primary-button" fx:id="submitSearchButton" onAction="#search" />
+    </HBox>
+    <HBox spacing="12" alignment="CENTER_LEFT">
+      <Button text="All conversations" styleClass="pill-active" fx:id="allConversationsButton" onAction="#allConversations" />
+      <Label text="All dates" styleClass="pill" />
+      <StackPane fx:id="imagesWrapper">
+        <Button fx:id="imagesButton" text="Images" />
+      </StackPane>
+      <StackPane fx:id="linksWrapper">
+        <Button fx:id="linksButton" text="Links" />
+      </StackPane>
+      <StackPane fx:id="filesWrapper">
+        <Button fx:id="filesButton" text="Files" />
+      </StackPane>
+    </HBox>
+  </VBox>
+  <VBox spacing="14" styleClass="card">
+    <Label text="Results in conversations" styleClass="section-title" />
+    <ListView fx:id="resultList" styleClass="directory-list" prefHeight="420" />
+    <Button text="Open conversation" styleClass="small-button" fx:id="openResultButton" onAction="#openResult" />
+  </VBox>
+</VBox>

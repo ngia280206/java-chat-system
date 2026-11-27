@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.social.AddFriendDialogController"
- spacing="12" styleClass="app-root" prefWidth="560" prefHeight="410">
+ spacing="12" styleClass="dialog-content" prefWidth="560" prefHeight="410">
  <Label text="Find people" styleClass="page-title"/>
  <Label text="Search by full name or username; blocked accounts are hidden." styleClass="muted"/>
  <TextField fx:id="findUserField" promptText="Enter a name or @username"/>

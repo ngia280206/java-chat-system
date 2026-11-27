@@ -1,2 +1,70 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.chat.ChatGroupController" styleClass="app-root" prefWidth="1250" prefHeight="850"><top><HBox spacing="10" styleClass="page-header"><Button text="← Chats" onAction="#back"/><Label fx:id="conversationTitle" styleClass="page-title" HBox.hgrow="ALWAYS"/><Button text="+ New" onAction="#newConversation"/><Button fx:id="searchButton" text="Search" onAction="#search"/><Button fx:id="assistantButton" text="✦ Ask AI" onAction="#assistant"/><Button text="Manage group" onAction="#groupDetails"/><Button fx:id="clearHistoryButton" text="Clear History" onAction="#clearHistory"/></HBox></top><center><HBox><VBox styleClass="conversation-pane" prefWidth="300"><Label text="Messages" styleClass="section-title"/><TextField promptText="Search conversations" styleClass="search-field"/><HBox spacing="8"><Label text="All" styleClass="pill-active"/><Label text="Unread" styleClass="pill"/><Label text="Groups" styleClass="pill"/></HBox><ListView fx:id="conversationList" VBox.vgrow="ALWAYS"/></VBox><ListView fx:id="messageList" styleClass="chat-main" HBox.hgrow="ALWAYS"/><VBox styleClass="chat-rail" prefWidth="210"><Label text="Group members" styleClass="section-title"/><Label text="Member roles and availability are managed in Group details." wrapText="true"/></VBox></HBox></center><bottom><VBox spacing="8"><HBox fx:id="confirmationBar" visible="false" managed="false" spacing="8"><Label fx:id="confirmationLabel"/><Button fx:id="confirmActionButton" text="Confirm" onAction="#confirmAction"/><Button fx:id="cancelActionButton" text="Cancel" onAction="#cancelAction"/></HBox><Label fx:id="feedbackLabel"/><HBox spacing="8" styleClass="chat-composer"><StackPane fx:id="attachmentWrapper"><Button fx:id="attachmentButton" text="+"/></StackPane><TextField fx:id="messageField" promptText="Write a message..." HBox.hgrow="ALWAYS"/><Button fx:id="sendButton" text="Send →" onAction="#send" styleClass="primary-button"/><Button fx:id="hideMessageButton" text="Hide Message" onAction="#hideSelected"/></HBox></VBox></bottom></BorderPane>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatsystem.user.controller.chat.ChatGroupController" styleClass="app-root">
+  <left>
+    <VBox spacing="14" styleClass="conversation-pane" prefWidth="310" minWidth="310" maxWidth="310">
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="Messages" styleClass="section-title" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="+ New" styleClass="small-button" onAction="#newConversation" />
+      </HBox>
+      <TextField promptText="Search conversations" styleClass="search-field" />
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="All" styleClass="pill-active" fx:id="allFilterButton" />
+        <Label text="Unread" styleClass="pill" fx:id="unreadFilterButton" />
+        <Label text="Groups" styleClass="pill" fx:id="groupsFilterButton" />
+      </HBox>
+      <ListView fx:id="conversationList" styleClass="conversation-list" VBox.vgrow="ALWAYS" />
+    </VBox>
+  </left>
+  <center>
+    <BorderPane styleClass="chat-workspace">
+      <top>
+        <HBox spacing="12" alignment="CENTER_LEFT" styleClass="chat-header">
+          <VBox spacing="14" HBox.hgrow="ALWAYS">
+            <Label fx:id="conversationTitle" styleClass="section-title" />
+            <Label text="Conversation" styleClass="tiny-muted" />
+          </VBox>
+          <Button text="Search" styleClass="small-button" fx:id="searchButton" onAction="#search" />
+          <Button text="Manage group" styleClass="small-button" onAction="#groupDetails" />
+          <Button text="✦ Ask AI" styleClass="small-button" fx:id="assistantButton" onAction="#assistant" />
+          <Button text="Clear history" styleClass="small-button" fx:id="clearHistoryButton" onAction="#clearHistory" />
+        </HBox>
+      </top>
+      <center>
+        <ListView fx:id="messageList" styleClass="message-list" />
+      </center>
+      <bottom>
+        <VBox spacing="14" styleClass="composer-wrap">
+          <HBox fx:id="confirmationBar" visible="false" managed="false" spacing="8">
+            <Label fx:id="confirmationLabel" />
+            <Button fx:id="confirmActionButton" text="Confirm" onAction="#confirmAction" />
+            <Button fx:id="cancelActionButton" text="Cancel" onAction="#cancelAction" />
+          </HBox>
+          <Label fx:id="feedbackLabel" wrapText="true" />
+          <HBox spacing="12" alignment="CENTER_LEFT" styleClass="chat-composer">
+            <StackPane fx:id="attachmentWrapper">
+              <Button fx:id="attachmentButton" text="+" />
+            </StackPane>
+            <TextField fx:id="messageField" promptText="Write a message..." HBox.hgrow="ALWAYS" />
+            <Button text="Send →" styleClass="primary-button" fx:id="sendButton" onAction="#send" />
+          </HBox>
+          <HBox spacing="12" alignment="CENTER_LEFT">
+            <Button text="← Chats" styleClass="inline-link" onAction="#back" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="Hide selected message" styleClass="inline-link" fx:id="hideMessageButton" onAction="#hideSelected" />
+          </HBox>
+        </VBox>
+      </bottom>
+    </BorderPane>
+  </center>
+  <right>
+    <VBox spacing="14" styleClass="chat-rail" prefWidth="210" minWidth="210" maxWidth="210">
+      <Label text="Group members" styleClass="section-title" />
+      <ListView fx:id="chatMemberList" styleClass="conversation-list" prefHeight="320" />
+      <Button text="Manage group" styleClass="small-button" onAction="#groupDetails" />
+    </VBox>
+  </right>
+</BorderPane>

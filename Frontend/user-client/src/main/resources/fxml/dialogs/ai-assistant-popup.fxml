@@ -1,3 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.chat.AiAssistantPopupController" spacing="14" styleClass="app-root" prefWidth="890" prefHeight="890"><Label text="✦ AI Assistant" styleClass="page-title"/><Label text="Local simulated response — no network or real AI is used." wrapText="true"/><HBox spacing="8"><Button fx:id="summarizePromptButton" text="Summarize" onAction="#summarize"/><Button text="Draft a reply" onAction="#draft"/><Button text="Explain" onAction="#explain"/></HBox><TextArea fx:id="promptField" promptText="Ask about this message..." prefRowCount="8"/><Button fx:id="sendPromptButton" text="Send" onAction="#send" styleClass="button-primary"/><Label fx:id="responseLabel" wrapText="true" styleClass="card" VBox.vgrow="ALWAYS"/><Button fx:id="closeAssistantButton" text="Close" onAction="#close"/></VBox>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatsystem.user.controller.chat.AiAssistantPopupController" styleClass="content-wrap" spacing="22" prefWidth="890" prefHeight="890">
+  <Label text="AI Assistant" styleClass="page-title"/>
+  <Label text="Ask about a selected message" styleClass="page-subtitle"/>
+  <VBox styleClass="card" spacing="14" VBox.vgrow="ALWAYS">
+    <HBox spacing="12" alignment="CENTER_LEFT"><StackPane styleClass="brand-badge"><Label text="✦" styleClass="brand-mark"/></StackPane><VBox><Label text="Relay AI Assistant" styleClass="section-title"/><Label text="Contextual message assistant" styleClass="muted"/></VBox><Region HBox.hgrow="ALWAYS"/><Button fx:id="closeAssistantButton" text="Close" onAction="#close" styleClass="ghost-button"/></HBox>
+    <Separator/><Label text="How can I help?" styleClass="section-title"/>
+    <HBox spacing="12"><Button fx:id="summarizePromptButton" text="Summarize" onAction="#summarize" styleClass="pill-active"/><Button text="Draft a reply" onAction="#draft" styleClass="pill"/><Button text="Explain" onAction="#explain" styleClass="pill"/></HBox>
+    <Label fx:id="responseLabel" wrapText="true" styleClass="callout-card" maxWidth="Infinity" VBox.vgrow="ALWAYS"/>
+    <HBox spacing="12" alignment="BOTTOM_RIGHT"><TextArea fx:id="promptField" promptText="Ask about this message..." prefRowCount="4" wrapText="true" HBox.hgrow="ALWAYS"/><Button fx:id="sendPromptButton" text="Send" onAction="#send" styleClass="primary-button"/></HBox>
+    <Label text="Local simulated response — no network or real AI is used." styleClass="tiny-muted"/>
+  </VBox>
+</VBox>

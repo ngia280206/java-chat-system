@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.chat.ChatHomeController" styleClass="app-root" prefWidth="1250" prefHeight="850">
- <top><VBox spacing="14" styleClass="page-header"><Label text="Chats" styleClass="page-title"/><HBox spacing="10"><TextField fx:id="conversationSearchField" promptText="Search conversations" HBox.hgrow="ALWAYS"/><Button fx:id="newConversationButton" text="+ New" onAction="#newConversation"/><Button text="Explore groups" onAction="#showGroups"/></HBox><HBox spacing="8"><Button fx:id="allFilterButton" text="All" onAction="#filterAll"/><Button fx:id="unreadFilterButton" text="Unread" onAction="#filterUnread"/><Button fx:id="groupsFilterButton" text="Groups" onAction="#filterGroups"/></HBox></VBox></top>
- <center><ListView fx:id="conversationList" styleClass="card"/></center>
- <bottom><HBox spacing="10" styleClass="card"><Label text="Ready to connect?" styleClass="section-title"/><Button text="Start a conversation" onAction="#newConversation" styleClass="button-primary"/></HBox></bottom>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatsystem.user.controller.chat.ChatHomeController" styleClass="app-root">
+  <left>
+    <VBox spacing="14" styleClass="conversation-pane" prefWidth="310" minWidth="310" maxWidth="310">
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="Messages" styleClass="section-title" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="+ New" styleClass="small-button" onAction="#newConversation" />
+      </HBox>
+      <TextField fx:id="conversationSearchField" promptText="Search conversations" styleClass="search-field" />
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <Button text="All" styleClass="pill-active" fx:id="allFilterButton" onAction="#filterAll" />
+        <Button text="Unread" styleClass="pill" fx:id="unreadFilterButton" onAction="#filterUnread" />
+        <Button text="Groups" styleClass="pill" fx:id="groupsFilterButton" onAction="#filterGroups" />
+      </HBox>
+      <ListView fx:id="conversationList" styleClass="conversation-list" VBox.vgrow="ALWAYS" />
+    </VBox>
+  </left>
+  <center>
+    <StackPane styleClass="chat-main">
+      <VBox spacing="14" styleClass="empty-state" maxWidth="600" maxHeight="Infinity">
+        <StackPane styleClass="brand-badge">
+          <Label text="R" styleClass="brand-mark" />
+        </StackPane>
+        <Label text="Your conversations, all in one place" styleClass="section-title" />
+        <Label text="Choose a chat or start a new conversation." styleClass="page-subtitle" />
+        <HBox spacing="12" alignment="CENTER_LEFT">
+          <Button text="Start a conversation" styleClass="primary-button" fx:id="newConversationButton" onAction="#newConversation" />
+          <Button text="Explore groups" styleClass="secondary-button" onAction="#showGroups" />
+        </HBox>
+        <Label text="Private chats and group conversations, together." styleClass="tiny-muted" />
+      </VBox>
+    </StackPane>
+  </center>
 </BorderPane>

@@ -1,1 +1,63 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?><BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.social.FriendsController" styleClass="app-root"><top><VBox spacing="10"><Label text="Friends" styleClass="page-title"/><HBox spacing="8"><CheckBox fx:id="onlineOnly" text="Online only"/><Button text="Requests" onAction="#requests"/><Button text="Blocked" onAction="#blocked"/><Button fx:id="openAddFriendButton" text="+ Add friend" onAction="#openAdd"/><ChoiceBox fx:id="friendSortChoice"/></HBox><TextField fx:id="friendSearchField" promptText="Search by name or username"/></VBox></top><center><ListView fx:id="friendList" styleClass="card"/></center><bottom><VBox spacing="8"><HBox fx:id="socialConfirmationBar" managed="false" visible="false" spacing="8"><Label fx:id="confirmationPrompt" text="Confirm this change?"/><Button fx:id="confirmSocialButton" text="Confirm" onAction="#confirmSocial"/><Button fx:id="cancelSocialButton" text="Cancel" onAction="#cancelSocial"/></HBox><HBox spacing="8"><Button fx:id="messageFriendButton" text="Message" onAction="#message"/><Button fx:id="createGroupButton" text="Create group" onAction="#createGroup"/><Button fx:id="removeFriendButton" text="Unfriend" onAction="#unfriend"/><Button fx:id="blockUserButton" text="Block User" onAction="#block"/></HBox><Label fx:id="socialFeedbackLabel"/></VBox></bottom></BorderPane>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="content-wrap" spacing="22" fx:controller="com.chatsystem.user.controller.social.FriendsController">
+  <Label text="RELAY  /  FRIENDS" styleClass="breadcrumb" />
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="5" HBox.hgrow="ALWAYS">
+      <Label text="Friends" styleClass="page-title" />
+      <Label text="Stay connected and manage your network." styleClass="page-subtitle" />
+    </VBox>
+    <Button text="+ Add friend" styleClass="primary-button" fx:id="openAddFriendButton" onAction="#openAdd" />
+  </HBox>
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Total friends" styleClass="metric-label" />
+      <Label fx:id="friendsMetric" styleClass="value-large" />
+      <Label text="Your network" styleClass="metric-trend" />
+    </VBox>
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Online now" styleClass="metric-label" />
+      <Label fx:id="onlineMetric" styleClass="value-large" />
+      <Label text="Friends available" styleClass="metric-trend" />
+    </VBox>
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Pending requests" styleClass="metric-label" />
+      <Label fx:id="requestsMetric" styleClass="value-large" />
+      <Label text="Awaiting your response" styleClass="metric-trend" />
+    </VBox>
+  </HBox>
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <Label text="All friends" styleClass="pill-active" />
+    <Button text="Requests" styleClass="pill" onAction="#requests" />
+    <Button text="Blocked" styleClass="pill" onAction="#blocked" />
+  </HBox>
+  <VBox spacing="14" styleClass="card">
+    <Label text="Your friends" styleClass="section-title" />
+    <HBox spacing="12" alignment="CENTER_LEFT">
+      <TextField fx:id="friendSearchField" promptText="Search by name or username" styleClass="search-field" HBox.hgrow="ALWAYS" />
+      <CheckBox fx:id="onlineOnly" text="Online only" />
+      <ChoiceBox fx:id="friendSortChoice" />
+    </HBox>
+    <HBox spacing="12" alignment="CENTER_LEFT" styleClass="directory-heading">
+      <Label text="FRIEND" styleClass="table-heading" prefWidth="200" minWidth="200" />
+      <Label text="USERNAME" styleClass="table-heading" prefWidth="180" minWidth="180" />
+      <Label text="STATUS" styleClass="table-heading" prefWidth="110" minWidth="110" />
+      <Label text="ACTIONS" styleClass="table-heading" prefWidth="300" minWidth="300" />
+    </HBox>
+    <ListView fx:id="friendList" styleClass="directory-list" prefHeight="240" />
+    <HBox fx:id="selectedFriendActions" spacing="12" alignment="CENTER_LEFT">
+      <Button text="Message" styleClass="small-button" fx:id="messageFriendButton" onAction="#message" />
+      <Button text="Create group" styleClass="small-button" fx:id="createGroupButton" onAction="#createGroup" />
+      <Button text="Unfriend" styleClass="small-button" fx:id="removeFriendButton" onAction="#unfriend" />
+      <Button text="Block user" styleClass="small-button" fx:id="blockUserButton" onAction="#block" />
+    </HBox>
+  </VBox>
+  <HBox fx:id="socialConfirmationBar" managed="false" visible="false" spacing="8">
+    <Label fx:id="confirmationPrompt" text="Confirm this change?" />
+    <Button fx:id="confirmSocialButton" text="Confirm" onAction="#confirmSocial" />
+    <Button fx:id="cancelSocialButton" text="Cancel" onAction="#cancelSocial" />
+  </HBox>
+  <Label fx:id="socialFeedbackLabel" />
+</VBox>

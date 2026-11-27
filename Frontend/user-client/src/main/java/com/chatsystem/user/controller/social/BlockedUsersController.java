@@ -13,6 +13,7 @@ public final class BlockedUsersController {
     private final SocialService social;
     private final UserNavigator navigator;
     private UserAccount pending;
+    @FXML private Button unblockButton;
     @FXML
     private ListView<UserAccount> blockedList;
     @FXML
@@ -27,6 +28,7 @@ public final class BlockedUsersController {
 
     @FXML
     private void initialize() {
+        com.chatsystem.user.ui.SelectionActions.showWhenSelected(unblockButton,blockedList);
         blockedList.setItems(social.getBlockedUsers());
         blockedList.setCellFactory(ignored -> new BlockedUserCell(this::requestUnblock));
     }

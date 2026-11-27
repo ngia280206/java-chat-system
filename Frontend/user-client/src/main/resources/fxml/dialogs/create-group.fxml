@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.group.CreateGroupDialogController"
- spacing="10" styleClass="app-root" prefWidth="530" prefHeight="515">
+ spacing="10" styleClass="dialog-content" prefWidth="530" prefHeight="515">
  <Label text="Create group" styleClass="page-title"/>
  <TextField fx:id="groupNameField" promptText="Group name"/>
  <TextArea fx:id="descriptionField" promptText="Description (optional)" prefRowCount="2"/>

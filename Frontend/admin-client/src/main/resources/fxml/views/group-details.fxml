@@ -1,5 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatsystem.admin.controller.GroupDetailsController" spacing="20" styleClass="content-area">
- <HBox spacing="12" alignment="CENTER_LEFT"><Button fx:id="backButton" text="Back to groups" styleClass="secondary-button"/><Region HBox.hgrow="ALWAYS"/><Button fx:id="moderationButton" text="Open moderation history" styleClass="secondary-button"/></HBox><VBox styleClass="card"><Label fx:id="nameLabel" styleClass="page-title"/><Label fx:id="descriptionLabel" styleClass="muted-text"/><Label fx:id="ownerLabel" styleClass="muted-text"/><Label fx:id="createdLabel" styleClass="muted-text"/></VBox>
- <HBox spacing="16" VBox.vgrow="ALWAYS"><VBox styleClass="card" HBox.hgrow="ALWAYS"><HBox alignment="CENTER_LEFT"><Label text="Members" styleClass="section-title"/><Region HBox.hgrow="ALWAYS"/><StackPane fx:id="exportWrapper"><Button fx:id="exportButton" text="Export members" styleClass="small-button"/></StackPane></HBox><ListView fx:id="memberList" VBox.vgrow="ALWAYS"/></VBox><VBox styleClass="card" HBox.hgrow="ALWAYS"><Label text="Group activity" styleClass="section-title"/><ListView fx:id="activityList" VBox.vgrow="ALWAYS"/></VBox></HBox>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="content-wrap" spacing="22" fx:controller="com.chatsystem.admin.controller.GroupDetailsController">
+  <Label text="ADMIN  /  GROUP DETAILS" styleClass="breadcrumb" />
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="5" HBox.hgrow="ALWAYS">
+      <Label text="Group details" styleClass="page-title" />
+      <Label text="Inspect group information, activity, and membership." styleClass="page-subtitle" />
+    </VBox>
+    <Button fx:id="backButton" text="Back to groups" styleClass="secondary-button" />
+  </HBox>
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="14" styleClass="card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label fx:id="nameLabel" styleClass="page-title" />
+      <Label fx:id="descriptionLabel" styleClass="muted-text" />
+      <Label fx:id="ownerLabel" styleClass="muted-text" />
+      <Label fx:id="createdLabel" styleClass="muted-text" />
+      <Button fx:id="moderationButton" text="Open moderation history" styleClass="secondary-button" />
+    </VBox>
+    <VBox spacing="14" styleClass="card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Group activity" styleClass="section-title" />
+      <ListView fx:id="activityList" styleClass="directory-list" prefHeight="190" />
+    </VBox>
+  </HBox>
+  <VBox spacing="14" styleClass="card">
+    <HBox spacing="12" alignment="CENTER_LEFT">
+      <Label text="Member list" styleClass="section-title" />
+      <Region HBox.hgrow="ALWAYS" />
+      <StackPane fx:id="exportWrapper">
+        <Button fx:id="exportButton" text="Export members" styleClass="small-button" />
+      </StackPane>
+    </HBox>
+    <HBox spacing="12" alignment="CENTER_LEFT" styleClass="directory-heading">
+      <Label text="MEMBER" styleClass="table-heading" prefWidth="350" minWidth="350" />
+      <Label text="ROLE" styleClass="table-heading" prefWidth="150" minWidth="150" />
+      <Label text="JOINED" styleClass="table-heading" prefWidth="240" minWidth="240" />
+    </HBox>
+    <ListView fx:id="memberList" styleClass="directory-list" prefHeight="260" />
+  </VBox>
 </VBox>

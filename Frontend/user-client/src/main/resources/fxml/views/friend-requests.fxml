@@ -1,1 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?><VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.social.FriendRequestsController" spacing="10" styleClass="app-root"><HBox spacing="8"><Button text="← Back to friends" onAction="#back"/><Label text="Friend requests" styleClass="page-title"/></HBox><TextField fx:id="requestSearchField" promptText="Filter incoming and sent requests by name"/><Label text="Incoming" styleClass="section-title"/><ListView fx:id="incomingList" VBox.vgrow="ALWAYS"/><HBox spacing="8"><Button fx:id="acceptButton" text="Accept" onAction="#accept"/><Button fx:id="declineButton" text="Decline" onAction="#decline"/></HBox><Label text="Sent" styleClass="section-title"/><ListView fx:id="outgoingList" VBox.vgrow="ALWAYS"/><Button fx:id="cancelRequestButton" text="Cancel request" onAction="#requestCancel"/><HBox fx:id="requestConfirmationBar" managed="false" visible="false" spacing="8"><Label text="Cancel this sent request?"/><Button fx:id="confirmRequestButton" text="Confirm" onAction="#confirmCancel"/><Button fx:id="cancelRequestDecisionButton" text="Keep request" onAction="#cancelDecision"/></HBox><Label fx:id="requestFeedbackLabel"/></VBox>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="content-wrap" spacing="22" fx:controller="com.chatsystem.user.controller.social.FriendRequestsController">
+  <Label text="RELAY  /  FRIEND REQUESTS" styleClass="breadcrumb" />
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="5" HBox.hgrow="ALWAYS">
+      <Label text="Friend requests" styleClass="page-title" />
+      <Label text="Review incoming requests and manage invitations you sent." styleClass="page-subtitle" />
+    </VBox>
+    <Button text="Back to friends" styleClass="secondary-button" onAction="#back" />
+  </HBox>
+  <TextField fx:id="requestSearchField" promptText="Filter incoming and sent requests by name" />
+  <VBox spacing="14" styleClass="card">
+    <Label text="Incoming requests" styleClass="section-title" />
+    <ListView fx:id="incomingList" styleClass="directory-list" prefHeight="185" />
+    <HBox fx:id="incomingSelectionActions" spacing="12" alignment="CENTER_LEFT">
+      <Button text="Accept" styleClass="primary-button" fx:id="acceptButton" onAction="#accept" />
+      <Button text="Decline" styleClass="secondary-button" fx:id="declineButton" onAction="#decline" />
+    </HBox>
+  </VBox>
+  <VBox spacing="14" styleClass="card">
+    <Label text="Sent requests" styleClass="section-title" />
+    <ListView fx:id="outgoingList" styleClass="directory-list" prefHeight="145" />
+    <Button text="Cancel request" styleClass="small-button" fx:id="cancelRequestButton" onAction="#requestCancel" />
+  </VBox>
+  <HBox fx:id="requestConfirmationBar" managed="false" visible="false" spacing="8">
+    <Label text="Cancel this sent request?" />
+    <Button fx:id="confirmRequestButton" text="Confirm" onAction="#confirmCancel" />
+    <Button fx:id="cancelRequestDecisionButton" text="Keep request" onAction="#cancelDecision" />
+  </HBox>
+  <Label fx:id="requestFeedbackLabel" />
+</VBox>
