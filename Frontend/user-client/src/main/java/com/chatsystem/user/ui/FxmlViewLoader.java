@@ -64,7 +64,7 @@ public final class FxmlViewLoader {
         if (type == AddFriendDialogController.class) return new AddFriendDialogController(context.social(), context.admin(), context.chat(), navigator);
         if (type == GroupManagementController.class) return new GroupManagementController(context.groups(), navigator);
         if (type == GroupDetailsController.class) return new GroupDetailsController(context.groups(), context.session(), context.admin(), navigator);
-        if (type == GroupInvitationsController.class) return new GroupInvitationsController(context.groups(), navigator);
+        if (type == GroupInvitationsController.class) return new GroupInvitationsController(context.groups(), context.admin(), navigator);
         if (type == CreateGroupDialogController.class) return new CreateGroupDialogController(context.groups(), context.social(), navigator);
         if (type == InviteMembersDialogController.class) return new InviteMembersDialogController(context.groups(), context.admin());
         if (type == ProfileController.class) return new ProfileController(context.profiles(), context.session());

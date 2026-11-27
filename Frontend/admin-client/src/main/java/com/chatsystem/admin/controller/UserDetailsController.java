@@ -1,8 +1,8 @@
 package com.chatsystem.admin.controller;
 import com.chatsystem.admin.navigation.*;import com.chatsystem.shared.model.*;import com.chatsystem.shared.model.status.UserStatus;import com.chatsystem.shared.service.AdminService;import com.chatsystem.shared.validation.*;import javafx.collections.*;import javafx.fxml.FXML;import javafx.scene.control.*;import java.util.*;
 public final class UserDetailsController{
- private final AdminService service;private final AdminNavigator navigator;private long id;@FXML private Label nameLabel,emailLabel,statusLabel,createdLabel,usernameLabel,addressLabel,birthLabel,genderLabel;@FXML private Button backButton,restrictButton,historyButton,editButton,passwordButton,deleteButton;@FXML private ListView<LoginEvent> historyList;@FXML private ListView<ActivityEvent> activityList;@FXML private ListView<UserAccount> friendsList;
- public UserDetailsController(AdminService s,AdminNavigator n){service=s;navigator=n;}@FXML private void initialize(){backButton.setOnAction(e->navigator.navigate(ViewRequest.of(AdminRoute.USERS)));restrictButton.setOnAction(e->confirmRestriction());
+ private final AdminService service;private final AdminNavigator navigator;private long id;@FXML private Label initialsLabel,nameLabel,emailLabel,statusLabel,createdLabel,usernameLabel,addressLabel,birthLabel,genderLabel;@FXML private Button backButton,restrictButton,historyButton,editButton,passwordButton,deleteButton;@FXML private ListView<LoginEvent> historyList;@FXML private ListView<ActivityEvent> activityList;@FXML private ListView<UserAccount> friendsList;
+ public UserDetailsController(AdminService s,AdminNavigator n){service=s;navigator=n;}@FXML private void initialize(){activityList.setCellFactory(v->new com.chatsystem.admin.ui.cell.ActivityEventCell());backButton.setOnAction(e->navigator.navigate(ViewRequest.of(AdminRoute.USERS)));restrictButton.setOnAction(e->confirmRestriction());
   editButton.setOnAction(e->{service.getUser(id).ifPresent(u->{com.chatsystem.admin.ui.AdminAccountDialogs.showEditor(service,u);present(id);});});
   passwordButton.setOnAction(e->service.getUser(id).ifPresent(u->com.chatsystem.admin.ui.AdminAccountDialogs.showPassword(service,u)));
   deleteButton.setOnAction(e->confirmDelete());
@@ -14,7 +14,7 @@ public final class UserDetailsController{
   if(alert.showAndWait().orElse(ButtonType.CANCEL)==ButtonType.OK){service.deleteUser(id);navigator.navigate(ViewRequest.of(AdminRoute.USERS));}
  }
  private void confirmRestriction(){UserAccount user=service.getUser(id).orElse(null);if(user==null)return;String action=user.getStatus()==UserStatus.LOCKED?"unlock":"restrict";Alert alert=new Alert(Alert.AlertType.CONFIRMATION,"Confirm that you want to "+action+" "+user.getDisplayName()+"?",ButtonType.OK,ButtonType.CANCEL);alert.setHeaderText("Confirm account change");if(alert.showAndWait().orElse(ButtonType.CANCEL)==ButtonType.OK)toggleRestriction(true);}
- public void present(long userId){id=userId;UserAccount u=service.getUser(id).orElseThrow(()->new IllegalArgumentException("Unknown user "+id));if(nameLabel!=null){nameLabel.setText(u.getDisplayName());emailLabel.setText(u.getEmail());
+ public void present(long userId){id=userId;UserAccount u=service.getUser(id).orElseThrow(()->new IllegalArgumentException("Unknown user "+id));if(nameLabel!=null){nameLabel.setText(u.getDisplayName());initialsLabel.setText(com.chatsystem.admin.ui.cell.RowLayout.initials(u.getDisplayName()));emailLabel.setText(u.getEmail());
   addressLabel.setText("Address: "+(u.getAddress().isBlank()?"Not supplied":u.getAddress()));
   birthLabel.setText("Date of birth: "+(u.getDateOfBirth()==null?"Not supplied":u.getDateOfBirth()));
   genderLabel.setText("Gender: "+u.getGender());

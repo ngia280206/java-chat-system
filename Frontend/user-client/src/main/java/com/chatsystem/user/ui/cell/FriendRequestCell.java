@@ -11,6 +11,7 @@ public final class FriendRequestCell extends ListCell<FriendRequest> {
     private final Consumer<FriendRequest> primary;
     private final String secondaryText;
     private final Consumer<FriendRequest> secondary;
+    private java.util.function.Function<FriendRequest,String> displayName = request -> "Request #" + request.getId();
 
     public FriendRequestCell() {
         this("", ignored -> {
@@ -24,6 +25,11 @@ public final class FriendRequestCell extends ListCell<FriendRequest> {
         this.secondary = secondary;
     }
 
+    public FriendRequestCell(String primaryText, Consumer<FriendRequest> primary, String secondaryText,
+                             Consumer<FriendRequest> secondary, java.util.function.Function<FriendRequest,String> displayName) {
+        this(primaryText,primary,secondaryText,secondary); this.displayName=displayName;
+    }
+
     @Override
     protected void updateItem(FriendRequest request, boolean empty) {
         super.updateItem(request, empty);
@@ -32,7 +38,7 @@ public final class FriendRequestCell extends ListCell<FriendRequest> {
             setGraphic(null);
             return;
         }
-        Label label = new Label("Request #" + request.getId() + " · account " + (request.getSenderId() == 1 ? request.getReceiverId() : request.getSenderId()));
+        HBox label = CellLayout.identity(displayName.apply(request), "Requested " + request.getCreatedAt().toString().substring(0,10));
         HBox.setHgrow(label, Priority.ALWAYS);
         HBox row = new HBox(10, label, action(primaryText, () -> primary.accept(request)));
         if (secondary != null) {

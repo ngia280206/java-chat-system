@@ -107,6 +107,8 @@ public final class UserNavigator {
         } else {
             setScene(stage, routeContent(request), profile);
         }
+        // Materialize the shell scroll viewport before callers access the new page.
+        stage.getScene().getRoot().applyCss();
         currentRequest.set(request);
     }
 

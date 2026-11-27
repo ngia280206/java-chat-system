@@ -18,11 +18,10 @@ public final class FriendCell extends ListCell<UserAccount> {
     @Override protected void updateItem(UserAccount user, boolean empty) {
         super.updateItem(user,empty);
         if (empty || user==null) {setText(null);setGraphic(null);return;}
-        Label identity = new Label(user.getDisplayName()+"  @"+user.getUsername());
-        Label presence = new Label(user.isOnline()?"● Online":"○ Offline");
-        presence.setStyle(user.isOnline()?"-fx-text-fill: #68D9A4;":"-fx-text-fill: #A0B0C3;");
-        HBox.setHgrow(identity,Priority.ALWAYS);
-        HBox row = new HBox(9, identity, presence,action("Message",()->message.accept(user)),
+        Label identity = CellLayout.field(user.getDisplayName(),200,"list-title");
+        Label username = CellLayout.field("@"+user.getUsername(),180,"body-text");
+        Label presence = CellLayout.field(user.isOnline()?"Online":"Offline",110,user.isOnline()?"pill-success":"pill");
+        HBox row = new HBox(12, identity, username, presence,action("Message",()->message.accept(user)),
                 action("Create group",()->createGroup.accept(user)),action("Unfriend",()->remove.accept(user)),
                 action("Block",()->block.accept(user)));
         row.setAlignment(javafx.geometry.Pos.CENTER_LEFT);

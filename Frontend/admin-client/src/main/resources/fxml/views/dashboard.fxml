@@ -1,8 +1,79 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatsystem.admin.controller.DashboardController" spacing="24" styleClass="content-area">
- <HBox alignment="CENTER_LEFT" spacing="16"><VBox><Label text="Platform overview" styleClass="page-title"/><Label text="Monitor members, groups, messages, and warnings" styleClass="muted-text"/></VBox><Region HBox.hgrow="ALWAYS"/><StackPane fx:id="exportWrapper"><Button fx:id="exportButton" text="Export overview" styleClass="secondary-button"/></StackPane></HBox>
- <HBox spacing="16"><VBox styleClass="card"><Label text="Members"/><Label fx:id="usersMetric" styleClass="metric-value"/></VBox><VBox styleClass="card"><Label text="Groups"/><Label fx:id="groupsMetric" styleClass="metric-value"/></VBox><VBox styleClass="card"><Label text="Pending warnings"/><Label fx:id="reportsMetric" styleClass="metric-value"/></VBox><VBox styleClass="card"><Label text="Messages"/><Label fx:id="messagesMetric" styleClass="metric-value"/></VBox></HBox>
- <HBox spacing="12"><MenuButton fx:id="rangeButton" text="Last 30 days  v" styleClass="small-button"/><Button fx:id="viewUsersButton" text="View all people" styleClass="small-button"/><Button fx:id="viewGroupsButton" text="View all groups" styleClass="small-button"/><Button fx:id="viewModerationButton" text="View warnings" styleClass="small-button"/></HBox>
- <HBox spacing="16" VBox.vgrow="ALWAYS"><VBox styleClass="card" HBox.hgrow="ALWAYS"><Label text="Weekly platform activity" styleClass="section-title"/><ListView fx:id="activityTrend" VBox.vgrow="ALWAYS"/></VBox><VBox fx:id="platformSnapshot" styleClass="card" prefWidth="300"><Label text="Platform snapshot" styleClass="section-title"/><Label fx:id="snapshotLabel" wrapText="true" styleClass="muted-text"/></VBox></HBox>
- <VBox styleClass="card"><Label text="Recent platform activity" styleClass="section-title"/><ListView fx:id="recentActivity" prefHeight="130"/></VBox>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="content-wrap" spacing="22" fx:controller="com.chatsystem.admin.controller.DashboardController">
+  <Label text="ADMIN  /  DASHBOARD" styleClass="breadcrumb" />
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="5" HBox.hgrow="ALWAYS">
+      <Label text="Overview &amp; statistics" styleClass="page-title" />
+      <Label text="Monitor engagement, safety, and system activity." styleClass="page-subtitle" />
+    </VBox>
+    <StackPane fx:id="exportWrapper">
+      <Button fx:id="exportButton" text="Export overview" styleClass="secondary-button" />
+    </StackPane>
+  </HBox>
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Total users" styleClass="metric-label" />
+      <Label fx:id="usersMetric" styleClass="value-large" />
+      <Label text="Registered accounts" styleClass="metric-trend" />
+    </VBox>
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Active today" styleClass="metric-label" />
+      <Label fx:id="activeMetric" styleClass="value-large" />
+      <Label text="Users in selected period" styleClass="metric-trend" />
+    </VBox>
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Messages sent" styleClass="metric-label" />
+      <Label fx:id="messagesMetric" styleClass="value-large" />
+      <Label text="Messages in selected period" styleClass="metric-trend" />
+    </VBox>
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Open warnings" styleClass="metric-label" />
+      <Label fx:id="reportsMetric" styleClass="value-large" />
+      <Label text="Needs attention" styleClass="metric-trend" />
+    </VBox>
+  </HBox>
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="14" styleClass="card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="Weekly activity" styleClass="section-title" />
+        <MenuButton fx:id="rangeButton" text="Last 30 days  v" styleClass="small-button" />
+      </HBox>
+      <Label text="Active users and conversation volume." styleClass="muted" />
+      <BarChart fx:id="activityTrend" legendVisible="false" animated="false" barGap="0" categoryGap="5" prefHeight="220" minHeight="220" maxHeight="220">
+        <xAxis>
+          <CategoryAxis tickLabelRotation="-35" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis forceZeroInRange="true" />
+        </yAxis>
+      </BarChart>
+    </VBox>
+    <VBox spacing="14" styleClass="card" fx:id="platformSnapshot" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Platform snapshot" styleClass="section-title" />
+      <Label text="Active accounts" styleClass="metric-label" />
+      <Label fx:id="snapshotLabel" wrapText="true" styleClass="body-text" />
+      <ProgressBar fx:id="activeProgress" maxWidth="Infinity" />
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="Groups" styleClass="muted" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Label fx:id="groupsMetric" styleClass="small-heading" />
+      </HBox>
+      <Separator />
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <Button fx:id="viewUsersButton" text="View all people" styleClass="small-button" />
+        <Button fx:id="viewGroupsButton" text="View all groups" styleClass="small-button" />
+      </HBox>
+      <Button fx:id="viewModerationButton" text="View warnings" styleClass="small-button" />
+    </VBox>
+  </HBox>
+  <VBox spacing="14" styleClass="card">
+    <HBox spacing="12" alignment="CENTER_LEFT">
+      <Label text="Recent platform activity" styleClass="section-title" />
+      <Region HBox.hgrow="ALWAYS" />
+    </HBox>
+    <ListView fx:id="recentActivity" styleClass="directory-list" prefHeight="220" />
+  </VBox>
 </VBox>

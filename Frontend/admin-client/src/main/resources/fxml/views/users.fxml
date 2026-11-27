@@ -1,6 +1,54 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatsystem.admin.controller.UsersController" spacing="20" styleClass="content-area">
- <HBox alignment="CENTER_LEFT"><VBox><Label text="People" styleClass="page-title"/><Label text="Search and manage member access" styleClass="muted-text"/></VBox><Region HBox.hgrow="ALWAYS"/><Button fx:id="addButton" text="+ Add user" styleClass="primary-button"/><StackPane fx:id="downloadWrapper"><Button fx:id="downloadButton" text="Download CSV" styleClass="secondary-button"/></StackPane></HBox>
- <HBox spacing="12"><TextField fx:id="searchField" promptText="Search users by name, email, or ID" styleClass="search-field" HBox.hgrow="ALWAYS"/><MenuButton fx:id="sortButton" text="Sort: recent login  v" styleClass="secondary-button"/><MenuButton fx:id="filterButton" text="All statuses" styleClass="secondary-button"/></HBox>
- <HBox styleClass="card" spacing="40"><Label text="ID"/><Label text="Member / email"/><Label text="Account status"/><Label text="Action"/></HBox><Label fx:id="emptyLabel" text="No people match the current search and filters." styleClass="muted-text" visible="false" managed="false"/><ListView fx:id="userList" VBox.vgrow="ALWAYS"/><HBox spacing="12" alignment="CENTER_RIGHT"><Button fx:id="previousButton" text="Previous" styleClass="small-button"/><Button fx:id="nextButton" text="Next" styleClass="small-button"/></HBox>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="content-wrap" spacing="22" fx:controller="com.chatsystem.admin.controller.UsersController">
+  <Label text="ADMIN  /  USERS" styleClass="breadcrumb" />
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="5" HBox.hgrow="ALWAYS">
+      <Label text="User directory" styleClass="page-title" />
+      <Label text="Search members and manage account access." styleClass="page-subtitle" />
+    </VBox>
+    <Button fx:id="addButton" text="+ Add user" styleClass="primary-button" />
+    <StackPane fx:id="downloadWrapper">
+      <Button fx:id="downloadButton" text="Download CSV" styleClass="secondary-button" />
+    </StackPane>
+  </HBox>
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Total users" styleClass="metric-label" />
+      <Label fx:id="totalMetric" styleClass="value-large" />
+      <Label text="Registered accounts" styleClass="metric-trend" />
+    </VBox>
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Active accounts" styleClass="metric-label" />
+      <Label fx:id="activeMetric" styleClass="value-large" />
+      <Label text="Current members" styleClass="metric-trend" />
+    </VBox>
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Restricted" styleClass="metric-label" />
+      <Label fx:id="restrictedMetric" styleClass="value-large" />
+      <Label text="Access limited" styleClass="metric-trend" />
+    </VBox>
+  </HBox>
+  <VBox spacing="14" styleClass="card">
+    <Label text="User directory" styleClass="section-title" />
+    <HBox spacing="12" alignment="CENTER_LEFT">
+      <TextField fx:id="searchField" promptText="Search users by name, email, or ID" styleClass="search-field" HBox.hgrow="ALWAYS" />
+      <MenuButton fx:id="sortButton" text="Sort: recent login  v" styleClass="secondary-button" />
+      <MenuButton fx:id="filterButton" text="All statuses" styleClass="secondary-button" />
+    </HBox>
+    <HBox spacing="12" alignment="CENTER_LEFT" styleClass="directory-heading">
+      <Label text="ID" styleClass="table-heading" prefWidth="70" minWidth="70" />
+      <Label text="MEMBER / EMAIL" styleClass="table-heading" prefWidth="400" minWidth="400" />
+      <Label text="ACCOUNT STATUS" styleClass="table-heading" prefWidth="160" minWidth="160" />
+      <Label text="ACTION" styleClass="table-heading" prefWidth="130" minWidth="130" />
+    </HBox>
+    <Label fx:id="emptyLabel" text="No people match the current search and filters." styleClass="muted-text" visible="false" managed="false" />
+    <ListView fx:id="userList" styleClass="directory-list" prefHeight="360" />
+    <HBox spacing="12" alignment="CENTER_LEFT">
+      <Button fx:id="previousButton" text="Previous" styleClass="small-button" />
+      <Button fx:id="nextButton" text="Next" styleClass="small-button" />
+    </HBox>
+  </VBox>
 </VBox>

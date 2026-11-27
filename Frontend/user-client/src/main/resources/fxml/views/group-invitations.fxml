@@ -1,1 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?><VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.group.GroupInvitationsController" spacing="10" styleClass="app-root"><HBox spacing="8"><Button text="← Back to groups" onAction="#back"/><Label text="Group invitations" styleClass="page-title"/></HBox><ListView fx:id="invitationList" VBox.vgrow="ALWAYS"/><HBox spacing="8"><Button fx:id="joinInvitationButton" text="Join" onAction="#join"/><Button text="Decline" onAction="#decline"/></HBox><Label fx:id="invitationFeedbackLabel"/></VBox>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="content-wrap" spacing="22" fx:controller="com.chatsystem.user.controller.group.GroupInvitationsController">
+  <Label text="RELAY  /  GROUP INVITATIONS" styleClass="breadcrumb" />
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="5" HBox.hgrow="ALWAYS">
+      <Label text="Group invitations" styleClass="page-title" />
+      <Label text="Join conversations you have been invited to." styleClass="page-subtitle" />
+    </VBox>
+    <Button text="Back to groups" styleClass="secondary-button" onAction="#back" />
+  </HBox>
+  <VBox spacing="14" styleClass="card">
+    <Label text="Pending invitations" styleClass="section-title" />
+    <ListView fx:id="invitationList" styleClass="directory-list" prefHeight="230" />
+    <HBox fx:id="invitationSelectionActions" spacing="12" alignment="CENTER_LEFT">
+      <Button text="Join group" styleClass="primary-button" fx:id="joinInvitationButton" onAction="#join" />
+      <Button text="Decline" styleClass="secondary-button" onAction="#decline" />
+    </HBox>
+  </VBox>
+  <Label fx:id="invitationFeedbackLabel" />
+</VBox>

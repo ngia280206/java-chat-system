@@ -1,1 +1,47 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?><VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.report.SpamReportsController" spacing="10" styleClass="app-root"><HBox spacing="8"><Label text="Spam reports" styleClass="page-title"/><Button fx:id="newReportButton" text="New report" onAction="#create"/></HBox><HBox spacing="8"><TextField fx:id="reportSearchField" promptText="Search your reports" HBox.hgrow="ALWAYS"/><ChoiceBox fx:id="statusChoice"/><Button fx:id="searchReportsButton" text="Search" onAction="#search"/></HBox><Label fx:id="reportEmptyLabel" text="No reports match the current filters." managed="false" visible="false"/><ListView fx:id="reportList" VBox.vgrow="ALWAYS"/><Button fx:id="openReportButton" text="Open report" onAction="#open"/></VBox>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="content-wrap" spacing="22" fx:controller="com.chatsystem.user.controller.report.SpamReportsController">
+  <Label text="RELAY  /  SPAM REPORTS" styleClass="breadcrumb" />
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="5" HBox.hgrow="ALWAYS">
+      <Label text="Spam reports" styleClass="page-title" />
+      <Label text="Track the reports you have submitted." styleClass="page-subtitle" />
+    </VBox>
+    <Button text="New report" styleClass="primary-button" fx:id="newReportButton" onAction="#create" />
+  </HBox>
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Submitted reports" styleClass="metric-label" />
+      <Label fx:id="submittedMetric" styleClass="value-large" />
+      <Label text="Your report history" styleClass="metric-trend" />
+    </VBox>
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Pending review" styleClass="metric-label" />
+      <Label fx:id="pendingMetric" styleClass="value-large" />
+      <Label text="Awaiting moderation" styleClass="metric-trend" />
+    </VBox>
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Reviewed reports" styleClass="metric-label" />
+      <Label fx:id="reviewedMetric" styleClass="value-large" />
+      <Label text="Decision recorded" styleClass="metric-trend" />
+    </VBox>
+  </HBox>
+  <VBox spacing="14" styleClass="card">
+    <Label text="Your submitted reports" styleClass="section-title" />
+    <HBox spacing="12" alignment="CENTER_LEFT">
+      <TextField fx:id="reportSearchField" promptText="Search your reports" HBox.hgrow="ALWAYS" />
+      <ChoiceBox fx:id="statusChoice" />
+      <Button text="Search" styleClass="primary-button" fx:id="searchReportsButton" onAction="#search" />
+    </HBox>
+    <Label fx:id="reportEmptyLabel" text="No reports match the current filters." managed="false" visible="false" />
+    <HBox spacing="12" alignment="CENTER_LEFT" styleClass="directory-heading">
+      <Label text="REPORT ID" styleClass="table-heading" prefWidth="120" minWidth="120" />
+      <Label text="REASON" styleClass="table-heading" prefWidth="420" minWidth="420" />
+      <Label text="STATUS" styleClass="table-heading" prefWidth="140" minWidth="140" />
+    </HBox>
+    <ListView fx:id="reportList" styleClass="directory-list" prefHeight="240" />
+    <Button text="Open report" styleClass="small-button" fx:id="openReportButton" onAction="#open" />
+  </VBox>
+</VBox>

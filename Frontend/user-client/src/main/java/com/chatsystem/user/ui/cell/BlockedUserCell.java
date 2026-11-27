@@ -26,7 +26,7 @@ public final class BlockedUserCell extends ListCell<UserAccount> {
             setGraphic(null);
             return;
         }
-        Label label = new Label(user.getDisplayName());
+        HBox label = CellLayout.identity(user.getDisplayName(), "@" + user.getUsername());
         HBox.setHgrow(label, Priority.ALWAYS);
         Button button = new Button("Unblock");
         button.getStyleClass().add("blocked-row-action");

@@ -15,6 +15,7 @@ public final class GroupManagementController {
     private ListView<Conversation> groupList;
     @FXML
     private Label groupManagementFeedback;
+    @FXML private Label groupsMetric, invitationsMetric, membersMetric;
 
     public GroupManagementController(GroupService g, UserNavigator n) {
         groups = g;
@@ -23,6 +24,9 @@ public final class GroupManagementController {
 
     @FXML
     private void initialize() {
+        groupsMetric.textProperty().bind(javafx.beans.binding.Bindings.size(groups.getGroups()).asString());
+        invitationsMetric.textProperty().bind(javafx.beans.binding.Bindings.size(groups.getInvitations()).asString());
+        membersMetric.textProperty().bind(javafx.beans.binding.Bindings.createStringBinding(() -> Integer.toString(groups.getGroups().stream().mapToInt(g -> groups.getMembers(g.getId()).size()).sum()), groups.getGroups()));
         groupList.setItems(groups.getGroups());
         groupList.setCellFactory(x -> new GroupCell());
         groupList.setOnMouseClicked(e -> {

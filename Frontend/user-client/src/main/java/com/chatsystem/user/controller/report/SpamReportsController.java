@@ -23,6 +23,7 @@ public final class SpamReportsController {
     private ListView<SpamReport> reportList;
     @FXML
     private Label reportEmptyLabel;
+    @FXML private Label submittedMetric, pendingMetric, reviewedMetric;
 
     public SpamReportsController(ReportService r, UserNavigator n) {
         reports = r;
@@ -31,6 +32,9 @@ public final class SpamReportsController {
 
     @FXML
     private void initialize() {
+        submittedMetric.textProperty().bind(javafx.beans.binding.Bindings.size(reports.getReports()).asString());
+        pendingMetric.textProperty().bind(javafx.beans.binding.Bindings.createStringBinding(() -> Long.toString(reports.getReports().stream().filter(r -> r.getStatus() == ReportStatus.PENDING).count()), reports.getReports()));
+        reviewedMetric.textProperty().bind(javafx.beans.binding.Bindings.createStringBinding(() -> Long.toString(reports.getReports().stream().filter(r -> r.getStatus() != ReportStatus.PENDING).count()), reports.getReports()));
         filtered = new FilteredList<>(reports.getReports());
         var sorted = new SortedList<>(filtered, Comparator.comparing(SpamReport::getCreatedAt).reversed());
         reportList.setItems(sorted);

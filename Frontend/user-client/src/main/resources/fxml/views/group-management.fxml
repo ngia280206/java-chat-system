@@ -1,1 +1,54 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?><VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.chatsystem.user.controller.group.GroupManagementController" spacing="12" styleClass="app-root"><HBox spacing="8"><Label text="Groups" styleClass="page-title"/><Button fx:id="createGroupButton" text="+ Create group" onAction="#create"/><Button text="Group invitations" onAction="#invitations"/><Button fx:id="viewAllGroupsButton" text="View all" onAction="#viewAll"/></HBox><ListView fx:id="groupList" VBox.vgrow="ALWAYS"/><HBox spacing="8"><Button text="Open group details" onAction="#open"/><Button fx:id="manageMembersButton" text="Manage members" onAction="#manage"/></HBox><Label fx:id="groupManagementFeedback"/></VBox>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="content-wrap" spacing="22" fx:controller="com.chatsystem.user.controller.group.GroupManagementController">
+  <Label text="RELAY  /  GROUP MANAGEMENT" styleClass="breadcrumb" />
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="5" HBox.hgrow="ALWAYS">
+      <Label text="Group management" styleClass="page-title" />
+      <Label text="Create communities and manage your conversations." styleClass="page-subtitle" />
+    </VBox>
+    <Button text="+ Create group" styleClass="primary-button" fx:id="createGroupButton" onAction="#create" />
+  </HBox>
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Your groups" styleClass="metric-label" />
+      <Label fx:id="groupsMetric" styleClass="value-large" />
+      <Label text="Groups you belong to" styleClass="metric-trend" />
+    </VBox>
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Pending invitations" styleClass="metric-label" />
+      <Label fx:id="invitationsMetric" styleClass="value-large" />
+      <Label text="Waiting for your response" styleClass="metric-trend" />
+    </VBox>
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Members across groups" styleClass="metric-label" />
+      <Label fx:id="membersMetric" styleClass="value-large" />
+      <Label text="People in your communities" styleClass="metric-trend" />
+    </VBox>
+  </HBox>
+  <HBox spacing="12" alignment="TOP_LEFT">
+    <VBox spacing="14" styleClass="card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="My groups" styleClass="section-title" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="View all" styleClass="small-button" fx:id="viewAllGroupsButton" onAction="#viewAll" />
+      </HBox>
+      <ListView fx:id="groupList" styleClass="directory-list" prefHeight="280" />
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <Button text="Open group details" styleClass="small-button" onAction="#open" />
+        <Button text="Manage members" styleClass="small-button" fx:id="manageMembersButton" onAction="#manage" />
+      </HBox>
+    </VBox>
+    <VBox spacing="14" styleClass="card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Group tools" styleClass="section-title" />
+      <Button text="Group invitations" styleClass="secondary-button" onAction="#invitations" />
+      <Button text="Manage members" styleClass="secondary-button" onAction="#manage" />
+      <Separator />
+      <Label text="Quick tips" styleClass="small-heading" />
+      <Label text="Invite friends to start a conversation. Manage roles and membership in group details." styleClass="body-text" wrapText="true" />
+    </VBox>
+  </HBox>
+  <Label fx:id="groupManagementFeedback" />
+</VBox>

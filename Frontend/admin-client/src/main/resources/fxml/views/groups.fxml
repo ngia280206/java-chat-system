@@ -1,4 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatsystem.admin.controller.GroupsController" spacing="20" styleClass="content-area">
- <Label text="Groups" styleClass="page-title"/><Label text="Inspect communities and their membership" styleClass="muted-text"/><HBox spacing="12"><TextField fx:id="searchField" promptText="Search group name or owner" styleClass="search-field" HBox.hgrow="ALWAYS"/><MenuButton fx:id="sortButton" text="Sort: member count  v" styleClass="secondary-button"/></HBox><HBox styleClass="card" spacing="60"><Label text="Group"/><Label text="Owner / created"/><Label text="Members"/><Label text="Action"/></HBox><Label fx:id="emptyLabel" text="No groups match this search." styleClass="muted-text" visible="false" managed="false"/><ListView fx:id="groupList" VBox.vgrow="ALWAYS"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="content-wrap" spacing="22" fx:controller="com.chatsystem.admin.controller.GroupsController">
+  <Label text="ADMIN  /  GROUPS" styleClass="breadcrumb" />
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="5" HBox.hgrow="ALWAYS">
+      <Label text="Groups &amp; members" styleClass="page-title" />
+      <Label text="Inspect communities, owners, and membership." styleClass="page-subtitle" />
+    </VBox>
+  </HBox>
+  <HBox spacing="12" alignment="CENTER_LEFT">
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Total groups" styleClass="metric-label" />
+      <Label fx:id="totalMetric" styleClass="value-large" />
+      <Label text="Communities" styleClass="metric-trend" />
+    </VBox>
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Total members" styleClass="metric-label" />
+      <Label fx:id="membersMetric" styleClass="value-large" />
+      <Label text="Group memberships" styleClass="metric-trend" />
+    </VBox>
+    <VBox spacing="14" styleClass="metric-card" HBox.hgrow="ALWAYS" prefWidth="0">
+      <Label text="Groups with reports" styleClass="metric-label" />
+      <Label fx:id="flaggedMetric" styleClass="value-large" />
+      <Label text="Needs review" styleClass="metric-trend" />
+    </VBox>
+  </HBox>
+  <VBox spacing="14" styleClass="card">
+    <Label text="Group directory" styleClass="section-title" />
+    <HBox spacing="12" alignment="CENTER_LEFT">
+      <TextField fx:id="searchField" promptText="Search group name or owner" styleClass="search-field" HBox.hgrow="ALWAYS" />
+      <MenuButton fx:id="sortButton" text="Sort: member count  v" styleClass="secondary-button" />
+    </HBox>
+    <HBox spacing="12" alignment="CENTER_LEFT" styleClass="directory-heading">
+      <Label text="GROUP" styleClass="table-heading" prefWidth="340" minWidth="340" />
+      <Label text="OWNER / CREATED" styleClass="table-heading" prefWidth="300" minWidth="300" />
+      <Label text="MEMBERS" styleClass="table-heading" prefWidth="110" minWidth="110" />
+      <Label text="ACTION" styleClass="table-heading" prefWidth="110" minWidth="110" />
+    </HBox>
+    <Label fx:id="emptyLabel" text="No groups match this search." styleClass="muted-text" visible="false" managed="false" />
+    <ListView fx:id="groupList" styleClass="directory-list" prefHeight="360" />
+  </VBox>
 </VBox>
